@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07D15E872817CFD700723348 /* AdjustableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D15E862817CFD700723348 /* AdjustableView.swift */; };
+		07D15E892817E0C900723348 /* AdjustChevronView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D15E882817E0C900723348 /* AdjustChevronView.swift */; };
+		07D15E8C281815C900723348 /* TextEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D15E8B281815C900723348 /* TextEditingViewController.swift */; };
+		07D15E8E2818171D00723348 /* ColorPaletteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D15E8D2818171D00723348 /* ColorPaletteCollectionView.swift */; };
+		07D15E902818212B00723348 /* PaybAck.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07D15E8F2818212B00723348 /* PaybAck.ttf */; };
+		07D15E93281831B200723348 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D15E92281831B200723348 /* UIImage+Extension.swift */; };
+		07F98745281A78E60058139C /* FontsPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F98744281A78E60058139C /* FontsPickerViewController.swift */; };
+		07F98748281A7E8C0058139C /* ValuePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F98747281A7E8C0058139C /* ValuePickerView.swift */; };
+		07F9874B281A844B0058139C /* TextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9874A281A844B0058139C /* TextCollectionViewCell.swift */; };
+		07F9874E281A9A060058139C /* FontSystem.json in Resources */ = {isa = PBXBuildFile; fileRef = 07F9874D281A9A060058139C /* FontSystem.json */; };
+		07F98752281AA6620058139C /* Oxanium-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F98751281AA6620058139C /* Oxanium-Medium.ttf */; };
+		07F98754281AA74A0058139C /* PatuaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F98753281AA74A0058139C /* PatuaOne-Regular.ttf */; };
+		07F9875B281AABF20058139C /* FontsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9875A281AABF20058139C /* FontsLoader.swift */; };
+		07F9875F281ABA300058139C /* nasalization-rg.otf in Resources */ = {isa = PBXBuildFile; fileRef = 07F9875E281ABA300058139C /* nasalization-rg.otf */; };
+		07F98762281ABC730058139C /* HARRYP.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 07F98761281ABC730058139C /* HARRYP.TTF */; };
+		07F98764281AC1A30058139C /* Game Of Squids.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F98763281AC1A30058139C /* Game Of Squids.ttf */; };
+		07F98768281AC3690058139C /* Capture it.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F98767281AC3690058139C /* Capture it.ttf */; };
 		1E42E017280DC93D0033E6EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42E016280DC93D0033E6EE /* AppDelegate.swift */; };
 		1E42E019280DC93D0033E6EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42E018280DC93D0033E6EE /* SceneDelegate.swift */; };
 		1E42E01B280DC93D0033E6EE /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42E01A280DC93D0033E6EE /* DiscoverViewController.swift */; };
@@ -71,6 +88,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07D15E862817CFD700723348 /* AdjustableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustableView.swift; sourceTree = "<group>"; };
+		07D15E882817E0C900723348 /* AdjustChevronView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustChevronView.swift; sourceTree = "<group>"; };
+		07D15E8B281815C900723348 /* TextEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditingViewController.swift; sourceTree = "<group>"; };
+		07D15E8D2818171D00723348 /* ColorPaletteCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteCollectionView.swift; sourceTree = "<group>"; };
+		07D15E8F2818212B00723348 /* PaybAck.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaybAck.ttf; sourceTree = "<group>"; };
+		07D15E92281831B200723348 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		07F98744281A78E60058139C /* FontsPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsPickerViewController.swift; sourceTree = "<group>"; };
+		07F98747281A7E8C0058139C /* ValuePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuePickerView.swift; sourceTree = "<group>"; };
+		07F9874A281A844B0058139C /* TextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCollectionViewCell.swift; sourceTree = "<group>"; };
+		07F9874D281A9A060058139C /* FontSystem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FontSystem.json; sourceTree = "<group>"; };
+		07F98751281AA6620058139C /* Oxanium-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxanium-Medium.ttf"; sourceTree = "<group>"; };
+		07F98753281AA74A0058139C /* PatuaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PatuaOne-Regular.ttf"; sourceTree = "<group>"; };
+		07F9875A281AABF20058139C /* FontsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsLoader.swift; sourceTree = "<group>"; };
+		07F9875E281ABA300058139C /* nasalization-rg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "nasalization-rg.otf"; sourceTree = "<group>"; };
+		07F98761281ABC730058139C /* HARRYP.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = HARRYP.TTF; sourceTree = "<group>"; };
+		07F98763281AC1A30058139C /* Game Of Squids.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Game Of Squids.ttf"; sourceTree = "<group>"; };
+		07F98767281AC3690058139C /* Capture it.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Capture it.ttf"; sourceTree = "<group>"; };
 		1E42E013280DC93D0033E6EE /* Flitrr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flitrr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E42E016280DC93D0033E6EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E42E018280DC93D0033E6EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +180,122 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07D15E852817CFBF00723348 /* AdjustableView */ = {
+			isa = PBXGroup;
+			children = (
+				07D15E862817CFD700723348 /* AdjustableView.swift */,
+				07D15E882817E0C900723348 /* AdjustChevronView.swift */,
+			);
+			path = AdjustableView;
+			sourceTree = "<group>";
+		};
+		07D15E8A281815B300723348 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				07F98743281A78BE0058139C /* Color */,
+				07F98742281A78B20058139C /* Style */,
+				07F98741281A78AB0058139C /* Fonts */,
+				07D15E8B281815C900723348 /* TextEditingViewController.swift */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		07D15E91281831A200723348 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				07D15E92281831B200723348 /* UIImage+Extension.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		07F98741281A78AB0058139C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				07F98744281A78E60058139C /* FontsPickerViewController.swift */,
+				07F9875A281AABF20058139C /* FontsLoader.swift */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		07F98742281A78B20058139C /* Style */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		07F98743281A78BE0058139C /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				07D15E8D2818171D00723348 /* ColorPaletteCollectionView.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		07F98746281A7E7C0058139C /* ValuePicker */ = {
+			isa = PBXGroup;
+			children = (
+				07F98747281A7E8C0058139C /* ValuePickerView.swift */,
+			);
+			path = ValuePicker;
+			sourceTree = "<group>";
+		};
+		07F98749281A84390058139C /* TextCell */ = {
+			isa = PBXGroup;
+			children = (
+				07F9874A281A844B0058139C /* TextCollectionViewCell.swift */,
+			);
+			path = TextCell;
+			sourceTree = "<group>";
+		};
+		07F9874C281A99E10058139C /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				07F9874D281A9A060058139C /* FontSystem.json */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
+		07F9874F281AA6210058139C /* UIFonts */ = {
+			isa = PBXGroup;
+			children = (
+				1E98AD792812FDCE006DAE75 /* Montserrat-SemiBold.ttf */,
+				1E98AD6C2811AC31006DAE75 /* Montserrat-Light.ttf */,
+				1E98AD4E280EAF28006DAE75 /* Montserrat-Regular.ttf */,
+				1E98AD50280EAF46006DAE75 /* Montserrat-Medium.ttf */,
+				1E98AD4C280EAF0A006DAE75 /* Montserrat-Bold.ttf */,
+			);
+			path = UIFonts;
+			sourceTree = "<group>";
+		};
+		07F98750281AA62D0058139C /* EditFonts */ = {
+			isa = PBXGroup;
+			children = (
+				07F98753281AA74A0058139C /* PatuaOne-Regular.ttf */,
+				07F98751281AA6620058139C /* Oxanium-Medium.ttf */,
+				07D15E8F2818212B00723348 /* PaybAck.ttf */,
+			);
+			path = EditFonts;
+			sourceTree = "<group>";
+		};
+		07F98755281AA7AF0058139C /* Techno */ = {
+			isa = PBXGroup;
+			children = (
+				07F98763281AC1A30058139C /* Game Of Squids.ttf */,
+				07F9875E281ABA300058139C /* nasalization-rg.otf */,
+			);
+			path = Techno;
+			sourceTree = "<group>";
+		};
+		07F98760281ABC5E0058139C /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				07F98767281AC3690058139C /* Capture it.ttf */,
+				07F98761281ABC730058139C /* HARRYP.TTF */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
 		1E42E00A280DC93D0033E6EE = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +361,7 @@
 		1E42E04A280DC97B0033E6EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07F9874C281A99E10058139C /* Files */,
 				1E98AD4B280EAEF3006DAE75 /* Fonts */,
 				1E42E022280DC9430033E6EE /* Assets.xcassets */,
 			);
@@ -220,6 +371,7 @@
 		1E42E04B280DCA520033E6EE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				07D15E8A281815B300723348 /* Text */,
 				1E98AD9B281699BE006DAE75 /* ImageLibraryPicker */,
 				1E98AD6728108459006DAE75 /* Settings */,
 				1E98AD44280EA687006DAE75 /* Discover */,
@@ -241,6 +393,10 @@
 		1E42E04D280DCAA20033E6EE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				07F98749281A84390058139C /* TextCell */,
+				07F98746281A7E7C0058139C /* ValuePicker */,
+				07D15E91281831A200723348 /* Image */,
+				07D15E852817CFBF00723348 /* AdjustableView */,
 				1E98AD9E2816B406006DAE75 /* HorizontalCollection */,
 				1E98AD7F28140C32006DAE75 /* ToolBar */,
 				1E98AD48280EA902006DAE75 /* RoundedTabBar */,
@@ -292,11 +448,10 @@
 		1E98AD4B280EAEF3006DAE75 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				1E98AD792812FDCE006DAE75 /* Montserrat-SemiBold.ttf */,
-				1E98AD6C2811AC31006DAE75 /* Montserrat-Light.ttf */,
-				1E98AD4E280EAF28006DAE75 /* Montserrat-Regular.ttf */,
-				1E98AD50280EAF46006DAE75 /* Montserrat-Medium.ttf */,
-				1E98AD4C280EAF0A006DAE75 /* Montserrat-Bold.ttf */,
+				07F98760281ABC5E0058139C /* Misc */,
+				07F98755281AA7AF0058139C /* Techno */,
+				07F98750281AA62D0058139C /* EditFonts */,
+				07F9874F281AA6210058139C /* UIFonts */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -506,10 +661,18 @@
 			files = (
 				1E98AD6D2811AC31006DAE75 /* Montserrat-Light.ttf in Resources */,
 				1E98AD4D280EAF0A006DAE75 /* Montserrat-Bold.ttf in Resources */,
+				07F98752281AA6620058139C /* Oxanium-Medium.ttf in Resources */,
 				1E42E026280DC9430033E6EE /* LaunchScreen.storyboard in Resources */,
+				07F98764281AC1A30058139C /* Game Of Squids.ttf in Resources */,
 				1E42E023280DC9430033E6EE /* Assets.xcassets in Resources */,
 				1E98AD4F280EAF28006DAE75 /* Montserrat-Regular.ttf in Resources */,
+				07F9874E281A9A060058139C /* FontSystem.json in Resources */,
+				07F9875F281ABA300058139C /* nasalization-rg.otf in Resources */,
+				07D15E902818212B00723348 /* PaybAck.ttf in Resources */,
+				07F98754281AA74A0058139C /* PatuaOne-Regular.ttf in Resources */,
+				07F98768281AC3690058139C /* Capture it.ttf in Resources */,
 				1E98AD51280EAF46006DAE75 /* Montserrat-Medium.ttf in Resources */,
+				07F98762281ABC730058139C /* HARRYP.TTF in Resources */,
 				1E98AD7A2812FDCE006DAE75 /* Montserrat-SemiBold.ttf in Resources */,
 				1E42E01E280DC93D0033E6EE /* Main.storyboard in Resources */,
 			);
@@ -540,21 +703,26 @@
 				1E98AD57280EC618006DAE75 /* ProjectsOptionsView.swift in Sources */,
 				1E42E017280DC93D0033E6EE /* AppDelegate.swift in Sources */,
 				1E98AD6F2811D0A7006DAE75 /* SettingsView.swift in Sources */,
+				07F9874B281A844B0058139C /* TextCollectionViewCell.swift in Sources */,
 				1E42E021280DC93D0033E6EE /* Flitrr.xcdatamodeld in Sources */,
 				1E98AD5E280EE2FD006DAE75 /* ProjectsSelectionTab.swift in Sources */,
 				1E42E051280DD3C90033E6EE /* RoundedTabBar.swift in Sources */,
+				07F98745281A78E60058139C /* FontsPickerViewController.swift in Sources */,
 				1E98AD5C280EE060006DAE75 /* ProjectsImageCell.swift in Sources */,
 				1E98AD7C2812FDF1006DAE75 /* Fonts.swift in Sources */,
 				1E98AD9A28168394006DAE75 /* ScrollableRoundedBar.swift in Sources */,
 				1E42E019280DC93D0033E6EE /* SceneDelegate.swift in Sources */,
 				1E98AD7528128E9E006DAE75 /* LanguageTableViewController.swift in Sources */,
 				1E98AD4A280EA925006DAE75 /* RoundedTabBarItems.swift in Sources */,
+				07D15E872817CFD700723348 /* AdjustableView.swift in Sources */,
 				1E98AD712811D773006DAE75 /* PaywallView.swift in Sources */,
+				07D15E892817E0C900723348 /* AdjustChevronView.swift in Sources */,
 				1E98AD93281575DA006DAE75 /* Folder+CoreDataClass.swift in Sources */,
 				1E98AD60280EE9DC006DAE75 /* ProjectsFolderCell.swift in Sources */,
 				1E98AD8328141DE1006DAE75 /* ProjectTransparentGridView.swift in Sources */,
 				1E98AD59280EDEEA006DAE75 /* UIViewController.swift in Sources */,
 				1E98AD95281575DA006DAE75 /* Project+CoreDataClass.swift in Sources */,
+				07F9875B281AABF20058139C /* FontsLoader.swift in Sources */,
 				1E98AD46280EA6F6006DAE75 /* ProjectsViewController.swift in Sources */,
 				1E98AD782812955E006DAE75 /* PrivacyPolicyViewController.swift in Sources */,
 				1E98AD6928108474006DAE75 /* SettingsViewController.swift in Sources */,
@@ -563,11 +731,15 @@
 				1E98AD8128140C51006DAE75 /* ToolBarView.swift in Sources */,
 				1E42E04F280DCABB0033E6EE /* UIColor.swift in Sources */,
 				1E98AD94281575DA006DAE75 /* Folder+CoreDataProperties.swift in Sources */,
+				07F98748281A7E8C0058139C /* ValuePickerView.swift in Sources */,
 				1E98AD53280EB0BC006DAE75 /* PropertyWrappers.swift in Sources */,
 				1E42E053280DED700033E6EE /* RoundedTabBarController.swift in Sources */,
 				1E98AD55280EB72D006DAE75 /* WaterFallLayout.swift in Sources */,
 				1E98ADA02816B438006DAE75 /* HorizontalCollectionView.swift in Sources */,
 				1E98AD7E28140BB1006DAE75 /* ProjectCreatingViewController.swift in Sources */,
+				07D15E8E2818171D00723348 /* ColorPaletteCollectionView.swift in Sources */,
+				07D15E93281831B200723348 /* UIImage+Extension.swift in Sources */,
+				07D15E8C281815C900723348 /* TextEditingViewController.swift in Sources */,
 				1E98AD96281575DA006DAE75 /* Project+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         tabBarController.viewControllers = [discoverController, projectsController]
         
-        window?.rootViewController = tabBarController
+        window?.rootViewController = TextEditingViewController() // tabBarController
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .dark
     }
@@ -63,7 +63,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
-
 }
 

@@ -19,7 +19,7 @@ final class ImageTitleCell: UICollectionViewCell {
         label.font = Montserrat.regular(size: 10)
         label.textColor = .white
         label.text = "CATS"
-        label.backgroundColor = .blue
+        label.backgroundColor = .appGray
         label.textAlignment = .center
         addSubview(label)
     }
@@ -28,11 +28,8 @@ final class ImageTitleCell: UICollectionViewCell {
         super.layoutSubviews()
         backgroundColor = .red
         
-        //i// mageView.frame = .init(x: 0, y: 0, width: bounds.width, height: bounds.height - 40)
         imageView.backgroundColor = .orange
-        label.frame = .init(
-            x: 0, y: 0, width: bounds.width, height: 20
-        )
+        label.frame = bounds
     }
     
     required init?(coder: NSCoder) {

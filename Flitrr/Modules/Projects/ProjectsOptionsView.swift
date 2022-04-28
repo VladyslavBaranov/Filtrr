@@ -99,9 +99,26 @@ protocol ProjectsOptionsContainerViewDelegate: AnyObject {
 final class ProjectsOptionsContainerView: UIView {
     
     weak var delegate: ProjectsOptionsContainerViewDelegate!
-    var stackView: UIStackView!
-    
-    var tagForButton = 0
+	var selectedIndex = 0 {
+		didSet {
+			for button in stackView.arrangedSubviews {
+				if button.tag != selectedIndex {
+					(button as? UIButton)?.layer.borderColor = UIColor.darkGray.cgColor
+					(button as? UIButton)?.setTitleColor(.white, for: .normal)
+				}
+			}
+		}
+	}
+	
+    private var stackView: UIStackView!
+    private var tagForButton = 0
+	
+	func setTitles(_ titles: [String]) {
+		guard titles.count == stackView.arrangedSubviews.count else { return }
+		for (index, view) in stackView.arrangedSubviews.enumerated() {
+			(view as? UIButton)?.setTitle(titles[index], for: .normal)
+		}
+	}
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -117,8 +134,8 @@ final class ProjectsOptionsContainerView: UIView {
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.heightAnchor.constraint(equalToConstant: 40),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40)
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor)
         ])
         stackView.spacing = 10
         stackView.distribution = .fillEqually
@@ -141,12 +158,7 @@ final class ProjectsOptionsContainerView: UIView {
     @objc func didTapOption(_ sender: UIButton) {
         sender.setTitleColor(.appAccent, for: .normal)
         sender.layer.borderColor = UIColor.appAccent.cgColor
-        for button in stackView.arrangedSubviews {
-            if button.tag != sender.tag {
-                (button as? UIButton)?.layer.borderColor = UIColor.darkGray.cgColor
-                (button as? UIButton)?.setTitleColor(.white, for: .normal)
-            }
-        }
+		selectedIndex = sender.tag
         delegate?.didTapOption(tag: sender.tag)
     }
     

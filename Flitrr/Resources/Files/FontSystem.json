@@ -1,0 +1,122 @@
+{
+	"featured": [
+		{
+			"name": "PAYBACK",
+			"fontname": "PaybAck"
+		},
+		{
+			"name": "Oxanium",
+			"fontname": "Oxanium-Medium"
+		},
+		{
+			"name": "Patua One",
+			"fontname": "PatuaOne-Regular"
+		},
+		{
+			"name": "Game Of Squids",
+			"fontname": "Game Of Squids"
+		},
+		{
+			"name": "Cochin",
+			"fontname": "Cochin-Italic"
+		},
+		{
+			"name": "Capture it",
+			"fontname": "Capture it"
+		},
+		{
+			"name": "Chalkduster",
+			"fontname": "Chalkduster"
+		}
+	],
+	"basic": [
+		{
+			"name": "Arial",
+			"fontname": "Arial"
+		},
+		{
+			"name": "Courier New",
+			"fontname": "Courier New"
+		},
+		{
+			"name": "Times New Roman",
+			"fontname": "Times New Roman"
+		},
+		{
+			"name": "Menlo",
+			"fontname": "Menlo"
+		},
+		{
+			"name": "Verdana",
+			"fontname": "Verdana"
+		}
+	],
+	"fancy": [
+		{
+			"name": "AcademyEngravedLetPlain",
+			"fontname": "AcademyEngravedLetPlain"
+		},
+		{
+			"name": "Zapfino",
+			"fontname": "Zapfino"
+		},
+		{
+			"name": "SavoyeLetPlain",
+			"fontname": "SavoyeLetPlain"
+		},
+		{
+			"name": "PartyLetPlain",
+			"fontname": "PartyLetPlain"
+		},
+		{
+			"name": "BradleyHandITCTT-Bold",
+			"fontname": "BradleyHandITCTT-Bold"
+		},
+		{
+			"name": "Chalkduster",
+			"fontname": "Chalkduster"
+		},
+		{
+			"name": "AmericanTypewriter",
+			"fontname": "AmericanTypewriter-Bold"
+		}
+	],
+	"classic": [
+		{
+			"name": "SnellRoundhand",
+			"fontname": "SnellRoundhand-Bold"
+		},
+		{
+			"name": "Didot",
+			"fontname": "Didot"
+		},
+		{
+			"name": "Cochin",
+			"fontname": "Cochin-Italic"
+		},
+		{
+			"name": "BradleyHandITCTT-Bold",
+			"fontname": "BradleyHandITCTT-Bold"
+		}
+	],
+	"techno": [
+		{
+			"name": "NASA",
+			"fontname": "Nasalization"
+		},
+		{
+			"name": "Game Of Squids",
+			"fontname": "Game Of Squids"
+		}
+	],
+	"miscellaneous": [
+		{
+			"name": "Harry Potter",
+			"fontname": "Harry P"
+		},
+		{
+			"name": "Capture it",
+			"fontname": "Capture it"
+		}
+	]
+}

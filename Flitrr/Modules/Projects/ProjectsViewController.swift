@@ -194,8 +194,8 @@ private extension ProjectsViewController {
         view.addSubview(optionsContainerView)
         NSLayoutConstraint.activate([
             optionsContainerView.heightAnchor.constraint(equalToConstant: 80),
-            optionsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            optionsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            optionsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            optionsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             optionsContainerView.topAnchor.constraint(equalTo: navigationView.bottomAnchor)
         ])
     }

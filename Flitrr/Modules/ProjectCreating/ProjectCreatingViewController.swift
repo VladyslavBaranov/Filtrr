@@ -10,8 +10,10 @@ import UIKit
 final class ProjectCreatingViewController: UIViewController {
     
     var toolBarView: ToolBarView!
-    var scrollbaleTabBar: ScrollableRoundedBar!
+    var scrollableTabBar: ScrollableRoundedBar!
     var transparentGridView: ProjectTransparentGridView!
+	
+	var addedCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,7 @@ final class ProjectCreatingViewController: UIViewController {
         
         setupToolBar()
         transparentGridView = ProjectTransparentGridView()
+		transparentGridView.clipsToBounds = true
         transparentGridView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(transparentGridView)
         
@@ -29,20 +32,21 @@ final class ProjectCreatingViewController: UIViewController {
             transparentGridView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120)
         ])
         
-        scrollbaleTabBar = ScrollableRoundedBar(frame: .init(
+        scrollableTabBar = ScrollableRoundedBar(frame: .init(
             x: 0,
             y: view.bounds.height - 80,
             width: view.bounds.width,
             height: 80)
         )
-        scrollbaleTabBar.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollbaleTabBar)
+		scrollableTabBar.delegate = self
+        scrollableTabBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollableTabBar)
         
         NSLayoutConstraint.activate([
-            scrollbaleTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollbaleTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollbaleTabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollbaleTabBar.heightAnchor.constraint(equalToConstant: 100)
+            scrollableTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollableTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollableTabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollableTabBar.heightAnchor.constraint(equalToConstant: 100)
         ])
         
     }
@@ -64,9 +68,12 @@ final class ProjectCreatingViewController: UIViewController {
 
 extension ProjectCreatingViewController: ToolBarViewDelegate {
     func didTapTrailingItem() {
-        let controller = ImageLibraryPickerViewController.createInstance()
-        controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true)
+		let renderer = UIGraphicsImageRenderer(size: transparentGridView.bounds.size)
+		let image = renderer.image { ctx in
+			transparentGridView.drawHierarchy(in: transparentGridView.bounds, afterScreenUpdates: true)
+		}
+		let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+		present(activityController, animated: true, completion: nil)
     }
     func didTapLeadingItem() {
         dismiss(animated: true)
@@ -74,4 +81,38 @@ extension ProjectCreatingViewController: ToolBarViewDelegate {
     func didTapUndo() {}
     func didTapLayers() {}
     func didTapRedo() {}
+}
+
+extension ProjectCreatingViewController: ScrollableRoundedBarDelegate {
+	func didTapItem(itemType: ScrollabelRoundedBarItemView.ItemType) {
+		switch itemType {
+		case .image:
+			let controller = ImageLibraryPickerViewController.createInstance()
+			controller.delegate = self
+			controller.modalPresentationStyle = .fullScreen
+			present(controller, animated: true)
+		case .text:
+			let controller = TextEditingViewController()
+			controller.modalPresentationStyle = .fullScreen
+			present(controller, animated: true, completion: nil)
+		default:
+			break
+		}
+	}
+}
+
+extension ProjectCreatingViewController: ImageLibraryPickerViewControllerDelegate {
+	func didSelectImage(uiImage: UIImage) {
+		
+		addedCount += 1
+		
+		if addedCount == 2 {
+			let v = AdjustableView(frame: .init(x: 15, y: 15, width: 200, height: 300))
+			v.imageView.image = uiImage.applyingFilter(name: "CIColorControls", parameters: ["inputContrast":10])
+			transparentGridView.addSubview(v)
+			print("add")
+			addedCount = 0
+		}
+		
+	}
 }

@@ -57,12 +57,17 @@ final class ScrollabelRoundedBarItemView: UICollectionViewCell {
     }
 }
 
+protocol ScrollableRoundedBarDelegate: AnyObject {
+	func didTapItem(itemType: ScrollabelRoundedBarItemView.ItemType)
+}
+
 final class ScrollableRoundedBar: UIView {
     
     var items: [ScrollabelRoundedBarItemView.ItemType] = [
-        .image, .text, .graphic, .shape
+		.image, .text, .graphic, .shape, .background
     ]
     
+	weak var delegate: ScrollableRoundedBarDelegate!
     var collectionView: UICollectionView!
     
     override init(frame: CGRect) {
@@ -116,6 +121,10 @@ extension ScrollableRoundedBar: UICollectionViewDelegate, UICollectionViewDataSo
         cell.currentItem = items[indexPath.row]
         return cell
     }
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		delegate?.didTapItem(itemType: items[indexPath.row])
+	}
 }
 extension ScrollableRoundedBar: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -14,6 +14,7 @@ struct PricingItem {
     var subtitle: String
     
     var isSelected = false
+	var postDescription: String = ""
 }
 
 final class PaywallHostingController: UIHostingController<PaywallView> {
@@ -87,7 +88,7 @@ struct PaywallView: View {
     @State var pricingItems: [PricingItem] = [
         .init(index: 0, price: "6.99", title: "Monthly", subtitle: "Pay monthly", isSelected: true),
         .init(index: 1, price: "34.99", title: "6 months", subtitle: "Pay for 6 months"),
-        .init(index: 2, price: "64.99", title: "Annually", subtitle: "Pay annually, free trial")
+		.init(index: 2, price: "5.4", title: "Annually", subtitle: "Pay annually, free trial", postDescription: "then $64.99 year")
     ]
     
     var body: some View {
@@ -151,6 +152,11 @@ struct PaywallView: View {
                             .background(Color(uiColor: .appAccent))
                             .cornerRadius(30)
                     }
+					if !pricingItems[selectedItem].postDescription.isEmpty {
+						Text(pricingItems[selectedItem].postDescription)
+							.foregroundColor(.white)
+							.font(Font(Montserrat.regular(size: 13)))
+					}
                 }
                 .padding(Edge.Set.bottom, 40)
             }

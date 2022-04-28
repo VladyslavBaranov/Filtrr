@@ -32,13 +32,32 @@ final class ToolBarView: UIView {
         case title, editSet
     }
     
-    var leadingItem: LeadingItem = .back
-    var trailingItem: TrailingItem = .share
+	var leadingItem: LeadingItem = .back {
+		didSet {
+			if leadingItem == .back {
+				leadingButton.setImage(.init(named: "Back"), for: .normal)
+			} else {
+				leadingButton.setImage(.init(named: "Cancel"), for: .normal)
+			}
+		}
+	}
+	
+	var trailingItem: TrailingItem = .share {
+		didSet {
+			if trailingItem == .share {
+				trailingButton.setImage(.init(named: "Share"), for: .normal)
+			} else {
+				trailingButton.setImage(.init(named: "Check"), for: .normal)
+			}
+		}
+	}
+	
     var centerItem: CenterItem = .title
     var title: String? {
         didSet {
             if centerItem == .title {
                 titleLabel.text = title
+				titleLabel.sizeToFit()
             }
         }
     }
@@ -58,6 +77,11 @@ final class ToolBarView: UIView {
         self.centerItem = centerItem
         setupUI()
     }
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		titleLabel?.frame = bounds
+	}
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -92,13 +116,10 @@ final class ToolBarView: UIView {
         
         if centerItem == .title {
             titleLabel = UILabel()
+			titleLabel.textAlignment = .center
             titleLabel.textColor = .white
             titleLabel.font = Montserrat.medium(size: 17)
             addSubview(titleLabel)
-            NSLayoutConstraint.activate([
-                titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-                titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-            ])
         } else {
             undoButton = UIButton()
             undoButton.setImage(.init(named: "Undo"), for: .normal)

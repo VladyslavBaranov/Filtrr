@@ -23,4 +23,9 @@ struct Montserrat {
     static func bold(size: CGFloat) -> UIFont {
         UIFont(name: "Montserrat-Bold", size: size) ?? .systemFont(ofSize: size)
     }
+	
+	static func getBoundingWidthRegular13(string: String) -> CGFloat {
+		let str = NSAttributedString(string: string, attributes: [.font: Montserrat.regular(size: 13)])
+		return str.size().width
+	}
 }

@@ -8,6 +8,10 @@
 import UIKit
 import Photos
 
+protocol ImageLibraryPickerViewControllerDelegate: AnyObject {
+	func didSelectImage(uiImage: UIImage)
+}
+
 final class ImageCollectionViewCell: UICollectionViewCell {
     var imageView: UIImageView!
     override init(frame: CGRect) {
@@ -43,13 +47,14 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     }
     
     func set(contentMode: ContentMode) {
-        imageView.contentMode = contentMode
+		imageView.contentMode = contentMode
     }
 }
 
 final class ImageLibraryPickerViewController: UIViewController {
     
     var allPhotos: PHFetchResult<PHAsset>?
+	var collections: PHFetchResult<PHCollection>?
     
     var photosContentMode: UIView.ContentMode = .scaleAspectFill
     
@@ -57,6 +62,7 @@ final class ImageLibraryPickerViewController: UIViewController {
     var prefsButton: UIButton!
     private var gradientLayer: CAGradientLayer!
 
+	weak var delegate: ImageLibraryPickerViewControllerDelegate!
     var collectionView: UICollectionView!
     var collectionsCollectionView: HorizontalCollectionView!
     
@@ -70,13 +76,13 @@ final class ImageLibraryPickerViewController: UIViewController {
         setupButtons()
         loadAssets()
         
-        setupCollectionsCollectionView()
+        // setupCollectionsCollectionView()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = .init(x: 0, y: 0, width: view.bounds.width, height: view.safeAreaInsets.top + 90)
-        collectionView.contentInset = .init(top: 0, left: 0, bottom: view.safeAreaInsets.bottom + 120, right: 0)
+        collectionView.contentInset = .init(top: 0, left: 0, bottom: view.safeAreaInsets.bottom, right: 0)
     }
     
     func loadAssets() {
@@ -236,7 +242,7 @@ extension ImageLibraryPickerViewController: UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         allPhotos?.count ?? 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! ImageCollectionViewCell
         cell.imageView.contentMode = photosContentMode
@@ -248,4 +254,23 @@ extension ImageLibraryPickerViewController: UICollectionViewDelegate, UICollecti
         }
         return cell
     }
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		
+		if let allPhotos = allPhotos {
+			let asset = allPhotos[indexPath.row]
+			print(asset.pixelWidth, asset.pixelHeight)
+			let options = PHImageRequestOptions()
+			PHImageManager.default().requestImage(
+				for: asset,
+				targetSize: .init(width: asset.pixelWidth, height: asset.pixelHeight),
+				contentMode: .aspectFit,
+				options: options) { [weak self] image, _ in
+					if let image = image {
+						self?.dismissSelf()
+						self?.delegate?.didSelectImage(uiImage: image)
+					}
+				}
+		}
+	}
 }

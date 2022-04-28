@@ -6,6 +6,13 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Capture it.ttf</string>
+		<string>Game Of Squids.ttf</string>
+		<string>HARRYP.TTF</string>
+		<string>nasalization-rg.otf</string>
+		<string>PatuaOne-Regular.ttf</string>
+		<string>Oxanium-Medium.ttf</string>
+		<string>PaybAck.ttf</string>
 		<string>Montserrat-SemiBold.ttf</string>
 		<string>Montserrat-Light.ttf</string>
 		<string>Montserrat-Regular.ttf</string>
