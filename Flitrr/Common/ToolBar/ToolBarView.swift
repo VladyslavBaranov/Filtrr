@@ -29,7 +29,7 @@ final class ToolBarView: UIView {
     }
     
     enum CenterItem {
-        case title, editSet
+        case title, editSet, colorData
     }
     
 	var leadingItem: LeadingItem = .back {
@@ -71,6 +71,8 @@ final class ToolBarView: UIView {
     private var undoButton: UIButton!
     private var redoButton: UIButton!
     private var layersButton: UIButton!
+	
+	private var colorCircle: UIView!
     
     init(frame: CGRect, centerItem: CenterItem) {
         super.init(frame: frame)
@@ -89,63 +91,98 @@ final class ToolBarView: UIView {
     
     private func setupUI() {
 
-        leadingButton = UIButton()
-        if leadingItem == .back {
-            leadingButton.setImage(.init(named: "Back"), for: .normal)
-        } else {
-            leadingButton.setImage(.init(named: "Cancel"), for: .normal)
-        }
-        leadingButton.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(leadingButton)
-        
-        trailingButton = UIButton()
-        trailingButton.translatesAutoresizingMaskIntoConstraints = false
-        if trailingItem == .share {
-            trailingButton.setImage(.init(named: "Share"), for: .normal)
-        } else {
-            trailingButton.setImage(.init(named: "Check"), for: .normal)
-        }
-        addSubview(trailingButton)
-        
-        NSLayoutConstraint.activate([
-            trailingButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            trailingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            leadingButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            leadingButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30)
-        ])
-        
-        if centerItem == .title {
-            titleLabel = UILabel()
-			titleLabel.textAlignment = .center
-            titleLabel.textColor = .white
-            titleLabel.font = Montserrat.medium(size: 17)
-            addSubview(titleLabel)
-        } else {
-            undoButton = UIButton()
-            undoButton.setImage(.init(named: "Undo"), for: .normal)
-            layersButton = UIButton()
-            layersButton.setImage(.init(named: "Layers"), for: .normal)
-            layersButton.setPreferredSymbolConfiguration(.init(pointSize: 30), forImageIn: .normal)
-            redoButton = UIButton()
-            redoButton.setImage(.init(named: "Redo"), for: .normal)
-            
-            toolsStack = UIStackView(arrangedSubviews: [undoButton, layersButton, redoButton])
-            toolsStack.spacing = 30
-            toolsStack.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(toolsStack)
-            
-            NSLayoutConstraint.activate([
-                toolsStack.centerXAnchor.constraint(equalTo: centerXAnchor),
-                toolsStack.centerYAnchor.constraint(equalTo: centerYAnchor)
-            ])
-        }
-        
+        setupSideButtons()
+        setupCenterItem()
+
         leadingButton.addTarget(self, action: #selector(leadingButtonTapped), for: .touchUpInside)
         trailingButton.addTarget(self, action: #selector(trailingButtonTapped), for: .touchUpInside)
         layersButton?.addTarget(self, action: #selector(layerButtonTapped), for: .touchUpInside)
         undoButton?.addTarget(self, action: #selector(undoButtonTapped), for: .touchUpInside)
         redoButton?.addTarget(self, action: #selector(redoButtonTapped), for: .touchUpInside)
     }
+	
+	private func setupSideButtons() {
+		leadingButton = UIButton()
+		if leadingItem == .back {
+			leadingButton.setImage(.init(named: "Back"), for: .normal)
+		} else {
+			leadingButton.setImage(.init(named: "Cancel"), for: .normal)
+		}
+		leadingButton.translatesAutoresizingMaskIntoConstraints = false
+		addSubview(leadingButton)
+		
+		trailingButton = UIButton()
+		trailingButton.translatesAutoresizingMaskIntoConstraints = false
+		if trailingItem == .share {
+			trailingButton.setImage(.init(named: "Share"), for: .normal)
+		} else {
+			trailingButton.setImage(.init(named: "Check"), for: .normal)
+		}
+		addSubview(trailingButton)
+		
+		NSLayoutConstraint.activate([
+			trailingButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+			trailingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+			leadingButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+			leadingButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30)
+		])
+	}
+	
+	private func setupCenterItem() {
+		switch centerItem {
+		case .title:
+			titleLabel = UILabel()
+			titleLabel.textAlignment = .center
+			titleLabel.textColor = .white
+			titleLabel.font = Montserrat.medium(size: 17)
+			addSubview(titleLabel)
+		case .editSet:
+			undoButton = UIButton()
+			undoButton.setImage(.init(named: "Undo"), for: .normal)
+			layersButton = UIButton()
+			layersButton.setImage(.init(named: "Layers"), for: .normal)
+			layersButton.setPreferredSymbolConfiguration(.init(pointSize: 30), forImageIn: .normal)
+			redoButton = UIButton()
+			redoButton.setImage(.init(named: "Redo"), for: .normal)
+			
+			toolsStack = UIStackView(arrangedSubviews: [undoButton, layersButton, redoButton])
+			toolsStack.spacing = 30
+			toolsStack.translatesAutoresizingMaskIntoConstraints = false
+			addSubview(toolsStack)
+			
+			NSLayoutConstraint.activate([
+				toolsStack.centerXAnchor.constraint(equalTo: centerXAnchor),
+				toolsStack.centerYAnchor.constraint(equalTo: centerYAnchor)
+			])
+		case .colorData:
+			colorCircle = UIView()
+			colorCircle.layer.cornerRadius = 15
+			colorCircle.backgroundColor = .red
+			
+			titleLabel = UILabel()
+			titleLabel.textAlignment = .center
+			titleLabel.text = "#FF0000  %100"
+			titleLabel.textColor = .white
+			titleLabel.font = Montserrat.medium(size: 17)
+			
+			toolsStack = UIStackView(arrangedSubviews: [colorCircle, titleLabel])
+			toolsStack.spacing = 10
+			toolsStack.translatesAutoresizingMaskIntoConstraints = false
+			addSubview(toolsStack)
+			
+			NSLayoutConstraint.activate([
+				colorCircle.heightAnchor.constraint(equalToConstant: 30),
+				colorCircle.widthAnchor.constraint(equalToConstant: 30),
+				toolsStack.centerXAnchor.constraint(equalTo: centerXAnchor),
+				toolsStack.centerYAnchor.constraint(equalTo: centerYAnchor)
+			])
+		}
+	}
+	
+	func setColor(_ uiColor: UIColor, alphaPercent: Int) {
+		colorCircle.backgroundColor = uiColor
+		titleLabel.text = "\(uiColor.hexString().uppercased())  \(alphaPercent)%"
+	}
     
     @objc func leadingButtonTapped() {
         delegate?.didTapLeadingItem()

@@ -30,9 +30,9 @@ struct NavigationBar: View {
             } label: {
                 Image(systemName: "chevron.left")
             }
-            Text("Settings")
+            Text(LocalizationManager.shared.localizedString(for: .settingsTitle))
                 .foregroundColor(.white)
-                .font(Font(UIFont(name: "Montserrat-Regular", size: 17) ?? .systemFont(ofSize: 17)))
+				.font(Font(Montserrat.regular(size: 17)))
         }
     }
 }

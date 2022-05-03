@@ -23,7 +23,7 @@ final class ValuePickerView: UIView {
 	var titles: [String] = [] {
 		didSet {
 			items = titles.map { .init(title: $0, isSelected: false) }
-			// items[0].isSelected = true
+			items[0].isSelected = true
 			collectionView.reloadData()
 		}
 	}
@@ -85,14 +85,18 @@ extension ValuePickerView: UICollectionViewDelegate, UICollectionViewDataSource,
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let cell = collectionView.cellForItem(at: indexPath) as! TextCollectionViewCell
-		cell.setSelected()
+		for i in 0..<items.count {
+			items[i].isSelected = i == indexPath.row
+		}
+		collectionView.reloadData()
+		// let cell = collectionView.cellForItem(at: indexPath) as! TextCollectionViewCell
+		// cell.setSelected()
 		delegate?.didSelectValue(at: indexPath.row)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-		let cell = collectionView.cellForItem(at: indexPath) as! TextCollectionViewCell
-		cell.setUnselected()
+		//let cell = collectionView.cellForItem(at: indexPath) as! TextCollectionViewCell
+		//cell.setUnselected()
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

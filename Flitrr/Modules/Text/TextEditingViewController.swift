@@ -15,12 +15,22 @@ final class TextEditingViewController: UIViewController {
 	private var textView: UITextView!
 	private var palette: ColorPaletteCollectionView!
 	
+	private var textViewAttributes: [NSAttributedString.Key: Any] = [
+		.font: UIFont(name: "PaybAck", size: 75) ?? .systemFont(ofSize: 75),
+		.foregroundColor: UIColor.white
+	]
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		let paragraph = NSMutableParagraphStyle()
+		paragraph.alignment = .center
+		textViewAttributes[.paragraphStyle] = paragraph
 		
 		view.backgroundColor = .appDark
 		
 		textView = UITextView(frame: view.bounds)
+		textView.delegate = self
 		textView.translatesAutoresizingMaskIntoConstraints = false
 		textView.autocorrectionType = .no
 		textView.autocapitalizationType = .none
@@ -48,8 +58,6 @@ final class TextEditingViewController: UIViewController {
 			textView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 		])
-		
-		
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -80,6 +88,7 @@ final class TextEditingViewController: UIViewController {
 	
 	func setupTopViews() {
 		optionsContainerView = ProjectsOptionsContainerView()
+		optionsContainerView.allowsBorderSelection = false
 		optionsContainerView.delegate = self
 		optionsContainerView.setTitles(["Color", "Fonts", "Style"])
 		optionsContainerView.selectedIndex = 0
@@ -107,12 +116,11 @@ final class TextEditingViewController: UIViewController {
 	}
 	
 	func unhideTopControls() {
+		toolBarView.isHidden = false
+		optionsContainerView.isHidden = false
 		UIView.animate(withDuration: 0.3) { [unowned self] in
 			toolBarView.alpha = 1
 			optionsContainerView.alpha = 1
-		} completion: { [unowned self] _ in
-			toolBarView.isHidden = false
-			optionsContainerView.isHidden = false
 		}
 	}
 	
@@ -137,29 +145,45 @@ extension TextEditingViewController: ColorPaletteCollectionViewDelegate {
 		case .textColor:
 			break
 		case .gradient:
-			break
+			hideKeyboardAndTopControls()
+			let vc = ColorPickerViewController()
+			vc.initialColor = textView.textColor
+			vc.delegate = self
+			vc.modalPresentationStyle = .custom
+			vc.transitioningDelegate = vc
+			present(vc, animated: true, completion: nil)
 		case .color(let uIColor):
-			textView.textColor = uIColor
+			textViewAttributes[.foregroundColor] = uIColor
+			textView.attributedText = NSAttributedString(string: textView.text, attributes: textViewAttributes)
 		}
 	}
 }
 
 extension TextEditingViewController: ProjectsOptionsContainerViewDelegate {
 	func didTapOption(tag: Int) {
+		hideKeyboardAndTopControls()
 		switch tag {
 		case 0:
-			break
+			let vc = ColorPickerViewController()
+			vc.initialColor = textView.textColor
+			vc.delegate = self
+			vc.modalPresentationStyle = .custom
+			vc.transitioningDelegate = vc
+			present(vc, animated: true, completion: nil)
 		case 1:
-			hideKeyboardAndTopControls()
 			let vc = FontsPickerViewController()
 			vc.initialFont = textView.font
 			vc.delegate = self
-			if let presentationController = vc.presentationController as? UISheetPresentationController {
-				presentationController.detents = [.medium()]
-			}
+			vc.modalPresentationStyle = .custom
+			vc.transitioningDelegate = vc
 			present(vc, animated: true, completion: nil)
 		case 2:
-			hideKeyboardAndTopControls()
+			let vc = StyleViewController()
+			vc.initialAttributes = textViewAttributes
+			vc.delegate = self
+			vc.modalPresentationStyle = .custom
+			vc.transitioningDelegate = vc
+			present(vc, animated: true, completion: nil)
 		default:
 			break
 		}
@@ -171,6 +195,35 @@ extension TextEditingViewController: FontsPickerViewControllerDelegate {
 		unhideTopControls()
 	}
 	func didSelect(font: UIFont?) {
-		textView.font = font
+		textViewAttributes[.font] = font
+		textView.attributedText = NSAttributedString(string: textView.text, attributes: textViewAttributes)
+	}
+}
+
+extension TextEditingViewController: ColorPickerViewControllerDelegate {
+	func didDismissColorPicker() {
+		unhideTopControls()
+	}
+	
+	func didReportColor(_ uiColor: UIColor) {
+		textViewAttributes[.foregroundColor] = uiColor
+		textView.attributedText = NSAttributedString(string: textView.text, attributes: textViewAttributes)
+	}
+}
+
+extension TextEditingViewController: StyleViewControllerDelegate {
+	func didSetAttributes(_ attributes: [NSAttributedString.Key : Any]) {
+		textViewAttributes = attributes
+		textView.attributedText = NSAttributedString(string: textView.text, attributes: textViewAttributes)
+	}
+
+	func didDismissStyleController() {
+		unhideTopControls()
+	}
+}
+
+extension TextEditingViewController: UITextViewDelegate {
+	func textViewDidChange(_ textView: UITextView) {
+		textView.attributedText = NSAttributedString(string: textView.text, attributes: textViewAttributes)
 	}
 }

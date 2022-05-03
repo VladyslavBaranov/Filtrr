@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         tabBarController.viewControllers = [discoverController, projectsController]
         
-        window?.rootViewController = TextEditingViewController() // tabBarController
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .dark
     }

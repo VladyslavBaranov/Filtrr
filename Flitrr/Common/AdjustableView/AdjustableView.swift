@@ -9,6 +9,7 @@ import UIKit
 
 final class AdjustableView: UIView {
 	
+	var savedFrame: CGRect = .zero
 	var gridIsActive = true
 	
 	var panGestureRecognier: UIPanGestureRecognizer!
@@ -49,27 +50,29 @@ final class AdjustableView: UIView {
 		addSubview(imageView)
 		
 		drawOutline()
+		
+		savedFrame = frame
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		gridIsActive.toggle()
-		if gridIsActive {
-			layer.borderColor = UIColor.clear.cgColor
-			UIView.animate(withDuration: 0.3) { [unowned self] in
-				uLeftButton.alpha = 0
-				uRightButton.alpha = 0
-				lLeftButton.alpha = 0
-				lRightButton.alpha = 0
-			}
-		} else {
-			layer.borderColor = UIColor.lightGray.cgColor
-			UIView.animate(withDuration: 0.3) { [unowned self] in
-				uLeftButton.alpha = 1
-				uRightButton.alpha = 1
-				lLeftButton.alpha = 1
-				lRightButton.alpha = 1
-			}
-		}
+//		if gridIsActive {
+//			layer.borderColor = UIColor.clear.cgColor
+//			UIView.animate(withDuration: 0.3) { [unowned self] in
+//				uLeftButton.alpha = 0
+//				uRightButton.alpha = 0
+//				lLeftButton.alpha = 0
+//				lRightButton.alpha = 0
+//			}
+//		} else {
+//			layer.borderColor = UIColor.lightGray.cgColor
+//			UIView.animate(withDuration: 0.3) { [unowned self] in
+//				uLeftButton.alpha = 1
+//				uRightButton.alpha = 1
+//				lLeftButton.alpha = 1
+//				lRightButton.alpha = 1
+//			}
+//		}
 	}
 	
 	override func layoutSubviews() {
@@ -78,6 +81,7 @@ final class AdjustableView: UIView {
 		uRightButton.frame.origin = .init(x: bounds.width - 15, y: 0)
 		lLeftButton.frame.origin = .init(x: 0, y: bounds.height - 15)
 		lRightButton.frame.origin = .init(x: bounds.width - 15, y: bounds.height - 15)
+		imageView.frame = bounds
 	}
 	
 	required init?(coder: NSCoder) {
@@ -117,11 +121,25 @@ final class AdjustableView: UIView {
 		
 		let globalPos = sender.location(in: superview)
 		center = globalPos
+		savedFrame = frame
 	}
 	
 	@objc func handleULeftRecognizer(_ sender: UIPanGestureRecognizer) {
-		print(sender.location(in: superview))
-		frame.origin = sender.location(in: superview)
 		
+		let location = sender.location(in: superview)
+		
+		switch sender.state {
+		case .changed:
+			frame.origin = location
+			frame.size = .init(
+				width: abs(savedFrame.maxX - location.x),
+				height: abs(savedFrame.maxY - location.y)
+			)
+		case .ended:
+			savedFrame = frame
+		default:
+			break
+		}
+
 	}
 }

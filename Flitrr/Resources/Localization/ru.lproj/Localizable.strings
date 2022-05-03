@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Flitrr
+
+  Created by VladyslavMac on 01.05.2022.
+  
+*/
+
+"settings_title" = "Настройки";
+"settings_lang" = "Язык";
+"settings_restore" = "Восстановить покупки";
+"settings_privacy" = "Условия пользования";
+"settings_rate" = "Оцените нас в App Store";
+"settings_card_caption" = "Get the premium feature and get the unlimited access to the app.";
+
+"paywall_year_title" = "БЕСПЛАТНО 3 дня - В год";
+"paywall_year_caption" = "Pay annually, free trial";
+"paywall_subscribe_now" = "Подписаться";
+"paywall_year_price_full" = "затем $64.99 в год";
+"paywall_6month_title" = "6 месяцев";
+"paywall_6month_caption" = "Оплата за 6 месяцев";
+"paywall_month_title" = "Месяц";
+"paywall_month_caption" = "Ежемесячная оплата";

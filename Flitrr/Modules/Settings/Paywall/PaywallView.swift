@@ -86,9 +86,9 @@ struct PaywallView: View {
     
     @State var selectedItem: Int = 0
     @State var pricingItems: [PricingItem] = [
-        .init(index: 0, price: "6.99", title: "Monthly", subtitle: "Pay monthly", isSelected: true),
+		.init(index: 0, price: "5.99", title: "FREE 3 Day Trial - Annually", subtitle: "Pay annually, free trial", postDescription: "then $64.99 year"),
         .init(index: 1, price: "34.99", title: "6 months", subtitle: "Pay for 6 months"),
-		.init(index: 2, price: "5.4", title: "Annually", subtitle: "Pay annually, free trial", postDescription: "then $64.99 year")
+		.init(index: 2, price: "6.99", title: "Monthly", subtitle: "Pay monthly", isSelected: true),
     ]
     
     var body: some View {

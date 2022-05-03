@@ -99,12 +99,20 @@ protocol ProjectsOptionsContainerViewDelegate: AnyObject {
 final class ProjectsOptionsContainerView: UIView {
     
     weak var delegate: ProjectsOptionsContainerViewDelegate!
+	
+	var allowsBorderSelection = true
+	
 	var selectedIndex = 0 {
 		didSet {
-			for button in stackView.arrangedSubviews {
-				if button.tag != selectedIndex {
-					(button as? UIButton)?.layer.borderColor = UIColor.darkGray.cgColor
-					(button as? UIButton)?.setTitleColor(.white, for: .normal)
+			if allowsBorderSelection {
+				for button in stackView.arrangedSubviews {
+					if button.tag != selectedIndex {
+						(button as? UIButton)?.layer.borderColor = UIColor.darkGray.cgColor
+						(button as? UIButton)?.setTitleColor(.white, for: .normal)
+					} else {
+						(button as? UIButton)?.layer.borderColor = UIColor.appAccent.cgColor
+						(button as? UIButton)?.setTitleColor(.appAccent, for: .normal)
+					}
 				}
 			}
 		}
@@ -144,10 +152,10 @@ final class ProjectsOptionsContainerView: UIView {
     func getButton(title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.appAccent, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 15)
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.appAccent.cgColor
+        button.layer.borderColor = UIColor.darkGray.cgColor
         button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(didTapOption(_:)), for: .touchUpInside)
         button.tag = tagForButton
@@ -156,8 +164,6 @@ final class ProjectsOptionsContainerView: UIView {
     }
     
     @objc func didTapOption(_ sender: UIButton) {
-        sender.setTitleColor(.appAccent, for: .normal)
-        sender.layer.borderColor = UIColor.appAccent.cgColor
 		selectedIndex = sender.tag
         delegate?.didTapOption(tag: sender.tag)
     }

@@ -18,6 +18,7 @@ final class AdjustChevronView: UIView {
 	init(frame: CGRect, corner: Corner) {
 		super.init(frame: frame)
 		self.corner = corner
+		backgroundColor = .clear
 	}
 	
 	override func draw(_ rect: CGRect) {

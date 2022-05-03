@@ -90,11 +90,11 @@ final class PaywallThumbnailView: UIView {
         premiumLabel = UILabel()
         let string = NSMutableAttributedString()
         let filtrrString = NSAttributedString(string: "filtrr", attributes: [
-            .font: UIFont(name: "Montserrat-Bold", size: 20) ?? .systemFont(ofSize: 20)
+			.font: Montserrat.bold(size: 20)
         ])
         string.append(filtrrString)
         let premiumString = NSAttributedString(string: " premium", attributes: [
-            .font: UIFont(name: "Montserrat-Light", size: 20) ?? .systemFont(ofSize: 20)
+			.font: Montserrat.light(size: 20)
         ])
         string.append(premiumString)
         premiumLabel.attributedText = string
@@ -111,8 +111,8 @@ final class PremiumViewTitle: UIView {
         super.init(frame: frame)
         backgroundColor = .appGray
         label = UILabel()
-        label.text = "Get the premium feature and get the unlimited access to the app."
-        label.font = UIFont(name: "Montserrat-Light", size: 13)
+		label.text = LocalizationManager.shared.localizedString(for: .settingsCardCaption)
+		label.font = Montserrat.light(size: 13)
         addSubview(label)
         label.numberOfLines = 2
         label.textColor = .soft2
@@ -167,7 +167,10 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
     var thumbnailView: PaywallThumbnailView!
     
     let settingsItems: [String] = [
-        "Language", "Restore Purchases", "Privacy Policy", "Rate Us on App Store"
+		LocalizationManager.shared.localizedString(for: .settingsLang),
+		LocalizationManager.shared.localizedString(for: .settingsRestore),
+		LocalizationManager.shared.localizedString(for: .settingsPrivacy),
+		LocalizationManager.shared.localizedString(for: .settingsRate)
     ]
     
     override func viewDidLoad() {
@@ -220,13 +223,13 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
     }
     func setupNavBar() {
         navigationItem.backButtonTitle = ""
-        navigationItem.title = "Settings"
+		navigationItem.title = LocalizationManager.shared.localizedString(for: .settingsTitle)
         navigationItem.leftBarButtonItem = .init(
             image: UIImage(systemName: "chevron.left"),
             style: .plain, target: self, action: #selector(dismissSelf))
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [
-            .font: UIFont(name: "Montserrat-Medium", size: 17) ?? .systemFont(ofSize: 17),
+			.font: Montserrat.medium(size: 17),
             .foregroundColor: UIColor.white
         ]
     }

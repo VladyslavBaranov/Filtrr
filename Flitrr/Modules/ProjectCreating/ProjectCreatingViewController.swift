@@ -108,9 +108,8 @@ extension ProjectCreatingViewController: ImageLibraryPickerViewControllerDelegat
 		
 		if addedCount == 2 {
 			let v = AdjustableView(frame: .init(x: 15, y: 15, width: 200, height: 300))
-			v.imageView.image = uiImage.applyingFilter(name: "CIColorControls", parameters: ["inputContrast":10])
+			v.imageView.image = uiImage //.applyingFilter(name: "CIColorControls", parameters: ["inputContrast":10])
 			transparentGridView.addSubview(v)
-			print("add")
 			addedCount = 0
 		}
 		

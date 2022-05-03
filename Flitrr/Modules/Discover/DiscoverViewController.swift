@@ -24,6 +24,7 @@ class DiscoverViewController: UIViewController {
         navigationView = NavigationView(frame: .zero)
         navigationView.title = "Discover"
         navigationView.translatesAutoresizingMaskIntoConstraints = false
+		navigationView.onSettingsButtonTapped = openSettings
         view.addSubview(navigationView)
         
         NSLayoutConstraint.activate([
@@ -33,5 +34,12 @@ class DiscoverViewController: UIViewController {
             navigationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
     }
+	
+	func openSettings() {
+		
+		let nav = SettingsViewController.createSettingsNavigationController()
+		nav.modalPresentationStyle = .fullScreen
+		present(nav, animated: true)
+	}
 }
 

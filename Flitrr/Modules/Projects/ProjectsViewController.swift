@@ -119,7 +119,6 @@ extension ProjectsViewController: ProjectsOptionsContainerViewDelegate {
             }
         case 1:
             currentMode = .folders
-            collectionView.contentInset = .init(top: 160, left: 0, bottom: 100, right: 0)
             collectionView.setCollectionViewLayout(createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9.0), animated: false)
             collectionView.alwaysBounceHorizontal = false
         
@@ -147,18 +146,20 @@ private extension ProjectsViewController {
         let layout = WaterFallLayout()
         layout.delegate = self
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.backgroundColor = .appDark
+		collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ProjectsFolderCell.self, forCellWithReuseIdentifier: "id")
         collectionView.register(FoldersCollectionHeaderView.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: "hId")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.contentInset = .init(top: 160, left: 20, bottom: 100, right: 20)
+        collectionView.contentInset = .init(top: 160, left: 0, bottom: 100, right: 0)
         
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -232,7 +233,7 @@ extension ProjectsViewController {
             if let text = alertVC.textFields?.first?.text {
                 let folder = Folder.createFolderAndSave(name: text)
                 self?.folders.insert(folder, at: 0)
-                self?.collectionView.reloadSections(.init(integer: 0))
+                self?.collectionView.reloadData()
             }
         }))
         present(alertVC, animated: true)

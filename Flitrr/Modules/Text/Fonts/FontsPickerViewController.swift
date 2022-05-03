@@ -98,9 +98,8 @@ extension FontsPickerViewController: ToolBarViewDelegate {
 	}
 	func didTapLeadingItem() {
 		delegate?.didSelect(font: initialFont)
-		dismiss(animated: true) { [weak self] in
-			self?.delegate?.didDismissFontPicker()
-		}
+		delegate?.didDismissFontPicker()
+		dismiss(animated: true)
 	}
 	func didTapUndo() {}
 	func didTapLayers() {}
@@ -143,5 +142,11 @@ extension FontsPickerViewController: ValuePickerViewDelegate {
 	func didSelectValue(at index: Int) {
 		currentFonts = fontsLoader.fonts(for: index)
 		fontsCollectionView.reloadData()
+	}
+}
+
+extension FontsPickerViewController: UIViewControllerTransitioningDelegate {
+	func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+		FractionPresentationController(presentedViewController: presented, presenting: presenting, heightFactor: 0.5)
 	}
 }
