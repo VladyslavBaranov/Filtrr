@@ -10,7 +10,27 @@ import UIKit
 final class AdjustableView: UIView {
 	
 	var savedFrame: CGRect = .zero
-	var gridIsActive = true
+    var gridIsActive = true {
+        didSet {
+            if !gridIsActive {
+                layer.borderColor = UIColor.clear.cgColor
+                UIView.animate(withDuration: 0.3) { [unowned self] in
+                    uLeftButton.alpha = 0
+                    uRightButton.alpha = 0
+                    lLeftButton.alpha = 0
+                    lRightButton.alpha = 0
+                }
+            } else {
+                layer.borderColor = UIColor.lightGray.cgColor
+                UIView.animate(withDuration: 0.3) { [unowned self] in
+                    uLeftButton.alpha = 1
+                    uRightButton.alpha = 1
+                    lLeftButton.alpha = 1
+                    lRightButton.alpha = 1
+                }
+            }
+        }
+    }
 	
 	var panGestureRecognier: UIPanGestureRecognizer!
 	var rotationRecognizer: UIRotationGestureRecognizer!
@@ -27,7 +47,7 @@ final class AdjustableView: UIView {
 	var lRightButton: AdjustChevronView!
 	var lRightRecognizer: UIPanGestureRecognizer!
 
-	
+    var contentView: UIView!
 	var imageView: UIImageView!
 	
 	
@@ -56,23 +76,6 @@ final class AdjustableView: UIView {
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		gridIsActive.toggle()
-//		if gridIsActive {
-//			layer.borderColor = UIColor.clear.cgColor
-//			UIView.animate(withDuration: 0.3) { [unowned self] in
-//				uLeftButton.alpha = 0
-//				uRightButton.alpha = 0
-//				lLeftButton.alpha = 0
-//				lRightButton.alpha = 0
-//			}
-//		} else {
-//			layer.borderColor = UIColor.lightGray.cgColor
-//			UIView.animate(withDuration: 0.3) { [unowned self] in
-//				uLeftButton.alpha = 1
-//				uRightButton.alpha = 1
-//				lLeftButton.alpha = 1
-//				lRightButton.alpha = 1
-//			}
-//		}
 	}
 	
 	override func layoutSubviews() {
@@ -129,6 +132,9 @@ final class AdjustableView: UIView {
 		let location = sender.location(in: superview)
 		
 		switch sender.state {
+        case .began:
+            gridIsActive = true
+            break
 		case .changed:
 			frame.origin = location
 			frame.size = .init(

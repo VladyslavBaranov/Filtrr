@@ -34,6 +34,7 @@
 		07F98779281C43620058139C /* PresentationControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F98778281C43620058139C /* PresentationControllers.swift */; };
 		07F9877D281ECC610058139C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07F9877F281ECC610058139C /* Localizable.strings */; };
 		07F98782281ED1500058139C /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F98781281ED1500058139C /* Localization.swift */; };
+		1E28628F28268E9200E624B1 /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E28628E28268E9200E624B1 /* CustomSearchTextField.swift */; };
 		1E42E017280DC93D0033E6EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42E016280DC93D0033E6EE /* AppDelegate.swift */; };
 		1E42E019280DC93D0033E6EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42E018280DC93D0033E6EE /* SceneDelegate.swift */; };
 		1E42E01B280DC93D0033E6EE /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42E01A280DC93D0033E6EE /* DiscoverViewController.swift */; };
@@ -121,7 +122,6 @@
 		07F98773281BC2260058139C /* SliderSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderSetView.swift; sourceTree = "<group>"; };
 		07F98776281C2BC00058139C /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		07F98778281C43620058139C /* PresentationControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationControllers.swift; sourceTree = "<group>"; };
-		07F9877E281ECC610058139C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		07F98780281ECC6F0058139C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		07F98781281ED1500058139C /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		07F98783281ED3AB0058139C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -132,6 +132,8 @@
 		07F98788281ED3E80058139C /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		07F98789281ED3F10058139C /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		07F9878A281ED3FE0058139C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E28628D282675EB00E624B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E28628E28268E9200E624B1 /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
 		1E42E013280DC93D0033E6EE /* Flitrr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flitrr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E42E016280DC93D0033E6EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E42E018280DC93D0033E6EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				1E98AD7B2812FDF1006DAE75 /* Fonts.swift */,
 				07F98776281C2BC00058139C /* CustomSlider.swift */,
 				07F98778281C43620058139C /* PresentationControllers.swift */,
+				1E28628E28268E9200E624B1 /* CustomSearchTextField.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -796,6 +799,7 @@
 				07F98748281A7E8C0058139C /* ValuePickerView.swift in Sources */,
 				07F9876A281AD5D10058139C /* StyleViewController.swift in Sources */,
 				07F9876E281AE8400058139C /* ColorSliderView.swift in Sources */,
+				1E28628F28268E9200E624B1 /* CustomSearchTextField.swift in Sources */,
 				1E42E053280DED700033E6EE /* RoundedTabBarController.swift in Sources */,
 				1E98AD55280EB72D006DAE75 /* WaterFallLayout.swift in Sources */,
 				1E98ADA02816B438006DAE75 /* HorizontalCollectionView.swift in Sources */,
@@ -846,7 +850,6 @@
 		07F9877F281ECC610058139C /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				07F9877E281ECC610058139C /* en */,
 				07F98780281ECC6F0058139C /* es */,
 				07F98783281ED3AB0058139C /* zh-Hans */,
 				07F98784281ED3B60058139C /* ja */,
@@ -856,6 +859,7 @@
 				07F98788281ED3E80058139C /* pt-PT */,
 				07F98789281ED3F10058139C /* it */,
 				07F9878A281ED3FE0058139C /* ko */,
+				1E28628D282675EB00E624B1 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

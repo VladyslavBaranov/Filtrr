@@ -18,6 +18,7 @@ final class NavigationView: UIView {
     
     var titleLabel: UILabel!
     var settingsButton: UIButton!
+    
     var onSettingsButtonTapped: (() -> ())?
     
     override init(frame: CGRect) {

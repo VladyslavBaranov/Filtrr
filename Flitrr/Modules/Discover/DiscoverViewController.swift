@@ -10,6 +10,7 @@ import UIKit
 class DiscoverViewController: UIViewController {
 
     private var navigationView: NavigationView!
+    var searchTextField: UISearchTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,19 @@ class DiscoverViewController: UIViewController {
             navigationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             navigationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             navigationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
+        
+        searchTextField = UISearchTextField()
+        searchTextField.backgroundColor = .appDark
+        searchTextField.placeholder = "Search Templates"
+        searchTextField.clearButtonMode = .whileEditing
+        view.addSubview(searchTextField)
+        searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchTextField.heightAnchor.constraint(equalToConstant: 50),
+            searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            searchTextField.topAnchor.constraint(equalTo: navigationView.bottomAnchor)
         ])
     }
 	
