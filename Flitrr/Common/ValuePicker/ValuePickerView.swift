@@ -27,6 +27,14 @@ final class ValuePickerView: UIView {
 			collectionView.reloadData()
 		}
 	}
+    
+    var selectedIndex = 0 {
+        didSet {
+            for i in 0..<items.count {
+                items[i].isSelected = i == selectedIndex
+            }
+        }
+    }
 	
 	var items: [Item] = []
 	
@@ -44,14 +52,14 @@ final class ValuePickerView: UIView {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		collectionView.frame = .init(x: 0, y: 1, width: bounds.width, height: bounds.height - 1)
+        collectionView.frame = .init(x: 0, y: 0.6, width: bounds.width, height: bounds.height - 0.6)
 	}
 	
 	func setupUI() {
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
 		collectionView = UICollectionView(
-			frame: .init(x: 0, y: 1, width: bounds.width, height: bounds.height - 1),
+            frame: .init(x: 0, y: 0.6, width: bounds.width, height: bounds.height - 0.6),
 			collectionViewLayout: layout
 		)
 		addSubview(collectionView)

@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Eyedropper.pdf",
+      "filename" : "Eyedropper-2.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Eyedropper-3.pdf",
       "idiom" : "universal"
     }
   ],

@@ -64,7 +64,7 @@ protocol ScrollableRoundedBarDelegate: AnyObject {
 final class ScrollableRoundedBar: UIView {
     
     var items: [ScrollabelRoundedBarItemView.ItemType] = [
-		.image, .text, .graphic, .shape, .background
+        .image, .text, .graphic, .shape, .background, .filters, .adjust, .crop, .shadow, .opacity
     ]
     
 	weak var delegate: ScrollableRoundedBarDelegate!

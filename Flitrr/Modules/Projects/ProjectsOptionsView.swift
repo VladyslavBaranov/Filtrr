@@ -8,14 +8,14 @@
 import UIKit
 
 final class NavigationView: UIView {
-    
+
     var title: String = "" {
         didSet {
             titleLabel.text = title
             titleLabel.sizeToFit()
         }
     }
-    
+
     var titleLabel: UILabel!
     var settingsButton: UIButton!
     
@@ -30,7 +30,7 @@ final class NavigationView: UIView {
         titleLabel.font = UIFont(name: "Montserrat-Bold", size: 32)
         titleLabel.textAlignment = .left
         addSubview(titleLabel)
-        titleLabel.textColor = .white
+        titleLabel.textColor = .label
         titleLabel.sizeToFit()
         
         settingsButton = UIButton()
@@ -83,7 +83,7 @@ final class ProjectsOptionsView: UIView {
             height: bounds.height)
         )
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 15)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.darkGray.cgColor
@@ -109,7 +109,7 @@ final class ProjectsOptionsContainerView: UIView {
 				for button in stackView.arrangedSubviews {
 					if button.tag != selectedIndex {
 						(button as? UIButton)?.layer.borderColor = UIColor.darkGray.cgColor
-						(button as? UIButton)?.setTitleColor(.white, for: .normal)
+						(button as? UIButton)?.setTitleColor(.label, for: .normal)
 					} else {
 						(button as? UIButton)?.layer.borderColor = UIColor.appAccent.cgColor
 						(button as? UIButton)?.setTitleColor(.appAccent, for: .normal)
@@ -153,7 +153,7 @@ final class ProjectsOptionsContainerView: UIView {
     func getButton(title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 15)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.darkGray.cgColor

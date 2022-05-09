@@ -47,6 +47,15 @@
 		1E42E04F280DCABB0033E6EE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42E04E280DCABB0033E6EE /* UIColor.swift */; };
 		1E42E051280DD3C90033E6EE /* RoundedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42E050280DD3C90033E6EE /* RoundedTabBar.swift */; };
 		1E42E053280DED700033E6EE /* RoundedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E42E052280DED700033E6EE /* RoundedTabBarController.swift */; };
+		1E5BCFD728281FDB00F7B610 /* AdjustableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFD628281FDB00F7B610 /* AdjustableImageView.swift */; };
+		1E5BCFDA2828260700F7B610 /* BackgroundSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFD92828260700F7B610 /* BackgroundSelectionViewController.swift */; };
+		1E5BCFDC2828472B00F7B610 /* AdjustableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFDB2828472A00F7B610 /* AdjustableLabel.swift */; };
+		1E5BCFDF2829060B00F7B610 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFDE2829060B00F7B610 /* FiltersViewController.swift */; };
+		1E5BCFE228290F7700F7B610 /* PaywallVid.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE128290F7700F7B610 /* PaywallVid.mp4 */; };
+		1E5BCFE4282910B300F7B610 /* PaywallVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE3282910B300F7B610 /* PaywallVideoView.swift */; };
+		1E5BCFE62829221800F7B610 /* FiltersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE52829221800F7B610 /* FiltersCollectionView.swift */; };
+		1E5BCFE82829495400F7B610 /* Filters.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE72829495400F7B610 /* Filters.json */; };
+		1E5BCFEA28294E5700F7B610 /* FilterLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE928294E5700F7B610 /* FilterLoader.swift */; };
 		1E98AD46280EA6F6006DAE75 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD45280EA6F6006DAE75 /* ProjectsViewController.swift */; };
 		1E98AD4A280EA925006DAE75 /* RoundedTabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD49280EA925006DAE75 /* RoundedTabBarItems.swift */; };
 		1E98AD4D280EAF0A006DAE75 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E98AD4C280EAF0A006DAE75 /* Montserrat-Bold.ttf */; };
@@ -150,6 +159,15 @@
 		1E42E04E280DCABB0033E6EE /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		1E42E050280DD3C90033E6EE /* RoundedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTabBar.swift; sourceTree = "<group>"; };
 		1E42E052280DED700033E6EE /* RoundedTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTabBarController.swift; sourceTree = "<group>"; };
+		1E5BCFD628281FDB00F7B610 /* AdjustableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustableImageView.swift; sourceTree = "<group>"; };
+		1E5BCFD92828260700F7B610 /* BackgroundSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSelectionViewController.swift; sourceTree = "<group>"; };
+		1E5BCFDB2828472A00F7B610 /* AdjustableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustableLabel.swift; sourceTree = "<group>"; };
+		1E5BCFDE2829060B00F7B610 /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		1E5BCFE128290F7700F7B610 /* PaywallVid.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaywallVid.mp4; sourceTree = "<group>"; };
+		1E5BCFE3282910B300F7B610 /* PaywallVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallVideoView.swift; sourceTree = "<group>"; };
+		1E5BCFE52829221800F7B610 /* FiltersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersCollectionView.swift; sourceTree = "<group>"; };
+		1E5BCFE72829495400F7B610 /* Filters.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Filters.json; sourceTree = "<group>"; };
+		1E5BCFE928294E5700F7B610 /* FilterLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLoader.swift; sourceTree = "<group>"; };
 		1E98AD45280EA6F6006DAE75 /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		1E98AD49280EA925006DAE75 /* RoundedTabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTabBarItems.swift; sourceTree = "<group>"; };
 		1E98AD4C280EAF0A006DAE75 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
@@ -212,6 +230,8 @@
 			children = (
 				07D15E862817CFD700723348 /* AdjustableView.swift */,
 				07D15E882817E0C900723348 /* AdjustChevronView.swift */,
+				1E5BCFD628281FDB00F7B610 /* AdjustableImageView.swift */,
+				1E5BCFDB2828472A00F7B610 /* AdjustableLabel.swift */,
 			);
 			path = AdjustableView;
 			sourceTree = "<group>";
@@ -231,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				07D15E92281831B200723348 /* UIImage+Extension.swift */,
+				1E5BCFE928294E5700F7B610 /* FilterLoader.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -284,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				07F9874D281A9A060058139C /* FontSystem.json */,
+				1E5BCFE72829495400F7B610 /* Filters.json */,
 			);
 			path = Files;
 			sourceTree = "<group>";
@@ -412,6 +434,7 @@
 		1E42E04A280DC97B0033E6EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1E5BCFE028290F6700F7B610 /* Video */,
 				07F9877A281ECC2A0058139C /* Localization */,
 				07F9874C281A99E10058139C /* Files */,
 				1E98AD4B280EAEF3006DAE75 /* Fonts */,
@@ -436,6 +459,8 @@
 		1E42E04C280DCA640033E6EE /* ProjectCreating */ = {
 			isa = PBXGroup;
 			children = (
+				1E5BCFDD282905F300F7B610 /* Filters */,
+				1E5BCFD8282825EF00F7B610 /* Background */,
 				1E98AD7D28140BB1006DAE75 /* ProjectCreatingViewController.swift */,
 				1E98AD8228141DE1006DAE75 /* ProjectTransparentGridView.swift */,
 			);
@@ -456,6 +481,31 @@
 				1E98AD47280EA8E7006DAE75 /* Extensions */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		1E5BCFD8282825EF00F7B610 /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				1E5BCFD92828260700F7B610 /* BackgroundSelectionViewController.swift */,
+			);
+			path = Background;
+			sourceTree = "<group>";
+		};
+		1E5BCFDD282905F300F7B610 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				1E5BCFDE2829060B00F7B610 /* FiltersViewController.swift */,
+				1E5BCFE52829221800F7B610 /* FiltersCollectionView.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		1E5BCFE028290F6700F7B610 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				1E5BCFE128290F7700F7B610 /* PaywallVid.mp4 */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		1E98AD43280EA679006DAE75 /* Projects */ = {
@@ -534,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				1E98AD702811D773006DAE75 /* PaywallView.swift */,
+				1E5BCFE3282910B300F7B610 /* PaywallVideoView.swift */,
 			);
 			path = Paywall;
 			sourceTree = "<group>";
@@ -722,6 +773,7 @@
 			files = (
 				1E98AD6D2811AC31006DAE75 /* Montserrat-Light.ttf in Resources */,
 				1E98AD4D280EAF0A006DAE75 /* Montserrat-Bold.ttf in Resources */,
+				1E5BCFE228290F7700F7B610 /* PaywallVid.mp4 in Resources */,
 				07F98752281AA6620058139C /* Oxanium-Medium.ttf in Resources */,
 				1E42E026280DC9430033E6EE /* LaunchScreen.storyboard in Resources */,
 				07F98764281AC1A30058139C /* Game Of Squids.ttf in Resources */,
@@ -736,6 +788,7 @@
 				07F9877D281ECC610058139C /* Localizable.strings in Resources */,
 				07F98762281ABC730058139C /* HARRYP.TTF in Resources */,
 				1E98AD7A2812FDCE006DAE75 /* Montserrat-SemiBold.ttf in Resources */,
+				1E5BCFE82829495400F7B610 /* Filters.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,8 +819,10 @@
 				1E42E017280DC93D0033E6EE /* AppDelegate.swift in Sources */,
 				1E98AD6F2811D0A7006DAE75 /* SettingsView.swift in Sources */,
 				07F9874B281A844B0058139C /* TextCollectionViewCell.swift in Sources */,
+				1E5BCFDA2828260700F7B610 /* BackgroundSelectionViewController.swift in Sources */,
 				07F98782281ED1500058139C /* Localization.swift in Sources */,
 				1E42E021280DC93D0033E6EE /* Flitrr.xcdatamodeld in Sources */,
+				1E5BCFDF2829060B00F7B610 /* FiltersViewController.swift in Sources */,
 				07F98772281AF7390058139C /* AlphaView.swift in Sources */,
 				1E98AD5E280EE2FD006DAE75 /* ProjectsSelectionTab.swift in Sources */,
 				1E42E051280DD3C90033E6EE /* RoundedTabBar.swift in Sources */,
@@ -777,6 +832,7 @@
 				1E98AD9A28168394006DAE75 /* ScrollableRoundedBar.swift in Sources */,
 				1E42E019280DC93D0033E6EE /* SceneDelegate.swift in Sources */,
 				1E98AD7528128E9E006DAE75 /* LanguageTableViewController.swift in Sources */,
+				1E5BCFD728281FDB00F7B610 /* AdjustableImageView.swift in Sources */,
 				1E98AD4A280EA925006DAE75 /* RoundedTabBarItems.swift in Sources */,
 				07D15E872817CFD700723348 /* AdjustableView.swift in Sources */,
 				1E98AD712811D773006DAE75 /* PaywallView.swift in Sources */,
@@ -786,6 +842,8 @@
 				1E98AD8328141DE1006DAE75 /* ProjectTransparentGridView.swift in Sources */,
 				1E98AD59280EDEEA006DAE75 /* UIViewController.swift in Sources */,
 				1E98AD95281575DA006DAE75 /* Project+CoreDataClass.swift in Sources */,
+				1E5BCFE4282910B300F7B610 /* PaywallVideoView.swift in Sources */,
+				1E5BCFEA28294E5700F7B610 /* FilterLoader.swift in Sources */,
 				07F9875B281AABF20058139C /* FontsLoader.swift in Sources */,
 				1E98AD46280EA6F6006DAE75 /* ProjectsViewController.swift in Sources */,
 				1E98AD782812955E006DAE75 /* PrivacyPolicyViewController.swift in Sources */,
@@ -806,9 +864,11 @@
 				1E98AD7E28140BB1006DAE75 /* ProjectCreatingViewController.swift in Sources */,
 				07D15E8E2818171D00723348 /* ColorPaletteCollectionView.swift in Sources */,
 				07D15E93281831B200723348 /* UIImage+Extension.swift in Sources */,
+				1E5BCFE62829221800F7B610 /* FiltersCollectionView.swift in Sources */,
 				07F98777281C2BC00058139C /* CustomSlider.swift in Sources */,
 				07F98770281AF3E00058139C /* CALayer.swift in Sources */,
 				07F98774281BC2260058139C /* SliderSetView.swift in Sources */,
+				1E5BCFDC2828472B00F7B610 /* AdjustableLabel.swift in Sources */,
 				07D15E8C281815C900723348 /* TextEditingViewController.swift in Sources */,
 				1E98AD96281575DA006DAE75 /* Project+CoreDataProperties.swift in Sources */,
 			);

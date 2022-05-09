@@ -37,7 +37,7 @@ final class ProjectsFolderCell: UICollectionViewCell {
         folderNameLabel = UILabel()
         folderNameLabel.textAlignment = .left
         folderNameLabel.text = "Summer Time"
-        folderNameLabel.textColor = .white
+        folderNameLabel.textColor = .label
         folderNameLabel.font = UIFont(name: "Montserrat-Regular", size: 15)
         addSubview(folderNameLabel)
         

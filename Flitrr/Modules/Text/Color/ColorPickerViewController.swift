@@ -74,7 +74,7 @@ extension ColorPickerViewController: ToolBarViewDelegate {
 	}
 	
 	func didTapLeadingItem() {
-		delegate?.didReportColor(initialColor)
+        delegate?.didReportColor(initialColor ?? .clear)
 		delegate?.didDismissColorPicker()
 		dismiss(animated: true)
 	}

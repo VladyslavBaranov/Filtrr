@@ -47,6 +47,15 @@ class ProjectsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = .init(x: 0, y: 0, width: view.bounds.width, height: view.safeAreaInsets.top + 80)
     }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let whiteComponent: CGFloat = traitCollection.userInterfaceStyle == .dark ? 0 : 1
+        gradientLayer.colors = [
+            UIColor(white: whiteComponent, alpha: 0.6).cgColor,
+            UIColor(white: whiteComponent, alpha: 0.3).cgColor,
+            UIColor(white: whiteComponent, alpha: 0).cgColor
+        ]
+    }
 }
 
 extension ProjectsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -56,9 +65,12 @@ extension ProjectsViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! ProjectsFolderCell
         
-        if currentMode == .folders {
+        switch currentMode {
+        case .folders:
             let folder = folders[indexPath.row]
             cell.setFolder(folder)
+        case .projects:
+            break
         }
         
         return cell
@@ -109,17 +121,17 @@ extension ProjectsViewController: ProjectsOptionsContainerViewDelegate {
         switch tag {
         case 0:
             currentMode = .projects
-            let layout = WaterFallLayout()
-            layout.delegate = self
-            collectionView.collectionViewLayout = layout
-            projectHeights = [300, 200, 300, 230, 250, 200]
+            // let layout = WaterFallLayout()
+            // layout.delegate = self
+            // collectionView.collectionViewLayout = layout
+            // projectHeights = [300, 200, 300, 230, 250, 200]
             collectionView.reloadData()
             UIView.animate(withDuration: 0.3) {
                 self.selectionTab.alpha = 0
             }
         case 1:
             currentMode = .folders
-            collectionView.setCollectionViewLayout(createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9.0), animated: false)
+            // collectionView.setCollectionViewLayout(createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9.0), animated: false)
             collectionView.alwaysBounceHorizontal = false
         
             collectionView.reloadData()
@@ -143,8 +155,8 @@ private extension ProjectsViewController {
         tabBarController?.tabBar.isHidden = true
     }
     func setupCollectionView() {
-        let layout = WaterFallLayout()
-        layout.delegate = self
+        let layout = createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9.0)
+        // layout.delegate = self
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.backgroundColor = .appDark
 		collectionView.showsVerticalScrollIndicator = false
@@ -165,10 +177,11 @@ private extension ProjectsViewController {
     }
     func setupGradient() {
         gradientLayer = CAGradientLayer()
+        let whiteComponent: CGFloat = traitCollection.userInterfaceStyle == .dark ? 0 : 1
         gradientLayer.colors = [
-            UIColor(white: 0, alpha: 0.6).cgColor,
-            UIColor(white: 0, alpha: 0.3).cgColor,
-            UIColor(white: 0, alpha: 0).cgColor
+            UIColor(white: whiteComponent, alpha: 0.6).cgColor,
+            UIColor(white: whiteComponent, alpha: 0.3).cgColor,
+            UIColor(white: whiteComponent, alpha: 0).cgColor
         ]
         view.layer.addSublayer(gradientLayer)
         gradientLayer.locations = [0.0, 0.5, 1.0]

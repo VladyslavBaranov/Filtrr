@@ -1,0 +1,158 @@
+[
+    {
+        "displayName": "NORMAL",
+        "filterName": "",
+        "parameters": []
+    },
+    {
+        "displayName": "NOIR",
+        "filterName": "CIPhotoEffectNoir",
+        "parameters": []
+    },
+    {
+        "displayName": "MONO",
+        "filterName": "CIPhotoEffectMono",
+        "parameters": []
+    },
+    {
+        "displayName": "CHROME",
+        "filterName": "CIPhotoEffectChrome",
+        "parameters": []
+    },
+    {
+        "displayName": "HUE",
+        "filterName": "CIHueAdjust",
+        "parameters": [
+            {
+                "displayName": "Angle",
+                "pName": "inputAngle",
+                "defaultScalarValue": 0,
+                "min": 0,
+                "max": 50
+            }
+        ]
+    },
+    {
+        "displayName": "SATURATION",
+        "filterName": "CIColorControls",
+        "parameters": [
+            {
+                "displayName": "Saturation",
+                "pName": "inputSaturation",
+                "defaultScalarValue": 1,
+                "min": 0,
+                "max": 2
+            }
+        ]
+    },
+    {
+        "displayName": "BRIGTNESS",
+        "filterName": "CIColorControls",
+        "parameters": [
+            {
+                "displayName": "Brightness",
+                "pName": "inputBrightness",
+                "defaultScalarValue": 1,
+                "min": 0,
+                "max": 2
+            }
+        ]
+    },
+    {
+        "displayName": "CONTRAST",
+        "filterName": "CIColorControls",
+        "parameters": [
+            {
+                "displayName": "Contrast",
+                "pName": "inputContrast",
+                "defaultScalarValue": 1,
+                "min": 0,
+                "max": 2
+            }
+        ]
+    },
+    {
+        "displayName": "POSTERIZE",
+        "filterName": "CIColorPosterize",
+        "parameters": [
+            {
+                "displayName": "Levels",
+                "pName": "inputLevels",
+                "defaultScalarValue": 6,
+                "min": 0,
+                "max": 20
+            }
+        ]
+    },
+    {
+        "displayName": "INVERT",
+        "filterName": "CIColorInvert",
+        "parameters": []
+    },
+    {
+        "displayName": "MEDIAN",
+        "filterName": "CIMedianFilter",
+        "parameters": []
+    },
+    {
+        "displayName": "GAUSSIAN",
+        "filterName": "CIGaussianBlur",
+        "parameters": [
+            {
+                "displayName": "Radius",
+                "pName": "inputRadius",
+                "defaultScalarValue": 0,
+                "min": 0,
+                "max": 20
+            }
+        ]
+    },
+    {
+        "displayName": "BLOOM",
+        "filterName": "CIBloom",
+        "parameters": [
+            {
+                "displayName": "Radius",
+                "pName": "inputRadius",
+                "defaultScalarValue": 0,
+                "min": 0,
+                "max": 20
+            },
+            {
+                "displayName": "Intensity",
+                "pName": "inputRadius",
+                "defaultScalarValue": 0.5,
+                "min": 0,
+                "max": 1
+            }
+        ]
+    },
+    {
+        "displayName": "COMIC",
+        "filterName": "CIComicEffect",
+        "parameters": []
+    },
+    {
+        "displayName": "PIXELS",
+        "filterName": "CIPixellate",
+        "parameters": []
+    },
+    {
+        "displayName": "EDGE WORK",
+        "filterName": "CIEdgeWork",
+        "parameters": []
+    },
+    {
+        "displayName": "SHARPEN",
+        "filterName": "CISharpenLuminance",
+        "parameters": [
+            {
+                "displayName": "Sharpness",
+                "pName": "inputSharpness",
+                "defaultScalarValue": 0.4,
+                "min": 0,
+                "max": 1
+            }
+        ]
+    }
+]

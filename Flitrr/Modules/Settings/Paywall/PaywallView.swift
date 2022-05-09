@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct PricingItem {
     var index: Int
@@ -71,7 +72,7 @@ struct PaywallOptionView: View {
                 .stroke(Color(UIColor.appAccent), lineWidth: pricingItem.index == selectedItem ? 1 : 0)
         )
         .background(
-            pricingItem.index == selectedItem ? Color(red: 38/255.0, green: 23/255.0, blue: 30/255.0).cornerRadius(16) : Color(uiColor: .appGray).cornerRadius(16))
+            pricingItem.index == selectedItem ? Color(uiColor: .appDark).cornerRadius(16) : Color(uiColor: .appGray).cornerRadius(16))
         .padding([.leading, .trailing], 30)
         .onTapGesture {
             selectedItem = pricingItem.index
@@ -82,12 +83,17 @@ struct PaywallOptionView: View {
 
 struct PaywallView: View {
     
+    let model: PlayerViewModel
     var onCloseButtonTapped: (() -> ())?
+    
+    init() {
+        model = PlayerViewModel(fileName: "PaywallVid")
+    }
     
     @State var selectedItem: Int = 0
     @State var pricingItems: [PricingItem] = [
 		.init(index: 0, price: "5.99", title: "FREE 3 Day Trial - Annually", subtitle: "Pay annually, free trial", postDescription: "then $64.99 year"),
-        .init(index: 1, price: "34.99", title: "6 months", subtitle: "Pay for 6 months"),
+        .init(index: 1, price: "4.99", title: "6 months", subtitle: "Pay for 6 months"),
 		.init(index: 2, price: "6.99", title: "Monthly", subtitle: "Pay monthly", isSelected: true),
     ]
     
@@ -95,8 +101,9 @@ struct PaywallView: View {
         GeometryReader { reader in
             VStack {
                 ZStack {
-                    Image("PaywallWoman")
-                        .resizable()
+                    PlayerContainerView(player: model.player, gravity: .aspectFill)
+                    //Image("PaywallWoman")
+                    //    .resizable()
                         
                     VStack {
                         Spacer()
@@ -114,6 +121,8 @@ struct PaywallView: View {
                     VStack {
                         HStack {
                             Button {
+                                model.pause()
+                                // model.player.removeAllItems()
                                 onCloseButtonTapped?()
                             } label: {
                                 Image(systemName: "xmark.circle.fill")
@@ -154,7 +163,6 @@ struct PaywallView: View {
                     }
 					if !pricingItems[selectedItem].postDescription.isEmpty {
 						Text(pricingItems[selectedItem].postDescription)
-							.foregroundColor(.white)
 							.font(Font(Montserrat.regular(size: 13)))
 					}
                 }

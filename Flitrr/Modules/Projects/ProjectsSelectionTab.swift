@@ -21,7 +21,7 @@ final class ProjectsSelectionTab: UIView {
         
         numberLabel = UILabel()
         numberLabel.text = "0 Projects Selected"
-        numberLabel.textColor = .white
+        numberLabel.textColor = .label
         numberLabel.font = UIFont(name: "Montserrat-Regular", size: 15)
         numberLabel.textAlignment = .center
         addSubview(numberLabel)

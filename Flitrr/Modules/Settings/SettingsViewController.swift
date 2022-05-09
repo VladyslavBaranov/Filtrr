@@ -227,10 +227,10 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         navigationItem.leftBarButtonItem = .init(
             image: UIImage(systemName: "chevron.left"),
             style: .plain, target: self, action: #selector(dismissSelf))
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .label
         navigationController?.navigationBar.titleTextAttributes = [
 			.font: Montserrat.medium(size: 17),
-            .foregroundColor: UIColor.white
+            .foregroundColor: UIColor.label
         ]
     }
     

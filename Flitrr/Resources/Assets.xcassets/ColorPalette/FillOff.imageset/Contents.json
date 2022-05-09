@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Fill Off.pdf",
+      "filename" : "Fill Off-1.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Fill Off-2.pdf",
       "idiom" : "universal"
     }
   ],

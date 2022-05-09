@@ -17,7 +17,7 @@ final class PrivacyPolicyViewController: UIViewController {
         view.backgroundColor = .appDark
         textView = UITextView()
         textView.backgroundColor = .appDark
-        textView.textColor = .white
+        textView.textColor = .label
         textView.isEditable = false
         textView.isSelectable = false
         textView.font = UIFont(name: "Montserrat-Regular", size: 15)

@@ -21,11 +21,11 @@ final class ToolBarView: UIView {
     weak var delegate: ToolBarViewDelegate!
     
     enum LeadingItem {
-        case back, cancel
+        case back, cancel, none
     }
     
     enum TrailingItem {
-        case share, confirm
+        case share, confirm, none
     }
     
     enum CenterItem {
@@ -34,9 +34,12 @@ final class ToolBarView: UIView {
     
 	var leadingItem: LeadingItem = .back {
 		didSet {
+            leadingButton.isHidden = false
 			if leadingItem == .back {
 				leadingButton.setImage(.init(named: "Back"), for: .normal)
-			} else {
+            } else if leadingItem == .none {
+                leadingButton.isHidden = true
+            } else {
 				leadingButton.setImage(.init(named: "Cancel"), for: .normal)
 			}
 		}
@@ -44,15 +47,23 @@ final class ToolBarView: UIView {
 	
 	var trailingItem: TrailingItem = .share {
 		didSet {
+            trailingButton.isHidden = false
 			if trailingItem == .share {
 				trailingButton.setImage(.init(named: "Share"), for: .normal)
-			} else {
+            } else if trailingItem == .none {
+                trailingButton.isHidden = true
+            } else {
 				trailingButton.setImage(.init(named: "Check"), for: .normal)
 			}
 		}
 	}
 	
-    var centerItem: CenterItem = .title
+    var centerItem: CenterItem = .title {
+        didSet {
+            setupCenterItem()
+        }
+    }
+    
     var title: String? {
         didSet {
             if centerItem == .title {
@@ -131,29 +142,41 @@ final class ToolBarView: UIView {
 	private func setupCenterItem() {
 		switch centerItem {
 		case .title:
-			titleLabel = UILabel()
-			titleLabel.textAlignment = .center
-			titleLabel.textColor = .white
-			titleLabel.font = Montserrat.medium(size: 17)
-			addSubview(titleLabel)
+            if titleLabel == nil {
+                titleLabel = UILabel()
+                titleLabel.textAlignment = .center
+                titleLabel.textColor = .label
+                titleLabel.font = Montserrat.medium(size: 17)
+                addSubview(titleLabel)
+            }
+            if undoButton != nil {
+                titleLabel.isHidden = false
+                toolsStack.isHidden = true
+            }
 		case .editSet:
-			undoButton = UIButton()
-			undoButton.setImage(.init(named: "Undo"), for: .normal)
-			layersButton = UIButton()
-			layersButton.setImage(.init(named: "Layers"), for: .normal)
-			layersButton.setPreferredSymbolConfiguration(.init(pointSize: 30), forImageIn: .normal)
-			redoButton = UIButton()
-			redoButton.setImage(.init(named: "Redo"), for: .normal)
-			
-			toolsStack = UIStackView(arrangedSubviews: [undoButton, layersButton, redoButton])
-			toolsStack.spacing = 30
-			toolsStack.translatesAutoresizingMaskIntoConstraints = false
-			addSubview(toolsStack)
-			
-			NSLayoutConstraint.activate([
-				toolsStack.centerXAnchor.constraint(equalTo: centerXAnchor),
-				toolsStack.centerYAnchor.constraint(equalTo: centerYAnchor)
-			])
+            if undoButton == nil {
+                undoButton = UIButton()
+                undoButton.setImage(.init(named: "Undo"), for: .normal)
+                layersButton = UIButton()
+                layersButton.setImage(.init(named: "Layers"), for: .normal)
+                layersButton.setPreferredSymbolConfiguration(.init(pointSize: 30), forImageIn: .normal)
+                redoButton = UIButton()
+                redoButton.setImage(.init(named: "Redo"), for: .normal)
+                
+                toolsStack = UIStackView(arrangedSubviews: [undoButton, layersButton, redoButton])
+                toolsStack.spacing = 30
+                toolsStack.translatesAutoresizingMaskIntoConstraints = false
+                addSubview(toolsStack)
+                
+                NSLayoutConstraint.activate([
+                    toolsStack.centerXAnchor.constraint(equalTo: centerXAnchor),
+                    toolsStack.centerYAnchor.constraint(equalTo: centerYAnchor)
+                ])
+            }
+            if titleLabel != nil {
+                titleLabel.isHidden = true
+                toolsStack.isHidden = false
+            }
 		case .colorData:
 			colorCircle = UIView()
 			colorCircle.layer.cornerRadius = 15
@@ -162,7 +185,7 @@ final class ToolBarView: UIView {
 			titleLabel = UILabel()
 			titleLabel.textAlignment = .center
 			titleLabel.text = "#FF0000  %100"
-			titleLabel.textColor = .white
+			titleLabel.textColor = .label
 			titleLabel.font = Montserrat.medium(size: 17)
 			
 			toolsStack = UIStackView(arrangedSubviews: [colorCircle, titleLabel])

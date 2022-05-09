@@ -47,7 +47,7 @@ final class AdjustChevronView: UIView {
 		}
 		
 		ctx.addPath(path)
-		ctx.setStrokeColor(UIColor.white.cgColor)
+		ctx.setStrokeColor(UIColor.label.cgColor)
 		ctx.setLineWidth(4)
 	
 		ctx.strokePath()

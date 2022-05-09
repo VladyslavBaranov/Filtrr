@@ -7,8 +7,16 @@
 
 import UIKit
 
-final class AdjustableView: UIView {
+protocol AdjustableViewDelegate: AnyObject {
+    func didToggleFiltersMode(_ view: AdjustableView, _ isGridEnabled: Bool)
+    func frameDidChange(_ view: AdjustableView)
+}
+
+class AdjustableView: UIView {
 	
+    weak var delegate: AdjustableViewDelegate!
+    
+    var isTransformingEnabled = true
 	var savedFrame: CGRect = .zero
     var gridIsActive = true {
         didSet {
@@ -32,24 +40,20 @@ final class AdjustableView: UIView {
         }
     }
 	
-	var panGestureRecognier: UIPanGestureRecognizer!
-	var rotationRecognizer: UIRotationGestureRecognizer!
-	
-	var uLeftButton: AdjustChevronView!
-	var uLeftRecognizer: UIPanGestureRecognizer!
-	
-	var uRightButton: AdjustChevronView!
-	var uRightRecognizer: UIPanGestureRecognizer!
-	
-	var lLeftButton: AdjustChevronView!
-	var lLeftRecognizer: UIPanGestureRecognizer!
-	
-	var lRightButton: AdjustChevronView!
-	var lRightRecognizer: UIPanGestureRecognizer!
+	private var panGestureRecognier: UIPanGestureRecognizer!
+	private var rotationRecognizer: UIRotationGestureRecognizer!
 
-    var contentView: UIView!
-	var imageView: UIImageView!
-	
+	private var uLeftButton: AdjustChevronView!
+	private var uLeftRecognizer: UIPanGestureRecognizer!
+
+	private var uRightButton: AdjustChevronView!
+	private var uRightRecognizer: UIPanGestureRecognizer!
+
+	private var lLeftButton: AdjustChevronView!
+	private var lLeftRecognizer: UIPanGestureRecognizer!
+
+	private var lRightButton: AdjustChevronView!
+	private var lRightRecognizer: UIPanGestureRecognizer!
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -61,13 +65,7 @@ final class AdjustableView: UIView {
 		panGestureRecognier = UIPanGestureRecognizer(target: self, action: #selector(handlePanRecognizer(_:)))
 		addGestureRecognizer(panGestureRecognier)
 		
-		// rotationRecognizer.require(toFail: panGestureRecognier)
-		
 		backgroundColor = .clear
-		
-		imageView = UIImageView(frame: bounds)
-		imageView.contentMode = .scaleAspectFit
-		addSubview(imageView)
 		
 		drawOutline()
 		
@@ -84,7 +82,6 @@ final class AdjustableView: UIView {
 		uRightButton.frame.origin = .init(x: bounds.width - 15, y: 0)
 		lLeftButton.frame.origin = .init(x: 0, y: bounds.height - 15)
 		lRightButton.frame.origin = .init(x: bounds.width - 15, y: bounds.height - 15)
-		imageView.frame = bounds
 	}
 	
 	required init?(coder: NSCoder) {
@@ -103,20 +100,40 @@ final class AdjustableView: UIView {
 		uLeftButton.addGestureRecognizer(uLeftRecognizer)
 		
 		uRightButton = AdjustChevronView(frame: .init(x: 0, y: 0, width: 15, height: 15), corner: .uRight)
+        uRightRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleURightRecognizer(_:)))
+        uRightButton.addGestureRecognizer(uRightRecognizer)
 		addSubview(uRightButton)
 		
 		lLeftButton = AdjustChevronView(frame: .init(x: 0, y: 0, width: 15, height: 15), corner: .lLeft)
 		addSubview(lLeftButton)
+        lLeftRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleLLeftRecognizer(_:)))
+        lLeftButton.addGestureRecognizer(lLeftRecognizer)
 		
 		lRightButton = AdjustChevronView(frame: .init(x: 0, y: 0, width: 15, height: 15), corner: .lRight)
 		addSubview(lRightButton)
+        lRightRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleLRightRecognizer(_:)))
+        lRightButton.addGestureRecognizer(lRightRecognizer)
 	}
+    
+    @objc func handleDoubleTap() {
+        delegate?.didToggleFiltersMode(self, gridIsActive)
+    }
+    
+    func untoggle() {
+        gridIsActive = false
+        for subview in subviews {
+            (subview as? AdjustableView)?.untoggle()
+        }
+    }
 	
 	@objc func handleRotationRecognizer(_ sender: UIRotationGestureRecognizer) {
-		transform = CGAffineTransform(rotationAngle: sender.rotation)
+        guard isTransformingEnabled else { return }
+        transform = CGAffineTransform(rotationAngle: sender.rotation)
+        // print(frame)
 	}
 	
 	@objc func handlePanRecognizer(_ sender: UIPanGestureRecognizer) {
+        guard isTransformingEnabled else { return }
 		let localPos = sender.location(in: self)
 		
 		guard localPos.x > bounds.width / 4 && localPos.x < 3 * bounds.width / 4 else { return }
@@ -125,10 +142,11 @@ final class AdjustableView: UIView {
 		let globalPos = sender.location(in: superview)
 		center = globalPos
 		savedFrame = frame
+        delegate?.frameDidChange(self)
 	}
 	
 	@objc func handleULeftRecognizer(_ sender: UIPanGestureRecognizer) {
-		
+        guard isTransformingEnabled else { return }
 		let location = sender.location(in: superview)
 		
 		switch sender.state {
@@ -148,4 +166,70 @@ final class AdjustableView: UIView {
 		}
 
 	}
+    
+    @objc func handleURightRecognizer(_ sender: UIPanGestureRecognizer) {
+        guard isTransformingEnabled else { return }
+        let location = sender.location(in: superview)
+        
+        switch sender.state {
+        case .began:
+            gridIsActive = true
+            break
+        case .changed:
+            frame.origin.y = location.y
+            frame.size = .init(
+                width: abs(location.x - savedFrame.minX), //abs(savedFrame.maxX - location.x)
+                height: abs(savedFrame.maxY - location.y)
+            )
+        case .ended:
+            savedFrame = frame
+        default:
+            break
+        }
+
+    }
+    
+    @objc func handleLRightRecognizer(_ sender: UIPanGestureRecognizer) {
+        guard isTransformingEnabled else { return }
+        let location = sender.location(in: superview)
+        
+        switch sender.state {
+        case .began:
+            gridIsActive = true
+            break
+        case .changed:
+            frame.size = .init(
+                width: abs(location.x - savedFrame.minX), //abs(savedFrame.maxX - location.x)
+                height: abs(location.y - savedFrame.minY)
+            )
+        case .ended:
+            savedFrame = frame
+        default:
+            break
+        }
+
+    }
+    
+    @objc func handleLLeftRecognizer(_ sender: UIPanGestureRecognizer) {
+        guard isTransformingEnabled else { return }
+        let location = sender.location(in: superview)
+        
+        switch sender.state {
+        case .began:
+            gridIsActive = true
+            break
+        case .changed:
+            frame.origin.x = location.x
+            
+            frame.size = .init(
+                width: abs(savedFrame.maxX - location.x), //abs(savedFrame.maxX - location.x)
+                height: abs(location.y - savedFrame.minY)
+            )
+        case .ended:
+            savedFrame = frame
+        default:
+            break
+        }
+
+    }
 }

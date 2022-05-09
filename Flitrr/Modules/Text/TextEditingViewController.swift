@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol TextEditingViewControllerDelegate: AnyObject {
+    func didConfirmText(_ attributedString: NSAttributedString)
+}
+
 final class TextEditingViewController: UIViewController {
 	
+    weak var delegate: TextEditingViewControllerDelegate!
+    
 	private var toolBarView: ToolBarView!
 	private var optionsContainerView: ProjectsOptionsContainerView!
 	
@@ -35,7 +41,7 @@ final class TextEditingViewController: UIViewController {
 		textView.autocorrectionType = .no
 		textView.autocapitalizationType = .none
 		textView.backgroundColor = .appDark
-		textView.textColor = .white
+		textView.textColor = .label
 		textView.textAlignment = .center
 		textView.text = "Text"
 		textView.tintColor = .appAccent
@@ -128,6 +134,8 @@ final class TextEditingViewController: UIViewController {
 
 extension TextEditingViewController: ToolBarViewDelegate {
 	func didTapTrailingItem() {
+        dismiss(animated: true)
+        delegate?.didConfirmText(textView.attributedText)
 	}
 	func didTapLeadingItem() {
 		dismiss(animated: true)
