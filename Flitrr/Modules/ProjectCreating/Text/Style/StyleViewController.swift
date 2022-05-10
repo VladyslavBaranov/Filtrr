@@ -47,17 +47,25 @@ final class StyleViewController: UIViewController {
 			stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 		])
 		
-		let alignmentLabel = createTitle("Alignment")
+		let alignmentLabel = createTitle(
+            LocalizationManager.shared.localizedString(for: .textFontsAlignment)
+        )
 		stackView.addArrangedSubview(alignmentLabel)
 		
 		optionsContainerView = ProjectsOptionsContainerView()
 		optionsContainerView.delegate = self
-		optionsContainerView.setTitles(["Left", "Center", "Right"])
+		optionsContainerView.setTitles([
+            LocalizationManager.shared.localizedString(for: .textFontsLeft),
+            LocalizationManager.shared.localizedString(for: .textFontsCenter),
+            LocalizationManager.shared.localizedString(for: .textFontsRight)
+        ])
 		optionsContainerView.translatesAutoresizingMaskIntoConstraints = false
 		optionsContainerView.selectedIndex = 1
 		stackView.addArrangedSubview(optionsContainerView)
 		
-		let fontSizeLabel = createTitle("Font Size")
+		let fontSizeLabel = createTitle(
+            LocalizationManager.shared.localizedString(for: .textFontsSize)
+        )
 		stackView.addArrangedSubview(fontSizeLabel)
 		
 		fontSizeContainerView = CustomSliderContainerView(frame: .zero)
@@ -65,14 +73,18 @@ final class StyleViewController: UIViewController {
 		fontSizeContainerView.slider.addTarget(self, action: #selector(fontSizeDidChange(_:)), for: .valueChanged)
 		stackView.addArrangedSubview(fontSizeContainerView)
 		
-		let letterSpacingLabel = createTitle("Letter Spacing")
+		let letterSpacingLabel = createTitle(
+            LocalizationManager.shared.localizedString(for: .textFontsLetterSpacing)
+        )
 		stackView.addArrangedSubview(letterSpacingLabel)
 		
 		letterSpacingContainerView = CustomSliderContainerView(frame: .zero)
 		letterSpacingContainerView.slider.addTarget(self, action: #selector(letterSpacingDidChange(_:)), for: .valueChanged)
 		stackView.addArrangedSubview(letterSpacingContainerView)
 		
-		let lineSpacingLabel = createTitle("Line Spacing")
+		let lineSpacingLabel = createTitle(
+            LocalizationManager.shared.localizedString(for: .textFontsLineSpacing)
+        )
 		stackView.addArrangedSubview(lineSpacingLabel)
 		
 		lineSpacingContainerView = CustomSliderContainerView(frame: .zero)
@@ -110,7 +122,7 @@ final class StyleViewController: UIViewController {
 		toolBarView = ToolBarView(frame: .zero, centerItem: .title)
 		toolBarView.leadingItem = .cancel
 		toolBarView.trailingItem = .confirm
-		toolBarView.title = "Style"
+		toolBarView.title = LocalizationManager.shared.localizedString(for: .textStyle)
 		toolBarView.delegate = self
 		toolBarView.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(toolBarView)

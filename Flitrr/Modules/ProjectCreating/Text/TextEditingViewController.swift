@@ -79,7 +79,7 @@ final class TextEditingViewController: UIViewController {
 		toolBarView = ToolBarView(frame: .zero, centerItem: .title)
 		toolBarView.leadingItem = .cancel
 		toolBarView.trailingItem = .confirm
-		toolBarView.title = "Text"
+        toolBarView.title = LocalizationManager.shared.localizedString(for: .textTitle)
 		toolBarView.delegate = self
 		toolBarView.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(toolBarView)
@@ -96,7 +96,13 @@ final class TextEditingViewController: UIViewController {
 		optionsContainerView = ProjectsOptionsContainerView()
 		optionsContainerView.allowsBorderSelection = false
 		optionsContainerView.delegate = self
-		optionsContainerView.setTitles(["Color", "Fonts", "Style"])
+		optionsContainerView.setTitles(
+            [
+                LocalizationManager.shared.localizedString(for: .textColor),
+                LocalizationManager.shared.localizedString(for: .textFonts),
+                LocalizationManager.shared.localizedString(for: .textStyle)
+            ]
+        )
 		optionsContainerView.selectedIndex = 0
 		optionsContainerView.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(optionsContainerView)
@@ -152,7 +158,7 @@ extension TextEditingViewController: ColorPaletteCollectionViewDelegate {
 			break
 		case .textColor:
 			break
-		case .gradient:
+		case .picker:
 			hideKeyboardAndTopControls()
 			let vc = ColorPickerViewController()
 			vc.initialColor = textView.textColor
@@ -163,7 +169,11 @@ extension TextEditingViewController: ColorPaletteCollectionViewDelegate {
 		case .color(let uIColor):
 			textViewAttributes[.foregroundColor] = uIColor
 			textView.attributedText = NSAttributedString(string: textView.text, attributes: textViewAttributes)
-		}
+        case .gradient(_, _, _):
+            break
+        case .transparent:
+            break
+        }
 	}
 }
 

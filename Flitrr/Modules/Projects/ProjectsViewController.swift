@@ -41,7 +41,6 @@ class ProjectsViewController: UIViewController {
         setupSelectionTab()
         loadFolders()
         navigationView.onSettingsButtonTapped = openSettings
-        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -76,18 +75,14 @@ extension ProjectsViewController: UICollectionViewDelegate, UICollectionViewData
         return cell
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let abs = abs(scrollView.contentOffset.y) - view.safeAreaInsets.top
-
-        if abs >= 160 {
+        let offset = scrollView.contentOffset.y + view.safeAreaInsets.top + 160
+        if offset > 0 {
+            let fraction = 1 - offset / 160
+            navigationView.alpha = fraction
+            optionsContainerView?.alpha = fraction
+        } else {
+            navigationView.alpha = 1
             optionsContainerView?.alpha = 1
-        } else {
-            optionsContainerView?.alpha = 0
-        }
-
-        if scrollView.contentOffset.y > -210 {
-           // navBar2.alpha = 0
-        } else {
-           // navBar2.alpha = 1
         }
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

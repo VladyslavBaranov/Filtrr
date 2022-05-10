@@ -11,8 +11,43 @@ protocol ValuePickerViewDelegate: AnyObject {
 	func didSelectValue(at index: Int)
 }
 
+enum PickerStyle {
+    case style1, style2
+}
+
 final class ValuePickerView: UIView {
 	
+    var pickerStyle: PickerStyle = .style1 {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    var isTransparentAppearance = false {
+        didSet {
+            if isTransparentAppearance {
+                backgroundColor = .clear
+                collectionView.backgroundColor = .clear
+            } else {
+                backgroundColor = .soft2
+                collectionView.backgroundColor = .appGray
+            }
+        }
+    }
+    
+    var leftInset: CGFloat = 0.0 {
+        didSet {
+            collectionView.contentInset = .init(top: 20, left: leftInset, bottom: 30, right: 20)
+        }
+    }
+    
+    var itemHeight: CGFloat = 30.0 {
+        didSet {
+            collectionView.contentInset = .init(top: 30, left: leftInset, bottom: 10, right: 20)
+            collectionView.reloadData()
+        }
+    }
+    
 	weak var delegate: ValuePickerViewDelegate!
 	
 	struct Item {
@@ -81,7 +116,7 @@ extension ValuePickerView: UICollectionViewDelegate, UICollectionViewDataSource,
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! TextCollectionViewCell
 		cell.set(text: titles[indexPath.row])
-		cell.usesMontserrat13 = true
+		cell.pickerStyle = pickerStyle
 		cell.usesBorder = true
 		cell.layer.cornerRadius = 10
 		if items[indexPath.row].isSelected {
@@ -108,9 +143,10 @@ extension ValuePickerView: UICollectionViewDelegate, UICollectionViewDataSource,
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let padding: CGFloat = pickerStyle == .style1 ? 20 : 40
 		return .init(
-			width: Montserrat.getBoundingWidthRegular13(string: titles[indexPath.row]) + 20,
-			height: 30
+			width: Montserrat.getBoundingWidthRegular13(string: titles[indexPath.row]) + padding,
+			height: itemHeight
 		)
 	}
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

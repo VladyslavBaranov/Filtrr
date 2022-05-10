@@ -32,7 +32,14 @@ class FontsLoader {
 	}
 	
 	func getFontCategories() -> [String] {
-		["Featured", "Basic", "Fancy", "Classic", "Techno", "Miscellaneous"]
+		[
+            LocalizationManager.shared.localizedString(for: .textFontsFeatured),
+            LocalizationManager.shared.localizedString(for: .textFontsBasic),
+            LocalizationManager.shared.localizedString(for: .textFontsFancy),
+            LocalizationManager.shared.localizedString(for: .textFontsClassic),
+            LocalizationManager.shared.localizedString(for: .textFontsTechno),
+            LocalizationManager.shared.localizedString(for: .textFontsMisc),
+        ]
 	}
 	
 	func fonts(for index: Int) -> [FontSystem.Font] {

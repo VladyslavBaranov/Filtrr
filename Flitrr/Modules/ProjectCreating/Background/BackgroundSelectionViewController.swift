@@ -124,6 +124,10 @@ extension BackgroundSelectionViewController: ColorPaletteCollectionViewDelegate 
             break
         case .color(let uIColor):
             delegate?.shouldFillBackgroundWithPlain(uIColor)
+        case .picker:
+            break
+        case .transparent:
+            break
         }
     }
 }

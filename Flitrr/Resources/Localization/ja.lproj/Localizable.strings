@@ -6,18 +6,47 @@
   
 */
 
-"settings_title" = "Settings";
-"settings_lang" = "Language";
-"settings_restore" = "Restore Purchases";
-"settings_privacy" = "Privacy Policy";
-"settings_rate" = "Rate Us on App Store";
-"settings_card_caption" = "Get the premium feature and get the unlimited access to the app.";
+"settings_title"="設定";
+"settings_lang"="言語";
+"settings_restore"="購入を復元";
+"settings_privacy"="プライバシーポリシー";
+"settings_rate"="AppStoreで評価してください";
+"settings_card_caption" = "プレミアム機能を取得して、アプリへの無制限のアクセスを取得します。";
 
-"paywall_year_title" = "FREE 3 Day Trial - Annually";
-"paywall_year_caption" = "Pay annually, free trial";
-"paywall_subscribe_now" = "Subscribe now";
-"paywall_year_price_full" = "then $64.99 per year";
-"paywall_6month_title" = "6 months";
-"paywall_6month_caption" = "Pay for 6 months";
-"paywall_month_title" = "Monthly";
-"paywall_month_caption" = "Pay monthly";
+"paywall_year_title"="無料の3日間トライアル-毎年";
+"paywall_year_caption" = "毎年支払う、無料トライアル";
+"paywall_subscribe_now"="今すぐ登録";
+"paywall_year_price_full"="その後は年間64.99ドル";
+"paywall_6month_title"="6か月";
+"paywall_6month_caption"="6か月間支払う";
+"paywall_month_title"="毎月";
+"paywall_month_caption"="毎月支払う";
+
+"creating_tab_image" = "画像";
+"creating_tab_text" = "文章";
+"creating_tab_graphic" = "グラフィック";
+"creating_tab_shape" = "形";
+"creating_tab_bg" = "バックグラウンド";
+"creating_tab_filters" = "フィルタ";
+"creating_tab_adjust" = "調整";
+"creating_tab_crop" = "作物";
+"creating_tab_shadow" = "風邪";
+"creating_tab_opacity"="不透明度";
+
+"text_title"="テキスト";
+"text_color"="色";
+"text_fonts"="フォント";
+"text_style"="スタイル";
+"text_fonts_featured"="注目";
+"text_fonts_basic"="基本";
+"text_fonts_fancy"="ファンシー";
+"text_fonts_classic"="クラシック";
+"text_fonts_techno"="テクノ";
+"text_fonts_misc"="その他";
+"text_style_alignment"="配置";
+"text_style_left"="左";
+"text_style_center"="センター";
+"text_style_right"="右";
+"text_style_fontsize"="フォントサイズ";
+"text_style_letterspacing"="文字の間隔";
+"text_style_linespacing"="行間隔";

@@ -68,6 +68,34 @@ final class ProjectCreatingViewController: UIViewController {
             toolBarView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
+    
+    func prepareForOnThird(title: String) {
+        transparentGridView.gridIsActive = true
+        toolBarView.centerItem = .title
+        toolBarView.leadingItem = .none
+        toolBarView.trailingItem = .none
+        toolBarView.title = title
+        
+        let baseHeight = transparentGridView.bounds.height
+        let topHeight = view.safeAreaInsets.top + 80
+        let vcHeight = view.bounds.height * 0.3
+        let destinationHeight = view.bounds.height - vcHeight - topHeight
+        let factor = destinationHeight / baseHeight
+        
+        UIView.animate(withDuration: 0.3) {
+            self.transparentGridView.transform = .init(scaleX: factor, y: factor)
+                .concatenating(.init(translationX: 0, y: -(baseHeight - baseHeight * factor) / 2))
+        }
+    }
+    func prepareForFullFromOneThird() {
+        transparentGridView.gridIsActive = false
+        toolBarView.centerItem = .editSet
+        toolBarView.leadingItem = .back
+        toolBarView.trailingItem = .share
+        UIView.animate(withDuration: 0.3) {
+            self.transparentGridView.transform = .identity
+        }
+    }
 }
 
 extension ProjectCreatingViewController: ToolBarViewDelegate {
@@ -91,43 +119,22 @@ extension ProjectCreatingViewController: ToolBarViewDelegate {
 }
 
 extension ProjectCreatingViewController: ScrollableRoundedBarDelegate {
-	func didTapItem(itemType: ScrollabelRoundedBarItemView.ItemType) {
+	func didTapItem(itemType: CreatingOption) {
 		switch itemType {
 		case .image:
-			let controller = ImageLibraryPickerViewController.createInstance()
-			controller.delegate = self
-			controller.modalPresentationStyle = .fullScreen
-			present(controller, animated: true)
+			showImagePicker()
 		case .text:
-			let controller = TextEditingViewController()
-            controller.delegate = self
-			controller.modalPresentationStyle = .fullScreen
-			present(controller, animated: true, completion: nil)
+			showTextEditing()
+        case .shape:
+            showShapesController()
         case .background:
-            transparentGridView.gridIsActive = true
-            toolBarView.centerItem = .title
-            toolBarView.leadingItem = .none
-            toolBarView.trailingItem = .none
-            toolBarView.title = "Background"
-            
-            let vc = BackgroundSelectionViewController()
-            vc.delegate = self
-            vc.modalPresentationStyle = .custom
-            vc.transitioningDelegate = vc
-            present(vc, animated: true, completion: nil)
-            
-            let baseHeight = transparentGridView.bounds.height
-            let topHeight = view.safeAreaInsets.top + 80
-            let vcHeight = view.bounds.height * 0.3
-            let destinationHeight = view.bounds.height - vcHeight - topHeight
-            let factor = destinationHeight / baseHeight
-            
-            UIView.animate(withDuration: 0.3) {
-                self.transparentGridView.transform = .init(scaleX: factor, y: factor)
-                    .concatenating(.init(translationX: 0, y: -(baseHeight - baseHeight * factor) / 2))
-            }
+            showBackgroundController()
         case .filters:
-            break
+            showFiltersController()
+        case .shadow:
+            showShadowViewController()
+        case .opacity:
+            showOpacityViewController()
 		default:
 			break
 		}
@@ -135,30 +142,30 @@ extension ProjectCreatingViewController: ScrollableRoundedBarDelegate {
 }
 
 extension ProjectCreatingViewController: ImageLibraryPickerViewControllerDelegate {
-	func didSelectImage(uiImage: UIImage) {
-		
-		addedCount += 1
-		
-		if addedCount == 2 {
-            let v = AdjustableImageView(frame:
-                    .init(x: 0, y: 0, width: transparentGridView.bounds.midX, height: transparentGridView.bounds.midY))
-            v.imageDelegate = self
-			v.imageView.image = uiImage
-			transparentGridView.add(v)
-			addedCount = 0
-		}
-		
-	}
+    
+    func showImagePicker() {
+        let controller = ImageLibraryPickerViewController.createInstance()
+        controller.delegate = self
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true)
+    }
+    
+    func didSelectImage(uiImage: UIImage) {
+        addedCount += 1
+        guard addedCount == 2 else { return }
+        let v = AdjustableImageView(frame:
+                .init(x: 0, y: 0, width: transparentGridView.bounds.midX, height: transparentGridView.bounds.midY))
+        v.imageDelegate = self
+        v.delegate = self
+        v.imageView.image = uiImage
+        transparentGridView.add(v)
+        addedCount = 0
+    }
 }
 
 extension ProjectCreatingViewController: ColorPickerViewControllerDelegate {
     func didDismissColorPicker() {
-        toolBarView.centerItem = .editSet
-        toolBarView.leadingItem = .back
-        toolBarView.trailingItem = .share
-        UIView.animate(withDuration: 0.3) {
-            self.transparentGridView.transform = .identity
-        }
+        prepareForFullFromOneThird()
     }
     
     func didReportColor(_ uiColor: UIColor) {
@@ -172,7 +179,40 @@ extension ProjectCreatingViewController: ColorPickerViewControllerDelegate {
     
 }
 
+extension ProjectCreatingViewController: TextEditingViewControllerDelegate {
+    
+    func showTextEditing() {
+        let controller = TextEditingViewController()
+        controller.delegate = self
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
+    }
+    
+    func didConfirmText(_ attributedString: NSAttributedString) {
+        let label = AdjustableLabel.createLabel(for: attributedString)
+        transparentGridView.add(label)
+    }
+}
+
+extension ProjectCreatingViewController {
+    func showShapesController() {
+        let controller = ShapesViewController()
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
+    }
+}
+
 extension ProjectCreatingViewController: BackgroundSelectionViewControllerDelegate {
+    
+    func showBackgroundController() {
+        prepareForOnThird(title: "Background")
+        let vc = BackgroundSelectionViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = vc
+        present(vc, animated: true, completion: nil)
+    }
+    
     func shouldFillWithImage(_ uiImage: UIImage) {
         transparentGridView.bakgroundMode = .image(uiImage)
     }
@@ -192,104 +232,49 @@ extension ProjectCreatingViewController: BackgroundSelectionViewControllerDelega
     }
 }
 
-extension ProjectCreatingViewController: TextEditingViewControllerDelegate {
-    func didConfirmText(_ attributedString: NSAttributedString) {
-        let label = AdjustableLabel.createLabel(for: attributedString)
-        transparentGridView.add(label)
-    }
-}
+
 
 extension ProjectCreatingViewController: AdjustableViewDelegate {
-    func frameDidChange(_ view: AdjustableView) {
-        // transparentGridView.setNeedsDisplay()
+    
+    func didToggle(_ view: AdjustableView) {
+        currentlySelectedAdjustableView = view
     }
     
-    func didToggleFiltersMode(_ view: AdjustableView, _ isGridEnabled: Bool) {
-        
-        currentlySelectedAdjustableView = view
-        
-        toolBarView.leadingItem = .none
-        toolBarView.trailingItem = .none
-        toolBarView.centerItem = .title
-        toolBarView.title = "Filters"
-        
-        let filtersController = FiltersViewController()
-        if let imageView = view as? AdjustableImageView {
-            
-            if let img = imageView.imageView.image {
-                let factor = 100 / img.size.width
-                let renderer = UIGraphicsImageRenderer(size: .init(width: 100, height: img.size.height * factor))
-                let scaledImage = renderer.image { _ in
-                    img.draw(in: CGRect(origin: .zero, size: .init(width: 100, height: img.size.height * factor)))
-                }
-                filtersController.targetImage = scaledImage
-            }
-            
-        }
-        filtersController.delegate = self
-        filtersController.modalPresentationStyle = .custom
-        filtersController.transitioningDelegate = filtersController
-        present(filtersController, animated: true, completion: nil)
-        
-        let baseHeight = transparentGridView.bounds.height
-        let topHeight = self.view.safeAreaInsets.top + 80
-        let vcHeight = self.view.bounds.height * 0.3
-        let destinationHeight = self.view.bounds.height - vcHeight - topHeight
-        let factor = destinationHeight / baseHeight
-        
-        UIView.animate(withDuration: 0.3) {
-            self.transparentGridView.transform = .init(scaleX: factor, y: factor)
-                .concatenating(.init(translationX: 0, y: -(baseHeight - baseHeight * factor) / 2))
-        }
+    func frameDidChange(_ view: AdjustableView) {
+        // transparentGridView.setNeedsDisplay()
     }
 }
 
 extension ProjectCreatingViewController: AdjustableImageViewDelegate {
-    func didToggleFilterMode(_ view: AdjustableImageView) {
-        currentlySelectedAdjustableView = view
-        
-        toolBarView.leadingItem = .none
-        toolBarView.trailingItem = .none
-        toolBarView.centerItem = .title
-        toolBarView.title = "Filters"
-        
+    
+    func showFiltersController() {
+        prepareForOnThird(title: "Filters")
+        guard let adjustable = currentlySelectedAdjustableView as? AdjustableImageView else { return }
         let filtersController = FiltersViewController()
-        if let imageView = view as? AdjustableImageView {
-            
-            if let img = imageView.imageView.image {
-                let factor = 100 / img.size.width
-                let renderer = UIGraphicsImageRenderer(size: .init(width: 100, height: img.size.height * factor))
-                let scaledImage = renderer.image { _ in
-                    img.draw(in: CGRect(origin: .zero, size: .init(width: 100, height: img.size.height * factor)))
-                }
-                filtersController.targetImage = scaledImage
+        if let img = adjustable.imageView.image {
+            let factor = 100 / img.size.width
+            let renderer = UIGraphicsImageRenderer(size: .init(width: 100, height: img.size.height * factor))
+            let scaledImage = renderer.image { _ in
+                img.draw(in: CGRect(origin: .zero, size: .init(width: 100, height: img.size.height * factor)))
             }
-            
+            filtersController.targetImage = scaledImage
         }
-        filtersController.delegate = self
         filtersController.modalPresentationStyle = .custom
+        filtersController.delegate = self
         filtersController.transitioningDelegate = filtersController
         present(filtersController, animated: true, completion: nil)
-        
-        let baseHeight = transparentGridView.bounds.height
-        let topHeight = self.view.safeAreaInsets.top + 80
-        let vcHeight = self.view.bounds.height * 0.3
-        let destinationHeight = self.view.bounds.height - vcHeight - topHeight
-        let factor = destinationHeight / baseHeight
-        
-        UIView.animate(withDuration: 0.3) {
-            self.transparentGridView.transform = .init(scaleX: factor, y: factor)
-                .concatenating(.init(translationX: 0, y: -(baseHeight - baseHeight * factor) / 2))
-        }
+    }
+    
+    func didToggleFilterMode(_ view: AdjustableImageView) {
     }
 }
 
 extension ProjectCreatingViewController: FiltersViewControllerDelegate {
     func didSelectFilter(_ filter: Filter) {
-        guard let imageAdjustableView = currentlySelectedAdjustableView as? AdjustableImageView else { return }
+        /*guard let imageAdjustableView = currentlySelectedAdjustableView as? AdjustableImageView else { return }
         guard let img = imageAdjustableView.imageView.image else { return }
         guard let output = img.applyingFilter(name: filter.filterName, parameters: [:]) else { return }
-        imageAdjustableView.imageView.image = output
+        imageAdjustableView.imageView.image = output*/
     }
     
     func didSelectBlendMode(_ filterName: String) {
@@ -307,5 +292,54 @@ extension ProjectCreatingViewController: FiltersViewControllerDelegate {
         UIView.animate(withDuration: 0.3) {
             self.transparentGridView.transform = .identity
         }
+    }
+}
+
+extension ProjectCreatingViewController: ShadowViewControllerDelegate {
+    
+    func didReportNewShadowModel(_ model: ShadowModel) {
+        currentlySelectedAdjustableView.layer.shadowRadius = model.blur
+        currentlySelectedAdjustableView.layer.shadowOffset = model.angle
+        currentlySelectedAdjustableView.layer.shadowOpacity = model.alpha
+        currentlySelectedAdjustableView.layer.shadowColor = model.color
+    }
+    
+    func showShadowViewController() {
+        guard let adjustable = currentlySelectedAdjustableView else { return }
+        adjustable.layer.shadowOpacity = 1
+        adjustable.layer.shadowColor = UIColor.clear.cgColor
+        prepareForOnThird(title: "Shadow")
+        let vc = ShadowViewController()
+        vc.originalShadowModel = ShadowModel(layer: adjustable.layer)
+        vc.delegate = self
+        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = vc
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func didDismissShadowController() {
+        prepareForFullFromOneThird()
+    }
+}
+
+extension ProjectCreatingViewController: OpacityViewControllerDelegate {
+    
+    func showOpacityViewController() {
+        guard let selectedAdjustable = currentlySelectedAdjustableView else { return }
+        prepareForOnThird(title: "Opacity")
+        let opacityController = OpacityViewController()
+        opacityController.originalOpacity = Float(selectedAdjustable.alpha)
+        opacityController.delegate = self
+        opacityController.modalPresentationStyle = .custom
+        opacityController.transitioningDelegate = opacityController
+        present(opacityController, animated: true, completion: nil)
+    }
+    
+    func didSetOpacity(_ opacity: Float) {
+        currentlySelectedAdjustableView?.alpha = CGFloat(opacity)
+    }
+    
+    func didDismissOpacityController() {
+        prepareForFullFromOneThird()
     }
 }

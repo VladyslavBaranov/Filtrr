@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AdjustableViewDelegate: AnyObject {
-    func didToggleFiltersMode(_ view: AdjustableView, _ isGridEnabled: Bool)
+    func didToggle(_ view: AdjustableView)
     func frameDidChange(_ view: AdjustableView)
 }
 
@@ -74,6 +74,7 @@ class AdjustableView: UIView {
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		gridIsActive.toggle()
+        delegate?.didToggle(self)
 	}
 	
 	override func layoutSubviews() {
@@ -114,10 +115,6 @@ class AdjustableView: UIView {
         lRightRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleLRightRecognizer(_:)))
         lRightButton.addGestureRecognizer(lRightRecognizer)
 	}
-    
-    @objc func handleDoubleTap() {
-        delegate?.didToggleFiltersMode(self, gridIsActive)
-    }
     
     func untoggle() {
         gridIsActive = false

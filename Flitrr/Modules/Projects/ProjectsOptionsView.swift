@@ -19,6 +19,12 @@ final class NavigationView: UIView {
     var titleLabel: UILabel!
     var settingsButton: UIButton!
     
+    var hidesSettingsButton = false {
+        didSet {
+            settingsButton.isHidden = hidesSettingsButton
+        }
+    }
+    
     var onSettingsButtonTapped: (() -> ())?
     
     override init(frame: CGRect) {

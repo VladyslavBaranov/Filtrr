@@ -56,6 +56,9 @@
 		1E5BCFE62829221800F7B610 /* FiltersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE52829221800F7B610 /* FiltersCollectionView.swift */; };
 		1E5BCFE82829495400F7B610 /* Filters.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE72829495400F7B610 /* Filters.json */; };
 		1E5BCFEA28294E5700F7B610 /* FilterLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE928294E5700F7B610 /* FilterLoader.swift */; };
+		1E5BCFED282A34B200F7B610 /* OpacityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFEC282A34B200F7B610 /* OpacityViewController.swift */; };
+		1E5BCFF0282A3ED200F7B610 /* ShadowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFEF282A3ED200F7B610 /* ShadowViewController.swift */; };
+		1E5BCFF4282AB74900F7B610 /* ShapesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFF3282AB74800F7B610 /* ShapesViewController.swift */; };
 		1E98AD46280EA6F6006DAE75 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD45280EA6F6006DAE75 /* ProjectsViewController.swift */; };
 		1E98AD4A280EA925006DAE75 /* RoundedTabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD49280EA925006DAE75 /* RoundedTabBarItems.swift */; };
 		1E98AD4D280EAF0A006DAE75 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E98AD4C280EAF0A006DAE75 /* Montserrat-Bold.ttf */; };
@@ -168,6 +171,9 @@
 		1E5BCFE52829221800F7B610 /* FiltersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersCollectionView.swift; sourceTree = "<group>"; };
 		1E5BCFE72829495400F7B610 /* Filters.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Filters.json; sourceTree = "<group>"; };
 		1E5BCFE928294E5700F7B610 /* FilterLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLoader.swift; sourceTree = "<group>"; };
+		1E5BCFEC282A34B200F7B610 /* OpacityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityViewController.swift; sourceTree = "<group>"; };
+		1E5BCFEF282A3ED200F7B610 /* ShadowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowViewController.swift; sourceTree = "<group>"; };
+		1E5BCFF3282AB74800F7B610 /* ShapesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesViewController.swift; sourceTree = "<group>"; };
 		1E98AD45280EA6F6006DAE75 /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		1E98AD49280EA925006DAE75 /* RoundedTabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTabBarItems.swift; sourceTree = "<group>"; };
 		1E98AD4C280EAF0A006DAE75 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
@@ -446,7 +452,6 @@
 		1E42E04B280DCA520033E6EE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				07D15E8A281815B300723348 /* Text */,
 				1E98AD9B281699BE006DAE75 /* ImageLibraryPicker */,
 				1E98AD6728108459006DAE75 /* Settings */,
 				1E98AD44280EA687006DAE75 /* Discover */,
@@ -459,10 +464,13 @@
 		1E42E04C280DCA640033E6EE /* ProjectCreating */ = {
 			isa = PBXGroup;
 			children = (
+				1E5BCFF2282AB72F00F7B610 /* Shapes */,
+				1E5BCFF1282A7C0F00F7B610 /* Base */,
+				07D15E8A281815B300723348 /* Text */,
+				1E5BCFEE282A3EB900F7B610 /* Shadow */,
+				1E5BCFEB282A348900F7B610 /* Opacity */,
 				1E5BCFDD282905F300F7B610 /* Filters */,
 				1E5BCFD8282825EF00F7B610 /* Background */,
-				1E98AD7D28140BB1006DAE75 /* ProjectCreatingViewController.swift */,
-				1E98AD8228141DE1006DAE75 /* ProjectTransparentGridView.swift */,
 			);
 			path = ProjectCreating;
 			sourceTree = "<group>";
@@ -506,6 +514,39 @@
 				1E5BCFE128290F7700F7B610 /* PaywallVid.mp4 */,
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		1E5BCFEB282A348900F7B610 /* Opacity */ = {
+			isa = PBXGroup;
+			children = (
+				1E5BCFEC282A34B200F7B610 /* OpacityViewController.swift */,
+			);
+			path = Opacity;
+			sourceTree = "<group>";
+		};
+		1E5BCFEE282A3EB900F7B610 /* Shadow */ = {
+			isa = PBXGroup;
+			children = (
+				1E5BCFEF282A3ED200F7B610 /* ShadowViewController.swift */,
+			);
+			path = Shadow;
+			sourceTree = "<group>";
+		};
+		1E5BCFF1282A7C0F00F7B610 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				1E98AD7D28140BB1006DAE75 /* ProjectCreatingViewController.swift */,
+				1E98AD8228141DE1006DAE75 /* ProjectTransparentGridView.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		1E5BCFF2282AB72F00F7B610 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				1E5BCFF3282AB74800F7B610 /* ShapesViewController.swift */,
+			);
+			path = Shapes;
 			sourceTree = "<group>";
 		};
 		1E98AD43280EA679006DAE75 /* Projects */ = {
@@ -843,6 +884,7 @@
 				1E98AD59280EDEEA006DAE75 /* UIViewController.swift in Sources */,
 				1E98AD95281575DA006DAE75 /* Project+CoreDataClass.swift in Sources */,
 				1E5BCFE4282910B300F7B610 /* PaywallVideoView.swift in Sources */,
+				1E5BCFF0282A3ED200F7B610 /* ShadowViewController.swift in Sources */,
 				1E5BCFEA28294E5700F7B610 /* FilterLoader.swift in Sources */,
 				07F9875B281AABF20058139C /* FontsLoader.swift in Sources */,
 				1E98AD46280EA6F6006DAE75 /* ProjectsViewController.swift in Sources */,
@@ -858,6 +900,7 @@
 				07F9876A281AD5D10058139C /* StyleViewController.swift in Sources */,
 				07F9876E281AE8400058139C /* ColorSliderView.swift in Sources */,
 				1E28628F28268E9200E624B1 /* CustomSearchTextField.swift in Sources */,
+				1E5BCFED282A34B200F7B610 /* OpacityViewController.swift in Sources */,
 				1E42E053280DED700033E6EE /* RoundedTabBarController.swift in Sources */,
 				1E98AD55280EB72D006DAE75 /* WaterFallLayout.swift in Sources */,
 				1E98ADA02816B438006DAE75 /* HorizontalCollectionView.swift in Sources */,
@@ -866,6 +909,7 @@
 				07D15E93281831B200723348 /* UIImage+Extension.swift in Sources */,
 				1E5BCFE62829221800F7B610 /* FiltersCollectionView.swift in Sources */,
 				07F98777281C2BC00058139C /* CustomSlider.swift in Sources */,
+				1E5BCFF4282AB74900F7B610 /* ShapesViewController.swift in Sources */,
 				07F98770281AF3E00058139C /* CALayer.swift in Sources */,
 				07F98774281BC2260058139C /* SliderSetView.swift in Sources */,
 				1E5BCFDC2828472B00F7B610 /* AdjustableLabel.swift in Sources */,

@@ -35,7 +35,7 @@ final class FontsPickerViewController: UIViewController {
 		setupFontPicker()
 		
 		fontsLoader = FontsLoader()
-		familyPickerView.titles = fontsLoader.getFontCategories()
+        familyPickerView.titles = fontsLoader.getFontCategories()
 		currentFonts = fontsLoader.fonts(for: 0)
 	}
 	
@@ -53,7 +53,7 @@ final class FontsPickerViewController: UIViewController {
 		toolBarView = ToolBarView(frame: .zero, centerItem: .title)
 		toolBarView.leadingItem = .cancel
 		toolBarView.trailingItem = .confirm
-		toolBarView.title = "Fonts"
+		toolBarView.title = LocalizationManager.shared.localizedString(for: .textFonts)
 		toolBarView.delegate = self
 		toolBarView.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(toolBarView)

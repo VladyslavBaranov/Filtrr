@@ -7,16 +7,40 @@
 
 import UIKit
 
-final class ScrollabelRoundedBarItemView: UICollectionViewCell {
-    
-    enum ItemType: String {
-        case image, text, graphic, shape, filters, adjust, crop, shadow, opacity, background
+enum CreatingOption: String {
+    case image, text, graphic, shape, filters, adjust, crop, shadow, opacity, background
+    func getLocalizedString() -> String {
+        switch self {
+        case .image:
+            return LocalizationManager.shared.localizedString(for: .creatingTabImage)
+        case .text:
+            return LocalizationManager.shared.localizedString(for: .creatingTabText)
+        case .graphic:
+            return LocalizationManager.shared.localizedString(for: .creatingTabGraphic)
+        case .shape:
+            return LocalizationManager.shared.localizedString(for: .creatingTabShape)
+        case .filters:
+            return LocalizationManager.shared.localizedString(for: .creatingTabFilters)
+        case .adjust:
+            return LocalizationManager.shared.localizedString(for: .creatingTabAdjust)
+        case .crop:
+            return LocalizationManager.shared.localizedString(for: .creatingTabCrop)
+        case .shadow:
+            return LocalizationManager.shared.localizedString(for: .creatingTabShadow)
+        case .opacity:
+            return LocalizationManager.shared.localizedString(for: .creatingTabOpacity)
+        case .background:
+            return LocalizationManager.shared.localizedString(for: .creatingTabBG)
+        }
     }
+}
+
+final class ScrollableRoundedBarItemView: UICollectionViewCell {
     
-    var currentItem: ItemType = .image {
+    var currentItem: CreatingOption = .image {
         didSet {
             imageView.image = .init(named: currentItem.rawValue.capitalized)
-            label.text = currentItem.rawValue.uppercased()
+            label.text = currentItem.getLocalizedString()
         }
     }
     
@@ -58,12 +82,12 @@ final class ScrollabelRoundedBarItemView: UICollectionViewCell {
 }
 
 protocol ScrollableRoundedBarDelegate: AnyObject {
-	func didTapItem(itemType: ScrollabelRoundedBarItemView.ItemType)
+	func didTapItem(itemType: CreatingOption)
 }
 
 final class ScrollableRoundedBar: UIView {
     
-    var items: [ScrollabelRoundedBarItemView.ItemType] = [
+    var items: [CreatingOption] = [
         .image, .text, .graphic, .shape, .background, .filters, .adjust, .crop, .shadow, .opacity
     ]
     
@@ -80,7 +104,7 @@ final class ScrollableRoundedBar: UIView {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.register(ScrollabelRoundedBarItemView.self, forCellWithReuseIdentifier: "id")
+        collectionView.register(ScrollableRoundedBarItemView.self, forCellWithReuseIdentifier: "id")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(collectionView)
         
@@ -117,7 +141,7 @@ extension ScrollableRoundedBar: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! ScrollabelRoundedBarItemView
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! ScrollableRoundedBarItemView
         cell.currentItem = items[indexPath.row]
         return cell
     }

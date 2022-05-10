@@ -9,6 +9,18 @@ import UIKit
 
 final class TextCollectionViewCell: UICollectionViewCell {
 	
+    var pickerStyle: PickerStyle = .style1 {
+        didSet {
+            switch pickerStyle {
+            case .style1:
+                usesMontserrat13 = true
+            case .style2:
+                backgroundColor = .clear
+                usesMontserrat15 = true
+            }
+        }
+    }
+    
 	private var label: UILabel!
 	
 	var textColor: UIColor = .white {
@@ -31,6 +43,14 @@ final class TextCollectionViewCell: UICollectionViewCell {
 			}
 		}
 	}
+    
+    var usesMontserrat15: Bool = true {
+        didSet {
+            if usesMontserrat15 {
+                label.font = Montserrat.regular(size: 15)
+            }
+        }
+    }
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -65,13 +85,27 @@ final class TextCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func setSelected() {
-		label.textColor = .white
-		backgroundColor = .soft2
+        switch pickerStyle {
+        case .style1:
+            label.textColor = .white
+            backgroundColor = .soft2
+            layer.borderColor = usesBorder ? UIColor.soft2.cgColor : UIColor.clear.cgColor
+        case .style2:
+            label.textColor = .appAccent
+            backgroundColor = .clear
+            layer.borderColor = UIColor.appAccent.cgColor
+        }
 	}
 	
 	func setUnselected() {
-		label.textColor = .soft2
-		backgroundColor = .appGray
+        switch pickerStyle {
+        case .style1:
+            label.textColor = .soft2
+            backgroundColor = .appGray
+        case .style2:
+            label.textColor = .white
+            backgroundColor = .clear
+        }
 	}
 }
 

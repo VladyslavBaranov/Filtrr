@@ -21,3 +21,32 @@
 "paywall_6month_caption" = "Оплата за 6 месяцев";
 "paywall_month_title" = "Месяц";
 "paywall_month_caption" = "Ежемесячная оплата";
+
+"creating_tab_image" = "ФОТО";
+"creating_tab_text" = "ТЕКСТ";
+"creating_tab_graphic" = "ГРАФИКА";
+"creating_tab_shape" = "ФИГУРА";
+"creating_tab_bg" = "ФОН";
+"creating_tab_filters" = "ФИЛЬТРЫ";
+"creating_tab_adjust" = "НАСТРОИТЬ";
+"creating_tab_crop" = "ОБРЕЗАТЬ";
+"creating_tab_shadow" = "ТЕНЬ";
+"creating_tab_opacity" = "ПРОЗРАЧНОСТЬ";
+
+"text_title" = "Текст";
+"text_color" = "Цвет";
+"text_fonts" = "Шрифты";
+"text_style" = "Стиль";
+"text_fonts_featured" = "Топовые";
+"text_fonts_basic" = "Простые";
+"text_fonts_fancy" = "Красивые";
+"text_fonts_classic" = "Классические";
+"text_fonts_techno" = "Техно";
+"text_fonts_misc" = "Разные";
+"text_style_alignment" = "Выравнивание";
+"text_style_left" = "Левое";
+"text_style_center" = "Центр";
+"text_style_right" = "Правое";
+"text_style_fontsize" = "Размер шрифта";
+"text_style_letterspacing" = "Апрош";
+"text_style_linespacing" = "Кегль";

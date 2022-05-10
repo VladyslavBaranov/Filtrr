@@ -8,7 +8,16 @@
 import UIKit
 
 final class ProjectsImageCell: UICollectionViewCell {
+    
     var imageView: UIImageView!
+    var imageInset: CGFloat = 0.0 {
+        didSet {
+            if imageInset != 0 {
+                imageView.contentMode = .scaleAspectFit
+            }
+            imageView.frame = bounds.insetBy(dx: imageInset, dy: imageInset)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
