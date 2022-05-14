@@ -16,7 +16,13 @@ protocol BackgroundSelectionViewControllerDelegate: AnyObject {
 final class BackgroundSelectionViewController: UIViewController {
     
     var addedCount = 0
-    private let titles = ["Image", "Transparent", "Color", "Gradient", "Pastel"]
+    private let titles = [
+        LocalizationManager.shared.localizedString(for: .backgroundImage),
+        LocalizationManager.shared.localizedString(for: .backgroundTrans),
+        LocalizationManager.shared.localizedString(for: .textColor),
+        LocalizationManager.shared.localizedString(for: .backgroundGradient),
+        LocalizationManager.shared.localizedString(for: .backgroundPastel)
+    ]
     
     weak var delegate: BackgroundSelectionViewControllerDelegate!
     private var toolBarView: ToolBarView!
@@ -51,7 +57,7 @@ final class BackgroundSelectionViewController: UIViewController {
         toolBarView = ToolBarView(frame: .zero, centerItem: .title)
         toolBarView.leadingItem = .cancel
         toolBarView.trailingItem = .confirm
-        toolBarView.title = "Color"
+        toolBarView.title = LocalizationManager.shared.localizedString(for: .textColor)
         toolBarView.delegate = self
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(toolBarView)

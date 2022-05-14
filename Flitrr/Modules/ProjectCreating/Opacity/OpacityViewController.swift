@@ -45,7 +45,7 @@ final class OpacityViewController: UIViewController {
     
     @objc private func opacityDidChange(_ sender: UISlider) {
         let opacity = sender.value
-        toolBarView.title = "Opacity %\(Int(opacity * 100))"
+        toolBarView.title = "\(LocalizationManager.shared.localizedString(for: .shadowOpacity)) %\(Int(opacity * 100))"
         delegate?.didSetOpacity(opacity)
     }
     
@@ -53,7 +53,7 @@ final class OpacityViewController: UIViewController {
         toolBarView = ToolBarView(frame: .zero, centerItem: .title)
         toolBarView.leadingItem = .cancel
         toolBarView.trailingItem = .confirm
-        toolBarView.title = "Opacity %\(Int(originalOpacity * 100))"
+        toolBarView.title = "\(LocalizationManager.shared.localizedString(for: .shadowOpacity)) %\(Int(originalOpacity * 100))"
         toolBarView.delegate = self
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(toolBarView)

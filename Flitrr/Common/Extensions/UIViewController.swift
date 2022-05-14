@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    func createSection(cellsPerRow: Int, heightRatio: CGFloat, inset: CGFloat) -> NSCollectionLayoutSection {
+    func createSection(cellsPerRow: Int, heightRatio: CGFloat, inset: CGFloat, usesHorizontalScroll: Bool) -> NSCollectionLayoutSection {
         
         let fraction: CGFloat = 1 / CGFloat(cellsPerRow)
         // Item
@@ -22,18 +22,20 @@ extension UIViewController {
         
         // Section
         let section = NSCollectionLayoutSection(group: group)
-        // section.orthogonalScrollingBehavior = .continuous
+        if usesHorizontalScroll {
+            section.orthogonalScrollingBehavior = .continuous
+        }
         section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
     
-        let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+        let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30))
         let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
         section.boundarySupplementaryItems = [headerItem]
         return section
     }
 
-    func createLayout(cellsPerRow: Int, heightRatio: CGFloat, inset: CGFloat) -> UICollectionViewLayout {
+    func createLayout(cellsPerRow: Int, heightRatio: CGFloat, inset: CGFloat, usesHorizontalScroll: Bool) -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { [unowned self] sectionIndex, environment in
-            return createSection(cellsPerRow: cellsPerRow, heightRatio: heightRatio, inset: inset)
+            return createSection(cellsPerRow: cellsPerRow, heightRatio: heightRatio, inset: inset, usesHorizontalScroll: usesHorizontalScroll)
         }
         return layout
     }

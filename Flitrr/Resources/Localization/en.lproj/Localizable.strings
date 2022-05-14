@@ -8,6 +8,13 @@
 
 "settings_title" = "Settings";
 "settings_lang" = "Language";
+
+"settings_appearance" = "Appearance";
+"settings_icon" = "App Icon";
+"settings_light" = "Light";
+"settings_dark" = "Dark";
+"settings_system" = "System";
+
 "settings_restore" = "Restore Purchases";
 "settings_privacy" = "Privacy Policy";
 "settings_rate" = "Rate Us on App Store";
@@ -15,9 +22,72 @@
 
 "paywall_year_title" = "FREE 3 Day Trial - Annually";
 "paywall_year_caption" = "Pay annually, free trial";
-"paywall_subscribe_now" = "Subscribe now";
-"paywall_year_price_full" = "then $64.99 per year";
-"paywall_6month_title" = "6 months";
+"paywall_year_price_full" = "Then $64.99 per year";
+"paywall_6month_title" = "FREE 3 Day Trial - 6 months";
 "paywall_6month_caption" = "Pay for 6 months";
+"paywall_6month_price_full" = "Then $34.99 per 6 months";
 "paywall_month_title" = "Monthly";
 "paywall_month_caption" = "Pay monthly";
+"paywall_subscribe_now" = "Subscribe now";
+
+"creating_tab_image" = "IMAGE";
+"creating_tab_text" = "TEXT";
+"creating_tab_graphic" = "GRAPHIC";
+"creating_tab_shape" = "SHAPE";
+"creating_tab_bg" = "BACKGROUND";
+"creating_tab_filters" = "FILTERS";
+"creating_tab_adjust" = "ADJUST";
+"creating_tab_crop" = "CROP";
+"creating_tab_shadow" = "SHADOW";
+"creating_tab_opacity" = "OPACITY";
+
+"text_title" = "Text";
+"text_color" = "Color";
+"text_fonts" = "Fonts";
+"text_style" = "Style";
+"text_fonts_featured" = "Featured";
+"text_fonts_basic" = "Basic";
+"text_fonts_fancy" = "Fancy";
+"text_fonts_classic" = "Classic";
+"text_fonts_techno" = "Techno";
+"text_fonts_misc" = "Miscellaneous";
+"text_style_alignment" = "Alignment";
+"text_style_left" = "Left";
+"text_style_center" = "Center";
+"text_style_right" = "Right";
+"text_style_fontsize" = "Font Size";
+"text_style_letterspacing" = "Letter Spacing";
+"text_style_linespacing" = "Line Spacing";
+
+"shapes_search" = "Search Shapes";
+"shapes_title" = "Shapes";
+"shapes_basic" = "Basic";
+"shapes_holiday" = "Holiday";
+"shapes_outline" = "Outline";
+"shapes_brush" = "Brush";
+
+"projects_title" = "Projects";
+"projects_folders" = "Folders";
+"projects_select" = "Select";
+"projects_favorites" = "Favorites";
+"projects_new_folder" = "New Folder";
+"projects_selected_str" = "Projects Selected";
+
+"ipicker_aspect" = "Aspect";
+"ipicker_square" = "Square";
+
+"graphics_title" = "Graphics";
+
+"background_title" = "Background";
+"background_image" = "Image";
+"background_trans" = "Transparent";
+"background_gradient" = "Gradient";
+"background_pastel" = "Pastel";
+
+"filters_title" = "Filters";
+
+"shadow_title" = "Shadow";
+"shadow_size" = "Size";
+"shadow_angle" = "Angle";
+"shadow_blur" = "Blur";
+"shadow_opacity" = "Opacity";

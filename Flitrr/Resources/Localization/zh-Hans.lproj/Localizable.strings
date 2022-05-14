@@ -6,18 +6,53 @@
   
 */
 
-"settings_title" = "Settings";
-"settings_lang" = "Language";
-"settings_restore" = "Restore Purchases";
-"settings_privacy" = "Privacy Policy";
-"settings_rate" = "Rate Us on App Store";
-"settings_card_caption" = "Get the premium feature and get the unlimited access to the app.";
+"settings_title" = "设置";
+"settings_lang" = "语言";
+"settings_restore" = "恢复购买";
+"settings_privacy" = "隐私政策";
+"settings_rate" = "在 App Store 上给我们打分";
+"settings_card_caption" = "获取高级功能并无限制访问应用程序。";
 
-"paywall_year_title" = "FREE 3 Day Trial - Annually";
-"paywall_year_caption" = "Pay annually, free trial";
-"paywall_subscribe_now" = "Subscribe now";
-"paywall_year_price_full" = "then $64.99 per year";
-"paywall_6month_title" = "6 months";
-"paywall_6month_caption" = "Pay for 6 months";
-"paywall_month_title" = "Monthly";
-"paywall_month_caption" = "Pay monthly";
+"paywall_year_title" = "免费 3 天试用 - 每年一次";
+"paywall_year_caption" = "按年付费，免费试用";
+"paywall_subscribe_now" = "现在订阅";
+"paywall_year_price_full" = "那么每年 64.99 美元";
+"paywall_6month_title" = "6 个月";
+"paywall_6month_caption" = "支付 6 个月";
+"paywall_month_title" = "每月";
+"paywall_month_caption" = "按月支付";
+
+"creating_tab_image" = "图像";
+"creating_tab_text" = "文本";
+"creating_tab_graphic" = "图形";
+"creating_tab_shape" = "形状";
+"creating_tab_bg" = "背景";
+"creating_tab_filters" = "过滤器";
+"creating_tab_adjust" = "调整";
+"creating_tab_crop" = "CROP";
+"creating_tab_shadow" = "阴影";
+"creating_tab_opacity" = "不透明度";
+
+"text_title" = "文本";
+"text_color" = "颜色";
+"text_fonts" = "字体";
+"text_style" = "风格";
+"text_fonts_featured" = "精选";
+"text_fonts_basic" = "基本";
+"text_fonts_fancy" = "花式";
+"text_fonts_classic" = "经典";
+"text_fonts_techno" = "技术";
+"text_fonts_misc" = "杂项";
+"text_style_alignment" = "对齐方式";
+"text_style_left" = "左";
+"text_style_center" = "中心";
+"text_style_right" = "右";
+"text_style_fontsize" = "字体大小";
+"text_style_letterspacing" = "字母间距";
+"text_style_linespacing" = "行距";
+
+"shapes_title" = "形状";
+"shapes_basic" = "基本";
+"shapes_holiday" = "假期";
+"shapes_outline" = "大纲";
+"shapes_brush" = "画笔";

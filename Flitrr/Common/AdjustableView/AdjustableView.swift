@@ -13,9 +13,10 @@ protocol AdjustableViewDelegate: AnyObject {
 }
 
 class AdjustableView: UIView {
+    
+    var id: UUID!
 	
     weak var delegate: AdjustableViewDelegate!
-    
     var isTransformingEnabled = true
 	var savedFrame: CGRect = .zero
     var gridIsActive = true {
@@ -58,6 +59,8 @@ class AdjustableView: UIView {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		
+        id = UUID()
+        
 		setAdjustMode()
 		rotationRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(handleRotationRecognizer(_:)))
 		addGestureRecognizer(rotationRecognizer)
@@ -88,6 +91,8 @@ class AdjustableView: UIView {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+    
+    func render(in ctx: CGContext) {}
 
 	func setAdjustMode() {
 		layer.borderWidth = 0.5

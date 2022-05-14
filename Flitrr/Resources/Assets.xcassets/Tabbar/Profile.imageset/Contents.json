@@ -1,6 +1,16 @@
 {
   "images" : [
     {
+      "filename" : "Profile-1.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
       "filename" : "Profile.pdf",
       "idiom" : "universal"
     }

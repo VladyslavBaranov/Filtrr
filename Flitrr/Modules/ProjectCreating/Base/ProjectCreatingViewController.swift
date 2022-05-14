@@ -8,7 +8,7 @@
 import UIKit
 
 final class ProjectCreatingViewController: UIViewController {
-    
+     
     private var currentlySelectedAdjustableView: AdjustableView!
     
     var toolBarView: ToolBarView!
@@ -101,21 +101,40 @@ final class ProjectCreatingViewController: UIViewController {
 extension ProjectCreatingViewController: ToolBarViewDelegate {
     func didTapTrailingItem() {
         transparentGridView.untoggle()
-        guard let png = transparentGridView.asPNG else { return }
+        guard let png = transparentGridView.createPNG() else { return }
 		// let renderer = UIGraphicsImageRenderer(size: transparentGridView.bounds.size)
         //
 		// let image = renderer.image { ctx in
 		// 	transparentGridView.drawHierarchy(in: transparentGridView.bounds, afterScreenUpdates: true)
 		// }
 		let activityController = UIActivityViewController(activityItems: [png], applicationActivities: nil)
+        activityController.completionWithItemsHandler = nil
 		present(activityController, animated: true, completion: nil)
     }
+    
     func didTapLeadingItem() {
         dismiss(animated: true)
     }
-    func didTapUndo() {}
-    func didTapLayers() {}
-    func didTapRedo() {}
+    
+    func didTapUndo() {
+        guard let undoManager = undoManager else { return }
+        guard undoManager.canUndo else { return }
+        undoManager.undo()
+    }
+    
+    func didTapLayers() {
+        print("REGISTERED")
+        undoManager?.registerUndo(withTarget: self, handler: { type in
+            print("ACTION TO BE UNDONE")
+        })
+    }
+    
+    func didTapRedo() {
+        guard let undoManager = undoManager else { return }
+        guard undoManager.canRedo else { return }
+        undoManager.redo()
+        print("REDONE")
+    }
 }
 
 extension ProjectCreatingViewController: ScrollableRoundedBarDelegate {
@@ -125,12 +144,18 @@ extension ProjectCreatingViewController: ScrollableRoundedBarDelegate {
 			showImagePicker()
 		case .text:
 			showTextEditing()
+        case .graphic:
+            let vc = GraphicViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
         case .shape:
             showShapesController()
         case .background:
             showBackgroundController()
         case .filters:
             showFiltersController()
+        case .crop:
+            showCropViewController()
         case .shadow:
             showShadowViewController()
         case .opacity:
@@ -155,11 +180,15 @@ extension ProjectCreatingViewController: ImageLibraryPickerViewControllerDelegat
         guard addedCount == 2 else { return }
         let v = AdjustableImageView(frame:
                 .init(x: 0, y: 0, width: transparentGridView.bounds.midX, height: transparentGridView.bounds.midY))
+        v.originalImage = uiImage
         v.imageDelegate = self
         v.delegate = self
-        v.imageView.image = uiImage
         transparentGridView.add(v)
         addedCount = 0
+        
+        undoManager?.registerUndo(withTarget: self, handler: { [unowned self] h in
+            transparentGridView.remove(v)
+        })
     }
 }
 
@@ -191,21 +220,50 @@ extension ProjectCreatingViewController: TextEditingViewControllerDelegate {
     func didConfirmText(_ attributedString: NSAttributedString) {
         let label = AdjustableLabel.createLabel(for: attributedString)
         transparentGridView.add(label)
+        
+        undoManager?.registerUndo(withTarget: self, handler: { [unowned self] _ in
+            transparentGridView.remove(label)
+        })
+    }
+}
+
+extension ProjectCreatingViewController: ShapesViewControllerDelegate {
+    func showShapesController() {
+        let controller = ShapesViewController()
+        controller.delegate = self
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
+    }
+    func didSelectBasicShape(_ name: String, size: CGSize) {
+        let shape = AdjustableImageView(frame:
+                .init(x: 0, y: 0, width: size.width, height: size.height))
+        shape.imageDelegate = self
+        shape.delegate = self
+        shape.imageView.image = UIImage(named: name)
+        transparentGridView.add(shape)
+        
+        undoManager?.registerUndo(withTarget: self, handler: { [unowned self] _ in
+            transparentGridView.remove(shape)
+        })
     }
 }
 
 extension ProjectCreatingViewController {
-    func showShapesController() {
-        let controller = ShapesViewController()
+    func showCropViewController() {
+        guard let adjustable = currentlySelectedAdjustableView as? AdjustableImageView else { return }
+        guard let image = adjustable.imageView.image else { return }
+        let controller = CropViewController()
+        controller.originalImage = image
         controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true, completion: nil)
+        controller.modalTransitionStyle = .crossDissolve
+        present(controller, animated: true)
     }
 }
 
 extension ProjectCreatingViewController: BackgroundSelectionViewControllerDelegate {
     
     func showBackgroundController() {
-        prepareForOnThird(title: "Background")
+        prepareForOnThird(title: LocalizationManager.shared.localizedString(for: .backgroundTitle))
         let vc = BackgroundSelectionViewController()
         vc.delegate = self
         vc.modalPresentationStyle = .custom
@@ -248,10 +306,10 @@ extension ProjectCreatingViewController: AdjustableViewDelegate {
 extension ProjectCreatingViewController: AdjustableImageViewDelegate {
     
     func showFiltersController() {
-        prepareForOnThird(title: "Filters")
         guard let adjustable = currentlySelectedAdjustableView as? AdjustableImageView else { return }
+        prepareForOnThird(title: LocalizationManager.shared.localizedString(for: .filtersTitle))
         let filtersController = FiltersViewController()
-        if let img = adjustable.imageView.image {
+        if let img = adjustable.originalImage {
             let factor = 100 / img.size.width
             let renderer = UIGraphicsImageRenderer(size: .init(width: 100, height: img.size.height * factor))
             let scaledImage = renderer.image { _ in
@@ -271,10 +329,8 @@ extension ProjectCreatingViewController: AdjustableImageViewDelegate {
 
 extension ProjectCreatingViewController: FiltersViewControllerDelegate {
     func didSelectFilter(_ filter: Filter) {
-        /*guard let imageAdjustableView = currentlySelectedAdjustableView as? AdjustableImageView else { return }
-        guard let img = imageAdjustableView.imageView.image else { return }
-        guard let output = img.applyingFilter(name: filter.filterName, parameters: [:]) else { return }
-        imageAdjustableView.imageView.image = output*/
+        guard let imageAdjustableView = currentlySelectedAdjustableView as? AdjustableImageView else { return }
+        imageAdjustableView.currentFilter = filter
     }
     
     func didSelectBlendMode(_ filterName: String) {
@@ -308,7 +364,7 @@ extension ProjectCreatingViewController: ShadowViewControllerDelegate {
         guard let adjustable = currentlySelectedAdjustableView else { return }
         adjustable.layer.shadowOpacity = 1
         adjustable.layer.shadowColor = UIColor.clear.cgColor
-        prepareForOnThird(title: "Shadow")
+        prepareForOnThird(title: LocalizationManager.shared.localizedString(for: .shadowTitle))
         let vc = ShadowViewController()
         vc.originalShadowModel = ShadowModel(layer: adjustable.layer)
         vc.delegate = self
@@ -326,7 +382,7 @@ extension ProjectCreatingViewController: OpacityViewControllerDelegate {
     
     func showOpacityViewController() {
         guard let selectedAdjustable = currentlySelectedAdjustableView else { return }
-        prepareForOnThird(title: "Opacity")
+        prepareForOnThird(title: LocalizationManager.shared.localizedString(for: .shadowOpacity))
         let opacityController = OpacityViewController()
         opacityController.originalOpacity = Float(selectedAdjustable.alpha)
         opacityController.delegate = self

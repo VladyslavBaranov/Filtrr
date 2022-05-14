@@ -14,7 +14,23 @@ protocol AdjustableImageViewDelegate: AnyObject {
 final class AdjustableImageView: AdjustableView {
     
     var imageDelegate: AdjustableImageViewDelegate!
-    var originalImage: UIImage!
+    var currentFilter: Filter! {
+        didSet {
+            if currentFilter.filterName.isEmpty {
+                imageView.image = originalImage
+            } else {
+                imageView.image = originalImage.applyingFilter(
+                    name: currentFilter.filterName,
+                    parameters: [:]
+                )
+            }
+        }
+    }
+    var originalImage: UIImage! {
+        didSet {
+            imageView.image = originalImage
+        }
+    }
     var imageView: UIImageView!
     
     override init(frame: CGRect) {
@@ -31,5 +47,12 @@ final class AdjustableImageView: AdjustableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.frame = bounds
+    }
+    
+    override func render(in ctx: CGContext) {
+        ctx.move(to: frame.origin)
+        // ctx.rotate(by: .pi / 4)
+        // ctx.translateBy(x: -frame.origin.x, y: -frame.origin.y)
+        imageView.image?.draw(in: frame, blendMode: .exclusion, alpha: 1)
     }
 }

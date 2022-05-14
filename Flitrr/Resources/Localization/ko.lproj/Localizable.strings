@@ -6,18 +6,53 @@
   
 */
 
-"settings_title" = "Settings";
-"settings_lang" = "Language";
-"settings_restore" = "Restore Purchases";
-"settings_privacy" = "Privacy Policy";
-"settings_rate" = "Rate Us on App Store";
-"settings_card_caption" = "Get the premium feature and get the unlimited access to the app.";
+"settings_title" = "설정";
+"settings_lang" = "언어";
+"settings_restore" = "구매 복원";
+"settings_privacy" = "개인정보 보호정책";
+"settings_rate" = "App Store에서 평가해 주세요";
+"settings_card_caption" = "프리미엄 기능을 사용하고 앱에 대한 무제한 액세스를 얻으십시오.";
 
-"paywall_year_title" = "FREE 3 Day Trial - Annually";
-"paywall_year_caption" = "Pay annually, free trial";
-"paywall_subscribe_now" = "Subscribe now";
-"paywall_year_price_full" = "then $64.99 per year";
-"paywall_6month_title" = "6 months";
-"paywall_6month_caption" = "Pay for 6 months";
-"paywall_month_title" = "Monthly";
-"paywall_month_caption" = "Pay monthly";
+"paywall_year_title" = "무료 3일 평가판 - 매년";
+"paywall_year_caption" = "연간 지불, 무료 평가판";
+"paywall_subscribe_now" = "지금 구독하세요";
+"paywall_year_price_full" = "그러면 연간 $64.99";
+"paywall_6month_title" = "6개월";
+"paywall_6month_caption" = "6개월 동안 지불";
+"paywall_month_title" = "매월";
+"paywall_month_caption" = "월별 지불";
+
+"creating_tab_image" = "이미지";
+"creating_tab_text" = "텍스트";
+"creating_tab_graphic" = "그래픽";
+"creating_tab_shape" = "모양";
+"creating_tab_bg" = "배경";
+"creating_tab_filters" = "필터스";
+"creating_tab_adjust" = "조정";
+"creating_tab_crop" = "자르기";
+"creating_tab_shadow" = "그림자";
+"creating_tab_opacity" = "불투명도";
+
+"text_title" = "텍스트";
+"text_color" = "색상";
+"text_fonts" = "글꼴";
+"text_style" = "스타일";
+"text_fonts_featured" = "추천";
+"text_fonts_basic" = "기본";
+"text_fonts_fancy" = "멋진";
+"text_fonts_classic" = "클래식";
+"text_fonts_techno" = "테크노";
+"text_fonts_misc" = "기타";
+"text_style_alignment" = "정렬";
+"text_style_left" = "왼쪽";
+"text_style_center" = "중앙";
+"text_style_right" = "오른쪽";
+"text_style_fontsize" = "글꼴 크기";
+"text_style_letterspacing" = "문자 간격";
+"text_style_linespacing" = "줄 간격";
+
+"shapes_title" = "모양";
+"shapes_basic" = "기본";
+"shapes_holiday" = "휴일";
+"shapes_outline" = "개요";
+"shapes_brush" = "브러시";

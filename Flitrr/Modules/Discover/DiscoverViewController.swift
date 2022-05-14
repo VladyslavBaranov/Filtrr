@@ -12,6 +12,8 @@ class DiscoverViewController: UIViewController {
     private var navigationView: NavigationView!
     var searchTextField: UISearchTextField!
     
+    var paywallWasShown = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appDark
@@ -19,6 +21,16 @@ class DiscoverViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
         
         setupTopViews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !paywallWasShown {
+            paywallWasShown = true
+            let controller = PaywallHostingController(rootView: PaywallView())
+            controller.modalPresentationStyle = .fullScreen
+            present(controller, animated: true)
+        }
     }
     
     func setupTopViews() {

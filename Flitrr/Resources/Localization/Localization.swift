@@ -8,8 +8,16 @@
 import Foundation
 
 enum LocalizationKey: String {
+    
 	case settingsTitle = "settings_title"
 	case settingsLang = "settings_lang"
+    
+    case settingsAppearance = "settings_appearance"
+    case settingsIcon = "settings_icon"
+    case settingsLight = "settings_light"
+    case settingsDark = "settings_dark"
+    case settingsSystem = "settings_system"
+    
 	case settingsRestore = "settings_restore"
 	case settingsPrivacy = "settings_privacy"
 	case settingsRate = "settings_rate"
@@ -21,6 +29,7 @@ enum LocalizationKey: String {
 	case settingsYearPriceFull = "paywall_year_price_full"
 	case settings6MonthTitle = "paywall_6month_title"
 	case settings6MonthCapion = "paywall_6month_caption"
+    case settings6MonthFull = "paywall_6month_price_full"
 	case settingsMonthTitle = "paywall_month_title"
 	case settingsMonthCaption = "paywall_month_caption"
     
@@ -52,14 +61,44 @@ enum LocalizationKey: String {
     case textFontsSize = "text_style_fontsize"
     case textFontsLetterSpacing = "text_style_letterspacing"
     case textFontsLineSpacing = "text_style_linespacing"
+    
+    case projectsTitle = "projects_title"
+    case projectsFolders = "projects_folders"
+    case projectsSelect = "projects_select"
+    case projectsFavorites = "projects_favorites"
+    case projectsNewFolder = "projects_new_folder"
+    case projectsSelectedStr = "projects_selected_str"
+    
+    case ipickerAspect = "ipicker_aspect"
+    case ipickerSquare = "ipicker_square"
+
+    case graphicsTitle = "graphics_title"
+
+    case backgroundTitle = "background_title"
+    case backgroundImage = "background_image"
+    case backgroundTrans = "background_trans"
+    case backgroundGradient = "background_gradient"
+    case backgroundPastel = "background_pastel"
+
+    case filtersTitle = "filters_title"
+
+    case shadowTitle = "shadow_title"
+    case shadowSize = "shadow_size"
+    case shadowAngle = "shadow_angle"
+    case shadowBlur = "shadow_blur"
+    case shadowOpacity = "shadow_opacity"
 
 }
 
 final class LocalizationManager {
 	
+    private var bundle: Bundle!
+    
 	var locale: String = "en" {
 		didSet {
 			UserDefaults.standard.set(locale, forKey: "com.filtrr.localizationid")
+            guard let path = Bundle.main.path(forResource: locale, ofType: "lproj") else { return }
+            bundle = Bundle(path: path)
 		}
 	}
 	
@@ -67,12 +106,14 @@ final class LocalizationManager {
 	
 	private init() {
 		locale = UserDefaults.standard.value(forKey: "com.filtrr.localizationid") as? String ?? "en"
+        guard let path = Bundle.main.path(forResource: locale, ofType: "lproj") else { return }
+        bundle = Bundle(path: path)
 	}
 	
 	func localizedString(for key: LocalizationKey) -> String {
-		NSLocalizedString(key.rawValue, tableName: "Localizable", bundle: .main, value: locale, comment: "")
+        bundle.localizedString(forKey: key.rawValue, value: nil, table: nil)
 	}
     func localizedString(for key: String) -> String {
-        NSLocalizedString(key, tableName: "Localizable", bundle: .main, value: locale, comment: "")
+        bundle.localizedString(forKey: key, value: nil, table: nil)
     }
 }

@@ -109,7 +109,7 @@ extension FiltersCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // filteringDelegate?.didSelect(filters[indexPath.row])
+        filteringDelegate?.didSelect(filters[indexPath.row])
         (collectionView.cellForItem(at: indexPath) as? FiltersCollectionViewCell)?.setSelected()
     }
 }

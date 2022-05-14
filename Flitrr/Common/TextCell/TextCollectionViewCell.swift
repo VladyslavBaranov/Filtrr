@@ -103,7 +103,7 @@ final class TextCollectionViewCell: UICollectionViewCell {
             label.textColor = .soft2
             backgroundColor = .appGray
         case .style2:
-            label.textColor = .white
+            label.textColor = .label
             backgroundColor = .clear
         }
 	}

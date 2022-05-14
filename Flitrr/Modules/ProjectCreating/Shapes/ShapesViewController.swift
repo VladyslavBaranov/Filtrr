@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol ShapesViewControllerDelegate: AnyObject {
+    func didSelectBasicShape(_ name: String, size: CGSize)
+}
+
 final class ShapesViewController: UIViewController {
+    
+    weak var delegate: ShapesViewControllerDelegate!
     
     private var navigationView: NavigationView!
     var searchTextField: UISearchTextField!
@@ -17,7 +23,9 @@ final class ShapesViewController: UIViewController {
     private let images = [
         "BlueStar5", "BlueStar5Round", "BlueStar6",
         "Ocean3", "Ocean3Round", "Ocean4",
-        "Purple6", "Purple6Round", "PurpleRhombus"
+        "Purple6", "Purple6Round", "PurpleRhombus",
+        "Magenta8", "Magenta8Round", "MagentaHeart",
+        "RedHeart1", "RedHeart2", "RedHeart3"
     ]
     
     override func viewDidLoad() {
@@ -73,14 +81,17 @@ final class ShapesViewController: UIViewController {
     }
     
     func setupCollection() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout(cellsPerRow: 3, heightRatio: 1, inset: 9))
+        collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: createLayout(cellsPerRow: 3, heightRatio: 1, inset: 9, usesHorizontalScroll: false)
+        )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset = .init(top: 162, left: 0, bottom: 0, right: 0)
+        collectionView.contentInset = .init(top: 182, left: 0, bottom: 0, right: 0)
         collectionView.register(ProjectsImageCell.self, forCellWithReuseIdentifier: "id")
         
         NSLayoutConstraint.activate([
@@ -106,7 +117,7 @@ extension ShapesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return cell
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y + view.safeAreaInsets.top + 162
+        let offset = scrollView.contentOffset.y + view.safeAreaInsets.top + 182
         if offset > 0 {
             let fraction = 1 - offset / 80
             navigationView.alpha = fraction
@@ -121,6 +132,8 @@ extension ShapesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        delegate?.didSelectBasicShape(images[indexPath.row], size: cell.frame.size)
         dismiss(animated: true)
     }
 }

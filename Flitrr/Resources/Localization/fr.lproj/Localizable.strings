@@ -6,18 +6,53 @@
   
 */
 
-"settings_title" = "Settings";
-"settings_lang" = "Language";
-"settings_restore" = "Restore Purchases";
-"settings_privacy" = "Privacy Policy";
-"settings_rate" = "Rate Us on App Store";
-"settings_card_caption" = "Get the premium feature and get the unlimited access to the app.";
+"settings_title" = "Paramètres";
+"settings_lang" = "Langue";
+"settings_restore" = "Restaurer les achats";
+"settings_privacy" = "Politique de confidentialité";
+"settings_rate" = "Évaluez-nous sur l'App Store";
+"settings_card_caption" = "Obtenez la fonctionnalité premium et bénéficiez d'un accès illimité à l'application.";
 
-"paywall_year_title" = "FREE 3 Day Trial - Annually";
-"paywall_year_caption" = "Pay annually, free trial";
-"paywall_subscribe_now" = "Subscribe now";
-"paywall_year_price_full" = "then $64.99 per year";
-"paywall_6month_title" = "6 months";
-"paywall_6month_caption" = "Pay for 6 months";
-"paywall_month_title" = "Monthly";
-"paywall_month_caption" = "Pay monthly";
+"paywall_year_title" = "Essai GRATUIT de 3 jours - Annuellement";
+"paywall_year_caption" = "Payez annuellement, essai gratuit";
+"paywall_subscribe_now" = "Abonnez-vous maintenant";
+"paywall_year_price_full" = "puis 64,99 $ par an";
+"paywall_6month_title" = "6 mois";
+"paywall_6month_caption" = "Payer pendant 6 mois";
+"paywall_month_title" = "Mensuel";
+"paywall_month_caption" = "Payer mensuellement";
+
+"creating_tab_image" = "IMAGE";
+"creating_tab_text" = "TEXTE";
+"creating_tab_graphic" = "GRAPHIQUE";
+"creating_tab_shape" = "FORME";
+"creating_tab_bg" = "CONTEXTE";
+"creating_tab_filters" = "FILTRES";
+"creating_tab_adjust" = "AJUSTER";
+"creating_tab_crop" = "CROP";
+"creating_tab_shadow" = "OMBRE";
+"creating_tab_opacity" = "OPACITÉ";
+
+"text_title" = "Texte";
+"text_color" = "Couleur";
+"text_fonts" = "Polices";
+"text_style" = "Style";
+"text_fonts_featured" = "En vedette";
+"text_fonts_basic" = "De base";
+"text_fonts_fancy" = "Fantaisie";
+"text_fonts_classic" = "Classique";
+"text_fonts_techno" = "Techno";
+"text_fonts_misc" = "Divers";
+"text_style_alignment" = "Alignement";
+"text_style_left" = "Gauche";
+"text_style_center" = "Centre";
+"text_style_right" = "Droite";
+"text_style_fontsize" = "Taille de la police";
+"text_style_letterspacing" = "Espacement des lettres";
+"text_style_linespacing" = "Interligne";
+
+"shapes_title" = "Formes";
+"shapes_basic" = "Basique";
+"shapes_holiday" = "Vacances";
+"shapes_outline" = "Contour";
+"shapes_brush" = "Pinceau";

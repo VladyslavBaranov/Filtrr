@@ -5,8 +5,8 @@
 //  Created by Vladyslav Baranov on 20.04.2022.
 //
 
-import UIKit
 import SwiftUI
+import StoreKit
 
 final class SettingsTableCell: UITableViewCell {
     
@@ -124,6 +124,10 @@ final class PremiumViewTitle: UIView {
         addSubview(chevronImageView)
     }
     
+    func localize() {
+        label.text = LocalizationManager.shared.localizedString(for: .settingsCardCaption)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -166,7 +170,8 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
     var tableView: UITableView!
     var thumbnailView: PaywallThumbnailView!
     
-    let settingsItems: [String] = [
+    var settingsItems: [String] = [
+        LocalizationManager.shared.localizedString(for: .settingsAppearance),
 		LocalizationManager.shared.localizedString(for: .settingsLang),
 		LocalizationManager.shared.localizedString(for: .settingsRestore),
 		LocalizationManager.shared.localizedString(for: .settingsPrivacy),
@@ -190,13 +195,18 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         tableView.separatorInset = .init(top: 0, left: 30, bottom: 0, right: 30)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        localize()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //thumbnailView.frame = .init(
            // x: 30, y: view.safeAreaInsets.top + 40, width: view.frame.width - 60, height: (view.bounds.width - 60) * 0.9)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        settingsItems.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         70
@@ -214,11 +224,19 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         let row = indexPath.row
         
         if row == 0 {
+            let vc = AppearanceViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+        } else if row == 1 {
             let languageVC = LanguageTableViewController(style: .plain)
             navigationController?.pushViewController(languageVC, animated: true)
-        } else if row == 2 {
+        } else if row == 3 {
             let privacyPolicyVC = PrivacyPolicyViewController()
             navigationController?.pushViewController(privacyPolicyVC, animated: true)
+        } else if row == 4 {
+            if let scene = view.window?.windowScene {
+                SKStoreReviewController.requestReview(in: scene)
+            }
         }
     }
     func setupNavBar() {
@@ -248,5 +266,18 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         let controller = SettingsViewController()
         let nav = UINavigationController(rootViewController: controller)
         return nav
+    }
+    
+    func localize() {
+        thumbnailView?.premiumView.localize()
+        navigationItem.title = LocalizationManager.shared.localizedString(for: .settingsTitle)
+        settingsItems = [
+            LocalizationManager.shared.localizedString(for: .settingsAppearance),
+            LocalizationManager.shared.localizedString(for: .settingsLang),
+            LocalizationManager.shared.localizedString(for: .settingsRestore),
+            LocalizationManager.shared.localizedString(for: .settingsPrivacy),
+            LocalizationManager.shared.localizedString(for: .settingsRate)
+        ]
+        tableView?.reloadData()
     }
 }

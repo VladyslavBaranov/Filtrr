@@ -59,6 +59,8 @@
 		1E5BCFED282A34B200F7B610 /* OpacityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFEC282A34B200F7B610 /* OpacityViewController.swift */; };
 		1E5BCFF0282A3ED200F7B610 /* ShadowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFEF282A3ED200F7B610 /* ShadowViewController.swift */; };
 		1E5BCFF4282AB74900F7B610 /* ShapesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFF3282AB74800F7B610 /* ShapesViewController.swift */; };
+		1E5BCFF7282B8B5700F7B610 /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFF6282B8B5700F7B610 /* CropViewController.swift */; };
+		1E5BCFFA282C1E5100F7B610 /* GraphicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFF9282C1E5100F7B610 /* GraphicViewController.swift */; };
 		1E98AD46280EA6F6006DAE75 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD45280EA6F6006DAE75 /* ProjectsViewController.swift */; };
 		1E98AD4A280EA925006DAE75 /* RoundedTabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD49280EA925006DAE75 /* RoundedTabBarItems.swift */; };
 		1E98AD4D280EAF0A006DAE75 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E98AD4C280EAF0A006DAE75 /* Montserrat-Bold.ttf */; };
@@ -89,6 +91,13 @@
 		1E98AD9A28168394006DAE75 /* ScrollableRoundedBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD9928168394006DAE75 /* ScrollableRoundedBar.swift */; };
 		1E98AD9D281699DB006DAE75 /* ImageLibraryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD9C281699DB006DAE75 /* ImageLibraryPickerViewController.swift */; };
 		1E98ADA02816B438006DAE75 /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD9F2816B438006DAE75 /* HorizontalCollectionView.swift */; };
+		1EC9915A282E58B9006B2D38 /* GraphicsObservingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */; };
+		1EC9915C282E5FB6006B2D38 /* GraphicsStretchyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */; };
+		1EF9521F282ED6830002A6E7 /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF9521E282ED6830002A6E7 /* AppearanceViewController.swift */; };
+		1EF95221282F92800002A6E7 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF95220282F92800002A6E7 /* AppState.swift */; };
+		1EF95223282FCA6D0002A6E7 /* iAps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EF95222282FCA6D0002A6E7 /* iAps.plist */; };
+		1EF95226282FCAD60002A6E7 /* InAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF95225282FCAD60002A6E7 /* InAppConfiguration.swift */; };
+		1EF95228282FCD280002A6E7 /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF95227282FCD280002A6E7 /* StoreHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +183,8 @@
 		1E5BCFEC282A34B200F7B610 /* OpacityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityViewController.swift; sourceTree = "<group>"; };
 		1E5BCFEF282A3ED200F7B610 /* ShadowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowViewController.swift; sourceTree = "<group>"; };
 		1E5BCFF3282AB74800F7B610 /* ShapesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesViewController.swift; sourceTree = "<group>"; };
+		1E5BCFF6282B8B5700F7B610 /* CropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
+		1E5BCFF9282C1E5100F7B610 /* GraphicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicViewController.swift; sourceTree = "<group>"; };
 		1E98AD45280EA6F6006DAE75 /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		1E98AD49280EA925006DAE75 /* RoundedTabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTabBarItems.swift; sourceTree = "<group>"; };
 		1E98AD4C280EAF0A006DAE75 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
@@ -204,6 +215,13 @@
 		1E98AD9928168394006DAE75 /* ScrollableRoundedBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableRoundedBar.swift; sourceTree = "<group>"; };
 		1E98AD9C281699DB006DAE75 /* ImageLibraryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLibraryPickerViewController.swift; sourceTree = "<group>"; };
 		1E98AD9F2816B438006DAE75 /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
+		1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsObservingViewController.swift; sourceTree = "<group>"; };
+		1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsStretchyHeader.swift; sourceTree = "<group>"; };
+		1EF9521E282ED6830002A6E7 /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
+		1EF95220282F92800002A6E7 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		1EF95222282FCA6D0002A6E7 /* iAps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iAps.plist; sourceTree = "<group>"; };
+		1EF95225282FCAD60002A6E7 /* InAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppConfiguration.swift; sourceTree = "<group>"; };
+		1EF95227282FCD280002A6E7 /* StoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +381,7 @@
 				07F98776281C2BC00058139C /* CustomSlider.swift */,
 				07F98778281C43620058139C /* PresentationControllers.swift */,
 				1E28628E28268E9200E624B1 /* CustomSearchTextField.swift */,
+				1EF95220282F92800002A6E7 /* AppState.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -399,6 +418,7 @@
 		1E42E015280DC93D0033E6EE /* Flitrr */ = {
 			isa = PBXGroup;
 			children = (
+				1EF95224282FCAB20002A6E7 /* iAp */,
 				1E98AD8E2815753B006DAE75 /* CoreData */,
 				1E42E04D280DCAA20033E6EE /* Common */,
 				1E42E04B280DCA520033E6EE /* Modules */,
@@ -433,6 +453,7 @@
 				1E42E024280DC9430033E6EE /* LaunchScreen.storyboard */,
 				1E42E018280DC93D0033E6EE /* SceneDelegate.swift */,
 				1E42E016280DC93D0033E6EE /* AppDelegate.swift */,
+				1EF95222282FCA6D0002A6E7 /* iAps.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -464,6 +485,8 @@
 		1E42E04C280DCA640033E6EE /* ProjectCreating */ = {
 			isa = PBXGroup;
 			children = (
+				1E5BCFF8282C1E3E00F7B610 /* Graphic */,
+				1E5BCFF5282B8B4000F7B610 /* Crop */,
 				1E5BCFF2282AB72F00F7B610 /* Shapes */,
 				1E5BCFF1282A7C0F00F7B610 /* Base */,
 				07D15E8A281815B300723348 /* Text */,
@@ -549,6 +572,24 @@
 			path = Shapes;
 			sourceTree = "<group>";
 		};
+		1E5BCFF5282B8B4000F7B610 /* Crop */ = {
+			isa = PBXGroup;
+			children = (
+				1E5BCFF6282B8B5700F7B610 /* CropViewController.swift */,
+			);
+			path = Crop;
+			sourceTree = "<group>";
+		};
+		1E5BCFF8282C1E3E00F7B610 /* Graphic */ = {
+			isa = PBXGroup;
+			children = (
+				1E5BCFF9282C1E5100F7B610 /* GraphicViewController.swift */,
+				1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */,
+				1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */,
+			);
+			path = Graphic;
+			sourceTree = "<group>";
+		};
 		1E98AD43280EA679006DAE75 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,6 +653,7 @@
 		1E98AD6728108459006DAE75 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				1EF9521D282ED6610002A6E7 /* Appearance */,
 				1E98AD7628129541006DAE75 /* PrivacyPolicy */,
 				1E98AD73281289E1006DAE75 /* Language */,
 				1E98AD72281289D7006DAE75 /* Paywall */,
@@ -697,6 +739,23 @@
 				1E98AD9F2816B438006DAE75 /* HorizontalCollectionView.swift */,
 			);
 			path = HorizontalCollection;
+			sourceTree = "<group>";
+		};
+		1EF9521D282ED6610002A6E7 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				1EF9521E282ED6830002A6E7 /* AppearanceViewController.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
+		1EF95224282FCAB20002A6E7 /* iAp */ = {
+			isa = PBXGroup;
+			children = (
+				1EF95225282FCAD60002A6E7 /* InAppConfiguration.swift */,
+				1EF95227282FCD280002A6E7 /* StoreHelper.swift */,
+			);
+			path = iAp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -815,6 +874,7 @@
 				1E98AD6D2811AC31006DAE75 /* Montserrat-Light.ttf in Resources */,
 				1E98AD4D280EAF0A006DAE75 /* Montserrat-Bold.ttf in Resources */,
 				1E5BCFE228290F7700F7B610 /* PaywallVid.mp4 in Resources */,
+				1EF95223282FCA6D0002A6E7 /* iAps.plist in Resources */,
 				07F98752281AA6620058139C /* Oxanium-Medium.ttf in Resources */,
 				1E42E026280DC9430033E6EE /* LaunchScreen.storyboard in Resources */,
 				07F98764281AC1A30058139C /* Game Of Squids.ttf in Resources */,
@@ -880,6 +940,7 @@
 				07D15E892817E0C900723348 /* AdjustChevronView.swift in Sources */,
 				1E98AD93281575DA006DAE75 /* Folder+CoreDataClass.swift in Sources */,
 				1E98AD60280EE9DC006DAE75 /* ProjectsFolderCell.swift in Sources */,
+				1E5BCFF7282B8B5700F7B610 /* CropViewController.swift in Sources */,
 				1E98AD8328141DE1006DAE75 /* ProjectTransparentGridView.swift in Sources */,
 				1E98AD59280EDEEA006DAE75 /* UIViewController.swift in Sources */,
 				1E98AD95281575DA006DAE75 /* Project+CoreDataClass.swift in Sources */,
@@ -887,20 +948,24 @@
 				1E5BCFF0282A3ED200F7B610 /* ShadowViewController.swift in Sources */,
 				1E5BCFEA28294E5700F7B610 /* FilterLoader.swift in Sources */,
 				07F9875B281AABF20058139C /* FontsLoader.swift in Sources */,
+				1EC9915C282E5FB6006B2D38 /* GraphicsStretchyHeader.swift in Sources */,
 				1E98AD46280EA6F6006DAE75 /* ProjectsViewController.swift in Sources */,
 				1E98AD782812955E006DAE75 /* PrivacyPolicyViewController.swift in Sources */,
 				07F9876C281AE0B00058139C /* ColorPickerViewController.swift in Sources */,
 				1E98AD6928108474006DAE75 /* SettingsViewController.swift in Sources */,
+				1EF95226282FCAD60002A6E7 /* InAppConfiguration.swift in Sources */,
 				1E98AD9D281699DB006DAE75 /* ImageLibraryPickerViewController.swift in Sources */,
 				1E98AD982815D33D006DAE75 /* FoldersCollectionHeaderView.swift in Sources */,
 				1E98AD8128140C51006DAE75 /* ToolBarView.swift in Sources */,
 				1E42E04F280DCABB0033E6EE /* UIColor.swift in Sources */,
 				1E98AD94281575DA006DAE75 /* Folder+CoreDataProperties.swift in Sources */,
+				1E5BCFFA282C1E5100F7B610 /* GraphicViewController.swift in Sources */,
 				07F98748281A7E8C0058139C /* ValuePickerView.swift in Sources */,
 				07F9876A281AD5D10058139C /* StyleViewController.swift in Sources */,
 				07F9876E281AE8400058139C /* ColorSliderView.swift in Sources */,
 				1E28628F28268E9200E624B1 /* CustomSearchTextField.swift in Sources */,
 				1E5BCFED282A34B200F7B610 /* OpacityViewController.swift in Sources */,
+				1EF95228282FCD280002A6E7 /* StoreHelper.swift in Sources */,
 				1E42E053280DED700033E6EE /* RoundedTabBarController.swift in Sources */,
 				1E98AD55280EB72D006DAE75 /* WaterFallLayout.swift in Sources */,
 				1E98ADA02816B438006DAE75 /* HorizontalCollectionView.swift in Sources */,
@@ -909,12 +974,15 @@
 				07D15E93281831B200723348 /* UIImage+Extension.swift in Sources */,
 				1E5BCFE62829221800F7B610 /* FiltersCollectionView.swift in Sources */,
 				07F98777281C2BC00058139C /* CustomSlider.swift in Sources */,
+				1EF9521F282ED6830002A6E7 /* AppearanceViewController.swift in Sources */,
 				1E5BCFF4282AB74900F7B610 /* ShapesViewController.swift in Sources */,
 				07F98770281AF3E00058139C /* CALayer.swift in Sources */,
 				07F98774281BC2260058139C /* SliderSetView.swift in Sources */,
+				1EF95221282F92800002A6E7 /* AppState.swift in Sources */,
 				1E5BCFDC2828472B00F7B610 /* AdjustableLabel.swift in Sources */,
 				07D15E8C281815C900723348 /* TextEditingViewController.swift in Sources */,
 				1E98AD96281575DA006DAE75 /* Project+CoreDataProperties.swift in Sources */,
+				1EC9915A282E58B9006B2D38 /* GraphicsObservingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1098,6 +1166,7 @@
 		1E42E041280DC9430033E6EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "Icon2 Icon3";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1129,6 +1198,7 @@
 		1E42E042280DC9430033E6EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "Icon2 Icon3";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

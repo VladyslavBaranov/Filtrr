@@ -56,7 +56,13 @@ final class ShadowViewController: UIViewController {
     
     private var selectedOptionIndex = 0
     private var addedCount = 0
-    private let titles = ["Size", "Angle", "Blur", "Color", "Opacity"]
+    private let titles = [
+        LocalizationManager.shared.localizedString(for: .shadowSize),
+        LocalizationManager.shared.localizedString(for: .shadowAngle),
+        LocalizationManager.shared.localizedString(for: .shadowBlur),
+        LocalizationManager.shared.localizedString(for: .textColor),
+        LocalizationManager.shared.localizedString(for: .shadowOpacity)
+    ]
     
     weak var delegate: ShadowViewControllerDelegate!
     private var toolBarView: ToolBarView!
@@ -93,6 +99,7 @@ final class ShadowViewController: UIViewController {
         palette = ColorPaletteCollectionView(
             frame: .init(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height - 160), collectionViewLayout: layout
         )
+        setupColors()
         palette.paletteDelegate = self
         view.addSubview(palette)
     }
@@ -115,7 +122,7 @@ final class ShadowViewController: UIViewController {
         toolBarView = ToolBarView(frame: .zero, centerItem: .title)
         toolBarView.leadingItem = .cancel
         toolBarView.trailingItem = .confirm
-        toolBarView.title = "Size"
+        toolBarView.title = LocalizationManager.shared.localizedString(for: .shadowSize)
         toolBarView.delegate = self
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(toolBarView)
@@ -154,18 +161,42 @@ final class ShadowViewController: UIViewController {
             let size = CGSize(width: ssize * sin(rad), height: -ssize * cos(rad))
             modelCopy.angle = size
             delegate?.didReportNewShadowModel(modelCopy)
-            toolBarView.title = "Angle \(Int(sender.value * 360))°"
+            toolBarView.title = "\(LocalizationManager.shared.localizedString(for: .shadowAngle)) \(Int(sender.value * 360))°"
         case 2:
             modelCopy.blur = CGFloat(sender.value) * 100
             delegate?.didReportNewShadowModel(modelCopy)
-            toolBarView.title = "Blur \(Int(modelCopy.blur))"
+            toolBarView.title = "\(LocalizationManager.shared.localizedString(for: .shadowBlur)) \(Int(modelCopy.blur))"
         case 4:
             modelCopy.alpha = sender.value
             delegate?.didReportNewShadowModel(modelCopy)
-            toolBarView.title = "Opacity %\(Int(sender.value * 100))"
+            toolBarView.title = "\(LocalizationManager.shared.localizedString(for: .shadowOpacity)) %\(Int(sender.value * 100))"
         default:
             break
         }
+    }
+    
+    func setupColors() {
+        palette.paletteItems = [
+            .color(.appAccent),
+            .color(UIColor(red: 1, green: 0.02, blue: 0.5, alpha: 1)),
+            .color(UIColor(red: 0.761, green: 0.09, blue: 0.49, alpha: 1)),
+            .color(UIColor(red: 0.38, green: 0.102, blue: 0.784, alpha: 1)),
+            .color(UIColor(red: 0.29, green: 0.384, blue: 0.851, alpha: 1)),
+            .color(UIColor(red: 0, green: 0.471, blue: 0.565, alpha: 1)),
+            .color(.white), .color(.black),
+            .color(UIColor(red: 1, green: 0.02, blue: 0.4, alpha: 1)),
+            .color(UIColor(red: 0.761, green: 0.09, blue: 0.49, alpha: 1)),
+            .color(UIColor.darkGray),
+            .color(UIColor.gray),
+            .color(.lightGray),
+            .color(.red),
+            .color(.orange),
+            .color(.yellow),
+            .color(.green),
+            .color(.cyan),
+            .color(.blue),
+            .color(.purple)
+        ]
     }
 }
 
@@ -191,26 +222,26 @@ extension ShadowViewController: ValuePickerViewDelegate {
         case 0:
             sliderContainerView.isHidden = false
             palette.isHidden = true
-            toolBarView.title = "Size"
+            toolBarView.title = LocalizationManager.shared.localizedString(for: .shadowSize)
             sliderContainerView.slider.value = Float(modelCopy.size / 100)
         case 1:
             sliderContainerView.isHidden = false
             palette.isHidden = true
-            toolBarView.title = "Angle"
+            toolBarView.title = LocalizationManager.shared.localizedString(for: .shadowAngle)
             sliderContainerView.slider.value = Float(modelCopy._angle / (2 * .pi))
         case 2:
             sliderContainerView.isHidden = false
             palette.isHidden = true
-            toolBarView.title = "Blur"
+            toolBarView.title = LocalizationManager.shared.localizedString(for: .shadowBlur)
             sliderContainerView.slider.value = Float(modelCopy.blur / 100)
         case 3:
             sliderContainerView.isHidden = true
             palette.isHidden = false
-            toolBarView.title = "Color"
+            toolBarView.title = LocalizationManager.shared.localizedString(for: .textColor)
         case 4:
             sliderContainerView.isHidden = false
             palette.isHidden = true
-            toolBarView.title = "Opacity"
+            toolBarView.title = LocalizationManager.shared.localizedString(for: .shadowOpacity)
             sliderContainerView.slider.value = modelCopy.alpha
         default:
             break

@@ -8,19 +8,27 @@
 
 "settings_title" = "Настройки";
 "settings_lang" = "Язык";
+
+"settings_appearance" = "Вид";
+"settings_icon" = "Иконка";
+"settings_light" = "Светлый";
+"settings_dark" = "Темный";
+"settings_system" = "Системный";
+
 "settings_restore" = "Восстановить покупки";
 "settings_privacy" = "Условия пользования";
 "settings_rate" = "Оцените нас в App Store";
-"settings_card_caption" = "Get the premium feature and get the unlimited access to the app.";
+"settings_card_caption" = "Получите премиум-возможности и получите неограниченный доступ к приложению.";
 
-"paywall_year_title" = "БЕСПЛАТНО 3 дня - В год";
-"paywall_year_caption" = "Pay annually, free trial";
-"paywall_subscribe_now" = "Подписаться";
-"paywall_year_price_full" = "затем $64.99 в год";
-"paywall_6month_title" = "6 месяцев";
-"paywall_6month_caption" = "Оплата за 6 месяцев";
+"paywall_year_title" = "БЕСПЛАТНО 3 дня - Ежегодно";
+"paywall_year_caption" = "Оплата ежегодная";
+"paywall_year_price_full" = "Затем $64.99 в год";
+"paywall_6month_title" = "БЕСПЛАТНО 3 дня - 6 месяцев";
+"paywall_6month_caption" = "Оплата раз в 6 месяцев";
+"paywall_6month_price_full" = "Затем $34.99 в 6 месяцев";
 "paywall_month_title" = "Месяц";
 "paywall_month_caption" = "Ежемесячная оплата";
+"paywall_subscribe_now" = "Подписаться";
 
 "creating_tab_image" = "ФОТО";
 "creating_tab_text" = "ТЕКСТ";
@@ -50,3 +58,35 @@
 "text_style_fontsize" = "Размер шрифта";
 "text_style_letterspacing" = "Апрош";
 "text_style_linespacing" = "Кегль";
+
+"shapes_title" = "Фигуры";
+"shapes_basic" = "Простые";
+"shapes_holiday" = "Путешетствия";
+"shapes_outline" = "Обведенные";
+"shapes_brush" = "Кисть";
+
+"projects_title" = "Проекты";
+"projects_folders" = "Папки";
+"projects_select" = "Выбрать";
+"projects_favorites" = "Избранные";
+"projects_new_folder" = "Новая папка";
+"projects_selected_str" = "выбранных проектов";
+
+"ipicker_aspect" = "Компактно";
+"ipicker_square" = "Квадрат";
+
+"graphics_title" = "Графика";
+
+"background_title" = "Фон";
+"background_image" = "Фото";
+"background_trans" = "Прозрачный";
+"background_gradient" = "Градиент";
+"background_pastel" = "Пастел";
+
+"filters_title" = "Фильтры";
+
+"shadow_title" = "Тень";
+"shadow_size" = "Размер";
+"shadow_angle" = "Угол";
+"shadow_blur" = "Мутность";
+"shadow_opacity" = "Прозрачность";

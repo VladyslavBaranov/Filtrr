@@ -6,18 +6,53 @@
   
 */
 
-"settings_title" = "Settings";
-"settings_lang" = "Language";
-"settings_restore" = "Restore Purchases";
-"settings_privacy" = "Privacy Policy";
-"settings_rate" = "Rate Us on App Store";
-"settings_card_caption" = "Get the premium feature and get the unlimited access to the app.";
+"settings_title" = "Configurações";
+"settings_lang" = "Idioma";
+"settings_restore" = "Restaurar compras";
+"settings_privacy" = "Política de Privacidade";
+"settings_rate" = "Avalie-nos na App Store";
+"settings_card_caption" = "Obtenha o recurso premium e tenha acesso ilimitado ao aplicativo.";
 
-"paywall_year_title" = "FREE 3 Day Trial - Annually";
-"paywall_year_caption" = "Pay annually, free trial";
-"paywall_subscribe_now" = "Subscribe now";
-"paywall_year_price_full" = "then $64.99 per year";
-"paywall_6month_title" = "6 months";
-"paywall_6month_caption" = "Pay for 6 months";
-"paywall_month_title" = "Monthly";
-"paywall_month_caption" = "Pay monthly";
+"paywall_year_title" = "Teste GRATUITO de 3 dias - Anualmente";
+"paywall_year_caption" = "Pague anualmente, teste gratuito";
+"paywall_subscribe_now" = "Assine agora";
+"paywall_year_price_full" = "então $ 64,99 por ano";
+"paywall_6month_title" = "6 meses";
+"paywall_6month_caption" = "Pagar por 6 meses";
+"paywall_month_title" = "Mensal";
+"paywall_month_caption" = "Pagar mensalmente";
+
+"creating_tab_image" = "IMAGE";
+"creating_tab_text" = "TEXTO";
+"creating_tab_graphic" = "GRÁFICO";
+"creating_tab_shape" = "SHAPE";
+"creating_tab_bg" = "FUNDO";
+"creating_tab_filters" = "FILTROS";
+"creating_tab_adjust" = "AJUSTAR";
+"creating_tab_crop" = "CROP";
+"creating_tab_shadow" = "SHADOW";
+"creating_tab_opacity" = "OPACIDADE";
+
+"text_title" = "Texto";
+"text_color" = "Cor";
+"text_fonts" = "Fontes";
+"text_style" = "Estilo";
+"text_fonts_featured" = "Em destaque";
+"text_fonts_basic" = "Básico";
+"text_fonts_fancy" = "Fantástico";
+"text_fonts_classic" = "Clássico";
+"text_fonts_techno" = "Tecnologia";
+"text_fonts_misc" = "Diversos";
+"text_style_alignment" = "Alinhamento";
+"text_style_left" = "Esquerda";
+"text_style_center" = "Centro";
+"text_style_right" = "Certo";
+"text_style_fontsize" = "Tamanho da fonte";
+"text_style_letterpacing" = "Espaçamento entre letras";
+"text_style_linespacing" = "Espaçamento entre linhas";
+
+"shapes_title" = "Formas";
+"shapes_basic" = "Básico";
+"shapes_holiday" = "Feriado";
+"shapes_outline" = "Esboço";
+"shapes_brush" = "Pincel";

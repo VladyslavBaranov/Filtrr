@@ -29,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.viewControllers = [discoverController, projectsController]
         
         window?.rootViewController = tabBarController
+        window?.overrideUserInterfaceStyle = AppState.shared.getUserInterfaceStyle()
         window?.makeKeyAndVisible()
     }
 

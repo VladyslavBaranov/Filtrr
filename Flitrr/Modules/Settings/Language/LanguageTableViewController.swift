@@ -12,15 +12,25 @@ final class LanguageTableViewController: UITableViewController {
     struct SettingsItem {
         var lang: String
         var isSelected = false
+        var id = "en"
     }
     
     var searchKey = ""
     var searchResult: [SettingsItem] = []
-    var languages: [SettingsItem] = [
-        "English", "Spanish", "Chinese", "Japanese", "French",
-        "German", "Russian", "Portugues", "Italian", "Korean"
-    ].map { .init(lang: $0) }
     
+    var languages: [SettingsItem] = [
+        .init(lang: "English", id: "en"),
+        .init(lang: "Española", id: "es"),
+        .init(lang: "中国人", id: "zh-Hans"),
+        .init(lang: "日本", id: "ja"),
+        .init(lang: "Français", id: "fr"),
+        .init(lang: "Deutsch", id: "de"),
+        .init(lang: "Русский", id: "ru"),
+        .init(lang: "Português", id: "pt-PT"),
+        .init(lang: "Italiano", id: "it"),
+        .init(lang: "한국인", id: "ko")
+    ]
+
     let searchController = UISearchController()
     
     override func viewDidLoad() {
@@ -43,6 +53,7 @@ final class LanguageTableViewController: UITableViewController {
         for i in 0..<languages.count {
             self.languages[i].isSelected = lang.lang == self.languages[i].lang
         }
+        LocalizationManager.shared.locale = lang.id
         tableView.reloadData()
     }
     

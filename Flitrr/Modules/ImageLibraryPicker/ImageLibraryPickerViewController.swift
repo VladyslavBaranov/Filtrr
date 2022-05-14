@@ -136,9 +136,9 @@ final class ImageLibraryPickerViewController: UIViewController {
                 visibleCell.set(contentMode: photosContentMode)
             }
             
-            let title1 = photosContentMode == .scaleAspectFit ? "Square" : "Aspect"
+            let title1 = photosContentMode == .scaleAspectFit ? LocalizationManager.shared.localizedString(for: .ipickerSquare) : LocalizationManager.shared.localizedString(for: .ipickerAspect)
             let imageName1 = photosContentMode == .scaleAspectFit ? "rectangle.arrowtriangle.2.outward" : "rectangle.arrowtriangle.2.inward"
-            navigationItem.rightBarButtonItem?.menu = createMenu(title: title1, imageName: imageName1)
+            prefsButton.menu = createMenu(title: title1, imageName: imageName1)
         }
         let addNewMenu = UIMenu(
             title: "",
@@ -150,7 +150,7 @@ final class ImageLibraryPickerViewController: UIViewController {
     func setupMainCollectionView() {
         collectionView = UICollectionView(
             frame: view.bounds,
-            collectionViewLayout: createLayout(cellsPerRow: 3, heightRatio: 1, inset: 1)
+            collectionViewLayout: createLayout(cellsPerRow: 3, heightRatio: 1, inset: 1, usesHorizontalScroll: false)
         )
         
         collectionView.backgroundColor = .appDark

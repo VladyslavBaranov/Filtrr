@@ -26,6 +26,11 @@ final class AdjustableLabel: AdjustableView {
         label.frame = bounds
     }
     
+    override func render(in ctx: CGContext) {
+        ctx.move(to: frame.origin)
+        label.attributedText?.draw(in: frame)
+    }
+    
     static func createLabel(for attributedString: NSAttributedString) -> AdjustableLabel {
         let label = AdjustableLabel(frame: .init(origin: .zero, size: attributedString.size()))
         label.label.attributedText = attributedString

@@ -42,6 +42,12 @@ class ProjectsViewController: UIViewController {
         loadFolders()
         navigationView.onSettingsButtonTapped = openSettings
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        localize()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = .init(x: 0, y: 0, width: view.bounds.width, height: view.safeAreaInsets.top + 80)
@@ -142,6 +148,15 @@ extension ProjectsViewController: ProjectsOptionsContainerViewDelegate {
             break
         }
     }
+    
+    func localize() {
+        navigationView.title = LocalizationManager.shared.localizedString(for: .projectsTitle)
+        optionsContainerView.setTitles([
+            LocalizationManager.shared.localizedString(for: .projectsTitle),
+            LocalizationManager.shared.localizedString(for: .projectsFolders),
+            LocalizationManager.shared.localizedString(for: .projectsSelect)
+        ])
+    }
 }
 
 private extension ProjectsViewController {
@@ -150,7 +165,7 @@ private extension ProjectsViewController {
         tabBarController?.tabBar.isHidden = true
     }
     func setupCollectionView() {
-        let layout = createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9.0)
+        let layout = createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9.0, usesHorizontalScroll: false)
         // layout.delegate = self
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.backgroundColor = .appDark
