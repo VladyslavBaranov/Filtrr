@@ -8,6 +8,13 @@
 
 "settings_title" = "Einstellungen";
 "settings_lang" = "Sprache";
+
+"settings_appearance" = "Erscheinungsbild";
+"settings_icon" = "App-Symbol";
+"settings_light" = "Licht";
+"settings_dark" = "Dunkel";
+"settings_system" = "System";
+
 "settings_restore" = "Einkäufe wiederherstellen";
 "settings_privacy" = "Datenschutzrichtlinie";
 "settings_rate" = "Bewerten Sie uns im App Store";
@@ -15,12 +22,13 @@
 
 "paywall_year_title" = "KOSTENLOSE 3-Tage-Testversion - Jährlich";
 "paywall_year_caption" = "Jährlich bezahlen, kostenlose Testversion";
-"paywall_subscribe_now" = "Jetzt abonnieren";
-"paywall_year_price_full" = "dann 64,99 $ pro Jahr";
-"paywall_6month_title" = "6 Monate";
+"paywall_year_price_full" = "Dann $64,99 pro Jahr";
+"paywall_6month_title" = "KOSTENLOSE 3-Tage-Testversion - 6 Monate";
 "paywall_6month_caption" = "Für 6 Monate bezahlen";
+"paywall_6month_price_full" = "Dann 34,99 $ für 6 Monate";
 "paywall_month_title" = "Monatlich";
 "paywall_month_caption" = "Monatlich bezahlen";
+"paywall_subscribe_now" = "Jetzt abonnieren";
 
 "creating_tab_image" = "BILD";
 "creating_tab_text" = "TEXT";
@@ -51,8 +59,35 @@
 "text_style_letterspacing" = "Buchstabenabstand";
 "text_style_linespacing" = "Zeilenabstand";
 
+"shapes_search" = "Formen suchen";
 "shapes_title" = "Formen";
 "shapes_basic" = "Grundlegend";
 "shapes_holiday" = "Urlaub";
 "shapes_outline" = "Umriss";
 "shapes_brush" = "Pinsel";
+
+"projects_title" = "Projekte";
+"projects_folders" = "Ordner";
+"projects_select" = "Auswählen";
+"projects_favorites" = "Favoriten";
+"projects_new_folder" = "Neuer Ordner";
+"projects_selected_str" = "Ausgewählte Projekte";
+
+"ipicker_aspect" = "Aspekt";
+"ipicker_square" = "Quadrat";
+
+"graphics_title" = "Grafiken";
+
+"background_title" = "Hintergrund";
+"background_image" = "Bild";
+"background_trans" = "Transparent";
+"background_gradient" = "Farbverlauf";
+"background_pastel" = "Pastell";
+
+"filters_title" = "Filter";
+
+"shadow_title" = "Schatten";
+"shadow_size" = "Größe";
+"shadow_angle" = "Winkel";
+"shadow_blur" = "Unschärfe";
+"shadow_opacity" = "Deckkraft";

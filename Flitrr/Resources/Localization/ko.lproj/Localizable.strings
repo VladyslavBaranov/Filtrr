@@ -8,6 +8,13 @@
 
 "settings_title" = "설정";
 "settings_lang" = "언어";
+
+"settings_appearance" = "모양";
+"settings_icon" = "앱 아이콘";
+"settings_light" = "빛";
+"settings_dark" = "어두움";
+"settings_system" = "시스템";
+
 "settings_restore" = "구매 복원";
 "settings_privacy" = "개인정보 보호정책";
 "settings_rate" = "App Store에서 평가해 주세요";
@@ -15,12 +22,13 @@
 
 "paywall_year_title" = "무료 3일 평가판 - 매년";
 "paywall_year_caption" = "연간 지불, 무료 평가판";
-"paywall_subscribe_now" = "지금 구독하세요";
 "paywall_year_price_full" = "그러면 연간 $64.99";
-"paywall_6month_title" = "6개월";
+"paywall_6month_title" = "3일 무료 평가판 - 6개월";
 "paywall_6month_caption" = "6개월 동안 지불";
+"paywall_6month_price_full" = "그럼 6개월당 $34.99";
 "paywall_month_title" = "매월";
 "paywall_month_caption" = "월별 지불";
+"paywall_subscribe_now" = "지금 구독하세요";
 
 "creating_tab_image" = "이미지";
 "creating_tab_text" = "텍스트";
@@ -51,8 +59,35 @@
 "text_style_letterspacing" = "문자 간격";
 "text_style_linespacing" = "줄 간격";
 
+"shapes_search" = "모양 검색";
 "shapes_title" = "모양";
 "shapes_basic" = "기본";
 "shapes_holiday" = "휴일";
 "shapes_outline" = "개요";
 "shapes_brush" = "브러시";
+
+"projects_title" = "프로젝트";
+"projects_folders" = "폴더";
+"projects_select" = "선택";
+"projects_favorites" = "즐겨찾기";
+"projects_new_folder" = "새 폴더";
+"projects_selected_str" = "선택된 프로젝트";
+
+"ipicker_aspect" = "측면";
+"ipicker_square" = "사각형";
+
+"graphics_title" = "그래픽";
+
+"background_title" = "배경";
+"background_image" = "이미지";
+"background_trans" = "투명";
+"background_gradient" = "그라디언트";
+"background_pastel" = "파스텔";
+
+"filters_title" = "필터";
+
+"shadow_title" = "그림자";
+"shadow_size" = "크기";
+"shadow_angle" = "각도";
+"shadow_blur" = "흐림 효과";
+"shadow_opacity" = "불투명도";

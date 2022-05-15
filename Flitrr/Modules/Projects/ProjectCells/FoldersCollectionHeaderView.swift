@@ -33,7 +33,7 @@ final class FoldersCollectionHeaderView: UICollectionReusableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         titleLabel.frame.origin = .init(
-            x: (bounds.maxY - titleLabel.bounds.height) / 2,
+            x: (bounds.maxY - titleLabel.bounds.height) / 2 + 5,
             y: bounds.maxY - titleLabel.bounds.height
         )
     }

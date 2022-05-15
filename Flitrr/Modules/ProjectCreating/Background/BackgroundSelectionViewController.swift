@@ -9,11 +9,14 @@ import UIKit
 
 protocol BackgroundSelectionViewControllerDelegate: AnyObject {
     func didDismissBackgroundSelection()
-    func shouldFillBackgroundWithPlain(_ color: UIColor)
-    func shouldFillWithImage(_ uiImage: UIImage)
+    func shouldFillBackgroundWithPlain(_ paletteItem: ColorPaletteItem, _ color: UIColor)
+    func shouldFillWithImage(_ paletteItem: ColorPaletteItem, _ uiImage: UIImage)
+    func shouldFillWithGradient(_ paletteItem: ColorPaletteItem, _ colors: [UIColor])
 }
 
 final class BackgroundSelectionViewController: UIViewController {
+    
+    var initialPaletteItem: ColorPaletteItem!
     
     var addedCount = 0
     private let titles = [
@@ -42,6 +45,7 @@ final class BackgroundSelectionViewController: UIViewController {
             frame: .init(x: 0, y: 80, width: view.bounds.width, height: 90), collectionViewLayout: layout
         )
         palette.paletteDelegate = self
+        palette.backgroundSetColors()
         view.addSubview(palette)
         backgroundPickerView.selectedIndex = 2
     }
@@ -84,6 +88,7 @@ extension BackgroundSelectionViewController: ToolBarViewDelegate {
         dismiss(animated: true)
     }
     func didTapLeadingItem() {
+        didSelectItem(initialPaletteItem)
         delegate?.didDismissBackgroundSelection()
         dismiss(animated: true)
     }
@@ -101,11 +106,15 @@ extension BackgroundSelectionViewController: ValuePickerViewDelegate {
             controller.modalPresentationStyle = .fullScreen
             present(controller, animated: true)
         case 1:
-            delegate?.shouldFillBackgroundWithPlain(.clear)
+            delegate?.shouldFillBackgroundWithPlain(.transparent, .clear)
             delegate?.didDismissBackgroundSelection()
             dismiss(animated: true)
         case 2:
-            break
+            palette.backgroundSetColors()
+        case 3:
+            palette.backgroundSetGradients()
+        case 4:
+            palette.backgroundSetPastel()
         default:
             break
         }
@@ -126,13 +135,15 @@ extension BackgroundSelectionViewController: ColorPaletteCollectionViewDelegate 
             break
         case .textColor:
             break
-        case .gradient:
-            break
+        case .gradient(let colors, _, _):
+            delegate?.shouldFillWithGradient(item, colors)
         case .color(let uIColor):
-            delegate?.shouldFillBackgroundWithPlain(uIColor)
+            delegate?.shouldFillBackgroundWithPlain(item, uIColor)
         case .picker:
             break
         case .transparent:
+            break
+        default:
             break
         }
     }
@@ -142,7 +153,7 @@ extension BackgroundSelectionViewController: ImageLibraryPickerViewControllerDel
     func didSelectImage(uiImage: UIImage) {
         addedCount += 1
         if addedCount == 2 {
-            delegate?.shouldFillWithImage(uiImage)
+            delegate?.shouldFillWithImage(initialPaletteItem, uiImage)
             delegate?.didDismissBackgroundSelection()
             dismiss(animated: true)
         }

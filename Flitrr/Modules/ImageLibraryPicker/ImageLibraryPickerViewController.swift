@@ -13,6 +13,14 @@ protocol ImageLibraryPickerViewControllerDelegate: AnyObject {
 }
 
 final class ImageCollectionViewCell: UICollectionViewCell {
+    
+    var isSelectedImage: Bool = false {
+        didSet {
+            layer.borderWidth = isSelectedImage ? 1 : 0
+            layer.borderColor = isSelectedImage ? UIColor.appAccent.cgColor : UIColor.clear.cgColor
+        }
+    }
+    
     var imageView: UIImageView!
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -176,27 +176,7 @@ final class ShadowViewController: UIViewController {
     }
     
     func setupColors() {
-        palette.paletteItems = [
-            .color(.appAccent),
-            .color(UIColor(red: 1, green: 0.02, blue: 0.5, alpha: 1)),
-            .color(UIColor(red: 0.761, green: 0.09, blue: 0.49, alpha: 1)),
-            .color(UIColor(red: 0.38, green: 0.102, blue: 0.784, alpha: 1)),
-            .color(UIColor(red: 0.29, green: 0.384, blue: 0.851, alpha: 1)),
-            .color(UIColor(red: 0, green: 0.471, blue: 0.565, alpha: 1)),
-            .color(.white), .color(.black),
-            .color(UIColor(red: 1, green: 0.02, blue: 0.4, alpha: 1)),
-            .color(UIColor(red: 0.761, green: 0.09, blue: 0.49, alpha: 1)),
-            .color(UIColor.darkGray),
-            .color(UIColor.gray),
-            .color(.lightGray),
-            .color(.red),
-            .color(.orange),
-            .color(.yellow),
-            .color(.green),
-            .color(.cyan),
-            .color(.blue),
-            .color(.purple)
-        ]
+        palette.backgroundSetColors()
     }
 }
 

@@ -184,6 +184,7 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         setupNavBar()
         
         tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView.backgroundColor = .appDark
         view.addSubview(tableView)
         tableView.register(SettingsTableCell.self, forCellReuseIdentifier: "id")
         tableView.delegate = self

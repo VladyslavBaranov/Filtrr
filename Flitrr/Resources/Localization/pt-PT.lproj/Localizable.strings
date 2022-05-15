@@ -8,6 +8,13 @@
 
 "settings_title" = "Configurações";
 "settings_lang" = "Idioma";
+
+"settings_appearance" = "Aparência";
+"settings_icon" = "Ícone do aplicativo";
+"settings_light" = "Luz";
+"settings_dark" = "Escuro";
+"settings_system" = "Sistema";
+
 "settings_restore" = "Restaurar compras";
 "settings_privacy" = "Política de Privacidade";
 "settings_rate" = "Avalie-nos na App Store";
@@ -15,12 +22,13 @@
 
 "paywall_year_title" = "Teste GRATUITO de 3 dias - Anualmente";
 "paywall_year_caption" = "Pague anualmente, teste gratuito";
-"paywall_subscribe_now" = "Assine agora";
-"paywall_year_price_full" = "então $ 64,99 por ano";
-"paywall_6month_title" = "6 meses";
+"paywall_year_price_full" = "Então $ 64,99 por ano";
+"paywall_6month_title" = "Teste GRATUITO de 3 dias - 6 meses";
 "paywall_6month_caption" = "Pagar por 6 meses";
+"paywall_6month_price_full" = "Então $ 34,99 por 6 meses";
 "paywall_month_title" = "Mensal";
 "paywall_month_caption" = "Pagar mensalmente";
+"paywall_subscribe_now" = "Assine agora";
 
 "creating_tab_image" = "IMAGE";
 "creating_tab_text" = "TEXTO";
@@ -51,8 +59,35 @@
 "text_style_letterpacing" = "Espaçamento entre letras";
 "text_style_linespacing" = "Espaçamento entre linhas";
 
+"shapes_search" = "Pesquisar formas";
 "shapes_title" = "Formas";
 "shapes_basic" = "Básico";
 "shapes_holiday" = "Feriado";
 "shapes_outline" = "Esboço";
 "shapes_brush" = "Pincel";
+
+"projects_title" = "Projetos";
+"projects_folders" = "Pastas";
+"projects_select" = "Selecionar";
+"projects_favorites" = "Favoritos";
+"projects_new_folder" = "Nova Pasta";
+"projects_selected_str" = "Projetos selecionados";
+
+"ipicker_aspect" = "Aspecto";
+"ipicker_square" = "Quadrado";
+
+"graphics_title" = "Gráficos";
+
+"background_title" = "Plano de fundo";
+"background_image" = "Imagem";
+"background_trans" = "Transparente";
+"background_gradient" = "Gradiente";
+"background_pastel" = "Pastel";
+
+"filters_title" = "Filtros";
+
+"shadow_title" = "Sombra";
+"shadow_size" = "Tamanho";
+"shadow_angle" = "Ângulo";
+"shadow_blur" = "Desfoque";
+"shadow_opacity" = "Opacidade";

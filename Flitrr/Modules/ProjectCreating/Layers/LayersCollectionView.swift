@@ -1,66 +1,20 @@
 //
-//  FiltersCollectionView.swift
+//  LayersCollectionView.swift
 //  Flitrr
 //
-//  Created by Vladyslav Baranov on 09.05.2022.
+//  Created by Vladyslav Baranov on 15.05.2022.
 //
 
 import UIKit
 
-protocol FiltersCollectionViewDelegate: AnyObject {
+protocol LayersCollectionViewDelegate: AnyObject {
     func didSelect(_ filter: Filter)
 }
 
-final class FiltersCollectionViewCell: UICollectionViewCell {
-    
-    var imageView: UIImageView!
-    var titleLabel: UILabel!
-    
-    func setSelected() {
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.appAccent.cgColor
-        imageView.alpha = 0.7
-        titleLabel.textColor = .appAccent
-    }
-    
-    func setUnselected() {
-        imageView.layer.borderWidth = 0
-        imageView.alpha = 1
-        titleLabel.textColor = .label
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        addSubview(imageView)
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 8
-        
-        titleLabel = UILabel()
-        titleLabel.text = "LAYER 1"
-        titleLabel.textAlignment = .center
-        titleLabel.font = Montserrat.regular(size: 10)
-        addSubview(titleLabel)
-        
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        imageView.frame = .init(x: 0, y: 0, width: bounds.width, height: bounds.height - 30)
-        titleLabel.frame = .init(x: 0, y: bounds.height - 30, width: bounds.width, height: 30)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-final class FiltersCollectionView: UICollectionView {
+final class LayersCollectionView: UICollectionView {
     
     private var selectedRow: Int = 0
-    weak var filteringDelegate: FiltersCollectionViewDelegate!
-    let filteringQueue = DispatchQueue(label: "com.filtrr.filtering")
+    weak var filteringDelegate: LayersCollectionViewDelegate!
     
     var filters: [Filter] = [] {
         didSet {
@@ -85,7 +39,7 @@ final class FiltersCollectionView: UICollectionView {
     }
 }
 
-extension FiltersCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension LayersCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         filters.count
     }
@@ -101,17 +55,6 @@ extension FiltersCollectionView: UICollectionViewDelegate, UICollectionViewDataS
             cell.setUnselected()
         }
         
-        if indexPath.row == 0 {
-            cell.imageView.image = targetImage
-        } else {
-            filteringQueue.async { [unowned self] in
-                let img = targetImage.applyingFilter(name: filter.filterName, parameters: [:])
-                DispatchQueue.main.async {
-                    cell.imageView.image = img
-                }
-            }
-        }
-        
         return cell
     }
     
@@ -125,7 +68,7 @@ extension FiltersCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
-extension FiltersCollectionView: UICollectionViewDelegateFlowLayout {
+extension LayersCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         16
     }
@@ -136,4 +79,5 @@ extension FiltersCollectionView: UICollectionViewDelegateFlowLayout {
         .init(width: collectionView.bounds.width / 4, height: collectionView.bounds.height)
     }
 }
+
 

@@ -8,6 +8,13 @@
 
 "settings_title" = "设置";
 "settings_lang" = "语言";
+
+"settings_appearance" = "外观";
+"settings_icon" = "应用图标";
+"settings_light" = "灯光";
+"settings_dark" = "黑暗";
+"settings_system" = "系统";
+
 "settings_restore" = "恢复购买";
 "settings_privacy" = "隐私政策";
 "settings_rate" = "在 App Store 上给我们打分";
@@ -15,12 +22,13 @@
 
 "paywall_year_title" = "免费 3 天试用 - 每年一次";
 "paywall_year_caption" = "按年付费，免费试用";
-"paywall_subscribe_now" = "现在订阅";
 "paywall_year_price_full" = "那么每年 64.99 美元";
-"paywall_6month_title" = "6 个月";
+"paywall_6month_title" = "免费 3 天试用 - 6 个月";
 "paywall_6month_caption" = "支付 6 个月";
+"paywall_6month_price_full" = "那么每 6 个月 34.99 美元";
 "paywall_month_title" = "每月";
 "paywall_month_caption" = "按月支付";
+"paywall_subscribe_now" = "现在订阅";
 
 "creating_tab_image" = "图像";
 "creating_tab_text" = "文本";
@@ -51,8 +59,35 @@
 "text_style_letterspacing" = "字母间距";
 "text_style_linespacing" = "行距";
 
+"shapes_search" = "搜索形状";
 "shapes_title" = "形状";
 "shapes_basic" = "基本";
 "shapes_holiday" = "假期";
 "shapes_outline" = "大纲";
 "shapes_brush" = "画笔";
+
+"projects_title" = "项目";
+"projects_folders" = "文件夹";
+"projects_select" = "选择";
+"projects_favorites" = "收藏夹";
+"projects_new_folder" = "新建文件夹";
+"projects_selected_str" = "项目选择";
+
+"ipicker_aspect" = "方面";
+"ipicker_square" = "正方形";
+
+"graphics_title" = "图形";
+
+"background_title" = "背景";
+"background_image" = "图像";
+"background_trans" = "透明";
+"background_gradient" = "渐变";
+"background_pastel" = "粉彩";
+
+"filters_title" = "过滤器";
+
+"shadow_title" = "阴影";
+"shadow_size" = "尺寸";
+"shadow_angle" = "角度";
+"shadow_blur" = "模糊";
+"shadow_opacity" = "不透明度";

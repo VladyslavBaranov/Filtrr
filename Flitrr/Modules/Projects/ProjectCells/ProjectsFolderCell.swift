@@ -67,6 +67,11 @@ final class ProjectsFolderCell: UICollectionViewCell {
     }
     
     func setFolder(_ folder: FolderProtocol) {
+        
+        iconImageView.image = nil
+        folderNameLabel.text = folder.name
+        folderCountLabel.isHidden = false
+        
         if folder.isForFavorites {
             iconImageView.image = UIImage(named: "FavoriteHeart")
         }
@@ -75,8 +80,6 @@ final class ProjectsFolderCell: UICollectionViewCell {
             iconImageView.tintColor = .gray
             folderCountLabel.isHidden = true
         }
-        folderNameLabel.text = folder.name
-        folderCountLabel.isHidden = false
     }
 
 }

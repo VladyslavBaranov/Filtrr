@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import StoreKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,9 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        let helper = StoreHelper()
+        SKPaymentQueue.default().add(StoreObserver.shared)
         return true
     }
 
@@ -39,6 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
 		[.portrait, .portraitUpsideDown]
 	}
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        SKPaymentQueue.default().remove(StoreObserver.shared)
+    }
 
     // MARK: - Core Data stack
 

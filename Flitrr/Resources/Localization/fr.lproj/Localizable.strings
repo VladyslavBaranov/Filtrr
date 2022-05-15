@@ -8,6 +8,13 @@
 
 "settings_title" = "Paramètres";
 "settings_lang" = "Langue";
+
+"settings_appearance" = "Apparence";
+"settings_icon" = "Icône de l'application";
+"settings_light" = "Lumière";
+"settings_dark" = "Sombre";
+"settings_system" = "Système";
+
 "settings_restore" = "Restaurer les achats";
 "settings_privacy" = "Politique de confidentialité";
 "settings_rate" = "Évaluez-nous sur l'App Store";
@@ -15,12 +22,13 @@
 
 "paywall_year_title" = "Essai GRATUIT de 3 jours - Annuellement";
 "paywall_year_caption" = "Payez annuellement, essai gratuit";
-"paywall_subscribe_now" = "Abonnez-vous maintenant";
-"paywall_year_price_full" = "puis 64,99 $ par an";
-"paywall_6month_title" = "6 mois";
+"paywall_year_price_full" = "Alors 64,99 $ par an";
+"paywall_6month_title" = "Essai GRATUIT de 3 jours - 6 mois";
 "paywall_6month_caption" = "Payer pendant 6 mois";
+"paywall_6month_price_full" = "Puis 34,99 $ par 6 mois";
 "paywall_month_title" = "Mensuel";
 "paywall_month_caption" = "Payer mensuellement";
+"paywall_subscribe_now" = "Abonnez-vous maintenant";
 
 "creating_tab_image" = "IMAGE";
 "creating_tab_text" = "TEXTE";
@@ -51,8 +59,35 @@
 "text_style_letterspacing" = "Espacement des lettres";
 "text_style_linespacing" = "Interligne";
 
+"shapes_search" = "Rechercher des formes";
 "shapes_title" = "Formes";
 "shapes_basic" = "Basique";
 "shapes_holiday" = "Vacances";
 "shapes_outline" = "Contour";
 "shapes_brush" = "Pinceau";
+
+"projects_title" = "Projets";
+"projects_folders" = "Dossiers";
+"projects_select" = "Sélectionner";
+"projects_favorites" = "Favoris";
+"projects_new_folder" = "Nouveau dossier";
+"projects_selected_str" = "Projets sélectionnés";
+
+"ipicker_aspect" = "Aspect";
+"ipicker_square" = "Carré";
+
+"graphics_title" = "Graphiques";
+
+"background_title" = "Arrière-plan";
+"background_image" = "Image";
+"background_trans" = "Transparent";
+"background_gradient" = "Dégradé";
+"background_pastel" = "Pastel";
+
+"filters_title" = "Filtres";
+
+"shadow_title" = "Ombre";
+"shadow_size" = "Taille";
+"shadow_size" = "Angle";
+"shadow_blur" = "Flou";
+"shadow_opacity" = "Opacité";

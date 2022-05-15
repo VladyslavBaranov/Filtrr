@@ -7,19 +7,38 @@
 
 import StoreKit
 
-class StoreHelper: ObservableObject {
+class StoreHelper: NSObject, ObservableObject {
+
+    private var request: SKProductsRequest!
+    @Published private(set) var products = [SKProduct]()
     
-    @Published private(set) var products: [Product]?
-    
-    init() {
+    override init() {
+        super.init()
         guard let products = InAppConfiguration.readConfigFile() else { return }
-        let task = Task {
-            self.products = await requestProductsFromAppStore(products: products)
+        request = SKProductsRequest(productIdentifiers: products)
+        request.delegate = self
+        request.start()
+    }
+
+    func buy(product: SKProduct) {
+        guard SKPaymentQueue.canMakePayments() else { return }
+        let payment = SKPayment(product: product)
+        SKPaymentQueue.default().add(payment)
+    }
+    
+    func restore() {
+        StoreObserver.shared.restore()
+    }
+}
+
+extension StoreHelper: SKProductsRequestDelegate {
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        if !response.products.isEmpty {
+            products = response.products
         }
     }
     
-    @MainActor func requestProductsFromAppStore(products: Set<String>) async -> [Product]? {
-        try? await Product.products(for: products)
+    func request(_ request: SKRequest, didFailWithError error: Error) {
+        print("FAILED")
     }
-    
 }

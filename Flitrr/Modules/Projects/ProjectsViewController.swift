@@ -18,6 +18,10 @@ class ProjectsViewController: UIViewController {
     var currentMode: Mode = .projects
     
     // View data section
+    
+    private var numberOfFavorites: Int = 0
+    var projects: [Project] = Project.getAvailableProjects()
+    
     var projectHeights: [CGFloat] = [300, 200, 300, 230, 250, 200]
     var folders: [FolderProtocol] = []
     
@@ -41,10 +45,26 @@ class ProjectsViewController: UIViewController {
         setupSelectionTab()
         loadFolders()
         navigationView.onSettingsButtonTapped = openSettings
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reloadProjects),
+            name: Notification.Name("shouldReloadProjectNotificationDidReceive"),
+            object: nil
+        )
+    }
+    
+    private func reevaluateFavorites() {
+        numberOfFavorites = projects.filter { $0.isFavorite }.count
+    }
+    @objc func reloadProjects() {
+        projects = Project.getAvailableProjects()
+        collectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        reloadProjects()
         localize()
     }
     
@@ -65,20 +85,27 @@ class ProjectsViewController: UIViewController {
 
 extension ProjectsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        currentMode == .projects ? projectHeights.count : folders.count
+        currentMode == .projects ? projects.count : folders.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! ProjectsFolderCell
-        
+    
         switch currentMode {
         case .folders:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! ProjectsFolderCell
             let folder = folders[indexPath.row]
+            if folder.isForFavorites {
+                cell.folderCountLabel.text = "\(numberOfFavorites)"
+            }
             cell.setFolder(folder)
+            return cell
         case .projects:
-            break
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "projectsId", for: indexPath) as! ProjectCell
+            cell.label.text = projects[indexPath.row].id?.uuidString ?? ""
+            cell.project = projects[indexPath.row]
+            cell.isChecked = projects[indexPath.row].isSelected
+            return cell
         }
         
-        return cell
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y + view.safeAreaInsets.top + 160
@@ -97,17 +124,28 @@ extension ProjectsViewController: UICollectionViewDelegate, UICollectionViewData
         return header
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if currentMode == .folders {
+        
+        switch currentMode {
+        case .projects:
+            if isSelectionModeEnabled {
+                projects[indexPath.row].isSelected.toggle()
+                (collectionView.cellForItem(at: indexPath) as? ProjectCell)?.isChecked = projects[indexPath.row].isSelected
+                let selectedObjectsCount = projects.filter { $0.isSelected }.count
+                selectionTab.title = "\(selectedObjectsCount) Projects Selected"
+            }
+        case .folders:
             let folder = folders[indexPath.row]
             if folder is CreationFolder {
                 showFolderCreationAlert()
+            } else {
+                let controller = FolderViewController()
+                controller.folder = folder
+                controller.modalPresentationStyle = .fullScreen
+                present(controller, animated: true)
             }
+            
         }
         
-        if isSelectionModeEnabled {
-            let cell = collectionView.cellForItem(at: indexPath) as! ProjectsFolderCell
-            cell.isChecked.toggle()
-        }
     }
 }
 
@@ -121,18 +159,24 @@ extension ProjectsViewController: ProjectsOptionsContainerViewDelegate {
     func didTapOption(tag: Int) {
         switch tag {
         case 0:
+            
             currentMode = .projects
             // let layout = WaterFallLayout()
             // layout.delegate = self
             // collectionView.collectionViewLayout = layout
             // projectHeights = [300, 200, 300, 230, 250, 200]
-            collectionView.reloadData()
+            
+            let layout = createLayout(cellsPerRow: 2, heightRatio: 1.5, inset: 9.0, usesHorizontalScroll: false, usesHeader: false)
+            collectionView.collectionViewLayout = layout
+            reloadProjects()
             UIView.animate(withDuration: 0.3) {
                 self.selectionTab.alpha = 0
             }
         case 1:
             currentMode = .folders
-            // collectionView.setCollectionViewLayout(createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9.0), animated: false)
+            reevaluateFavorites()
+            let layout = createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9.0, usesHorizontalScroll: false)
+            collectionView.collectionViewLayout = layout
             collectionView.alwaysBounceHorizontal = false
         
             collectionView.reloadData()
@@ -140,10 +184,36 @@ extension ProjectsViewController: ProjectsOptionsContainerViewDelegate {
                 self.selectionTab.alpha = 0
             }
         case 2:
+            
             isSelectionModeEnabled.toggle()
-            UIView.animate(withDuration: 0.3) {
-                self.selectionTab.alpha = 1
+            
+            if isSelectionModeEnabled {
+                optionsContainerView.set(state: false, for: 0)
+                optionsContainerView.set(state: false, for: 1)
+                optionsContainerView.set(title: "Cancel", index: 2)
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.selectionTab.alpha = 1
+                }
+
+            } else {
+                optionsContainerView.set(state: true, for: 0)
+                optionsContainerView.set(state: true, for: 1)
+                optionsContainerView.set(title: "Select", index: 2)
+                
+                for project in projects {
+                    project.isSelected = false
+                    collectionView.visibleCells.forEach { cell in
+                        (cell as? ProjectCell)?.isChecked = false
+                    }
+                }
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.selectionTab.alpha = 0
+                }
             }
+            
+            
         default:
             break
         }
@@ -165,7 +235,7 @@ private extension ProjectsViewController {
         tabBarController?.tabBar.isHidden = true
     }
     func setupCollectionView() {
-        let layout = createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9.0, usesHorizontalScroll: false)
+        let layout = createLayout(cellsPerRow: 2, heightRatio: 1.5, inset: 9.0, usesHorizontalScroll: false, usesHeader: false)
         // layout.delegate = self
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.backgroundColor = .appDark
@@ -173,6 +243,7 @@ private extension ProjectsViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ProjectsFolderCell.self, forCellWithReuseIdentifier: "id")
+        collectionView.register(ProjectCell.self, forCellWithReuseIdentifier: "projectsId")
         collectionView.register(FoldersCollectionHeaderView.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: "hId")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.contentInset = .init(top: 160, left: 0, bottom: 100, right: 0)
@@ -180,8 +251,8 @@ private extension ProjectsViewController {
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -229,6 +300,7 @@ private extension ProjectsViewController {
             y: view.bounds.height - 100,
             width: view.bounds.width,
             height: 100))
+        selectionTab.delegate = self
         tabBarController?.view.addSubview(selectionTab)
         selectionTab.alpha = 0
     }
@@ -260,5 +332,31 @@ extension ProjectsViewController {
             }
         }))
         present(alertVC, animated: true)
+    }
+}
+
+extension ProjectsViewController: ProjectsSelectionTabDelegate {
+    func didTapShare() {
+        print("SHARE")
+    }
+    
+    func didTapTrash() {
+        let selectedObjectsCount = projects.filter { $0.isSelected }.count
+        let alert = UIAlertController(
+            title: "Delete \(selectedObjectsCount) Projects",
+            message: "This action is irreversible", preferredStyle: .alert
+        )
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancelAction)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] _ in
+            let selectedObjects = projects.filter { $0.isSelected }
+            for selectedObject in selectedObjects {
+                _ = Project.deleteProject(selectedObject)
+            }
+            projects.removeAll { $0.isSelected }
+            collectionView.reloadData()
+        }
+        alert.addAction(deleteAction)
+        present(alert, animated: true)
     }
 }

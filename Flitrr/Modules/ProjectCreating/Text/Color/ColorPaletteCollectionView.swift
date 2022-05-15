@@ -14,6 +14,7 @@ enum ColorPaletteItem {
     case transparent
 	case color(UIColor)
     case gradient([UIColor], CGPoint, CGPoint)
+    case image(UIImage)
 }
 
 final class ColorPaletteCollectionViewCell: UICollectionViewCell {
@@ -34,16 +35,22 @@ final class ColorPaletteCollectionViewCell: UICollectionViewCell {
 				backgroundColor = .clear
 				imageView.image = UIImage(named: "ColorPicker")
 			case .color(let uIColor):
+                gradientLayer.opacity = 0
 				imageView.isHidden = true
 				backgroundColor = uIColor
             case .transparent:
+                imageView.isHidden = false
+                gradientLayer.opacity = 0
                 backgroundColor = .clear
                 imageView.image = UIImage(named: "Transparent")
             case .gradient(let colors, let start, let end):
                 gradientLayer.colors = colors.map { $0.cgColor }
-                gradientLayer.startPoint = start
-                gradientLayer.endPoint = end
+                gradientLayer.startPoint = .zero
+                gradientLayer.endPoint = .init(x: 1, y: 1)
                 imageView.isHidden = true
+                gradientLayer.opacity = 1
+            default:
+                break
             }
 		}
 	}
@@ -109,6 +116,71 @@ final class ColorPaletteCollectionView: UICollectionView {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+    
+    func backgroundSetColors() {
+        paletteItems = [
+            .transparent,
+            .color(.appAccent),
+            .color(UIColor(red: 1, green: 0.02, blue: 0.5, alpha: 1)),
+            .color(UIColor(red: 0.761, green: 0.09, blue: 0.49, alpha: 1)),
+            .color(UIColor(red: 0.38, green: 0.102, blue: 0.784, alpha: 1)),
+            .color(UIColor(red: 0.29, green: 0.384, blue: 0.851, alpha: 1)),
+            .color(UIColor(red: 0, green: 0.471, blue: 0.565, alpha: 1)),
+            .color(.white), .color(.black),
+            .color(UIColor(red: 1, green: 0.02, blue: 0.4, alpha: 1)),
+            .color(UIColor(red: 0.761, green: 0.09, blue: 0.49, alpha: 1)),
+            .color(UIColor.darkGray),
+            .color(UIColor.gray),
+            .color(.lightGray),
+            .color(.red),
+            .color(.orange),
+            .color(.yellow),
+            .color(.green),
+            .color(.cyan),
+            .color(.blue),
+            .color(.purple)
+        ]
+        reloadData()
+    }
+    
+    func backgroundSetGradients() {
+        paletteItems = [
+            .transparent,
+            .gradient([.orange, .purple, .cyan], .zero, .zero),
+            .gradient([.purple, .yellow], .zero, .zero),
+            .gradient([.orange, .yellow], .zero, .zero),
+            .gradient([.white, .yellow], .zero, .zero),
+            .gradient([.blue, .black], .zero, .zero),
+            .gradient([.white, .black], .zero, .zero),
+            .gradient([.blue, .orange], .zero, .zero),
+            .gradient([.blue, .cyan], .zero, .zero),
+            .gradient([.magenta, .cyan], .zero, .zero),
+        ]
+        reloadData()
+    }
+    
+    func backgroundSetPastel() {
+        paletteItems = [
+            .transparent,
+            .gradient(
+                [UIColor(red: 0.769, green: 0.91, blue: 0.988, alpha: 1),
+                 UIColor(red: 0.969, green: 0.82, blue: 0.945, alpha: 1)], .zero, .zero),
+            .gradient(
+                [UIColor(red: 0.976, green: 0.812, blue: 0.776, alpha: 1),
+                 UIColor(red: 0.631, green: 0.561, blue: 0.812, alpha: 1)], .zero, .zero),
+            .gradient(
+                [UIColor(red: 0.98, green: 0.616, blue: 0.624, alpha: 1),
+                 UIColor(red: 0.969, green: 0.82, blue: 0.945, alpha: 1)], .zero, .zero),
+            .gradient(
+                [UIColor(red: 0.475, green: 0.847, blue: 0.725, alpha: 1),
+                 UIColor(red: 0.969, green: 0.82, blue: 0.945, alpha: 1)], .zero, .zero),
+            .gradient(
+                [UIColor(red: 0.69, green: 0.859, blue: 0.929, alpha: 1),
+                 UIColor(red: 0.969, green: 0.82, blue: 0.945, alpha: 1)], .zero, .zero),
+            
+        ]
+        reloadData()
+    }
 }
 
 extension ColorPaletteCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {

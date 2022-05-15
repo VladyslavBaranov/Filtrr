@@ -26,5 +26,49 @@ extension Project {
 }
 
 extension Project : Identifiable {
-
+    
+    func toggleIsFavorites() {
+        let context = AppDelegate.getContext()
+        isFavorite.toggle()
+        do {
+            try context.save()
+        } catch {
+        }
+    }
+    
+    static func createProjectAndSave(pngData: Data) {
+        let context = AppDelegate.getContext()
+        let project = Project(context: context)
+        project.id = UUID()
+        project.isFavorite = false
+        project.data = pngData
+        do {
+            try context.save()
+        } catch {
+        }
+    }
+    
+    static func getAvailableProjects() -> [Project] {
+        let context = AppDelegate.getContext()
+        do {
+            let req = fetchRequest()
+            req.propertiesToFetch = ["id", "isFavorite"]
+            let folders = try context.fetch(fetchRequest())
+            return folders
+        } catch {
+            return []
+        }
+    }
+    
+    static func deleteProject(_ project: Project) -> Bool {
+        let context = AppDelegate.getContext()
+        context.delete(project)
+        do {
+            try context.save()
+            return true
+        } catch {
+            return false
+        }
+    }
+    
 }

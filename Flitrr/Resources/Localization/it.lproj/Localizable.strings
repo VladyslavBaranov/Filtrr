@@ -56,3 +56,36 @@
 "shapes_holiday" = "Vacanza";
 "shapes_outline" = "Contorno";
 "shapes_brush" = "Pennello";
+
+"shapes_search" = "Cerca forme";
+"shapes_title" = "Forme";
+"shapes_basic" = "Base";
+"shapes_holiday" = "Vacanza";
+"shapes_outline" = "Contorno";
+"shapes_brush" = "Pennello";
+
+"projects_title" = "Progetti";
+"projects_folders" = "Cartelle";
+"projects_select" = "Seleziona";
+"projects_favorites" = "Preferiti";
+"projects_new_folder" = "Nuova cartella";
+"projects_selected_str" = "Progetti selezionati";
+
+"ipicker_aspect" = "Aspetto";
+"ipicker_square" = "Quadrato";
+
+"graphics_title" = "Grafica";
+
+"background_title" = "Sfondo";
+"background_image" = "Immagine";
+"background_trans" = "Trasparente";
+"background_gradient" = "Gradiente";
+"background_pastel" = "Pastello";
+
+"filters_title" = "Filtri";
+
+"shadow_title" = "Ombra";
+"shadow_size" = "dimensione";
+"shadow_angle" = "Angolo";
+"shadow_blur" = "Sfocatura";
+"shadow_opacity" = "opacità";

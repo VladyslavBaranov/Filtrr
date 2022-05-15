@@ -12,6 +12,7 @@ final class ProjectTransparentGridView: AdjustableView {
     enum BackgroundMode {
         case plainColor(UIColor)
         case image(UIImage)
+        case gradient([UIColor])
     }
     
     var adjustables: [AdjustableView] = []
@@ -97,6 +98,16 @@ final class ProjectTransparentGridView: AdjustableView {
             }
         case .image(let uIImage):
             uIImage.draw(in: bounds)
+        case .gradient(let colors):
+            let cgColors = colors.map { $0.cgColor }
+            guard let gradient = CGGradient(
+                colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                colors: cgColors as CFArray, locations: nil) else { return }
+            ctx.drawLinearGradient(
+                gradient,
+                start: .zero, end: .init(x: rect.width, y: rect.height),
+                options: []
+            )
         }
         
     }

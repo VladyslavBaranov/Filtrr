@@ -156,7 +156,16 @@ final class ProjectsOptionsContainerView: UIView {
         stackView.distribution = .fillEqually
     }
     
-    func getButton(title: String) -> UIButton {
+    func set(title: String, index: Int) {
+        (stackView.arrangedSubviews[index] as? UIButton)?.setTitle(title, for: .normal)
+    }
+    
+    func set(state: Bool, for index: Int) {
+        stackView.arrangedSubviews[index].alpha = state ? 1 : 0.5
+        stackView.arrangedSubviews[index].isUserInteractionEnabled = state
+    }
+    
+    private func getButton(title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
         button.setTitleColor(.label, for: .normal)
@@ -170,7 +179,7 @@ final class ProjectsOptionsContainerView: UIView {
         return button
     }
     
-    @objc func didTapOption(_ sender: UIButton) {
+    @objc private func didTapOption(_ sender: UIButton) {
 		selectedIndex = sender.tag
         delegate?.didTapOption(tag: sender.tag)
     }

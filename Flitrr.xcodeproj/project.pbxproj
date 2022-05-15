@@ -98,6 +98,13 @@
 		1EF95223282FCA6D0002A6E7 /* iAps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EF95222282FCA6D0002A6E7 /* iAps.plist */; };
 		1EF95226282FCAD60002A6E7 /* InAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF95225282FCAD60002A6E7 /* InAppConfiguration.swift */; };
 		1EF95228282FCD280002A6E7 /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF95227282FCD280002A6E7 /* StoreHelper.swift */; };
+		1EF9522A283114F70002A6E7 /* ProjectsFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF95229283114F70002A6E7 /* ProjectsFileManager.swift */; };
+		1EF9522C28313C320002A6E7 /* StoreObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF9522B28313C320002A6E7 /* StoreObserver.swift */; };
+		1EF9522F283141DE0002A6E7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF9522E283141DE0002A6E7 /* StoreKit.framework */; };
+		1EF9523228314EC30002A6E7 /* LayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF9523128314EC30002A6E7 /* LayersViewController.swift */; };
+		1EF9523428314F280002A6E7 /* LayersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF9523328314F280002A6E7 /* LayersCollectionView.swift */; };
+		1EF9523728316BBC0002A6E7 /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF9523628316BBC0002A6E7 /* ProjectCell.swift */; };
+		1EF9523A283186210002A6E7 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF95239283186200002A6E7 /* FolderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +229,13 @@
 		1EF95222282FCA6D0002A6E7 /* iAps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iAps.plist; sourceTree = "<group>"; };
 		1EF95225282FCAD60002A6E7 /* InAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppConfiguration.swift; sourceTree = "<group>"; };
 		1EF95227282FCD280002A6E7 /* StoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreHelper.swift; sourceTree = "<group>"; };
+		1EF95229283114F70002A6E7 /* ProjectsFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsFileManager.swift; sourceTree = "<group>"; };
+		1EF9522B28313C320002A6E7 /* StoreObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreObserver.swift; sourceTree = "<group>"; };
+		1EF9522E283141DE0002A6E7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		1EF9523128314EC30002A6E7 /* LayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayersViewController.swift; sourceTree = "<group>"; };
+		1EF9523328314F280002A6E7 /* LayersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayersCollectionView.swift; sourceTree = "<group>"; };
+		1EF9523628316BBC0002A6E7 /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
+		1EF95239283186200002A6E7 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EF9522F283141DE0002A6E7 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +417,7 @@
 				1E42E02F280DC9430033E6EE /* FlitrrTests */,
 				1E42E039280DC9430033E6EE /* FlitrrUITests */,
 				1E42E014280DC93D0033E6EE /* Products */,
+				1EF9522D283141DE0002A6E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -485,6 +501,7 @@
 		1E42E04C280DCA640033E6EE /* ProjectCreating */ = {
 			isa = PBXGroup;
 			children = (
+				1EF9523028314E990002A6E7 /* Layers */,
 				1E5BCFF8282C1E3E00F7B610 /* Graphic */,
 				1E5BCFF5282B8B4000F7B610 /* Crop */,
 				1E5BCFF2282AB72F00F7B610 /* Shapes */,
@@ -593,6 +610,8 @@
 		1E98AD43280EA679006DAE75 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				1EF95238283186070002A6E7 /* Folder */,
+				1EF9523528316BA60002A6E7 /* Cells */,
 				1E98AD5D280EE2FD006DAE75 /* ProjectsSelectionTab.swift */,
 				1E98AD56280EC618006DAE75 /* ProjectsOptionsView.swift */,
 				1E98AD54280EB72D006DAE75 /* WaterFallLayout.swift */,
@@ -717,6 +736,7 @@
 		1E98AD8E2815753B006DAE75 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				1EF95229283114F70002A6E7 /* ProjectsFileManager.swift */,
 				1E98AD8F281575DA006DAE75 /* Folder+CoreDataClass.swift */,
 				1E98AD90281575DA006DAE75 /* Folder+CoreDataProperties.swift */,
 				1E98AD91281575DA006DAE75 /* Project+CoreDataClass.swift */,
@@ -754,8 +774,42 @@
 			children = (
 				1EF95225282FCAD60002A6E7 /* InAppConfiguration.swift */,
 				1EF95227282FCD280002A6E7 /* StoreHelper.swift */,
+				1EF9522B28313C320002A6E7 /* StoreObserver.swift */,
 			);
 			path = iAp;
+			sourceTree = "<group>";
+		};
+		1EF9522D283141DE0002A6E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1EF9522E283141DE0002A6E7 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1EF9523028314E990002A6E7 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				1EF9523128314EC30002A6E7 /* LayersViewController.swift */,
+				1EF9523328314F280002A6E7 /* LayersCollectionView.swift */,
+			);
+			path = Layers;
+			sourceTree = "<group>";
+		};
+		1EF9523528316BA60002A6E7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1EF9523628316BBC0002A6E7 /* ProjectCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1EF95238283186070002A6E7 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				1EF95239283186200002A6E7 /* FolderViewController.swift */,
+			);
+			path = Folder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -927,6 +981,7 @@
 				07F98772281AF7390058139C /* AlphaView.swift in Sources */,
 				1E98AD5E280EE2FD006DAE75 /* ProjectsSelectionTab.swift in Sources */,
 				1E42E051280DD3C90033E6EE /* RoundedTabBar.swift in Sources */,
+				1EF9523728316BBC0002A6E7 /* ProjectCell.swift in Sources */,
 				07F98745281A78E60058139C /* FontsPickerViewController.swift in Sources */,
 				1E98AD5C280EE060006DAE75 /* ProjectsImageCell.swift in Sources */,
 				1E98AD7C2812FDF1006DAE75 /* Fonts.swift in Sources */,
@@ -937,6 +992,8 @@
 				1E98AD4A280EA925006DAE75 /* RoundedTabBarItems.swift in Sources */,
 				07D15E872817CFD700723348 /* AdjustableView.swift in Sources */,
 				1E98AD712811D773006DAE75 /* PaywallView.swift in Sources */,
+				1EF9522A283114F70002A6E7 /* ProjectsFileManager.swift in Sources */,
+				1EF9523428314F280002A6E7 /* LayersCollectionView.swift in Sources */,
 				07D15E892817E0C900723348 /* AdjustChevronView.swift in Sources */,
 				1E98AD93281575DA006DAE75 /* Folder+CoreDataClass.swift in Sources */,
 				1E98AD60280EE9DC006DAE75 /* ProjectsFolderCell.swift in Sources */,
@@ -952,11 +1009,13 @@
 				1E98AD46280EA6F6006DAE75 /* ProjectsViewController.swift in Sources */,
 				1E98AD782812955E006DAE75 /* PrivacyPolicyViewController.swift in Sources */,
 				07F9876C281AE0B00058139C /* ColorPickerViewController.swift in Sources */,
+				1EF9523A283186210002A6E7 /* FolderViewController.swift in Sources */,
 				1E98AD6928108474006DAE75 /* SettingsViewController.swift in Sources */,
 				1EF95226282FCAD60002A6E7 /* InAppConfiguration.swift in Sources */,
 				1E98AD9D281699DB006DAE75 /* ImageLibraryPickerViewController.swift in Sources */,
 				1E98AD982815D33D006DAE75 /* FoldersCollectionHeaderView.swift in Sources */,
 				1E98AD8128140C51006DAE75 /* ToolBarView.swift in Sources */,
+				1EF9523228314EC30002A6E7 /* LayersViewController.swift in Sources */,
 				1E42E04F280DCABB0033E6EE /* UIColor.swift in Sources */,
 				1E98AD94281575DA006DAE75 /* Folder+CoreDataProperties.swift in Sources */,
 				1E5BCFFA282C1E5100F7B610 /* GraphicViewController.swift in Sources */,
@@ -978,6 +1037,7 @@
 				1E5BCFF4282AB74900F7B610 /* ShapesViewController.swift in Sources */,
 				07F98770281AF3E00058139C /* CALayer.swift in Sources */,
 				07F98774281BC2260058139C /* SliderSetView.swift in Sources */,
+				1EF9522C28313C320002A6E7 /* StoreObserver.swift in Sources */,
 				1EF95221282F92800002A6E7 /* AppState.swift in Sources */,
 				1E5BCFDC2828472B00F7B610 /* AdjustableLabel.swift in Sources */,
 				07D15E8C281815C900723348 /* TextEditingViewController.swift in Sources */,

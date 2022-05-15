@@ -8,6 +8,13 @@
 
 "settings_title"="設定";
 "settings_lang"="言語";
+
+"settings_appearance"="外観";
+"settings_icon"="アプリアイコン";
+"settings_light"="ライト";
+"settings_dark"="暗い";
+"settings_system"="システム";
+
 "settings_restore"="購入を復元";
 "settings_privacy"="プライバシーポリシー";
 "settings_rate"="AppStoreで評価してください";
@@ -15,22 +22,23 @@
 
 "paywall_year_title"="無料の3日間トライアル-毎年";
 "paywall_year_caption" = "毎年支払う、無料トライアル";
-"paywall_subscribe_now"="今すぐ登録";
 "paywall_year_price_full"="その後は年間64.99ドル";
-"paywall_6month_title"="6か月";
+"paywall_6month_title"="無料の3日間トライアル-6か月";
 "paywall_6month_caption"="6か月間支払う";
+"paywall_6month_price_full"="その後6か月あたり$34.99";
 "paywall_month_title"="毎月";
 "paywall_month_caption"="毎月支払う";
+"paywall_subscribe_now"="今すぐ登録";
 
-"creating_tab_image" = "画像";
-"creating_tab_text" = "文章";
-"creating_tab_graphic" = "グラフィック";
-"creating_tab_shape" = "形";
-"creating_tab_bg" = "バックグラウンド";
-"creating_tab_filters" = "フィルタ";
-"creating_tab_adjust" = "調整";
-"creating_tab_crop" = "作物";
-"creating_tab_shadow" = "風邪";
+"creating_tab_image" = "IMAGE";
+"creating_tab_text" = "TEXT";
+"creating_tab_graphic" = "GRAPHIC";
+"creating_tab_shape" = "SHAPE";
+"creating_tab_bg" = "BACKGROUND";
+"creating_tab_filters" = "FILTERS";
+"creating_tab_adjust" = "ADJUST";
+"creating_tab_crop" = "CROP";
+"creating_tab_shadow" = "SHADOW";
 "creating_tab_opacity"="不透明度";
 
 "text_title"="テキスト";
@@ -50,3 +58,36 @@
 "text_style_fontsize"="フォントサイズ";
 "text_style_letterspacing"="文字の間隔";
 "text_style_linespacing"="行間隔";
+
+"shapes_search"="図形を検索";
+"shapes_title"="形状";
+"shapes_basic"="基本";
+"shapes_holiday"="ホリデー";
+"shapes_outline"="アウトライン";
+"shapes_brush"="ブラシ";
+
+"projects_title"="プロジェクト";
+"projects_folders"="フォルダ";
+"projects_select"="選択";
+"projects_favorites"="お気に入り";
+"projects_new_folder"="新しいフォルダ";
+"projects_selected_str"="選択されたプロジェクト";
+
+"ipicker_aspect"="アスペクト";
+"ipicker_square"="正方形";
+
+"graphics_title"="グラフィックス";
+
+"background_title"="背景";
+"background_image"="画像";
+"background_trans"="透明";
+"background_gradient"="グラデーション";
+"background_petal"="パステル";
+
+"filters_title"="フィルター";
+
+"shadow_title"="シャドウ";
+"shadow_size"="サイズ";
+"shadow_angle"="角度";
+"shadow_blur" = "Blur";
+"shadow_opacity"="不透明度";

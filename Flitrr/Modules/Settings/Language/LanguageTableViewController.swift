@@ -43,8 +43,12 @@ final class LanguageTableViewController: UITableViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         tableView.register(SettingsTableCell.self, forCellReuseIdentifier: "id")
         tableView.separatorInset = .init(top: 0, left: 30, bottom: 0, right: 30)
-        
-        languages[0].isSelected = true
+
+        for (i, lang) in languages.enumerated() {
+            if lang.id == LocalizationManager.shared.locale {
+                languages[i].isSelected = true
+            }
+        }
         tableView.reloadData()
     }
     

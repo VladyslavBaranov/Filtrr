@@ -1,0 +1,92 @@
+//
+//  LayersViewController.swift
+//  Flitrr
+//
+//  Created by Vladyslav Baranov on 15.05.2022.
+//
+
+import UIKit
+
+protocol LayersViewControllerDelegate: AnyObject {
+    func didDismissLayers()
+}
+
+final class LayersViewController: UIViewController {
+    
+    weak var delegate: LayersViewControllerDelegate!
+    
+    private var layersCollectionView: LayersCollectionView!
+    private var layerOptionsPicker: ValuePickerView!
+    private var swipeGestureRecognizer: UISwipeGestureRecognizer!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .appGray
+        setupOptionsPicker()
+        
+        layerOptionsPicker.selectedIndex = 0
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layersCollectionView = LayersCollectionView(frame: .zero, collectionViewLayout: layout)
+        // layersCollectionView. = self
+        view.addSubview(layersCollectionView)
+        
+        swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown))
+        swipeGestureRecognizer.direction = .down
+        view.addGestureRecognizer(swipeGestureRecognizer)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layersCollectionView.frame = .init(x: 0, y: 30, width: view.bounds.width, height: view.bounds.height - 130)
+        layerOptionsPicker.frame = .init(
+            x: 0, y: view.bounds.height - 80, width: view.bounds.width, height: 80)
+    }
+    
+    func setupOptionsPicker() {
+        layerOptionsPicker = ValuePickerView(
+            frame: .init(x: 0, y: view.bounds.height - 80, width: view.bounds.width, height: 80))
+        layerOptionsPicker.titles = ["Hide", "Lock", "Delete"] //169201
+        layerOptionsPicker.delegate = self
+        view.addSubview(layerOptionsPicker)
+    }
+    
+    @objc func swipeDown() {
+        delegate?.didDismissLayers()
+        dismiss(animated: true)
+    }
+}
+
+extension LayersViewController: ToolBarViewDelegate {
+    func didTapTrailingItem() {
+        delegate?.didDismissLayers()
+        dismiss(animated: true)
+    }
+    func didTapLeadingItem() {
+        delegate?.didDismissLayers()
+        dismiss(animated: true)
+    }
+    func didTapUndo() {}
+    func didTapLayers() {}
+    func didTapRedo() {}
+}
+
+extension LayersViewController: ValuePickerViewDelegate {
+    func didSelectValue(at index: Int) {
+        // delegate?.didSelectBlendMode(blendModes[index].filterName)
+    }
+}
+
+extension LayersViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        FractionPresentationController(presentedViewController: presented, presenting: presenting, heightFactor: 0.3)
+    }
+}
+
+extension LayersViewController: FiltersCollectionViewDelegate {
+    func didSelect(_ filter: Filter) {
+        // delegate?.didSelectFilter(filter)
+    }
+}
+

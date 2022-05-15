@@ -5,3 +5,89 @@
   Created by VladyslavMac on 01.05.2022.
   
 */
+
+"settings_title" = "Configuración";
+"settings_lang" = "Idioma";
+
+"settings_appearance" = "Apariencia";
+"settings_icon" = "Icono de la aplicación";
+"settings_light" = "Luz";
+"settings_dark" = "Oscuro";
+"settings_system" = "Sistema";
+
+"settings_restore" = "Restaurar compras";
+"settings_privacy" = "Política de privacidad";
+"settings_rate" = "Califícanos en App Store";
+"settings_card_caption" = "Obtenga la función premium y obtenga acceso ilimitado a la aplicación.";
+
+"paywall_year_title" = "Prueba GRATUITA de 3 días - Anualmente";
+"paywall_year_caption" = "Pago anual, prueba gratuita";
+"paywall_year_price_full" = "Entonces $64,99 por año";
+"paywall_6month_title" = "Prueba GRATUITA de 3 días - 6 meses";
+"paywall_6month_caption" = "Pague por 6 meses";
+"paywall_6month_price_full" = "Entonces $34,99 por 6 meses";
+"paywall_month_title" = "Mensual";
+"paywall_month_caption" = "Pago mensual";
+"paywall_subscribe_now" = "Suscribirse ahora";
+
+"creating_tab_image" = "IMAGEN";
+"creating_tab_text" = "TEXTO";
+"creating_tab_graphic" = "GRÁFICO";
+"creating_tab_shape" = "FORMA";
+"creating_tab_bg" = "ANTECEDENTES";
+"creating_tab_filters" = "FILTROS";
+"creating_tab_adjust" = "AJUSTAR";
+"creating_tab_crop" = "CULTIVO";
+"creating_tab_shadow" = "SOMBRA";
+"creating_tab_opacity" = "OPACIDAD";
+
+"text_title" = "Texto";
+"text_color" = "Color";
+"text_fonts" = "Fuentes";
+"text_style" = "Estilo";
+"text_fonts_featured" = "Destacado";
+"text_fonts_basic" = "Básico";
+"text_fonts_fancy" = "Fantasía";
+"text_fonts_classic" = "Clásico";
+"text_fonts_techno" = "Tecno";
+"text_fonts_misc" = "Varios";
+"text_style_alignment" = "Alineación";
+"text_style_left" = "Izquierda";
+"text_style_center" = "Centro";
+"text_style_right" = "Derecho";
+"text_style_fontsize" = "Tamaño de fuente";
+"text_style_letterspacing" = "Espaciado entre letras";
+"text_style_linespacing" = "Espaciado entre líneas";
+
+"shapes_search" = "Buscar formas";
+"shapes_title" = "Formas";
+"shapes_basic" = "Básico";
+"shapes_holiday" = "Vacaciones";
+"shapes_outline" = "Contorno";
+"shapes_brush" = "Pincel";
+
+"projects_title" = "Proyectos";
+"projects_folders" = "Carpetas";
+"projects_select" = "Seleccionar";
+"projects_favorites" = "Favoritos";
+"projects_new_folder" = "Nueva carpeta";
+"projects_selected_str" = "Proyectos seleccionados";
+
+"ipicker_aspect" = "Aspecto";
+"ipicker_square" = "Cuadrado";
+
+"graphics_title" = "Gráficos";
+
+"background_title" = "Fondo";
+"background_image" = "Imagen";
+"background_trans" = "Transparente";
+"background_gradient" = "Gradiente";
+"background_pastel" = "Pastel";
+
+"filters_title" = "Filtros";
+
+"shadow_title" = "Sombra";
+"shadow_size" = "Tamaño";
+"shadow_angle" = "Ángulo";
+"shadow_blur" = "Desenfoque";
+"shadow_opacity" = "Opacidad";

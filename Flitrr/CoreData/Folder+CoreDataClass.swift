@@ -32,6 +32,14 @@ public class Folder: NSManagedObject {
         folder.name = "New Folder"
         return folder
     }
+    
+    static func dropFolder(_ folder: Folder) {
+        let context = AppDelegate.getContext()
+        do {
+            context.delete(folder)
+        } catch {
+        }
+    }
 }
 
 class FavoritesFolder: FolderProtocol {

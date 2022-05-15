@@ -7,16 +7,31 @@
 
 import UIKit
 
+protocol ProjectsSelectionTabDelegate: AnyObject {
+    func didTapShare()
+    func didTapTrash()
+}
+
 final class ProjectsSelectionTab: UIView {
-    var shareButton: UIButton!
-    var numberLabel: UILabel!
-    var deleteButton: UIButton!
+    
+    weak var delegate: ProjectsSelectionTabDelegate!
+    
+    private var shareButton: UIButton!
+    private var numberLabel: UILabel!
+    private var deleteButton: UIButton!
+    
+    var title: String = "" {
+        didSet {
+            numberLabel.text = title
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .appGray
         shareButton = UIButton()
         shareButton.setImage(UIImage(named: "Share"), for: .normal)
+        shareButton.addTarget(self, action: #selector(didTapShare), for: .touchUpInside)
         addSubview(shareButton)
         
         numberLabel = UILabel()
@@ -28,6 +43,7 @@ final class ProjectsSelectionTab: UIView {
         
         deleteButton = UIButton()
         deleteButton.setImage(UIImage(named: "Delete"), for: .normal)
+        deleteButton.addTarget(self, action: #selector(didTapTrash), for: .touchUpInside)
         addSubview(deleteButton)
     }
     
@@ -48,5 +64,13 @@ final class ProjectsSelectionTab: UIView {
             cornerRadii: .init(width: 15, height: 15)
         ).cgPath
         layer.mask = roundedLayer
+    }
+    
+    @objc private func didTapShare() {
+        delegate?.didTapShare()
+    }
+    
+    @objc private func didTapTrash() {
+        delegate?.didTapTrash()
     }
 }

@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol ProjectCreatingViewControllerDelegate: AnyObject {
+    func shouldReloadProjects()
+}
+
 final class ProjectCreatingViewController: UIViewController {
-     
+    
+    weak var delegate: ProjectCreatingViewControllerDelegate!
     private var currentlySelectedAdjustableView: AdjustableView!
     
     var toolBarView: ToolBarView!
@@ -16,6 +21,8 @@ final class ProjectCreatingViewController: UIViewController {
     var transparentGridView: ProjectTransparentGridView!
 	
 	var addedCount = 0
+    
+    private var initialBackgroundItem = ColorPaletteItem.transparent
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +120,32 @@ extension ProjectCreatingViewController: ToolBarViewDelegate {
     }
     
     func didTapLeadingItem() {
-        dismiss(animated: true)
+        
+        let alert = UIAlertController(
+            title: "New Project",
+            message: "Warning: all layers will be merged upon saved",
+            preferredStyle: .alert)
+        let discardAction = UIAlertAction(title: "Discard", style: .destructive) { [unowned self] _ in
+            dismiss(animated: true)
+        }
+        
+        alert.addAction(discardAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        
+        alert.addAction(cancelAction)
+        let saveAction = UIAlertAction(title: "Save", style: .cancel) { [unowned self] _ in
+            guard let png = transparentGridView.createPNG() else { return }
+            Project.createProjectAndSave(pngData: png)
+            NotificationCenter.default.post(
+                name: Notification.Name("shouldReloadProjectNotificationDidReceive"),
+                object: nil
+            )
+            dismiss(animated: true)
+            
+        }
+        
+        alert.addAction(saveAction)
+        present(alert, animated: true)
     }
     
     func didTapUndo() {
@@ -123,10 +155,7 @@ extension ProjectCreatingViewController: ToolBarViewDelegate {
     }
     
     func didTapLayers() {
-        print("REGISTERED")
-        undoManager?.registerUndo(withTarget: self, handler: { type in
-            print("ACTION TO BE UNDONE")
-        })
+        showLayersController()
     }
     
     func didTapRedo() {
@@ -261,21 +290,28 @@ extension ProjectCreatingViewController {
 }
 
 extension ProjectCreatingViewController: BackgroundSelectionViewControllerDelegate {
+    func shouldFillWithGradient(_ paletteItem: ColorPaletteItem, _ colors: [UIColor]) {
+        initialBackgroundItem = paletteItem
+        transparentGridView.bakgroundMode = .gradient(colors)
+    }
     
     func showBackgroundController() {
         prepareForOnThird(title: LocalizationManager.shared.localizedString(for: .backgroundTitle))
         let vc = BackgroundSelectionViewController()
+        vc.initialPaletteItem = initialBackgroundItem
         vc.delegate = self
         vc.modalPresentationStyle = .custom
         vc.transitioningDelegate = vc
         present(vc, animated: true, completion: nil)
     }
     
-    func shouldFillWithImage(_ uiImage: UIImage) {
+    func shouldFillWithImage(_ paletteItem: ColorPaletteItem, _ uiImage: UIImage) {
+        initialBackgroundItem = paletteItem
         transparentGridView.bakgroundMode = .image(uiImage)
     }
     
-    func shouldFillBackgroundWithPlain(_ color: UIColor) {
+    func shouldFillBackgroundWithPlain(_ paletteItem: ColorPaletteItem, _ color: UIColor) {
+        initialBackgroundItem = paletteItem
         transparentGridView.bakgroundMode = .plainColor(color)
     }
     
@@ -396,6 +432,20 @@ extension ProjectCreatingViewController: OpacityViewControllerDelegate {
     }
     
     func didDismissOpacityController() {
+        prepareForFullFromOneThird()
+    }
+}
+
+extension ProjectCreatingViewController: LayersViewControllerDelegate {
+    func showLayersController() {
+        prepareForOnThird(title: "Layers")
+        let layersController = LayersViewController()
+        layersController.delegate = self
+        layersController.modalPresentationStyle = .custom
+        layersController.transitioningDelegate = layersController
+        present(layersController, animated: true)
+    }
+    func didDismissLayers() {
         prepareForFullFromOneThird()
     }
 }

@@ -26,6 +26,7 @@ final class AdjustableImageView: AdjustableView {
             }
         }
     }
+
     var originalImage: UIImage! {
         didSet {
             imageView.image = originalImage
@@ -51,8 +52,32 @@ final class AdjustableImageView: AdjustableView {
     
     override func render(in ctx: CGContext) {
         ctx.move(to: frame.origin)
+   
+        var blendMode = CGBlendMode.normal
+        if let str = layer.compositingFilter as? String {
+            switch str {
+            case "normalBlendMode":
+                blendMode = .normal
+            case "dakenBlendMode":
+                blendMode = .darken
+            case "multiplyBlendMode":
+                blendMode = .multiply
+            case "colorBurnBlendMode":
+                blendMode = .colorBurn
+            case "lightenBlendMode":
+                blendMode = .lighten
+            case "differenceBlendMode":
+                blendMode = .difference
+            case "exclusionBlendMode":
+                blendMode = .exclusion
+            case "xorBlendMode":
+                blendMode = .xor
+            default:
+                break
+            }
+        }
         // ctx.rotate(by: .pi / 4)
         // ctx.translateBy(x: -frame.origin.x, y: -frame.origin.y)
-        imageView.image?.draw(in: frame, blendMode: .exclusion, alpha: 1)
+        imageView.image?.draw(in: frame, blendMode: blendMode, alpha: 1)
     }
 }

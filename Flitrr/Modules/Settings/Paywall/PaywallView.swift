@@ -83,6 +83,9 @@ struct PaywallOptionView: View {
 
 struct PaywallView: View {
     
+    @ObservedObject
+    var storeHelper = StoreHelper()
+    
     let model: PlayerViewModel
     var onCloseButtonTapped: (() -> ())?
     

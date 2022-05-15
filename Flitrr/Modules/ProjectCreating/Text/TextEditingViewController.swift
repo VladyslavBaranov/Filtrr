@@ -173,6 +173,8 @@ extension TextEditingViewController: ColorPaletteCollectionViewDelegate {
             break
         case .transparent:
             break
+        default:
+            break
         }
 	}
 }
