@@ -20,7 +20,7 @@ class ProjectsViewController: UIViewController {
     // View data section
     
     private var numberOfFavorites: Int = 0
-    var projects: [Project] = Project.getAvailableProjects()
+    var projects: [Project] = Project.getAllAvailableProjects()
     
     var projectHeights: [CGFloat] = [300, 200, 300, 230, 250, 200]
     var folders: [FolderProtocol] = []
@@ -58,7 +58,7 @@ class ProjectsViewController: UIViewController {
         numberOfFavorites = projects.filter { $0.isFavorite }.count
     }
     @objc func reloadProjects() {
-        projects = Project.getAvailableProjects()
+        projects = Project.getAllAvailableProjects()
         collectionView.reloadData()
     }
     
@@ -100,9 +100,8 @@ extension ProjectsViewController: UICollectionViewDelegate, UICollectionViewData
             return cell
         case .projects:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "projectsId", for: indexPath) as! ProjectCell
-            cell.label.text = projects[indexPath.row].id?.uuidString ?? ""
-            cell.project = projects[indexPath.row]
-            cell.isChecked = projects[indexPath.row].isSelected
+            let project = projects[indexPath.row]
+            cell.set(project)
             return cell
         }
         
@@ -137,15 +136,14 @@ extension ProjectsViewController: UICollectionViewDelegate, UICollectionViewData
             let folder = folders[indexPath.row]
             if folder is CreationFolder {
                 showFolderCreationAlert()
-            } else {
-                let controller = FolderViewController()
-                controller.folder = folder
-                controller.modalPresentationStyle = .fullScreen
-                present(controller, animated: true)
+                return
             }
-            
+            if folder.isForFavorites {
+                showContentsOfFavorites()
+                return
+            }
+            showContentsOfFolder(folder as! Folder)
         }
-        
     }
 }
 
@@ -274,6 +272,7 @@ private extension ProjectsViewController {
     func setupTopViews() {
         navigationView = NavigationView(frame: .zero)
         navigationView.translatesAutoresizingMaskIntoConstraints = false
+        navigationView.trailingButtonMode = .settings
         view.addSubview(navigationView)
         
         NSLayoutConstraint.activate([
@@ -314,6 +313,21 @@ private extension ProjectsViewController {
         folders = Folder.getAvailableFolders()
         folders.append(FavoritesFolder())
         folders.append(CreationFolder())
+    }
+    func showContentsOfFavorites() {
+        let favorites = projects.filter { $0.isFavorite }
+        print(favorites.map { $0.folder_id })
+        let controller = FolderViewController()
+        controller.isFavoritesMode = true
+        controller.projects = favorites
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true)
+    }
+    func showContentsOfFolder(_ folder: Folder) {
+        let controller = FolderViewController()
+        controller.folder = folder
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true)
     }
 }
 

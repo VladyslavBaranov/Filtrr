@@ -20,6 +20,50 @@ extension Folder: FolderProtocol {
     @NSManaged public var created: Date?
     @NSManaged public var name: String?
     
+    func getLastProjectURL(forFavorites: Bool) -> URL? {
+        let projects = Project.getAllAvailableProjects()
+        if forFavorites {
+            return projects.last?.url
+        } else {
+            let folderProjects = projects.filter { $0.folder_id == id }
+            return folderProjects.last?.url
+        }
+    }
+    
+    func loadProjectsCount(forceReload: Bool = false) -> Int {
+        if numberOfProjects == nil || forceReload {
+            let projects = Project.getAllAvailableProjects()
+            let folderProjects = projects.filter { $0.folder_id == id }
+            self.numberOfProjects = folderProjects.count
+            return folderProjects.count
+        }
+        return numberOfProjects ?? 0
+    }
+    func insert(projects: [Project]) -> Bool {
+        guard !projects.isEmpty else { return false }
+        let ctx = AppDelegate.getContext()
+        for project in projects {
+            project.folder_id = id
+        }
+        do {
+            try ctx.save()
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+    func rename(_ newName: String) -> Bool {
+        guard newName != name else { return false }
+        let context = AppDelegate.getContext()
+        name = newName
+        do {
+            try context.save()
+            return true
+        } catch {
+            return false
+        }
+    }
     
     static func createFolderAndSave(name: String) -> Folder {
         let context = AppDelegate.getContext()

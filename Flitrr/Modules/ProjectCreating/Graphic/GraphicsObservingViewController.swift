@@ -9,6 +9,8 @@ import UIKit
 
 final class GraphicsObservingViewController: UIViewController {
     
+    var collection: GraphicsCollection!
+    
     var collectionView: UICollectionView!
     
     var headerView: GraphicsStretchyHeader!
@@ -21,6 +23,9 @@ final class GraphicsObservingViewController: UIViewController {
         headerView = GraphicsStretchyHeader(
             frame: .init(x: 0, y: 0, width: view.bounds.width, height: view.bounds.width * 0.6)
         )
+        headerView.imageView.image = UIImage(named: collection.header)
+        headerView.title = collection.title
+        headerView.countLabel.text = "\(collection.numberOfPics) graphics"
         headerView.delegate = self
         view.addSubview(headerView)
     }
@@ -28,7 +33,7 @@ final class GraphicsObservingViewController: UIViewController {
     func setupCollection() {
         collectionView = UICollectionView(
             frame: .zero,
-            collectionViewLayout: createLayout(cellsPerRow: 2, heightRatio: 1, inset: 9, usesHorizontalScroll: false)
+            collectionViewLayout: createLayout(cellsPerRow: 2, heightRatio: 1.3, inset: 9, usesHorizontalScroll: false)
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
@@ -52,12 +57,14 @@ final class GraphicsObservingViewController: UIViewController {
 
 extension GraphicsObservingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        6
+        collection.content.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! ProjectsImageCell
         cell.backgroundColor = .appGray
-        cell.imageInset = 10
+        cell.imageView.image = UIImage(
+            named: collection.content[indexPath.row].image)
+        cell.layoutType = collection.content[indexPath.row].layoutType
         cell.layer.cornerRadius = 10
         return cell
     }
@@ -70,6 +77,7 @@ extension GraphicsObservingViewController: UICollectionViewDelegate, UICollectio
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        dismiss(animated: true)
     }
 }
 

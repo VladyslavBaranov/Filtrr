@@ -19,8 +19,15 @@ final class GraphicsStretchyHeader: UIView {
     var gradientLayer: CAGradientLayer!
     
     var backButton: UIButton!
-    var titleLabel: UILabel!
+    private var titleLabel: UILabel!
     var countLabel: UILabel!
+    
+    var title: String = "" {
+        didSet {
+            titleLabel.text = title
+            titleLabel.sizeToFit()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,7 +52,6 @@ final class GraphicsStretchyHeader: UIView {
     
     func setupUI() {
         imageView = UIImageView(frame: bounds)
-        imageView.image = UIImage(named: "FlamingoHeader")
         imageView.contentMode = .scaleAspectFill
         addSubview(imageView)
         

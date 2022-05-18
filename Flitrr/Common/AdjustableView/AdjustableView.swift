@@ -15,6 +15,15 @@ protocol AdjustableViewDelegate: AnyObject {
 class AdjustableView: UIView {
     
     var id: UUID!
+    
+    var isLocked = false
+    var isDeleted = false {
+        didSet {
+            if isDeleted {
+                isHidden = true
+            }
+        }
+    }
 	
     weak var delegate: AdjustableViewDelegate!
     var isTransformingEnabled = true

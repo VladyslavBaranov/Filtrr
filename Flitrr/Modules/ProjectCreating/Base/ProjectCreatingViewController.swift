@@ -268,6 +268,7 @@ extension ProjectCreatingViewController: ShapesViewControllerDelegate {
                 .init(x: 0, y: 0, width: size.width, height: size.height))
         shape.imageDelegate = self
         shape.delegate = self
+        shape.originalImage = UIImage(named: name)
         shape.imageView.image = UIImage(named: name)
         transparentGridView.add(shape)
         
@@ -440,6 +441,7 @@ extension ProjectCreatingViewController: LayersViewControllerDelegate {
     func showLayersController() {
         prepareForOnThird(title: "Layers")
         let layersController = LayersViewController()
+        layersController.layers = transparentGridView.adjustables
         layersController.delegate = self
         layersController.modalPresentationStyle = .custom
         layersController.transitioningDelegate = layersController

@@ -19,6 +19,8 @@ public class Folder: NSManagedObject {
     var isForFavorites = false
     var isForCreation = false
     
+    var numberOfProjects: Int? = nil
+    
     static func createFavoritesFolder() -> Folder {
         let folder = Folder()
         folder.isForFavorites = true

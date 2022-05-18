@@ -19,6 +19,13 @@ final class MainCollectionReusableView: UICollectionReusableView {
             titleLabel.sizeToFit()
         }
     }
+    
+    var showsTrailingButton: Bool = true {
+        didSet {
+            seeAllButton.isHidden = !showsTrailingButton
+            chevronView.isHidden = !showsTrailingButton
+        }
+    }
     var associatedHeaderIndex = 0
     
     private var titleLabel: UILabel!
@@ -63,6 +70,8 @@ final class MainCollectionReusableView: UICollectionReusableView {
 }
 
 final class GraphicViewController: UIViewController {
+    
+    let loader = GraphicsLoader()
     
     private var navigationView: NavigationView!
     var searchTextField: UISearchTextField!
@@ -144,10 +153,7 @@ final class GraphicViewController: UIViewController {
 
 extension GraphicViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
-    }
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        3
+        loader.collections.count
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(
@@ -157,6 +163,9 @@ extension GraphicViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! ProjectsFolderCell
+        let collection = loader.collections[indexPath.row]
+        cell.imageView.image = UIImage(named: collection.thumb)
+        cell.folderCountLabel.text = "\(collection.numberOfPics)"
         return cell
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -176,7 +185,9 @@ extension GraphicViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let observingVC = GraphicsObservingViewController()
+        observingVC.collection = loader.collections[indexPath.row]
         observingVC.modalPresentationStyle = .fullScreen
+        observingVC.overrideUserInterfaceStyle = .dark
         present(observingVC, animated: true)
     }
 }

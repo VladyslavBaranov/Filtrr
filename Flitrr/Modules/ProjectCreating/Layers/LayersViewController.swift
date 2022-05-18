@@ -15,6 +15,9 @@ final class LayersViewController: UIViewController {
     
     weak var delegate: LayersViewControllerDelegate!
     
+    private var currentlySelectedLayer: AdjustableView!
+    
+    var layers: [AdjustableView] = []
     private var layersCollectionView: LayersCollectionView!
     private var layerOptionsPicker: ValuePickerView!
     private var swipeGestureRecognizer: UISwipeGestureRecognizer!
@@ -24,12 +27,11 @@ final class LayersViewController: UIViewController {
         view.backgroundColor = .appGray
         setupOptionsPicker()
         
-        layerOptionsPicker.selectedIndex = 0
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layersCollectionView = LayersCollectionView(frame: .zero, collectionViewLayout: layout)
-        // layersCollectionView. = self
+        layersCollectionView.layersDelegate = self
+        layersCollectionView.layers = layers
         view.addSubview(layersCollectionView)
         
         swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown))
@@ -74,7 +76,18 @@ extension LayersViewController: ToolBarViewDelegate {
 
 extension LayersViewController: ValuePickerViewDelegate {
     func didSelectValue(at index: Int) {
-        // delegate?.didSelectBlendMode(blendModes[index].filterName)
+        guard let currentlySelectedLayer = currentlySelectedLayer else { return }
+        switch index {
+        case 0:
+            currentlySelectedLayer.isHidden.toggle()
+        case 1:
+            currentlySelectedLayer.isTransformingEnabled.toggle()
+        case 2:
+            currentlySelectedLayer.isDeleted = true
+            
+        default:
+            break
+        }
     }
 }
 
@@ -84,9 +97,9 @@ extension LayersViewController: UIViewControllerTransitioningDelegate {
     }
 }
 
-extension LayersViewController: FiltersCollectionViewDelegate {
-    func didSelect(_ filter: Filter) {
-        // delegate?.didSelectFilter(filter)
+extension LayersViewController: LayersCollectionViewDelegate {
+    func didSelect(_ adjustable: AdjustableView) {
+        currentlySelectedLayer = adjustable
     }
 }
 

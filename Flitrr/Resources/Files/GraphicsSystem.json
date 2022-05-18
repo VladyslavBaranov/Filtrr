@@ -1,0 +1,34 @@
+[
+    {
+        "thumb": "SummerJamHead",
+        "title": "Summer Time",
+        "numberOfPics": 6,
+        "header": "FlamingoHeader",
+        "content": [
+            {
+                "image": "sj1",
+                "layoutType": 0
+            },
+            {
+                "image": "sj2",
+                "layoutType": 1
+            },
+            {
+                "image": "sj3",
+                "layoutType": 0
+            },
+            {
+                "image": "sj4",
+                "layoutType": 2
+            },
+            {
+                "image": "sj5",
+                "layoutType": 2
+            },
+            {
+                "image": "sj6",
+                "layoutType": 1
+            }
+        ]
+    }
+]

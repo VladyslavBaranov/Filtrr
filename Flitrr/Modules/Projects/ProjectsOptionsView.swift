@@ -8,6 +8,27 @@
 import UIKit
 
 final class NavigationView: UIView {
+    
+    enum TrailingButtonMode {
+        case none, settings, folderEdit
+    }
+    
+    var trailingButtonMode = TrailingButtonMode.settings {
+        didSet {
+            switch trailingButtonMode {
+            case .none:
+                trailingButton.isHidden = true
+            case .settings:
+                trailingButton.isHidden = false
+                trailingButton.setImage(UIImage(systemName: "gearshape"), for: .normal)
+            case .folderEdit:
+                trailingButton.isHidden = false
+                trailingButton.tintColor = .appAccent
+                trailingButton.showsMenuAsPrimaryAction = true
+                trailingButton.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+            }
+        }
+    }
 
     var title: String = "" {
         didSet {
@@ -17,11 +38,11 @@ final class NavigationView: UIView {
     }
 
     var titleLabel: UILabel!
-    var settingsButton: UIButton!
+    var trailingButton: UIButton!
     
     var hidesSettingsButton = false {
         didSet {
-            settingsButton.isHidden = hidesSettingsButton
+            trailingButton.isHidden = hidesSettingsButton
         }
     }
     
@@ -39,12 +60,11 @@ final class NavigationView: UIView {
         titleLabel.textColor = .label
         titleLabel.sizeToFit()
         
-        settingsButton = UIButton()
-        settingsButton.setPreferredSymbolConfiguration(.init(pointSize: 30), forImageIn: .normal)
-        settingsButton.setImage(UIImage(systemName: "gearshape"), for: .normal)
-        settingsButton.tintColor = .gray
-        settingsButton.addTarget(self, action: #selector(settingsButtonTapped(_:)), for: .touchUpInside)
-        addSubview(settingsButton)
+        trailingButton = UIButton()
+        trailingButton.setPreferredSymbolConfiguration(.init(pointSize: 30), forImageIn: .normal)
+        trailingButton.tintColor = .gray
+        trailingButton.addTarget(self, action: #selector(settingsButtonTapped(_:)), for: .touchUpInside)
+        addSubview(trailingButton)
     }
     
     override func layoutSubviews() {
@@ -52,7 +72,7 @@ final class NavigationView: UIView {
         titleLabel.frame.origin.x = 30
         titleLabel.frame.size.height = bounds.height
         
-        settingsButton.frame = .init(x: bounds.width - bounds.height, y: 0, width: bounds.height, height: bounds.height)
+        trailingButton.frame = .init(x: bounds.width - bounds.height, y: 0, width: bounds.height, height: bounds.height)
     }
     
     required init?(coder: NSCoder) {
@@ -62,6 +82,11 @@ final class NavigationView: UIView {
     @objc func settingsButtonTapped(_ sender: Any) {
         onSettingsButtonTapped?()
     }
+    
+    func setMenuForTrailingButton(_ menu: UIMenu) {
+        trailingButton.menu = menu
+    }
+
 }
 
 final class ProjectsOptionsView: UIView {

@@ -20,12 +20,22 @@ final class ShapesViewController: UIViewController {
     private var shapeCategoryPicker: ValuePickerView!
     var collectionView: UICollectionView!
     
-    private let images = [
-        "BlueStar5", "BlueStar5Round", "BlueStar6",
-        "Ocean3", "Ocean3Round", "Ocean4",
-        "Purple6", "Purple6Round", "PurpleRhombus",
-        "Magenta8", "Magenta8Round", "MagentaHeart",
-        "RedHeart1", "RedHeart2", "RedHeart3"
+    var selectedIndex = 0
+    private let images: [[String]] = [
+        [
+            "BlueStar5", "BlueStar5Round", "BlueStar6",
+            "Ocean3", "Ocean3Round", "Ocean4",
+            "Purple6", "Purple6Round", "PurpleRhombus",
+            "Magenta8", "Magenta8Round", "MagentaHeart",
+            "RedHeart1", "RedHeart2", "RedHeart3"
+        ],
+        [
+            "BlueStar5O", "BlueStar5RoundO", "BlueStar6O",
+            "Ocean3O", "Ocean3RoundO", "Ocean4O",
+            "Purple6O", "Purple6RoundO", "PurpleRhombusO",
+            "Magenta8O", "Magenta8RoundO", "MagentaHeartO",
+            "RedHeart1O", "RedHeart2O", "RedHeart3O"
+        ]
     ]
     
     override func viewDidLoad() {
@@ -72,7 +82,8 @@ final class ShapesViewController: UIViewController {
     func setupShapePicker() {
         shapeCategoryPicker = ValuePickerView(
             frame: .init(x: 0, y: view.bounds.height - 80, width: view.bounds.width, height: 80))
-        shapeCategoryPicker.titles = ["Basic", "Holiday", "Outline", "Bursh"]
+        shapeCategoryPicker.titles = ["Basic", "Outline"]
+        shapeCategoryPicker.delegate = self
         shapeCategoryPicker.isTransparentAppearance = true
         shapeCategoryPicker.leftInset = 13
         shapeCategoryPicker.itemHeight = 40
@@ -106,11 +117,11 @@ final class ShapesViewController: UIViewController {
 
 extension ShapesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        images.count
+        images[selectedIndex].count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! ProjectsImageCell
-        cell.imageView.image = UIImage(named: images[indexPath.row])
+        cell.imageView.image = UIImage(named: images[selectedIndex][indexPath.row])
         cell.backgroundColor = .appGray
         cell.imageInset = 10
         cell.layer.cornerRadius = 10
@@ -133,7 +144,14 @@ extension ShapesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        delegate?.didSelectBasicShape(images[indexPath.row], size: cell.frame.size)
+        delegate?.didSelectBasicShape(images[selectedIndex][indexPath.row], size: cell.frame.size)
         dismiss(animated: true)
+    }
+}
+
+extension ShapesViewController: ValuePickerViewDelegate {
+    func didSelectValue(at index: Int) {
+        selectedIndex = index
+        collectionView.reloadData()
     }
 }

@@ -32,6 +32,7 @@ final class ProjectsFolderCell: UICollectionViewCell {
         imageView.backgroundColor = .appGray
         imageView.layer.cornerRadius = 10
         imageView.layer.cornerCurve = .continuous
+        imageView.clipsToBounds = true
         addSubview(imageView)
         
         folderNameLabel = UILabel()
@@ -68,18 +69,21 @@ final class ProjectsFolderCell: UICollectionViewCell {
     
     func setFolder(_ folder: FolderProtocol) {
         
-        iconImageView.image = nil
         folderNameLabel.text = folder.name
         folderCountLabel.isHidden = false
         
         if folder.isForFavorites {
             iconImageView.image = UIImage(named: "FavoriteHeart")
+            return
         }
         if folder.isForCreation {
             iconImageView.image = UIImage(systemName: "plus")
             iconImageView.tintColor = .gray
             folderCountLabel.isHidden = true
+            return
         }
+        let count = (folder as! Folder).loadProjectsCount()
+        folderCountLabel.text = "\(count)"
     }
 
 }

@@ -15,27 +15,23 @@ final class ProjectsFileManager {
         case commonError
     }
     
-    func getImageDataWithURL(_ url: URL) -> Result<Data, PNGFileError> {
-        
-        guard let data = try? Data(contentsOf: url) else { return .failure(.commonError) }
+    func getImageDataWith(fileName: String) -> Result<Data, PNGFileError> {
+        guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return .failure(.commonError) }
+        let fileUrl = url.appendingPathComponent(fileName)
+        guard let data = try? Data(contentsOf: fileUrl) else { return .failure(.commonError) }
         return .success(data)
-        /*
-        let manager = FileManager.default
-        guard manager.fileExists(atPath: url.path) else {
-            print("FILE NOT EXISTS")
-            return .failure(.commonError)
-        }
-        print("FILE EXISTS")
-        guard let data = try? Data(contentsOf: url) else { return .failure(.commonError) }
-        return .success(data)*/
     }
     
-    func createPNGImage(_ data: Data, name: String) -> URL? {
+    func getImageDataWithURL(_ url: URL) -> Result<Data, PNGFileError> {
+        guard let data = try? Data(contentsOf: url) else { return .failure(.commonError) }
+        return .success(data)
+    }
+    
+    func createPNGImage(_ data: Data, id: UUID) -> URL? {
         guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
         }
-        let pngUrl = url.appendingPathComponent(name).appendingPathExtension("png")
-        let manager = FileManager.default
+        let pngUrl = url.appendingPathComponent("IMG_\(UUID().uuidString)").appendingPathExtension("png")
         do {
             try data.write(to: pngUrl)
             return pngUrl

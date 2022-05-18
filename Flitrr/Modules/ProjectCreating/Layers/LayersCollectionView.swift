@@ -8,21 +8,68 @@
 import UIKit
 
 protocol LayersCollectionViewDelegate: AnyObject {
-    func didSelect(_ filter: Filter)
+    func didSelect(_ adjustable: AdjustableView)
+}
+
+final class LayersCollectionViewCell: UICollectionViewCell {
+    
+    var imageView: UIImageView!
+    var titleLabel: UILabel!
+    
+    var adjustable: AdjustableView!
+    
+    func setSelected() {
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.appAccent.cgColor
+        imageView.alpha = 0.7
+        titleLabel.textColor = .appAccent
+    }
+    
+    func setUnselected() {
+        imageView.layer.borderWidth = 0
+        imageView.alpha = 1
+        titleLabel.textColor = .label
+    }
+    
+    func set(_ adjustable: AdjustableView) {
+        if adjustable is AdjustableImageView {
+            imageView.image = (adjustable as! AdjustableImageView).originalImage
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        addSubview(imageView)
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
+        
+        titleLabel = UILabel()
+        titleLabel.text = "LAYER 1"
+        titleLabel.textAlignment = .center
+        titleLabel.font = Montserrat.regular(size: 10)
+        addSubview(titleLabel)
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.frame = .init(x: 0, y: 0, width: bounds.width, height: bounds.height - 30)
+        titleLabel.frame = .init(x: 0, y: bounds.height - 30, width: bounds.width, height: 30)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 final class LayersCollectionView: UICollectionView {
     
     private var selectedRow: Int = 0
-    weak var filteringDelegate: LayersCollectionViewDelegate!
+    weak var layersDelegate: LayersCollectionViewDelegate!
     
-    var filters: [Filter] = [] {
-        didSet {
-            reloadData()
-        }
-    }
-    
-    var targetImage: UIImage!
+    var layers: [AdjustableView] = []
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -31,7 +78,7 @@ final class LayersCollectionView: UICollectionView {
         dataSource = self
         contentInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         showsHorizontalScrollIndicator = false
-        register(FiltersCollectionViewCell.self, forCellWithReuseIdentifier: "id")
+        register(LayersCollectionViewCell.self, forCellWithReuseIdentifier: "id")
     }
     
     required init?(coder: NSCoder) {
@@ -41,13 +88,13 @@ final class LayersCollectionView: UICollectionView {
 
 extension LayersCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        filters.count
+        layers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! FiltersCollectionViewCell
-        let filter = filters[indexPath.row]
-        cell.titleLabel.text = filter.displayName
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! LayersCollectionViewCell
+        cell.set(layers[indexPath.row])
+        cell.titleLabel.text = "LAYER \(indexPath.row + 1)"
         
         if indexPath.row == selectedRow {
             cell.setSelected()
@@ -59,12 +106,12 @@ extension LayersCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        filteringDelegate?.didSelect(filters[indexPath.row])
         selectedRow = indexPath.row
         for cell in collectionView.visibleCells {
-            (cell as? FiltersCollectionViewCell)?.setUnselected()
+            (cell as? LayersCollectionViewCell)?.setUnselected()
         }
-        (collectionView.cellForItem(at: indexPath) as? FiltersCollectionViewCell)?.setSelected()
+        (collectionView.cellForItem(at: indexPath) as? LayersCollectionViewCell)?.setSelected()
+        layersDelegate?.didSelect(layers[indexPath.row])
     }
 }
 

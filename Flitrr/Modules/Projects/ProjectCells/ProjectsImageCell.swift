@@ -9,12 +9,27 @@ import UIKit
 
 final class ProjectsImageCell: UICollectionViewCell {
     
+    var layoutType = 0 {
+        didSet {
+            if layoutType == 0 {
+                imageInset = 10
+                imageView.contentMode = .scaleAspectFit
+            } else if layoutType == 1 {
+                imageInset = bounds.width / 4
+                imageView.contentMode = .scaleAspectFit
+            } else {
+                imageInset = 0
+                imageView.contentMode = .scaleAspectFill
+            }
+        }
+    }
+    
     var imageView: UIImageView!
     var imageInset: CGFloat = 0.0 {
         didSet {
-            if imageInset != 0 {
-                imageView.contentMode = .scaleAspectFit
-            }
+            //if imageInset != 0 {
+            //    imageView.contentMode = .scaleAspectFit
+            //}
             imageView.frame = bounds.insetBy(dx: imageInset, dy: imageInset)
         }
     }
@@ -27,11 +42,7 @@ final class ProjectsImageCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         clipsToBounds = true
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
