@@ -43,7 +43,7 @@ final class ColorPaletteCollectionViewCell: UICollectionViewCell {
                 gradientLayer.opacity = 0
                 backgroundColor = .clear
                 imageView.image = UIImage(named: "Transparent")
-            case .gradient(let colors, let start, let end):
+            case .gradient(let colors, _, _):
                 gradientLayer.colors = colors.map { $0.cgColor }
                 gradientLayer.startPoint = .zero
                 gradientLayer.endPoint = .init(x: 1, y: 1)

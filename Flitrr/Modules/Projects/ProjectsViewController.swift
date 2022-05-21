@@ -22,7 +22,6 @@ class ProjectsViewController: UIViewController {
     private var numberOfFavorites: Int = 0
     var projects: [Project] = Project.getAllAvailableProjects()
     
-    var projectHeights: [CGFloat] = [300, 200, 300, 230, 250, 200]
     var folders: [FolderProtocol] = []
     
     // View section
@@ -131,6 +130,11 @@ extension ProjectsViewController: UICollectionViewDelegate, UICollectionViewData
                 (collectionView.cellForItem(at: indexPath) as? ProjectCell)?.isChecked = projects[indexPath.row].isSelected
                 let selectedObjectsCount = projects.filter { $0.isSelected }.count
                 selectionTab.title = "\(selectedObjectsCount) Projects Selected"
+            } else {
+                let vc = ProjectLookViewController()
+                vc.project = projects[indexPath.row]
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true)
             }
         case .folders:
             let folder = folders[indexPath.row]
@@ -147,11 +151,13 @@ extension ProjectsViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
+/*
 extension ProjectsViewController: WaterFallLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
         projectHeights[indexPath.row]
     }
 }
+*/
 
 extension ProjectsViewController: ProjectsOptionsContainerViewDelegate {
     func didTapOption(tag: Int) {
@@ -163,8 +169,8 @@ extension ProjectsViewController: ProjectsOptionsContainerViewDelegate {
             // layout.delegate = self
             // collectionView.collectionViewLayout = layout
             // projectHeights = [300, 200, 300, 230, 250, 200]
-            
-            let layout = createLayout(cellsPerRow: 2, heightRatio: 1.5, inset: 9.0, usesHorizontalScroll: false, usesHeader: false)
+            let rowsCount = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 4
+            let layout = createLayout(cellsPerRow: rowsCount, heightRatio: 1.5, inset: 9.0, usesHorizontalScroll: false, usesHeader: false)
             collectionView.collectionViewLayout = layout
             reloadProjects()
             UIView.animate(withDuration: 0.3) {
@@ -173,7 +179,8 @@ extension ProjectsViewController: ProjectsOptionsContainerViewDelegate {
         case 1:
             currentMode = .folders
             reevaluateFavorites()
-            let layout = createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9.0, usesHorizontalScroll: false)
+            let rowsCount = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 4
+            let layout = createLayout(cellsPerRow: rowsCount, heightRatio: 1.2, inset: 9.0, usesHorizontalScroll: false)
             collectionView.collectionViewLayout = layout
             collectionView.alwaysBounceHorizontal = false
         
@@ -233,7 +240,10 @@ private extension ProjectsViewController {
         tabBarController?.tabBar.isHidden = true
     }
     func setupCollectionView() {
-        let layout = createLayout(cellsPerRow: 2, heightRatio: 1.5, inset: 9.0, usesHorizontalScroll: false, usesHeader: false)
+        
+        
+        let rowsCount = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 4
+        let layout = createLayout(cellsPerRow: rowsCount, heightRatio: 1.5, inset: 9.0, usesHorizontalScroll: false, usesHeader: false)
         // layout.delegate = self
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.backgroundColor = .appDark
@@ -286,10 +296,13 @@ private extension ProjectsViewController {
         optionsContainerView.delegate = self
         optionsContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(optionsContainerView)
+        
+        let optionsInset: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 40 : 120
+        
         NSLayoutConstraint.activate([
             optionsContainerView.heightAnchor.constraint(equalToConstant: 80),
-            optionsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            optionsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            optionsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: optionsInset),
+            optionsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -optionsInset),
             optionsContainerView.topAnchor.constraint(equalTo: navigationView.bottomAnchor)
         ])
     }
@@ -307,6 +320,8 @@ private extension ProjectsViewController {
         
         let nav = SettingsViewController.createSettingsNavigationController()
         nav.modalPresentationStyle = .fullScreen
+        
+        
         present(nav, animated: true)
     }
     func loadFolders() {

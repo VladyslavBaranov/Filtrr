@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol CropViewControllerDelegate: AnyObject {
+    func didCut(_ image: UIImage)
+}
+
 final class CropViewController: UIViewController {
     
+    weak var delegate: CropViewControllerDelegate!
     var originalImage: UIImage!
     private var toolBarView: ToolBarView!
     private var adjustableView: AdjustableImageView!
@@ -21,6 +26,7 @@ final class CropViewController: UIViewController {
         setupCropPicker()
         
         adjustableView = AdjustableImageView(frame: .zero)
+        adjustableView.originalImage = originalImage
         adjustableView.imageView.image = originalImage
         adjustableView.isTransformingEnabled = false
         view.addSubview(adjustableView)
@@ -69,13 +75,17 @@ final class CropViewController: UIViewController {
         cropOptionPicker = ValuePickerView(
             frame: .init(x: 0, y: view.bounds.height - 80, width: view.bounds.width, height: 80))
         cropOptionPicker.isTransparentAppearance = true
-        cropOptionPicker.titles = ["Original", "Custom", "Square", "Circle", "3:4", "4:3"]
+        cropOptionPicker.titles = ["Original", "Square", "Circle", "3:4", "4:3"]
+        cropOptionPicker.delegate = self
         view.addSubview(cropOptionPicker)
     }
 }
 
 extension CropViewController: ToolBarViewDelegate {
     func didTapTrailingItem() {
+        if let img = adjustableView.imageView.image {
+            delegate?.didCut(img)
+        }
         dismiss(animated: true)
     }
     func didTapLeadingItem() {
@@ -84,4 +94,28 @@ extension CropViewController: ToolBarViewDelegate {
     func didTapUndo() {}
     func didTapLayers() {}
     func didTapRedo() {}
+}
+
+extension CropViewController: ValuePickerViewDelegate {
+    func didSelectValue(at index: Int) {
+        switch index {
+        case 0:
+            adjustableView.imageView.image = originalImage
+            adjustableView.imageView.contentMode = .scaleAspectFit
+        case 1:
+            adjustableView.imageView.image = originalImage.squareCut()
+            adjustableView.imageView.contentMode = .scaleAspectFit
+        case 2:
+            adjustableView.imageView.image = originalImage.circleCut()
+            adjustableView.imageView.contentMode = .scaleAspectFit
+        case 3:
+            adjustableView.imageView.image = originalImage.proportionCut(x: 3, y: 4)
+            adjustableView.imageView.contentMode = .scaleAspectFit
+        case 4:
+            adjustableView.imageView.image = originalImage.proportionCut(x: 4, y: 3)
+            adjustableView.imageView.contentMode = .scaleAspectFit
+        default:
+            break
+        }
+    }
 }

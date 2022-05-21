@@ -18,13 +18,16 @@ final class NavigationView: UIView {
             switch trailingButtonMode {
             case .none:
                 trailingButton.isHidden = true
+                trailingButton.isUserInteractionEnabled = false
             case .settings:
                 trailingButton.isHidden = false
+                trailingButton.isUserInteractionEnabled = true
                 trailingButton.setImage(UIImage(systemName: "gearshape"), for: .normal)
             case .folderEdit:
                 trailingButton.isHidden = false
                 trailingButton.tintColor = .appAccent
                 trailingButton.showsMenuAsPrimaryAction = true
+                trailingButton.isUserInteractionEnabled = true
                 trailingButton.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
             }
         }

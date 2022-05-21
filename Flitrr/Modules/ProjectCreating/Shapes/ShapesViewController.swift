@@ -15,6 +15,7 @@ final class ShapesViewController: UIViewController {
     
     weak var delegate: ShapesViewControllerDelegate!
     
+    private var closeButton: UIButton!
     private var navigationView: NavigationView!
     var searchTextField: UISearchTextField!
     private var shapeCategoryPicker: ValuePickerView!
@@ -47,10 +48,27 @@ final class ShapesViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        shapeCategoryPicker.frame = .init(x: 0, y: view.safeAreaInsets.top + 130, width: view.bounds.width, height: 80)
+        shapeCategoryPicker.frame = .init(
+            x: 0,
+            y: view.safeAreaInsets.top + closeButton.frame.height + 130, width: view.bounds.width, height: 80)
+    }
+    
+    @objc func dismissSelf() {
+        dismiss(animated: true)
     }
     
     func setupTopViews() {
+        
+        closeButton = UIButton(type: .close)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
+        ])
+        
         navigationView = NavigationView(frame: .zero)
         navigationView.hidesSettingsButton = true
         navigationView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +79,7 @@ final class ShapesViewController: UIViewController {
             navigationView.heightAnchor.constraint(equalToConstant: 80),
             navigationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             navigationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            navigationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            navigationView.topAnchor.constraint(equalTo: closeButton.bottomAnchor)
         ])
         
         searchTextField = UISearchTextField()
@@ -102,7 +120,7 @@ final class ShapesViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset = .init(top: 182, left: 0, bottom: 0, right: 0)
+        collectionView.contentInset = .init(top: 212, left: 0, bottom: 0, right: 0)
         collectionView.register(ProjectsImageCell.self, forCellWithReuseIdentifier: "id")
         
         NSLayoutConstraint.activate([

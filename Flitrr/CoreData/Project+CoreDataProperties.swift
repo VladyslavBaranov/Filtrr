@@ -30,8 +30,8 @@ extension Project : Identifiable {
     
     func log() {
         print("____")
-        print(url)
-        print(id)
+        print(url ?? "")
+        print(id ?? "")
         print(isFavorite)
     }
     
@@ -62,7 +62,7 @@ extension Project : Identifiable {
         let id = UUID()
         project.id = id
         project.isFavorite = false
-        
+        project.created = Date()
         if let url = ProjectsFileManager.shared.createPNGImage(pngData, id: id) {
             project.url = url
             do {
@@ -70,6 +70,10 @@ extension Project : Identifiable {
             } catch {
             }
         }
+    }
+    
+    static func getLastFavoriteProject() -> Project? {
+        getAllAvailableProjects().filter { $0.isFavorite }.first
     }
     
     static func getAllAvailableProjects() -> [Project] {
@@ -125,7 +129,7 @@ extension Project : Identifiable {
     static func deleteAll() {
         let pr = Project.getAllAvailableProjects()
         for project in pr {
-            Project.deleteProject(project)
+            _ = Project.deleteProject(project)
         }
     }
 }

@@ -167,6 +167,7 @@ final class ThumbnailTableHeaderView: UIView {
 
 final class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    var toolBarView: ToolBarView!
     var tableView: UITableView!
     var thumbnailView: PaywallThumbnailView!
     
@@ -181,8 +182,7 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appDark
-        setupNavBar()
-        
+ 
         tableView = UITableView(frame: view.bounds, style: .plain)
         tableView.backgroundColor = .appDark
         view.addSubview(tableView)
@@ -193,7 +193,9 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         let thumb = ThumbnailTableHeaderView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: view.bounds.width * 0.9))
         thumb.onPaywallTap = presentPaywall
         tableView.tableHeaderView = thumb
-        tableView.separatorInset = .init(top: 0, left: 30, bottom: 0, right: 30)
+        tableView.separatorInset = .init(top: 80, left: 30, bottom: 0, right: 30)
+        
+        setupToolBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -203,9 +205,9 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        //thumbnailView.frame = .init(
-           // x: 30, y: view.safeAreaInsets.top + 40, width: view.frame.width - 60, height: (view.bounds.width - 60) * 0.9)
+        tableView.contentInset = .init(top: view.safeAreaInsets.top + 40, left: 0, bottom: 0, right: 0)
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         settingsItems.count
     }
@@ -229,28 +231,18 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         } else if row == 1 {
-            let languageVC = LanguageTableViewController(style: .plain)
-            navigationController?.pushViewController(languageVC, animated: true)
+            let languageVC = LanguageTableViewController()
+            languageVC.modalPresentationStyle = .fullScreen
+            present(languageVC, animated: true)
         } else if row == 3 {
             let privacyPolicyVC = PrivacyPolicyViewController()
-            navigationController?.pushViewController(privacyPolicyVC, animated: true)
+            privacyPolicyVC.modalPresentationStyle = .fullScreen
+            present(privacyPolicyVC, animated: true)
         } else if row == 4 {
             if let scene = view.window?.windowScene {
                 SKStoreReviewController.requestReview(in: scene)
             }
         }
-    }
-    func setupNavBar() {
-        navigationItem.backButtonTitle = ""
-		navigationItem.title = LocalizationManager.shared.localizedString(for: .settingsTitle)
-        navigationItem.leftBarButtonItem = .init(
-            image: UIImage(systemName: "chevron.left"),
-            style: .plain, target: self, action: #selector(dismissSelf))
-        navigationController?.navigationBar.tintColor = .label
-        navigationController?.navigationBar.titleTextAttributes = [
-			.font: Montserrat.medium(size: 17),
-            .foregroundColor: UIColor.label
-        ]
     }
     
     func presentPaywall() {
@@ -259,14 +251,30 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         present(controller, animated: true)
     }
     
+    func setupToolBar() {
+        toolBarView = ToolBarView(frame: .zero, centerItem: .editSet)
+        toolBarView.delegate = self
+        toolBarView.centerItem = .title
+        toolBarView.trailingItem = .none
+        toolBarView.title = "Settings"
+        toolBarView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(toolBarView)
+        
+        NSLayoutConstraint.activate([
+            toolBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            toolBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            toolBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            toolBarView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+    }
+    
     @objc func dismissSelf() {
         dismiss(animated: true)
     }
     
-    static func createSettingsNavigationController() -> UINavigationController {
+    static func createSettingsNavigationController() -> SettingsViewController {
         let controller = SettingsViewController()
-        let nav = UINavigationController(rootViewController: controller)
-        return nav
+        return controller
     }
     
     func localize() {
@@ -281,4 +289,16 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         ]
         tableView?.reloadData()
     }
+}
+
+extension SettingsViewController: ToolBarViewDelegate {
+    func didTapTrailingItem() {}
+    
+    func didTapLeadingItem() {
+        dismiss(animated: true)
+    }
+    
+    func didTapUndo() {}
+    func didTapLayers() {}
+    func didTapRedo() {}
 }

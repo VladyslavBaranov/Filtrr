@@ -8,21 +8,14 @@
 import SwiftUI
 import AVKit
 
-struct PricingItem {
-    var index: Int
-    var price: String
-    var title: String
-    var subtitle: String
-    
-    var isSelected = false
-	var postDescription: String = ""
-}
-
 final class PaywallHostingController: UIHostingController<PaywallView> {
     
     override init(rootView: PaywallView) {
         super.init(rootView: rootView)
         self.rootView.onCloseButtonTapped = dismissSelf
+        StoreObserver.shared.finishedCallback = { [unowned self] in
+            dismiss(animated: true)
+        }
     }
     
     func dismissSelf() {
@@ -36,7 +29,7 @@ final class PaywallHostingController: UIHostingController<PaywallView> {
 struct PaywallOptionView: View {
     
     @Binding var selectedItem: Int
-    @State var pricingItem: PricingItem
+    @State var pricingItem: AppProduct
     
     var body: some View {
         HStack(spacing: 16) {
@@ -45,9 +38,9 @@ struct PaywallOptionView: View {
                 .frame(width: 24, height: 24)
                 .padding(.leading, 16)
             VStack(alignment: .leading, spacing: 10) {
-                Text(pricingItem.title)
+                Text(pricingItem.getTitle())
                     .font(Font(UIFont(name: "Montserrat-Bold", size: 15) ?? .systemFont(ofSize: 15)))
-                Text(pricingItem.subtitle)
+                Text(pricingItem.getSubtitle())
                     .font(Font(UIFont(name: "Montserrat-Regular", size: 10) ?? .systemFont(ofSize: 10)))
                     .foregroundColor(pricingItem.index == selectedItem ? Color(uiColor: .appAccent) : Color(uiColor: .lightGray))
             }
@@ -56,7 +49,7 @@ struct PaywallOptionView: View {
                 Text("$")
                     .font(Font(Montserrat.regular(size: 10)))
                     .offset(x: 0, y: -4)
-                Text("\(pricingItem.price)")
+                Text("\(pricingItem.getPrice())")
                     .font(Font(Montserrat.semibold(size: 20)))
                 Text("/m")
                     .font(Font(Montserrat.regular(size: 10)))
@@ -94,29 +87,6 @@ struct PaywallView: View {
     }
     
     @State var selectedItem: Int = 0
-    @State var pricingItems: [PricingItem] = [
-		.init(
-            index: 0,
-            price: "5.99",
-            title: LocalizationManager.shared.localizedString(for: .settingsYearTitle),
-            subtitle: LocalizationManager.shared.localizedString(for: .settingsYearCaption),
-            postDescription: LocalizationManager.shared.localizedString(for: .settingsYearPriceFull)
-        ),
-        .init(
-            index: 1,
-            price: "4.99",
-            title: LocalizationManager.shared.localizedString(for: .settings6MonthTitle),
-            subtitle: LocalizationManager.shared.localizedString(for: .settings6MonthCapion),
-            postDescription: LocalizationManager.shared.localizedString(for: .settings6MonthFull)
-        ),
-		.init(
-            index: 2,
-            price: "6.99",
-            title: LocalizationManager.shared.localizedString(for: .settingsMonthTitle),
-            subtitle: LocalizationManager.shared.localizedString(for: .settingsMonthCaption),
-            isSelected: true
-        ),
-    ]
     
     private func clampOffset(_ reader: GeometryProxy) -> CGFloat {
         let offset = reader.frame(in: .global).minY
@@ -170,32 +140,48 @@ struct PaywallView: View {
                     .offset(y: clampOffset2(reader))
             }.frame(height: UIScreen.main.bounds.height / 2)
             
-            ZStack {
-                VStack(alignment: .center, spacing: 16) {
-                    PaywallOptionView(selectedItem: $selectedItem, pricingItem: pricingItems[0])
-                        .padding(.top, 40)
-                    PaywallOptionView(selectedItem: $selectedItem, pricingItem: pricingItems[1])
-                    PaywallOptionView(selectedItem: $selectedItem, pricingItem: pricingItems[2])
-                    Spacer(minLength: 120)
-                }
-                
-                VStack(alignment: .center) {
-                    Spacer()
-                    Button {
-                        print("Subscribe")
-                    } label: {
-                        Text(LocalizationManager.shared.localizedString(for: .settingsSubscribNow))
-                            .foregroundColor(.white)
-                            .font(Font(Montserrat.semibold(size: 17)))
-                            .frame(width: UIScreen.main.bounds.width - 120, height: 60)
-                            .background(Color(uiColor: .appAccent))
-                            .cornerRadius(30)
+            if !storeHelper.products.isEmpty {
+                ZStack {
+                    VStack(alignment: .center, spacing: 16) {
+                        PaywallOptionView(
+                            selectedItem: $selectedItem,
+                            pricingItem: storeHelper.products[0])
+                            .padding(.top, 40)
+                        PaywallOptionView(
+                            selectedItem: $selectedItem,
+                            pricingItem: storeHelper.products[1])
+                        PaywallOptionView(
+                            selectedItem: $selectedItem,
+                            pricingItem: storeHelper.products[2])
+                        Spacer(minLength: 120)
                     }
-                    Text(pricingItems[selectedItem].postDescription)
-                        .font(Font(Montserrat.regular(size: 13)))
                     
+                    VStack(alignment: .center) {
+                        Spacer()
+                        Button {
+                            storeHelper.buy(product: storeHelper.products[selectedItem].skProduct)
+                        } label: {
+                            Text(LocalizationManager.shared.localizedString(for: .settingsSubscribNow))
+                                .foregroundColor(.white)
+                                .font(Font(Montserrat.semibold(size: 17)))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 60)
+                                .background(Color(uiColor: .appAccent))
+                                .cornerRadius(30)
+                                .padding([.leading, .trailing], 50)
+                        }
+                        Text("pricingItems[selectedItem]")
+                            .font(Font(Montserrat.regular(size: 13)))
+                        
+                    }
+                    .padding(Edge.Set.bottom, 40)
                 }
-                .padding(Edge.Set.bottom, 40)
+            } else {
+                VStack(alignment: .center) {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                }
+                .frame(height: 200)
             }
         }.ignoresSafeArea()
     }

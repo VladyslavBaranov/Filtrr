@@ -34,10 +34,18 @@
 			"name": "Arial",
 			"fontname": "Arial"
 		},
+        {
+            "name": "Avenir",
+            "fontname": "Avenir-Black"
+        },
 		{
 			"name": "Courier New",
 			"fontname": "Courier New"
 		},
+        {
+            "name": "Georgia",
+            "fontname": "Georgia-BoldItalic"
+        },
 		{
 			"name": "Times New Roman",
 			"fontname": "Times New Roman"

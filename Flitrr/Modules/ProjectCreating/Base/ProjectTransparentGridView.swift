@@ -9,6 +9,8 @@ import UIKit
 
 final class ProjectTransparentGridView: AdjustableView {
     
+    var targetImageSize: CGSize = .init(width: 1080, height: 1080)
+    
     enum BackgroundMode {
         case plainColor(UIColor)
         case image(UIImage)
@@ -71,13 +73,16 @@ final class ProjectTransparentGridView: AdjustableView {
         
         switch bakgroundMode {
         case .plainColor(let uIColor):
+            
+            
+            let count = UIDevice.current.userInterfaceIdiom == .pad ? 45 : 22
             if uIColor == .clear {
-                let dimension: CGFloat = rect.width / 22.0
+                let dimension: CGFloat = rect.width / CGFloat(count)
                 var x: CGFloat = 0.0
                 var y: CGFloat = 0.0
                 
                 while y <= rect.height {
-                    for i in 0..<22 {
+                    for i in 0..<count {
                         ctx.addRect(.init(x: x, y: y, width: dimension, height: dimension))
                         if i % 2 == 0 {
                             ctx.setFillColor(UIColor.appGray.cgColor)
@@ -113,24 +118,32 @@ final class ProjectTransparentGridView: AdjustableView {
     }
     
     func createPNG() -> Data? {
-        let renderer = UIGraphicsImageRenderer(bounds: bounds)
-        let image = renderer.image { rendererContext in
-            let ctx = rendererContext.cgContext
-            switch bakgroundMode {
-            case .plainColor(let uIColor):
-                
-                ctx.setFillColor(uIColor.cgColor)
-                ctx.fill(bounds)
-                
-                for adjustable in adjustables {
-                    adjustable.render(in: ctx)
-                }
-                
-            default:
-                layer.render(in: ctx)
+        
+        let xFactor = targetImageSize.width / bounds.width
+        let yFactor = targetImageSize.height / bounds.height
+        
+        UIGraphicsBeginImageContext(targetImageSize)
+        
+        guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
+        
+        switch bakgroundMode {
+        case .plainColor(let uIColor):
+            
+            ctx.setFillColor(uIColor.cgColor)
+            ctx.fill(.init(origin: .zero, size: targetImageSize))
+            
+            for adjustable in adjustables {
+                adjustable.render(in: ctx, factor: .init(x: xFactor, y: yFactor))
             }
+            
+        default:
+            layer.render(in: ctx)
         }
-        return image.pngData()
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsGetCurrentContext()
+        
+        return image?.pngData()
     }
     
     func hideTrash() {

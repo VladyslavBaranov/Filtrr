@@ -62,7 +62,8 @@ final class FolderViewController: UIViewController {
     }
     
     private func setupCollection() {
-        let layout = createLayout(cellsPerRow: 2, heightRatio: 1.5, inset: 9.0, usesHorizontalScroll: false, usesHeader: false)
+        let rowsCount = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 3
+        let layout = createLayout(cellsPerRow: rowsCount, heightRatio: 1.5, inset: 9.0, usesHorizontalScroll: false, usesHeader: false)
         // layout.delegate = self
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .appDark
@@ -166,29 +167,11 @@ extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        /*
-        switch currentMode {
-        case .projects:
-            if isSelectionModeEnabled {
-                projects[indexPath.row].isSelected.toggle()
-                (collectionView.cellForItem(at: indexPath) as? ProjectCell)?.isChecked = projects[indexPath.row].isSelected
-                let selectedObjectsCount = projects.filter { $0.isSelected }.count
-                selectionTab.title = "\(selectedObjectsCount) Projects Selected"
-            }
-        case .folders:
-            let folder = folders[indexPath.row]
-            if folder is CreationFolder {
-                showFolderCreationAlert()
-                return
-            }
-            if folder.isForFavorites {
-                showContentsOfFavorites()
-                return
-            }
-            print("SHOW REGULAR FOLDER")
-        }
-         */
-        
+        let project = projects[indexPath.row]
+        let vc = ProjectLookViewController()
+        vc.project = project
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 

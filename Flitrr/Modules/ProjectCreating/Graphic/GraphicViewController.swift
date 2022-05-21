@@ -69,10 +69,17 @@ final class MainCollectionReusableView: UICollectionReusableView {
     }
 }
 
+protocol GraphicViewControllerDelegate: AnyObject {
+    func didSelectGraphic(_ uiImage: UIImage)
+}
+ 
 final class GraphicViewController: UIViewController {
     
     let loader = GraphicsLoader()
     
+    weak var delegate: GraphicViewControllerDelegate!
+    
+    private var closeButton: UIButton!
     private var navigationView: NavigationView!
     var searchTextField: UISearchTextField!
     private var shapeCategoryPicker: ValuePickerView!
@@ -87,10 +94,26 @@ final class GraphicViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        shapeCategoryPicker.frame = .init(x: 0, y: view.safeAreaInsets.top + 130, width: view.bounds.width, height: 80)
+        collectionView.contentInset = .init(top: navigationView.frame.maxY, left: 0, bottom: 0, right: 0)
+        //shapeCategoryPicker.frame = .init(x: 0, y: view.safeAreaInsets.top + 130, width: view.bounds.width, height: 80)
+    }
+    
+    @objc func dismissSelf() {
+        dismiss(animated: true)
     }
     
     func setupTopViews() {
+        
+        closeButton = UIButton(type: .close)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
+        ])
+        
         navigationView = NavigationView(frame: .zero)
         navigationView.hidesSettingsButton = true
         navigationView.translatesAutoresizingMaskIntoConstraints = false
@@ -101,22 +124,22 @@ final class GraphicViewController: UIViewController {
             navigationView.heightAnchor.constraint(equalToConstant: 80),
             navigationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             navigationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            navigationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            navigationView.topAnchor.constraint(equalTo: closeButton.bottomAnchor)
         ])
-        
-        searchTextField = UISearchTextField()
-        searchTextField.backgroundColor = .appDark
-        searchTextField.placeholder = "Search Graphics"
-        searchTextField.clearButtonMode = .whileEditing
-        view.addSubview(searchTextField)
-        searchTextField.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            searchTextField.heightAnchor.constraint(equalToConstant: 50),
-            searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            searchTextField.topAnchor.constraint(equalTo: navigationView.bottomAnchor)
-        ])
-        setupShapePicker()
+        //
+        // searchTextField = UISearchTextField()
+        // searchTextField.backgroundColor = .appDark
+        // searchTextField.placeholder = "Search Graphics"
+        // searchTextField.clearButtonMode = .whileEditing
+        // view.addSubview(searchTextField)
+        // searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        // NSLayoutConstraint.activate([
+        //     searchTextField.heightAnchor.constraint(equalToConstant: 50),
+        //     searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+        //     searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+        //     searchTextField.topAnchor.constraint(equalTo: navigationView.bottomAnchor)
+        // ])
+        // setupShapePicker()
     }
     
     func setupShapePicker() {
@@ -131,7 +154,10 @@ final class GraphicViewController: UIViewController {
     }
     
     func setupCollection() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9, usesHorizontalScroll: true))
+        collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9, usesHorizontalScroll: true)
+        )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         collectionView.backgroundColor = .clear
@@ -169,25 +195,35 @@ extension GraphicViewController: UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y + view.safeAreaInsets.top + 222
+        let offset = scrollView.contentOffset.y + navigationView.frame.maxY
         if offset > 0 {
             let fraction = 1 - offset / 80
             navigationView.alpha = fraction
-            searchTextField?.alpha = fraction
+            // searchTextField?.alpha = fraction
             
-            let pickerFraction = 1 - offset / 40
-            shapeCategoryPicker.alpha = pickerFraction
+            //let pickerFraction = 1 - offset / 40
+            // shapeCategoryPicker.alpha = pickerFraction
         } else {
             navigationView.alpha = 1
-            searchTextField?.alpha = 1
-            shapeCategoryPicker.alpha = 1
+            // searchTextField?.alpha = 1
+            // shapeCategoryPicker.alpha = 1
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let observingVC = GraphicsObservingViewController()
+        observingVC.delegate = self
         observingVC.collection = loader.collections[indexPath.row]
         observingVC.modalPresentationStyle = .fullScreen
         observingVC.overrideUserInterfaceStyle = .dark
         present(observingVC, animated: true)
+    }
+}
+
+extension GraphicViewController: GraphicsObservingViewControllerDelegate {
+    func didSelect(_ uiImage: UIImage?) {
+        if let uiImage = uiImage {
+            delegate?.didSelectGraphic(uiImage)
+        }
+        dismiss(animated: true)
     }
 }

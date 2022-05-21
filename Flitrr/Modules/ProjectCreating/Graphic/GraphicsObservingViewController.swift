@@ -7,13 +7,18 @@
 
 import UIKit
 
+protocol GraphicsObservingViewControllerDelegate: AnyObject {
+    func didSelect(_ uiImage: UIImage?)
+}
+
 final class GraphicsObservingViewController: UIViewController {
     
+    weak var delegate: GraphicsObservingViewControllerDelegate!
     var collection: GraphicsCollection!
     
-    var collectionView: UICollectionView!
+    private var collectionView: UICollectionView!
     
-    var headerView: GraphicsStretchyHeader!
+    private var headerView: GraphicsStretchyHeader!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +28,7 @@ final class GraphicsObservingViewController: UIViewController {
         headerView = GraphicsStretchyHeader(
             frame: .init(x: 0, y: 0, width: view.bounds.width, height: view.bounds.width * 0.6)
         )
+        headerView.defaultHeight = view.bounds.width * 0.6
         headerView.imageView.image = UIImage(named: collection.header)
         headerView.title = collection.title
         headerView.countLabel.text = "\(collection.numberOfPics) graphics"
@@ -77,7 +83,11 @@ extension GraphicsObservingViewController: UICollectionViewDelegate, UICollectio
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        dismiss(animated: true)
+        dismiss(animated: true) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.delegate?.didSelect(UIImage(
+                named: strongSelf.collection.content[indexPath.row].image))
+        }
     }
 }
 

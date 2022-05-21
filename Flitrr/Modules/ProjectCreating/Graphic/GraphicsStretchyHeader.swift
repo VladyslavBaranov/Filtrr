@@ -13,6 +13,7 @@ protocol GraphicsStretchyHeaderDelegate: AnyObject {
 
 final class GraphicsStretchyHeader: UIView {
     
+    var defaultHeight: CGFloat = 0
     weak var delegate: GraphicsStretchyHeaderDelegate!
     var imageView: UIImageView!
     var dimImageView: UIImageView!

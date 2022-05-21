@@ -242,6 +242,9 @@ extension AppearanceViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! AppearanceViewCell
+        cell.backgroundColor = .systemGray6
+        cell.layer.cornerRadius = 8
+        cell.layer.cornerCurve = .continuous
         cell.setItem(sections[indexPath.section].items[indexPath.row])
         return cell
     }

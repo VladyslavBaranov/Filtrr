@@ -94,6 +94,11 @@
 		1E98AD9A28168394006DAE75 /* ScrollableRoundedBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD9928168394006DAE75 /* ScrollableRoundedBar.swift */; };
 		1E98AD9D281699DB006DAE75 /* ImageLibraryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD9C281699DB006DAE75 /* ImageLibraryPickerViewController.swift */; };
 		1E98ADA02816B438006DAE75 /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD9F2816B438006DAE75 /* HorizontalCollectionView.swift */; };
+		1EAE085A283807DE000A185F /* AdjustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE0859283807DE000A185F /* AdjustViewController.swift */; };
+		1EAE085E2838D8A4000A185F /* PrivacyPolicy.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1EAE085D2838D8A4000A185F /* PrivacyPolicy.rtf */; };
+		1EAE086128390625000A185F /* ProjectLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE086028390625000A185F /* ProjectLookViewController.swift */; };
+		1EAE086328390E89000A185F /* ProjectFileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE086228390E89000A185F /* ProjectFileInfoViewController.swift */; };
+		1EAE086728392B08000A185F /* BackgroundRemoval in Frameworks */ = {isa = PBXBuildFile; productRef = 1EAE086628392B08000A185F /* BackgroundRemoval */; };
 		1EC9915A282E58B9006B2D38 /* GraphicsObservingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */; };
 		1EC9915C282E5FB6006B2D38 /* GraphicsStretchyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */; };
 		1EF9521F282ED6830002A6E7 /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF9521E282ED6830002A6E7 /* AppearanceViewController.swift */; };
@@ -229,6 +234,10 @@
 		1E98AD9928168394006DAE75 /* ScrollableRoundedBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableRoundedBar.swift; sourceTree = "<group>"; };
 		1E98AD9C281699DB006DAE75 /* ImageLibraryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLibraryPickerViewController.swift; sourceTree = "<group>"; };
 		1E98AD9F2816B438006DAE75 /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
+		1EAE0859283807DE000A185F /* AdjustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustViewController.swift; sourceTree = "<group>"; };
+		1EAE085D2838D8A4000A185F /* PrivacyPolicy.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = PrivacyPolicy.rtf; sourceTree = "<group>"; };
+		1EAE086028390625000A185F /* ProjectLookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLookViewController.swift; sourceTree = "<group>"; };
+		1EAE086228390E89000A185F /* ProjectFileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFileInfoViewController.swift; sourceTree = "<group>"; };
 		1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsObservingViewController.swift; sourceTree = "<group>"; };
 		1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsStretchyHeader.swift; sourceTree = "<group>"; };
 		1EF9521E282ED6830002A6E7 /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EF9522F283141DE0002A6E7 /* StoreKit.framework in Frameworks */,
+				1EAE086728392B08000A185F /* BackgroundRemoval in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +361,7 @@
 		07F9874C281A99E10058139C /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				1EAE085D2838D8A4000A185F /* PrivacyPolicy.rtf */,
 				07F9874D281A9A060058139C /* FontSystem.json */,
 				1E5BCFE72829495400F7B610 /* Filters.json */,
 				1E934C7F2834DADD004D9B8D /* GraphicsSystem.json */,
@@ -510,6 +521,7 @@
 		1E42E04C280DCA640033E6EE /* ProjectCreating */ = {
 			isa = PBXGroup;
 			children = (
+				1EBB40332836288E002A54B9 /* Adjust */,
 				1EF9523028314E990002A6E7 /* Layers */,
 				1E5BCFF8282C1E3E00F7B610 /* Graphic */,
 				1E5BCFF5282B8B4000F7B610 /* Crop */,
@@ -620,6 +632,7 @@
 		1E98AD43280EA679006DAE75 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				1EAE085F28390609000A185F /* ProjectLook */,
 				1EF9523B28324C4E0002A6E7 /* Picker */,
 				1EF95238283186070002A6E7 /* Folder */,
 				1EF9523528316BA60002A6E7 /* Cells */,
@@ -773,6 +786,23 @@
 			path = HorizontalCollection;
 			sourceTree = "<group>";
 		};
+		1EAE085F28390609000A185F /* ProjectLook */ = {
+			isa = PBXGroup;
+			children = (
+				1EAE086028390625000A185F /* ProjectLookViewController.swift */,
+				1EAE086228390E89000A185F /* ProjectFileInfoViewController.swift */,
+			);
+			path = ProjectLook;
+			sourceTree = "<group>";
+		};
+		1EBB40332836288E002A54B9 /* Adjust */ = {
+			isa = PBXGroup;
+			children = (
+				1EAE0859283807DE000A185F /* AdjustViewController.swift */,
+			);
+			path = Adjust;
+			sourceTree = "<group>";
+		};
 		1EF9521D282ED6610002A6E7 /* Appearance */ = {
 			isa = PBXGroup;
 			children = (
@@ -848,6 +878,9 @@
 			dependencies = (
 			);
 			name = Flitrr;
+			packageProductDependencies = (
+				1EAE086628392B08000A185F /* BackgroundRemoval */,
+			);
 			productName = Flitrr;
 			productReference = 1E42E013280DC93D0033E6EE /* Flitrr.app */;
 			productType = "com.apple.product-type.application";
@@ -929,6 +962,9 @@
 				ko,
 			);
 			mainGroup = 1E42E00A280DC93D0033E6EE;
+			packageReferences = (
+				1EAE086528392B08000A185F /* XCRemoteSwiftPackageReference "BackgroundRemoval" */,
+			);
 			productRefGroup = 1E42E014280DC93D0033E6EE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -960,6 +996,7 @@
 				07D15E902818212B00723348 /* PaybAck.ttf in Resources */,
 				07F98754281AA74A0058139C /* PatuaOne-Regular.ttf in Resources */,
 				07F98768281AC3690058139C /* Capture it.ttf in Resources */,
+				1EAE085E2838D8A4000A185F /* PrivacyPolicy.rtf in Resources */,
 				1E98AD51280EAF46006DAE75 /* Montserrat-Medium.ttf in Resources */,
 				07F9877D281ECC610058139C /* Localizable.strings in Resources */,
 				07F98762281ABC730058139C /* HARRYP.TTF in Resources */,
@@ -1019,6 +1056,7 @@
 				1E98AD93281575DA006DAE75 /* Folder+CoreDataClass.swift in Sources */,
 				1E98AD60280EE9DC006DAE75 /* ProjectsFolderCell.swift in Sources */,
 				1E5BCFF7282B8B5700F7B610 /* CropViewController.swift in Sources */,
+				1EAE085A283807DE000A185F /* AdjustViewController.swift in Sources */,
 				1E98AD8328141DE1006DAE75 /* ProjectTransparentGridView.swift in Sources */,
 				1E98AD59280EDEEA006DAE75 /* UIViewController.swift in Sources */,
 				1E98AD95281575DA006DAE75 /* Project+CoreDataClass.swift in Sources */,
@@ -1029,6 +1067,7 @@
 				1EC9915C282E5FB6006B2D38 /* GraphicsStretchyHeader.swift in Sources */,
 				1E98AD46280EA6F6006DAE75 /* ProjectsViewController.swift in Sources */,
 				1E98AD782812955E006DAE75 /* PrivacyPolicyViewController.swift in Sources */,
+				1EAE086128390625000A185F /* ProjectLookViewController.swift in Sources */,
 				07F9876C281AE0B00058139C /* ColorPickerViewController.swift in Sources */,
 				1EF9523A283186210002A6E7 /* FolderViewController.swift in Sources */,
 				1E98AD6928108474006DAE75 /* SettingsViewController.swift in Sources */,
@@ -1060,6 +1099,7 @@
 				1EF9521F282ED6830002A6E7 /* AppearanceViewController.swift in Sources */,
 				1E5BCFF4282AB74900F7B610 /* ShapesViewController.swift in Sources */,
 				07F98770281AF3E00058139C /* CALayer.swift in Sources */,
+				1EAE086328390E89000A185F /* ProjectFileInfoViewController.swift in Sources */,
 				07F98774281BC2260058139C /* SliderSetView.swift in Sources */,
 				1EF9522C28313C320002A6E7 /* StoreObserver.swift in Sources */,
 				1EF95221282F92800002A6E7 /* AppState.swift in Sources */,
@@ -1427,6 +1467,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1EAE086528392B08000A185F /* XCRemoteSwiftPackageReference "BackgroundRemoval" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Ezaldeen99/BackgroundRemoval.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1EAE086628392B08000A185F /* BackgroundRemoval */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE086528392B08000A185F /* XCRemoteSwiftPackageReference "BackgroundRemoval" */;
+			productName = BackgroundRemoval;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1E42E01F280DC93D0033E6EE /* Flitrr.xcdatamodeld */ = {

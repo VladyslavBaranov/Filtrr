@@ -11,7 +11,13 @@ protocol AdjustableImageViewDelegate: AnyObject {
     func didToggleFilterMode(_ view: AdjustableImageView)
 }
 
+enum CropCategory {
+    case original, square, circle, p3x4, p4x3
+}
+
 final class AdjustableImageView: AdjustableView {
+    
+    var cropCategory = CropCategory.original
     
     var imageDelegate: AdjustableImageViewDelegate!
     var currentFilter: Filter! {
@@ -50,7 +56,7 @@ final class AdjustableImageView: AdjustableView {
         imageView.frame = bounds
     }
     
-    override func render(in ctx: CGContext) {
+    override func render(in ctx: CGContext, factor: CGPoint) {
         ctx.move(to: frame.origin)
    
         var blendMode = CGBlendMode.normal
@@ -78,6 +84,11 @@ final class AdjustableImageView: AdjustableView {
         }
         // ctx.rotate(by: .pi / 4)
         // ctx.translateBy(x: -frame.origin.x, y: -frame.origin.y)
+        let frame = CGRect(
+            x: frame.origin.x * factor.x,
+            y: frame.origin.y * factor.y,
+            width: frame.width * factor.x,
+            height: frame.height * factor.y)
         imageView.image?.draw(in: frame, blendMode: blendMode, alpha: 1)
     }
 }

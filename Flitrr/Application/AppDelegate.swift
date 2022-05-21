@@ -15,36 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static func getContext() -> NSManagedObjectContext {
         (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }
+    
+    //var helper: StoreHelper!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         SKPaymentQueue.default().add(StoreObserver.shared)
         
-        // IMG_E73B3163-93F7-45A9-B610-5145EDC61652.png
-        // if let png = UIImage(named: "BlueStar5")?.pngData() {
-        //     let res = ProjectsFileManager.shared.createPNGImage(png, id: UUID())
-        //     print(res)
+        //helper = StoreHelper()
+        // StoreObserver.shared.receiptValidation { date in
+        //     print(date)
         // }
-        
-        //IMG_E73B3163-93F7-45A9-B610-5145EDC61652.png
-        // let png = ProjectsFileManager.shared.getImageDataWith(fileName: "IMG_40735B28-B72F-4BD2-8E9E-54E1FEC07A0C.png")
-        // switch png {
-        // case .success(let data):
-        //     print("bytes", data.count)
-        // default:
-        //     print("ERROR")
-        // }
-        
-        //Project.deleteAll()
-        //if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-        //    if let cs = try? FileManager.default.contentsOfDirectory(atPath: dir.path) {
-        //        print(cs)
-        //        //for c in cs {
-        //        //    try? FileManager.default.removeItem(at: dir.appendingPathComponent(c))
-        //        //}
-        //
-        //    }
-        //}
-        
         
         return true
     }

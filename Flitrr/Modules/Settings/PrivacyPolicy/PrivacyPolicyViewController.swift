@@ -8,6 +8,9 @@
 import UIKit
 
 final class PrivacyPolicyViewController: UIViewController {
+    
+    private var gradientLayer: CAGradientLayer!
+    private var closeButton: UIButton!
     var textView: UITextView!
     
     override func viewDidLoad() {
@@ -16,28 +19,75 @@ final class PrivacyPolicyViewController: UIViewController {
         
         view.backgroundColor = .appDark
         textView = UITextView()
+        textView.contentInset = .init(top: 80, left: 30, bottom: 30, right: 30)
         textView.backgroundColor = .appDark
         textView.textColor = .label
         textView.isEditable = false
         textView.isSelectable = false
         textView.font = UIFont(name: "Montserrat-Regular", size: 15)
-        textView.text = """
-Lorem ipsum dolor sit amet
-
-Consectetur adipiscing elit. Natoque phasellus lobortis mattis cursus faucibus hac proin risus. Turpis phasellus massa ullamcorper volutpat. Ornare commodo non integer fermentum nisi, morbi id. Vel tortor mauris feugiat amet, maecenas facilisis risus, in faucibus. Vestibulum ullamcorper fames eget enim diam fames faucibus duis ac. Aliquam non tellus semper in dignissim nascetur venenatis lacus.
-
-Lectus vel non varius interdum vel tellus sed mattis. Sit laoreet auctor arcu mauris tincidunt sociis tristique pharetra neque. Aliquam pharetra elementum nisl sapien. Erat nisl morbi eu dolor in. Sapien ut lacus dui libero morbi tristique.
-
-Sit praesent mi, dolor, magna in pellentesque sollicitudin odio sed. Sit nibh aliquam enim ipsum lectus sem fermentum congue velit. Purus habitant odio in morbi aliquet velit pulvinar. Facilisis ut amet interdum pretium. Fames pretium eget orci facilisis mattis est libero facilisis ullamcorper. Est auctor amet egestas risus libero et. Auctor faucibus sit id fringilla vitae. Ac volutpat sodales tristique ut netus turpis.
-
-Lorem ipsum dolor sit amet, Consectetur adipiscing elit. Natoque phasellus lobortis mattis cursus faucibus hac proin risus. Turpis phasellus massa ullamcorper volutpat. Ornare commodo non integer fermentum nisi, morbi id. Vel tortor mauris feugiat amet, maecenas facilisis risus, in faucibus. Vestibulum ullamcorper fames eget enim diam fames faucibus duis ac. Aliquam non tellus semper in dignissim nascetur venenatis lacus.
-"""
+        
         view.addSubview(textView)
+        
+        setupCloseButton()
+        
+        guard let file = Bundle.main.url(forResource: "PrivacyPolicy", withExtension: "rtf") else { return }
+        guard let string = try? NSMutableAttributedString(
+            url: file,
+            options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil) else { return }
+        string.addAttribute(
+            NSAttributedString.Key.foregroundColor,
+            value: UIColor.label, range: .init(location: 0, length: string.string.count))
+        textView.attributedText = string
+        
+        setupGradient()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let whiteComponent: CGFloat = traitCollection.userInterfaceStyle == .dark ? 0 : 1
+        gradientLayer.colors = [
+            UIColor(white: whiteComponent, alpha: 0.6).cgColor,
+            UIColor(white: whiteComponent, alpha: 0.3).cgColor,
+            UIColor(white: whiteComponent, alpha: 0).cgColor
+        ]
+    }
+    
+    func setupGradient() {
+        gradientLayer = CAGradientLayer()
+        let whiteComponent: CGFloat = traitCollection.userInterfaceStyle == .dark ? 0 : 1
+        gradientLayer.colors = [
+            UIColor(white: whiteComponent, alpha: 0.6).cgColor,
+            UIColor(white: whiteComponent, alpha: 0.3).cgColor,
+            UIColor(white: whiteComponent, alpha: 0).cgColor
+        ]
+        view.layer.addSublayer(gradientLayer)
+        gradientLayer.locations = [0.0, 0.5, 1.0]
+        gradientLayer.shouldRasterize = true
+        gradientLayer.rasterizationScale = UIScreen.main.scale
+        gradientLayer.startPoint = .init(x: 0.5, y: 0)
+        gradientLayer.endPoint = .init(x: 0.5, y: 1)
+    }
+    
+    func setupCloseButton() {
+        closeButton = UIButton(type: .close)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
+        ])
+    }
+    
+    @objc func dismissSelf() {
+        dismiss(animated: true)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         textView.frame = .init(
-            x: 30, y: view.safeAreaInsets.top + 20, width: view.bounds.width - 60, height: view.bounds.height)
+            x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        gradientLayer.frame = .init(x: 0, y: 0, width: view.bounds.width, height: view.safeAreaInsets.top + 80)
     }
 }

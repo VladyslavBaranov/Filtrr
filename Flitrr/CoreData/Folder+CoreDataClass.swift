@@ -37,10 +37,7 @@ public class Folder: NSManagedObject {
     
     static func dropFolder(_ folder: Folder) {
         let context = AppDelegate.getContext()
-        do {
-            context.delete(folder)
-        } catch {
-        }
+        context.delete(folder)
     }
 }
 

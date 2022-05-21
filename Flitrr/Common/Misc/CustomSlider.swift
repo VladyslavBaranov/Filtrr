@@ -8,6 +8,7 @@
 import UIKit
 
 final class CustomSlider: UISlider {
+
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		minimumTrackTintColor = .white
@@ -30,6 +31,7 @@ final class CustomSliderContainerView: UIView {
 		super.init(frame: frame)
 
 		slider = CustomSlider()
+        slider.frame = bounds
 		addSubview(slider)
 	}
 	

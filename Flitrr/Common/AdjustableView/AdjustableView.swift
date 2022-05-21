@@ -101,7 +101,7 @@ class AdjustableView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
     
-    func render(in ctx: CGContext) {}
+    func render(in ctx: CGContext, factor: CGPoint) {}
 
 	func setAdjustMode() {
 		layer.borderWidth = 0.5

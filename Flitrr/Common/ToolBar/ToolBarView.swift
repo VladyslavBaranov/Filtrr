@@ -73,8 +73,8 @@ final class ToolBarView: UIView {
         }
     }
     
-    private var leadingButton: UIButton!
-    private var trailingButton: UIButton!
+    private(set) var leadingButton: UIButton!
+    private(set) var trailingButton: UIButton!
     
     private var titleLabel: UILabel!
     

@@ -156,9 +156,10 @@ final class ImageLibraryPickerViewController: UIViewController {
     }
     
     func setupMainCollectionView() {
+        let rowsCount = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 6
         collectionView = UICollectionView(
             frame: view.bounds,
-            collectionViewLayout: createLayout(cellsPerRow: 3, heightRatio: 1, inset: 1, usesHorizontalScroll: false)
+            collectionViewLayout: createLayout(cellsPerRow: rowsCount, heightRatio: 1, inset: 1, usesHorizontalScroll: false)
         )
         
         collectionView.backgroundColor = .appDark
