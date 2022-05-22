@@ -40,11 +40,19 @@ final class AdjustableImageView: AdjustableView {
     }
     var imageView: UIImageView!
     
+    var activityIndicator: UIActivityIndicatorView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         imageView = UIImageView(frame: bounds)
         imageView.contentMode = .scaleToFill
         insertSubview(imageView, at: 0)
+        
+        activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.color = .white
+        addSubview(activityIndicator)
+        activityIndicator.hidesWhenStopped = true
+        
     }
     
     required init?(coder: NSCoder) {
@@ -54,6 +62,7 @@ final class AdjustableImageView: AdjustableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.frame = bounds
+        activityIndicator.center = .init(x: bounds.midX, y: bounds.midY)
     }
     
     override func render(in ctx: CGContext, factor: CGPoint) {

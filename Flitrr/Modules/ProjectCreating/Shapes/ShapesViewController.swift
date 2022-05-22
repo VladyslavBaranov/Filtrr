@@ -72,7 +72,7 @@ final class ShapesViewController: UIViewController {
         navigationView = NavigationView(frame: .zero)
         navigationView.hidesSettingsButton = true
         navigationView.translatesAutoresizingMaskIntoConstraints = false
-        navigationView.title = "Shapes"
+        navigationView.title = LocalizationManager.shared.localizedString(for: .shapesTitle)
         view.addSubview(navigationView)
         
         NSLayoutConstraint.activate([
@@ -84,7 +84,7 @@ final class ShapesViewController: UIViewController {
         
         searchTextField = UISearchTextField()
         searchTextField.backgroundColor = .appDark
-        searchTextField.placeholder = "Search Shapes"
+        searchTextField.placeholder = LocalizationManager.shared.localizedString(for: .shapesSearch)
         searchTextField.clearButtonMode = .whileEditing
         view.addSubview(searchTextField)
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -100,7 +100,10 @@ final class ShapesViewController: UIViewController {
     func setupShapePicker() {
         shapeCategoryPicker = ValuePickerView(
             frame: .init(x: 0, y: view.bounds.height - 80, width: view.bounds.width, height: 80))
-        shapeCategoryPicker.titles = ["Basic", "Outline"]
+        shapeCategoryPicker.titles = [
+            LocalizationManager.shared.localizedString(for: .shapesBasic),
+            LocalizationManager.shared.localizedString(for: .shapesOutline)
+        ]
         shapeCategoryPicker.delegate = self
         shapeCategoryPicker.isTransparentAppearance = true
         shapeCategoryPicker.leftInset = 13

@@ -22,13 +22,14 @@
 
 "paywall_year_title" = "Essai GRATUIT de 3 jours - Annuellement";
 "paywall_year_caption" = "Payez annuellement, essai gratuit";
-"paywall_year_price_full" = "Alors 64,99 $ par an";
+"paywall_year_price_full" = "Alors @ par an";
 "paywall_6month_title" = "Essai GRATUIT de 3 jours - 6 mois";
 "paywall_6month_caption" = "Payer pendant 6 mois";
-"paywall_6month_price_full" = "Puis 34,99 $ par 6 mois";
+"paywall_6month_price_full" = "Puis @ par 6 mois";
 "paywall_month_title" = "Mensuel";
 "paywall_month_caption" = "Payer mensuellement";
 "paywall_subscribe_now" = "Abonnez-vous maintenant";
+"paywall_m" = "/m";
 
 "creating_tab_image" = "IMAGE";
 "creating_tab_text" = "TEXTE";
@@ -77,6 +78,7 @@
 "ipicker_square" = "Carré";
 
 "graphics_title" = "Graphiques";
+"graphics_latest" = "Dernières collections";
 
 "background_title" = "Arrière-plan";
 "background_image" = "Image";
@@ -91,3 +93,35 @@
 "shadow_size" = "Angle";
 "shadow_blur" = "Flou";
 "shadow_opacity" = "Opacité";
+
+"adjust_no_bg" = "Pas d'arrière-plan";
+"adjust_contrast" = "Contraste";
+"adjust_saturation" = "Saturation";
+"adjust_brightness" = "Luminosité";
+"adjust_warmth" = "Chaleur";
+
+"layers_hide" = "Masquer";
+"layers_lock" = "Verrouiller";
+"layers_delete" = "Supprimer";
+"layer_ul" = "CALQUE";
+
+"crop_title" = "Rogner";
+"crop_original" = "Original";
+"crop_square" = "Carré";
+"crop_circle" = "Cercle";
+
+"file_info_created" = "Créé";
+"file_info_name" = "Nom de fichier";
+"file_info_ext" = "Extension";
+"file_info_res" = "Résolution";
+"file_info_size" = "Taille";
+
+"discover_title" = "Découvrir";
+"discover_search" = "Modèles de recherche";
+"discover_cat" = "Modèles en vedette";
+
+"alert_title" = "Nouveau projet";
+"alert_description" = "Attention : tous les calques seront fusionnés lors de l'enregistrement";
+"alert_a1" = "Supprimer";
+"alert_a2" = "Annuler";
+"alert_a3" = "Enregistrer";

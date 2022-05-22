@@ -226,7 +226,10 @@ final class ImageLibraryPickerViewController: UIViewController {
         prefsButton.setImage(.init(systemName: "ellipsis.circle"), for: .normal)
         prefsButton.tintColor = .white
         prefsButton.translatesAutoresizingMaskIntoConstraints = false
-        prefsButton.menu = createMenu(title: "Aspect", imageName: "rectangle.arrowtriangle.2.inward")
+        prefsButton.menu = createMenu(
+            title: LocalizationManager.shared.localizedString(for: .ipickerAspect),
+            imageName: "rectangle.arrowtriangle.2.inward"
+        )
         prefsButton.showsMenuAsPrimaryAction = true
         view.addSubview(prefsButton)
         

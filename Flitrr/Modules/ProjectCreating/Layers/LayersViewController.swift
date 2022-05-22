@@ -49,7 +49,11 @@ final class LayersViewController: UIViewController {
     func setupOptionsPicker() {
         layerOptionsPicker = ValuePickerView(
             frame: .init(x: 0, y: view.bounds.height - 80, width: view.bounds.width, height: 80))
-        layerOptionsPicker.titles = ["Hide", "Lock", "Delete"] //169201
+        layerOptionsPicker.titles = [
+            LocalizationManager.shared.localizedString(for: .layersHide),
+            LocalizationManager.shared.localizedString(for: .layersLock),
+            LocalizationManager.shared.localizedString(for: .layersDelete)
+        ]
         layerOptionsPicker.delegate = self
         view.addSubview(layerOptionsPicker)
     }
@@ -84,7 +88,6 @@ extension LayersViewController: ValuePickerViewDelegate {
             currentlySelectedLayer.isTransformingEnabled.toggle()
         case 2:
             currentlySelectedLayer.isDeleted = true
-            
         default:
             break
         }

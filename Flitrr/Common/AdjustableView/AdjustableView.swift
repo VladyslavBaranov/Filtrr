@@ -16,7 +16,6 @@ class AdjustableView: UIView {
     
     var id: UUID!
     
-    var isLocked = false
     var isDeleted = false {
         didSet {
             if isDeleted {

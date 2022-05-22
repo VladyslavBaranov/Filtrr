@@ -58,7 +58,7 @@ final class CropViewController: UIViewController {
         toolBarView = ToolBarView(frame: .zero, centerItem: .title)
         toolBarView.leadingItem = .cancel
         toolBarView.trailingItem = .confirm
-        toolBarView.title = "Crop"
+        toolBarView.title = LocalizationManager.shared.localizedString(for: .cropTitle)
         toolBarView.delegate = self
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(toolBarView)
@@ -75,7 +75,11 @@ final class CropViewController: UIViewController {
         cropOptionPicker = ValuePickerView(
             frame: .init(x: 0, y: view.bounds.height - 80, width: view.bounds.width, height: 80))
         cropOptionPicker.isTransparentAppearance = true
-        cropOptionPicker.titles = ["Original", "Square", "Circle", "3:4", "4:3"]
+        cropOptionPicker.titles = [
+            LocalizationManager.shared.localizedString(for: .cropOriginal),
+            LocalizationManager.shared.localizedString(for: .cropSquare),
+            LocalizationManager.shared.localizedString(for: .cropCircle)
+        ]
         cropOptionPicker.delegate = self
         view.addSubview(cropOptionPicker)
     }
@@ -98,22 +102,32 @@ extension CropViewController: ToolBarViewDelegate {
 
 extension CropViewController: ValuePickerViewDelegate {
     func didSelectValue(at index: Int) {
+        let original = originalImage
         switch index {
         case 0:
             adjustableView.imageView.image = originalImage
-            adjustableView.imageView.contentMode = .scaleAspectFit
         case 1:
-            adjustableView.imageView.image = originalImage.squareCut()
-            adjustableView.imageView.contentMode = .scaleAspectFit
+            adjustableView.activityIndicator.startAnimating()
+            DispatchQueue.global().async {
+                let res = original?.squareCut()
+                DispatchQueue.main.async { [unowned self] in
+                    adjustableView.imageView.image = res
+                    adjustableView.activityIndicator.stopAnimating()
+                }
+            }
         case 2:
-            adjustableView.imageView.image = originalImage.circleCut()
-            adjustableView.imageView.contentMode = .scaleAspectFit
+            adjustableView.activityIndicator.startAnimating()
+            DispatchQueue.global().async {
+                let res = original?.circleCut()
+                DispatchQueue.main.async { [unowned self] in
+                    adjustableView.imageView.image = res
+                    adjustableView.activityIndicator.stopAnimating()
+                }
+            }
         case 3:
             adjustableView.imageView.image = originalImage.proportionCut(x: 3, y: 4)
-            adjustableView.imageView.contentMode = .scaleAspectFit
         case 4:
             adjustableView.imageView.image = originalImage.proportionCut(x: 4, y: 3)
-            adjustableView.imageView.contentMode = .scaleAspectFit
         default:
             break
         }

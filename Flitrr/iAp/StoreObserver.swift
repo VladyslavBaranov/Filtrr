@@ -11,6 +11,18 @@ final class StoreObserver: NSObject, SKPaymentTransactionObserver {
     
     static let shared = StoreObserver()
     
+    func setCurrent(product id: String) {
+        UserDefaults.standard.set(id, forKey: "com.filtrr.subscriptionid")
+    }
+    
+    func isSubscribed() -> Bool {
+        UserDefaults.standard.value(forKey: "com.filtrr.subscriptionid") != nil
+    }
+    
+    func dropSubscription() {
+        UserDefaults.standard.removeObject(forKey: "com.filtrr.subscriptionid")
+    }
+    
     var finishedCallback: (() -> ())?
     
     func buy(_ product: AppProduct) {
@@ -29,11 +41,13 @@ final class StoreObserver: NSObject, SKPaymentTransactionObserver {
             case .purchasing:
                 break
             case .purchased:
+                setCurrent(product: transaction.payment.productIdentifier)
                 finishedCallback?()
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .failed:
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .restored:
+                setCurrent(product: transaction.payment.productIdentifier)
                 finishedCallback?()
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .deferred:
@@ -44,14 +58,21 @@ final class StoreObserver: NSObject, SKPaymentTransactionObserver {
         }
     }
     
-    func receiptValidation(_ expirationDate: @escaping (Date?) -> ()) {
+    func receiptValidation(_ completion: @escaping (ValidationResponse?) -> ()) {
+        
+        #if DEBUG
         let verifyReceiptURL = "https://sandbox.itunes.apple.com/verifyReceipt"
+        #else
+        let verifyReceiptURL = "https://buy.itunes.apple.com/verifyReceipt"
+        #endif
+        
         let receiptFileURL = Bundle.main.appStoreReceiptURL
         let receiptData = try? Data(contentsOf: receiptFileURL!)
         let recieptString = receiptData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
         let jsonDict: [String: AnyObject] = [
             "receipt-data": recieptString! as AnyObject,
-            "password": "787ca6b864714cdea4ed6d55802d1fe4" as AnyObject
+            "password": "787ca6b864714cdea4ed6d55802d1fe4" as AnyObject,
+            "exclude-old-transactions": 1 as AnyObject
         ]
         
         do {
@@ -61,38 +82,31 @@ final class StoreObserver: NSObject, SKPaymentTransactionObserver {
             storeRequest.httpMethod = "POST"
             storeRequest.httpBody = requestData
             let session = URLSession(configuration: URLSessionConfiguration.default)
-            let task = session.dataTask(with: storeRequest, completionHandler: { [weak self] (data, response, error) in
-                do {
-                    if let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
-                        print("Response :",jsonResponse)
-                        if let date = self?.getExpirationDateFromResponse(jsonResponse) {
-                            expirationDate(date)
+            let task = session.dataTask(
+                with: storeRequest,
+                completionHandler: { (data, response, error) in
+                    if let data = data {
+                        do {
+                            if let jsonResponse = try JSONSerialization.jsonObject(
+                                with: data,
+                                options: JSONSerialization.ReadingOptions.mutableContainers
+                            ) as? NSDictionary {
+                                // print("Response :", jsonResponse)
+                                let obj = ValidationResponse(jsonResponse)
+                                completion(obj)
+                            } else {
+                                completion(nil)
+                            }
+                        } catch {
+                            completion(nil)
                         }
+                    } else {
+                        completion(nil)
                     }
-                } catch let parseError {
-                    print(parseError)
-                }
             })
             task.resume()
-        } catch let parseError {
-            print(parseError)
+        } catch {
+            completion(nil)
         }
     }
-    
-    
-    func getExpirationDateFromResponse(_ jsonResponse: NSDictionary) -> Date? {
-        if let receiptInfo: NSArray = jsonResponse["latest_receipt_info"] as? NSArray {
-            let lastReceipt = receiptInfo.lastObject as! NSDictionary
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss VV"
-            if let expiresDate = lastReceipt["expires_date"] as? String {
-                return formatter.date(from: expiresDate)
-            }
-            return nil
-        }
-        else {
-            return nil
-        }
-    }
-    
 }

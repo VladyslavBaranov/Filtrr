@@ -32,6 +32,7 @@ enum LocalizationKey: String {
     case settings6MonthFull = "paywall_6month_price_full"
 	case settingsMonthTitle = "paywall_month_title"
 	case settingsMonthCaption = "paywall_month_caption"
+    case paywallM = "paywall_m"
     
     case creatingTabImage = "creating_tab_image"
     case creatingTabText = "creating_tab_text"
@@ -73,6 +74,7 @@ enum LocalizationKey: String {
     case ipickerSquare = "ipicker_square"
 
     case graphicsTitle = "graphics_title"
+    case graphicsLatest = "graphics_latest"
 
     case backgroundTitle = "background_title"
     case backgroundImage = "background_image"
@@ -87,7 +89,37 @@ enum LocalizationKey: String {
     case shadowAngle = "shadow_angle"
     case shadowBlur = "shadow_blur"
     case shadowOpacity = "shadow_opacity"
+    
+    case adjustNoBg = "adjust_no_bg"
+    case adjustContrast = "adjust_contrast"
+    case adjustSaturation = "adjust_saturation"
+    case adjustBrightness = "adjust_brightness"
+    case adjustWarmth = "adjust_warmth"
 
+    case layersHide = "layers_hide"
+    case layersLock = "layers_lock"
+    case layersDelete = "layers_delete"
+    case layersUL = "layer_ul"
+
+    case cropTitle = "crop_title"
+    case cropOriginal = "crop_original"
+    case cropSquare = "crop_square"
+    case cropCircle = "crop_circle"
+    
+    case discoverTitle = "discover_title"
+    case discoverSearch = "discover_search"
+    case discoverCat = "discover_cat"
+    
+    case shapesTitle = "shapes_title"
+    case shapesSearch = "shapes_search"
+    case shapesBasic = "shapes_basic"
+    case shapesOutline = "shapes_outline"
+    
+    case alertTitle = "alert_title"
+    case alertDesc = "alert_description"
+    case alertA1 = "alert_a1"
+    case alertA2 = "alert_a2"
+    case alertA3 = "alert_a3"
 }
 
 final class LocalizationManager {
@@ -111,9 +143,9 @@ final class LocalizationManager {
 	}
 	
 	func localizedString(for key: LocalizationKey) -> String {
-        bundle.localizedString(forKey: key.rawValue, value: nil, table: nil)
+        bundle?.localizedString(forKey: key.rawValue, value: nil, table: nil) ?? ""
 	}
     func localizedString(for key: String) -> String {
-        bundle.localizedString(forKey: key, value: nil, table: nil)
+        bundle?.localizedString(forKey: key, value: nil, table: nil) ?? ""
     }
 }

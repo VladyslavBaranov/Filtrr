@@ -138,8 +138,18 @@
         "parameters": []
     },
     {
+        "displayName": "CRYSTAL",
+        "filterName": "CICrystallize",
+        "parameters": []
+    },
+    {
         "displayName": "EDGE WORK",
         "filterName": "CIEdgeWork",
+        "parameters": []
+    },
+    {
+        "displayName": "OVERLAY",
+        "filterName": "CILineOverlay",
         "parameters": []
     },
     {
@@ -154,5 +164,30 @@
                 "max": 1
             }
         ]
+    },
+    {
+        "displayName": "INSTANT",
+        "filterName": "CIPhotoEffectInstant",
+        "parameters": []
+    },
+    {
+        "displayName": "PROCESS",
+        "filterName": "CIPhotoEffectProcess",
+        "parameters": []
+    },
+    {
+        "displayName": "SEPIA",
+        "filterName": "CISepiaTone",
+        "parameters": []
+    },
+    {
+        "displayName": "MAXIMUM",
+        "filterName": "CIMaximumComponent",
+        "parameters": []
+    },
+    {
+        "displayName": "MINIMUM",
+        "filterName": "CIMinimumComponent",
+        "parameters": []
     }
 ]

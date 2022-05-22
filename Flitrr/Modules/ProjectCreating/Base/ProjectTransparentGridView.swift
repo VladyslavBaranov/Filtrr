@@ -12,16 +12,28 @@ final class ProjectTransparentGridView: AdjustableView {
     var targetImageSize: CGSize = .init(width: 1080, height: 1080)
     
     enum BackgroundMode {
+        case renderClear
         case plainColor(UIColor)
         case image(UIImage)
         case gradient([UIColor])
     }
     
+    var isClearBackground: Bool = true
     var adjustables: [AdjustableView] = []
     var trashButton: UIButton!
     
     var bakgroundMode = BackgroundMode.plainColor(.clear) {
         didSet {
+            switch bakgroundMode {
+            case .plainColor(let uIColor):
+                if uIColor == .clear {
+                    isClearBackground = true
+                } else {
+                    isClearBackground = false
+                }
+            default:
+                isClearBackground = false
+            }
             setNeedsDisplay()
         }
     }
@@ -72,17 +84,18 @@ final class ProjectTransparentGridView: AdjustableView {
         guard let ctx = UIGraphicsGetCurrentContext() else { return }
         
         switch bakgroundMode {
+        case .renderClear:
+            UIColor.clear.setFill()
+            UIRectFill(bounds)
         case .plainColor(let uIColor):
-            
-            
             let count = UIDevice.current.userInterfaceIdiom == .pad ? 45 : 22
             if uIColor == .clear {
                 let dimension: CGFloat = rect.width / CGFloat(count)
                 var x: CGFloat = 0.0
                 var y: CGFloat = 0.0
-                
+                var i = 0
                 while y <= rect.height {
-                    for i in 0..<count {
+                    for _ in 0..<count {
                         ctx.addRect(.init(x: x, y: y, width: dimension, height: dimension))
                         if i % 2 == 0 {
                             ctx.setFillColor(UIColor.appGray.cgColor)
@@ -95,6 +108,7 @@ final class ProjectTransparentGridView: AdjustableView {
                             x = 0
                             y += dimension
                         }
+                        i += 1
                     }
                 }
             } else {
@@ -117,6 +131,22 @@ final class ProjectTransparentGridView: AdjustableView {
         
     }
     
+    func prepareForRendering() {
+        gridIsActive = false
+        if isClearBackground {
+            bakgroundMode = .renderClear
+        }
+        for adjustable in adjustables {
+            adjustable.gridIsActive = false
+        }
+    }
+    
+    func unprepare() {
+        if isClearBackground {
+            bakgroundMode = .plainColor(.clear)
+        }
+    }
+    
     func createPNG() -> Data? {
         
         let xFactor = targetImageSize.width / bounds.width
@@ -126,19 +156,22 @@ final class ProjectTransparentGridView: AdjustableView {
         
         guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
         
-        switch bakgroundMode {
-        case .plainColor(let uIColor):
-            
-            ctx.setFillColor(uIColor.cgColor)
-            ctx.fill(.init(origin: .zero, size: targetImageSize))
-            
-            for adjustable in adjustables {
-                adjustable.render(in: ctx, factor: .init(x: xFactor, y: yFactor))
-            }
-            
-        default:
-            layer.render(in: ctx)
-        }
+        // switch bakgroundMode {
+        // case .plainColor(let uIColor):
+        //
+        //     ctx.setFillColor(uIColor.cgColor)
+        //     ctx.fill(.init(origin: .zero, size: targetImageSize))
+        //
+        //     for adjustable in adjustables {
+        //         adjustable.render(in: ctx, factor: .init(x: xFactor, y: yFactor))
+        //     }
+        //
+        // default:
+        //     layer.render(in: ctx)
+        // }
+        
+        drawHierarchy(in: .init(origin: .zero, size: targetImageSize), afterScreenUpdates: false)
+        //-layer.render(in: ctx)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsGetCurrentContext()

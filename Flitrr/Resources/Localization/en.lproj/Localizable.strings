@@ -22,13 +22,14 @@
 
 "paywall_year_title" = "FREE 3 Day Trial - Annually";
 "paywall_year_caption" = "Pay annually, free trial";
-"paywall_year_price_full" = "Then $64.99 per year";
+"paywall_year_price_full" = "Then @ per year";
 "paywall_6month_title" = "FREE 3 Day Trial - 6 months";
 "paywall_6month_caption" = "Pay for 6 months";
-"paywall_6month_price_full" = "Then $34.99 per 6 months";
+"paywall_6month_price_full" = "Then @ per 6 months";
 "paywall_month_title" = "Monthly";
 "paywall_month_caption" = "Pay monthly";
 "paywall_subscribe_now" = "Subscribe now";
+"paywall_m" = "/m";
 
 "creating_tab_image" = "IMAGE";
 "creating_tab_text" = "TEXT";
@@ -77,6 +78,7 @@
 "ipicker_square" = "Square";
 
 "graphics_title" = "Graphics";
+"graphics_latest" = "Latest Collections";
 
 "background_title" = "Background";
 "background_image" = "Image";
@@ -91,3 +93,40 @@
 "shadow_angle" = "Angle";
 "shadow_blur" = "Blur";
 "shadow_opacity" = "Opacity";
+
+"adjust_no_bg" = "No Background";
+"adjust_contrast" = "Contrast";
+"adjust_saturation" = "Saturation";
+"adjust_brightness" = "Brightness";
+"adjust_warmth" = "Warmth";
+
+"layers_hide" = "Hide";
+"layers_lock" = "Lock";
+"layers_delete" = "Delete";
+"layer_ul" = "LAYER";
+
+"crop_title" = "Crop";
+"crop_original" = "Original";
+"crop_square" = "Square";
+"crop_circle" = "Circle";
+
+"file_info_created" = "Created";
+"file_info_name" = "File Name";
+"file_info_ext" = "Extension";
+"file_info_res" = "Resolution";
+"file_info_size" = "Size";
+
+"discover_title" = "Discover";
+"discover_search" = "Search Templates";
+"discover_cat" = "Featured Templates";
+
+"shapes_title" = "Shapes";
+"shapes_search" = "Search Shapes";
+"shapes_basic" = "Basic";
+"shapes_outline" = "Outline";
+
+"alert_title" = "New Project";
+"alert_description" = "Warning: all layers will be merged upon saved";
+"alert_a1" = "Discard";
+"alert_a2" = "Cancel";
+"alert_a3" = "Save";

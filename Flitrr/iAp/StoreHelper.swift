@@ -9,6 +9,7 @@ import StoreKit
 
 class AppProduct {
     
+    var price: Float = 0.0
     var index: Int = 0
     var skProduct: SKProduct!
     var isSelected = false
@@ -22,9 +23,9 @@ class AppProduct {
     
     func getTitle() -> String {
         switch skProduct.productIdentifier {
-        case "com.year.subscription":
+        case "com.year.renewable":
             return LocalizationManager.shared.localizedString(for: .settingsYearTitle)
-        case "com.6months.subscription":
+        case "com.6months.renewable":
             return LocalizationManager.shared.localizedString(for: .settings6MonthTitle)
         default:
             return LocalizationManager.shared.localizedString(for: .settingsMonthTitle)
@@ -33,9 +34,9 @@ class AppProduct {
     
     func getSubtitle() -> String {
         switch skProduct.productIdentifier {
-        case "com.year.subscription":
+        case "com.year.renewable":
             return LocalizationManager.shared.localizedString(for: .settingsYearCaption)
-        case "com.6months.subscription":
+        case "com.6months.renewable":
             return LocalizationManager.shared.localizedString(for: .settings6MonthCapion)
         default:
             return LocalizationManager.shared.localizedString(for: .settingsMonthCaption)
@@ -44,12 +45,29 @@ class AppProduct {
     
     func getDescription() -> String {
         switch skProduct.productIdentifier {
-        case "com.year.subscription":
+        case "com.year.renewable":
             return LocalizationManager.shared.localizedString(for: .settingsYearPriceFull)
-        case "com.6months.subscription":
-            return LocalizationManager.shared.localizedString(for: .settings6MonthCapion)
+                .replacingOccurrences(of: "@", with: "\(getPrice())")
+        case "com.6months.renewable":
+            return LocalizationManager.shared.localizedString(for: .settings6MonthFull)
+                .replacingOccurrences(of: "@", with: "\(getPrice())")
         default:
             return ""
+        }
+    }
+    
+    func getMonthlyPrice() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = skProduct.priceLocale
+
+        switch skProduct.productIdentifier {
+        case "com.year.renewable":
+            return formatter.string(from: NSNumber(value: price / 12.0)) ?? ""
+        case "com.6months.renewable":
+            return formatter.string(from: NSNumber(value: price / 6.0)) ?? ""
+        default:
+            return formatter.string(from: NSNumber(value: price)) ?? ""
         }
     }
 }
@@ -65,7 +83,6 @@ class StoreHelper: NSObject, ObservableObject {
         request = SKProductsRequest(productIdentifiers: products)
         request.delegate = self
         request.start()
-        print("STARTED")
     }
 
     func buy(product: SKProduct) {
@@ -88,11 +105,19 @@ extension StoreHelper: SKProductsRequestDelegate {
                 pr.skProduct = prod
                 pr.index = i
                 pr.isSelected = i == 0
+                pr.price = prod.price.floatValue
                 prods.append(pr)
+                print("#", pr.skProduct.productIdentifier, pr.skProduct.price)
             }
-        }
-        DispatchQueue.main.async { [unowned self] in
-            self.products = prods
+            
+            DispatchQueue.main.async { [unowned self] in
+                self.products = prods //.sorted { $0.price > $1.price }
+                for product in products {
+                    print(product.skProduct.price, product.skProduct.productIdentifier)
+                }
+            }
+            
+            
         }
     }
     

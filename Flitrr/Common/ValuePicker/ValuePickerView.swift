@@ -16,6 +16,9 @@ enum PickerStyle {
 }
 
 final class ValuePickerView: UIView {
+    
+    
+    var isMultiSelectionEnabled = false
 	
     var pickerStyle: PickerStyle = .style1 {
         didSet {
@@ -67,6 +70,17 @@ final class ValuePickerView: UIView {
         didSet {
             for i in 0..<items.count {
                 items[i].isSelected = i == selectedIndex
+            }
+        }
+    }
+    
+    var selectedIdexes: Set<Int> = [] {
+        didSet {
+            for i in 0..<items.count {
+                items[i].isSelected = false
+            }
+            for i in selectedIdexes {
+                items[i].isSelected = true
             }
         }
     }
@@ -128,13 +142,19 @@ extension ValuePickerView: UICollectionViewDelegate, UICollectionViewDataSource,
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		for i in 0..<items.count {
-			items[i].isSelected = i == indexPath.row
-		}
-		collectionView.reloadData()
-		// let cell = collectionView.cellForItem(at: indexPath) as! TextCollectionViewCell
-		// cell.setSelected()
-		delegate?.didSelectValue(at: indexPath.row)
+        if isMultiSelectionEnabled {
+            selectedIdexes.insert(indexPath.row)
+            collectionView.reloadData()
+            delegate?.didSelectValue(at: indexPath.row)
+        } else {
+            for i in 0..<items.count {
+                items[i].isSelected = i == indexPath.row
+            }
+            collectionView.reloadData()
+            // let cell = collectionView.cellForItem(at: indexPath) as! TextCollectionViewCell
+            // cell.setSelected()
+            delegate?.didSelectValue(at: indexPath.row)
+        }
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

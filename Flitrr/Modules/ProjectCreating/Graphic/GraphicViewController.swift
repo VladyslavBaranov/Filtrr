@@ -35,7 +35,7 @@ final class MainCollectionReusableView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         titleLabel = UILabel()
-        titleLabel.text = "Latest Collections"
+        titleLabel.text = LocalizationManager.shared.localizedString(for: .graphicsLatest)
         titleLabel.font = Montserrat.medium(size: 17)
         titleLabel.textAlignment = .left
         titleLabel.sizeToFit()
@@ -117,7 +117,7 @@ final class GraphicViewController: UIViewController {
         navigationView = NavigationView(frame: .zero)
         navigationView.hidesSettingsButton = true
         navigationView.translatesAutoresizingMaskIntoConstraints = false
-        navigationView.title = "Graphics"
+        navigationView.title = LocalizationManager.shared.localizedString(for: .graphicsTitle)
         view.addSubview(navigationView)
         
         NSLayoutConstraint.activate([

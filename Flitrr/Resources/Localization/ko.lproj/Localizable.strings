@@ -22,13 +22,14 @@
 
 "paywall_year_title" = "무료 3일 평가판 - 매년";
 "paywall_year_caption" = "연간 지불, 무료 평가판";
-"paywall_year_price_full" = "그러면 연간 $64.99";
+"paywall_year_price_full" = "그런 다음 @ 매년";
 "paywall_6month_title" = "3일 무료 평가판 - 6개월";
 "paywall_6month_caption" = "6개월 동안 지불";
-"paywall_6month_price_full" = "그럼 6개월당 $34.99";
+"paywall_6month_price_full" = "그런 다음 @ 6개월마다";
 "paywall_month_title" = "매월";
 "paywall_month_caption" = "월별 지불";
 "paywall_subscribe_now" = "지금 구독하세요";
+"paywall_m" = "월";
 
 "creating_tab_image" = "이미지";
 "creating_tab_text" = "텍스트";
@@ -77,6 +78,7 @@
 "ipicker_square" = "사각형";
 
 "graphics_title" = "그래픽";
+"graphics_latest" = "최신 컬렉션";
 
 "background_title" = "배경";
 "background_image" = "이미지";
@@ -91,3 +93,35 @@
 "shadow_angle" = "각도";
 "shadow_blur" = "흐림 효과";
 "shadow_opacity" = "불투명도";
+
+"adjust_no_bg" = "배경 없음";
+"adjust_contrast" = "대비";
+"adjust_saturation" = "채도";
+"adjust_brightness" = "밝기";
+"adjust_warmth" = "따뜻함";
+
+"layers_hide" = "숨기기";
+"layers_lock" = "잠금";
+"layers_delete" = "삭제";
+"layer_ul" = "레이어";
+
+"crop_title" = "자르기";
+"crop_original" = "원본";
+"crop_square" = "사각형";
+"crop_circle" = "원";
+
+"file_info_created" = "생성됨";
+"file_info_name" = "파일 이름";
+"file_info_ext" = "확장자";
+"file_info_res" = "해상도";
+"file_info_size" = "크기";
+
+"discover_title" = "발견";
+"discover_search" = "검색 템플릿";
+"discover_cat" = "추천 템플릿";
+
+"alert_title" = "새 프로젝트";
+"alert_description" = "경고: 모든 레이어는 저장 시 병합됩니다.";
+"alert_a1" = "폐기";
+"alert_a2" = "취소";
+"alert_a3" = "저장";

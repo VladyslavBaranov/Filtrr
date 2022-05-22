@@ -22,13 +22,14 @@
 
 "paywall_year_title" = "免费 3 天试用 - 每年一次";
 "paywall_year_caption" = "按年付费，免费试用";
-"paywall_year_price_full" = "那么每年 64.99 美元";
+"paywall_year_price_full" = "然后@每年";
 "paywall_6month_title" = "免费 3 天试用 - 6 个月";
 "paywall_6month_caption" = "支付 6 个月";
-"paywall_6month_price_full" = "那么每 6 个月 34.99 美元";
+"paywall_6month_price_full" = "然后@每 6 个月";
 "paywall_month_title" = "每月";
 "paywall_month_caption" = "按月支付";
 "paywall_subscribe_now" = "现在订阅";
+"paywall_m" = "月";
 
 "creating_tab_image" = "图像";
 "creating_tab_text" = "文本";
@@ -77,6 +78,7 @@
 "ipicker_square" = "正方形";
 
 "graphics_title" = "图形";
+"graphics_latest" = "最新收藏";
 
 "background_title" = "背景";
 "background_image" = "图像";
@@ -91,3 +93,35 @@
 "shadow_angle" = "角度";
 "shadow_blur" = "模糊";
 "shadow_opacity" = "不透明度";
+
+"adjust_no_bg" = "无背景";
+"adjust_contrast" = "对比度";
+"adjust_saturation" = "饱和度";
+"adjust_brightness" = "亮度";
+"adjust_warmth" = "温暖";
+
+"layers_hide" = "隐藏";
+"layers_lock" = "锁";
+"layers_delete" = "删除";
+"layer_ul" = "层";
+
+"crop_title" = "作物";
+"crop_original" = "原始";
+"crop_square" = "正方形";
+"crop_circle" = "圆";
+
+"file_info_created" = "创建";
+"file_info_name" = "文件名";
+"file_info_ext" = "扩展名";
+"file_info_res" = "分辨率";
+"file_info_size" = "大小";
+
+"discover_title" = "发现";
+"discover_search" = "搜索模板";
+"discover_cat" = "特色模板";
+
+"alert_title" = "新项目";
+"alert_description" = "警告：所有图层将在保存后合并";
+"alert_a1" = "丢弃";
+"alert_a2" = "取消";
+"alert_a3" = "保存";

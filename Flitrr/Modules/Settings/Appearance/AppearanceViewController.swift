@@ -50,6 +50,7 @@ final class AppearanceViewCell: UICollectionViewCell {
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         
         label = UILabel()
+        label.numberOfLines = 0
         label.textAlignment = .center
         label.font = Montserrat.medium(size: 16)
         
@@ -136,7 +137,7 @@ final class AppearanceViewController: UIViewController {
     
     private var sections: [AppearanceSection] = [
         .init(
-            title: "App Icon",
+            title: LocalizationManager.shared.localizedString(for: .settingsIcon),
             items: [
                 .init(isSelected: true, imageName: "Icon-1", title: ""),
                 .init(isSelected: false, imageName: "Icon-3", title: ""),
@@ -144,11 +145,11 @@ final class AppearanceViewController: UIViewController {
             ]
         ),
         .init(
-            title: "Appearance",
+            title: LocalizationManager.shared.localizedString(for: .settingsAppearance),
             items: [
-                .init(isSelected: false, imageName: "", title: "Light"),
-                .init(isSelected: false, imageName: "", title: "Dark"),
-                .init(isSelected: true, imageName: "", title: "System")
+                .init(isSelected: false, imageName: "", title: LocalizationManager.shared.localizedString(for: .settingsLight)),
+                .init(isSelected: false, imageName: "", title: LocalizationManager.shared.localizedString(for: .settingsDark)),
+                .init(isSelected: true, imageName: "", title: LocalizationManager.shared.localizedString(for: .settingsSystem))
             ]
         )
     ]
@@ -192,9 +193,10 @@ final class AppearanceViewController: UIViewController {
     
     func setupToolBar() {
         toolBarView = ToolBarView(frame: .zero, centerItem: .title)
+        toolBarView.backgroundColor = .clear
         toolBarView.leadingItem = .cancel
         toolBarView.trailingItem = .none
-        toolBarView.title = "Appearance"
+        toolBarView.title = LocalizationManager.shared.localizedString(for: .settingsAppearance)
         toolBarView.delegate = self
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(toolBarView)
@@ -272,6 +274,9 @@ extension AppearanceViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // print(scrollView.contentOffset.y)
     }
 }
 

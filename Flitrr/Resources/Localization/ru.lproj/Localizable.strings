@@ -22,13 +22,14 @@
 
 "paywall_year_title" = "БЕСПЛАТНО 3 дня - Ежегодно";
 "paywall_year_caption" = "Оплата ежегодная";
-"paywall_year_price_full" = "Затем $64.99 в год";
+"paywall_year_price_full" = "Затем @ в год";
 "paywall_6month_title" = "БЕСПЛАТНО 3 дня - 6 месяцев";
 "paywall_6month_caption" = "Оплата раз в 6 месяцев";
-"paywall_6month_price_full" = "Затем $34.99 в 6 месяцев";
+"paywall_6month_price_full" = "Затем @ в 6 месяцев";
 "paywall_month_title" = "Месяц";
 "paywall_month_caption" = "Ежемесячная оплата";
 "paywall_subscribe_now" = "Подписаться";
+"paywall_m" = "/м";
 
 "creating_tab_image" = "ФОТО";
 "creating_tab_text" = "ТЕКСТ";
@@ -76,6 +77,7 @@
 "ipicker_square" = "Квадрат";
 
 "graphics_title" = "Графика";
+"graphics_latest" = "Последние коллекции";
 
 "background_title" = "Фон";
 "background_image" = "Фото";
@@ -90,3 +92,35 @@
 "shadow_angle" = "Угол";
 "shadow_blur" = "Мутность";
 "shadow_opacity" = "Прозрачность";
+
+"adjust_no_bg" = "Без фона";
+"adjust_contrast" = "Контраст";
+"adjust_saturation" = "Насыщение";
+"adjust_brightness" = "Яркость";
+"adjust_warmth" = "Теплота";
+
+"layers_hide" = "Спрятать";
+"layers_lock" = "Закрепить";
+"layers_delete" = "Удалить";
+"layer_ul" = "СЛОЙ";
+
+"crop_title" = "Обрезать";
+"crop_original" = "Оригинал";
+"crop_square" = "Квадрат";
+"crop_circle" = "Круг";
+
+"file_info_created" = "Создан";
+"file_info_name" = "Файл";
+"file_info_ext" = "Формат";
+"file_info_res" = "Разширение";
+"file_info_size" = "Размер";
+
+"discover_title" = "Шаблоны";
+"discover_search" = "Поиск шаблонов";
+"discover_cat" = "Популярные шаблоны";
+
+"alert_title" = "Новый проект";
+"alert_description" = "Внимание: все слои будут объединены";
+"alert_a1" = "Удалить";
+"alert_a2" = "Отменить";
+"alert_a3" = "Сохранить";

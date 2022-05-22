@@ -14,6 +14,8 @@ protocol LayersCollectionViewDelegate: AnyObject {
 final class LayersCollectionViewCell: UICollectionViewCell {
     
     var imageView: UIImageView!
+    var label: UILabel!
+    
     var titleLabel: UILabel!
     
     var adjustable: AdjustableView!
@@ -33,7 +35,15 @@ final class LayersCollectionViewCell: UICollectionViewCell {
     
     func set(_ adjustable: AdjustableView) {
         if adjustable is AdjustableImageView {
+            imageView.isHidden = false
+            label.isHidden = true
             imageView.image = (adjustable as! AdjustableImageView).originalImage
+        }
+        if adjustable is AdjustableLabel {
+            imageView.isHidden = true
+            label.isHidden = false
+            label.textAlignment = .center
+            label.text = (adjustable as! AdjustableLabel).label.text
         }
     }
     
@@ -46,17 +56,24 @@ final class LayersCollectionViewCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 8
         
         titleLabel = UILabel()
-        titleLabel.text = "LAYER 1"
+        titleLabel.text = "\(LocalizationManager.shared.localizedString(for: .layersUL)) 1"
         titleLabel.textAlignment = .center
         titleLabel.font = Montserrat.regular(size: 10)
         addSubview(titleLabel)
         
+        label = UILabel()
+        label.numberOfLines = 0
+        label.font = Montserrat.medium(size: 16)
+        label.textColor = .label
+        addSubview(label)
+        label.isHidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.frame = .init(x: 0, y: 0, width: bounds.width, height: bounds.height - 30)
         titleLabel.frame = .init(x: 0, y: bounds.height - 30, width: bounds.width, height: 30)
+        label.frame = .init(x: 0, y: 0, width: bounds.width, height: bounds.height - 30)
     }
     
     required init?(coder: NSCoder) {

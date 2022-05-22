@@ -22,9 +22,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SKPaymentQueue.default().add(StoreObserver.shared)
         
         //helper = StoreHelper()
-        // StoreObserver.shared.receiptValidation { date in
-        //     print(date)
-        // }
+        StoreObserver.shared.receiptValidation { validation in
+            if let validation = validation {
+                if validation.isReqDateLessThanExpiry() {
+                    // print("SUBSCRIPTION IS ACTIVE")
+                } else {
+                    print("SUBSCRIPTION IS NOT ACTIVE")
+                    StoreObserver.shared.dropSubscription()
+                }
+            } else {
+                StoreObserver.shared.dropSubscription()
+            }
+        }
         
         return true
     }

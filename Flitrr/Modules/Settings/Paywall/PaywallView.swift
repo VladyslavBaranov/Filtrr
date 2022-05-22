@@ -46,12 +46,9 @@ struct PaywallOptionView: View {
             }
             Spacer()
             HStack(spacing: 3) {
-                Text("$")
-                    .font(Font(Montserrat.regular(size: 10)))
-                    .offset(x: 0, y: -4)
-                Text("\(pricingItem.getPrice())")
+                Text("\(pricingItem.getMonthlyPrice())")
                     .font(Font(Montserrat.semibold(size: 20)))
-                Text("/m")
+                Text(LocalizationManager.shared.localizedString(for: .paywallM))
                     .font(Font(Montserrat.regular(size: 10)))
                     .offset(x: 0, y: 5)
             }
@@ -75,6 +72,8 @@ struct PaywallOptionView: View {
 }
 
 struct PaywallView: View {
+    
+    @State var dismissButtonOpacity: CGFloat = 0.0
     
     @ObservedObject
     var storeHelper = StoreHelper()
@@ -127,6 +126,7 @@ struct PaywallView: View {
                                     .foregroundColor(.gray)
                                     .font(.title)
                                     .padding(EdgeInsets(top: 45, leading: 20, bottom: 0, trailing: 0))
+                                    .opacity(dismissButtonOpacity)
                             }
                             Spacer()
                         }
@@ -170,7 +170,7 @@ struct PaywallView: View {
                                 .cornerRadius(30)
                                 .padding([.leading, .trailing], 50)
                         }
-                        Text("pricingItems[selectedItem]")
+                        Text(storeHelper.products[selectedItem].getDescription())
                             .font(Font(Montserrat.regular(size: 13)))
                         
                     }
@@ -184,6 +184,11 @@ struct PaywallView: View {
                 .frame(height: 200)
             }
         }.ignoresSafeArea()
+            .onAppear {
+                withAnimation(.linear(duration: 0.3).delay(2)) {
+                    dismissButtonOpacity = 1
+                }
+            }
     }
     
     func getFiltrrPremiumString() -> NSAttributedString {

@@ -79,13 +79,14 @@ class DiscoverViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if !paywallWasShown {
-            // paywallWasShown = true
-            // let controller = PaywallHostingController(rootView: PaywallView())
-            // if UIDevice.current.userInterfaceIdiom == .phone {
-            //     controller.modalPresentationStyle = .fullScreen
-            // }
-            // 
-            // present(controller, animated: true)
+            if !StoreObserver.shared.isSubscribed() {
+                paywallWasShown = true
+                let controller = PaywallHostingController(rootView: PaywallView())
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    controller.modalPresentationStyle = .fullScreen
+                }
+                present(controller, animated: true)
+            }
         }
     }
     
@@ -97,7 +98,7 @@ class DiscoverViewController: UIViewController {
     
     func setupTopViews() {
         navigationView = NavigationView(frame: .zero)
-        navigationView.title = "Discover"
+        navigationView.title = LocalizationManager.shared.localizedString(for: .discoverTitle)
         navigationView.translatesAutoresizingMaskIntoConstraints = false
 		navigationView.onSettingsButtonTapped = openSettings
         view.addSubview(navigationView)
@@ -112,7 +113,7 @@ class DiscoverViewController: UIViewController {
         searchTextField = UISearchTextField()
         searchTextField.returnKeyType = .done
         searchTextField.backgroundColor = .appDark
-        searchTextField.placeholder = "Search Templates"
+        searchTextField.placeholder = LocalizationManager.shared.localizedString(for: .discoverSearch)
         searchTextField.clearButtonMode = .whileEditing
         view.addSubview(searchTextField)
         searchTextField.addTarget(self, action: #selector(searchTextFieldDidChange(_:)), for: .editingChanged)
@@ -175,7 +176,7 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
             ofKind: kind, withReuseIdentifier: "hId", for: indexPath) as! MainCollectionReusableView
         view.associatedHeaderIndex = indexPath.section
         view.showsTrailingButton = false
-        view.title = "Featured Templates"
+        view.title = LocalizationManager.shared.localizedString(for: .discoverCat)
         return view
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

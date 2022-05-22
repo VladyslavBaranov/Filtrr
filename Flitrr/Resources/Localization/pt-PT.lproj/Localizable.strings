@@ -22,13 +22,14 @@
 
 "paywall_year_title" = "Teste GRATUITO de 3 dias - Anualmente";
 "paywall_year_caption" = "Pague anualmente, teste gratuito";
-"paywall_year_price_full" = "Então $ 64,99 por ano";
+"paywall_year_price_full" = "Então @ por ano";
 "paywall_6month_title" = "Teste GRATUITO de 3 dias - 6 meses";
 "paywall_6month_caption" = "Pagar por 6 meses";
-"paywall_6month_price_full" = "Então $ 34,99 por 6 meses";
+"paywall_6month_price_full" = "Então @ por 6 meses";
 "paywall_month_title" = "Mensal";
 "paywall_month_caption" = "Pagar mensalmente";
 "paywall_subscribe_now" = "Assine agora";
+"paywall_m" = "/m";
 
 "creating_tab_image" = "IMAGE";
 "creating_tab_text" = "TEXTO";
@@ -77,6 +78,7 @@
 "ipicker_square" = "Quadrado";
 
 "graphics_title" = "Gráficos";
+"graphics_latest" = "Últimas coleções";
 
 "background_title" = "Plano de fundo";
 "background_image" = "Imagem";
@@ -91,3 +93,35 @@
 "shadow_angle" = "Ângulo";
 "shadow_blur" = "Desfoque";
 "shadow_opacity" = "Opacidade";
+
+"adjust_no_bg" = "Sem fundo";
+"adjust_contrast" = "Contraste";
+"adjust_saturation" = "Saturação";
+"adjust_brightness" = "Brilho";
+"adjust_warmth" = "Calor";
+
+"layers_hide" = "Ocultar";
+"layers_lock" = "Bloquear";
+"layers_delete" = "Excluir";
+"layer_ul" = "CAMADA";
+
+"crop_title" = "Cortar";
+"crop_original" = "Original";
+"crop_square" = "Quadrado";
+"crop_circle" = "Círculo";
+
+"file_info_created" = "Criado";
+"file_info_name" = "Nome do arquivo";
+"file_info_ext" = "Extensão";
+"file_info_res" = "Resolução";
+"file_info_size" = "Tamanho";
+
+"discover_title" = "Descobrir";
+"discover_search" = "Modelos de pesquisa";
+"discover_cat" = "Modelos em destaque";
+
+"alert_title" = "Novo Projeto";
+"alert_description" = "Aviso: todas as camadas serão mescladas ao serem salvas";
+"alert_a1" = "Descartar";
+"alert_a2" = "Cancelar";
+"alert_a3" = "Salvar";

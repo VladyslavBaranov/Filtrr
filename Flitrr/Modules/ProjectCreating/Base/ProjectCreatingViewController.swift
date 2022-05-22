@@ -30,6 +30,8 @@ final class ProjectCreatingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .appDark
         
+        print(targetImageSize)
+        
         if targetImageSize == .zero {
             targetImageSize = .init(width: view.bounds.width, height: view.bounds.width)
         }
@@ -42,8 +44,20 @@ final class ProjectCreatingViewController: UIViewController {
 		transparentGridView.clipsToBounds = true
         //transparentGridView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(transparentGridView)
-        transparentGridView.frame.size = .init(width: view.bounds.width, height: view.bounds.width)
-        transparentGridView.center =  view.center
+        
+        if targetImageSize.width < targetImageSize.height {
+            let factor = targetImageSize.width / targetImageSize.height
+            transparentGridView.frame.size.height = view.bounds.height - UIApplication.shared.getStatusBarHeight() - 190
+            transparentGridView.frame.size.width = transparentGridView.frame.size.height * factor
+            transparentGridView.frame.origin.y = UIApplication.shared.getStatusBarHeight() + 80
+        } else {
+            let factor = targetImageSize.width / targetImageSize.height
+            transparentGridView.frame.size.width = view.bounds.width
+            transparentGridView.frame.size.height = view.bounds.width * factor
+            transparentGridView.center.y = view.center.y
+        }
+        //transparentGridView.frame.origin.y = UIApplication.shared.getStatusBarHeight() + 80
+        transparentGridView.center.x = view.center.x
         
         // NSLayoutConstraint.activate([
         //     transparentGridView.topAnchor.constraint(equalTo: toolBarView.bottomAnchor),
@@ -85,6 +99,8 @@ final class ProjectCreatingViewController: UIViewController {
         toolBarView = ToolBarView(frame: .zero, centerItem: .editSet)
         toolBarView.delegate = self
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
+        toolBarView.trailingItem = .none
+        toolBarView.trailingButton.isEnabled = false
         view.addSubview(toolBarView)
         
         NSLayoutConstraint.activate([
@@ -126,7 +142,7 @@ final class ProjectCreatingViewController: UIViewController {
 
 extension ProjectCreatingViewController: ToolBarViewDelegate {
     func didTapTrailingItem() {
-        transparentGridView.untoggle()
+        transparentGridView.prepareForRendering()
         guard let png = transparentGridView.createPNG() else { return }
 		// let renderer = UIGraphicsImageRenderer(size: transparentGridView.bounds.size)
         //
@@ -139,29 +155,40 @@ extension ProjectCreatingViewController: ToolBarViewDelegate {
     }
     
     func didTapLeadingItem() {
-        
+        transparentGridView.prepareForRendering()
         let alert = UIAlertController(
-            title: "New Project",
-            message: "Warning: all layers will be merged upon saved",
+            title: LocalizationManager.shared.localizedString(for: .alertTitle),
+            message: LocalizationManager.shared.localizedString(for: .alertDesc),
             preferredStyle: .alert)
-        let discardAction = UIAlertAction(title: "Discard", style: .destructive) { [unowned self] _ in
+        let discardAction = UIAlertAction(
+            title: LocalizationManager.shared.localizedString(for: .alertA1), style: .destructive) { [unowned self] _ in
             dismiss(animated: true)
         }
         
         alert.addAction(discardAction)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        let cancelAction = UIAlertAction(title: LocalizationManager.shared.localizedString(for: .alertA2), style: .default) { [unowned self] _ in
+            self.transparentGridView.unprepare()
+        }
         
         alert.addAction(cancelAction)
-        let saveAction = UIAlertAction(title: "Save", style: .cancel) { [unowned self] _ in
-            guard let png = transparentGridView.createPNG() else { return }
-            Project.createProjectAndSave(
-                pngData: png)
-            NotificationCenter.default.post(
-                name: Notification.Name("shouldReloadProjectNotificationDidReceive"),
-                object: nil
-            )
-            dismiss(animated: true)
-            
+        let saveAction = UIAlertAction(
+            title: LocalizationManager.shared.localizedString(for: .alertA3), style: .cancel) { [unowned self] _ in
+            if StoreObserver.shared.isSubscribed() {
+                guard let png = transparentGridView.createPNG() else { return }
+                Project.createProjectAndSave(
+                    pngData: png)
+                NotificationCenter.default.post(
+                    name: Notification.Name("shouldReloadProjectNotificationDidReceive"),
+                    object: nil
+                )
+                dismiss(animated: true)
+            } else {
+                let controller = PaywallHostingController(rootView: PaywallView())
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    controller.modalPresentationStyle = .fullScreen
+                }
+                present(controller, animated: true)
+            }
         }
         
         alert.addAction(saveAction)
@@ -498,6 +525,7 @@ extension ProjectCreatingViewController: OpacityViewControllerDelegate {
 
 extension ProjectCreatingViewController: LayersViewControllerDelegate {
     func showLayersController() {
+        guard !transparentGridView.adjustables.isEmpty else { return }
         prepareForOnThird(title: "Layers")
         let layersController = LayersViewController()
         layersController.layers = transparentGridView.adjustables

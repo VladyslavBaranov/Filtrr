@@ -22,13 +22,14 @@
 
 "paywall_year_title" = "KOSTENLOSE 3-Tage-Testversion - Jährlich";
 "paywall_year_caption" = "Jährlich bezahlen, kostenlose Testversion";
-"paywall_year_price_full" = "Dann $64,99 pro Jahr";
+"paywall_year_price_full" = "Dann @ pro Jahr";
 "paywall_6month_title" = "KOSTENLOSE 3-Tage-Testversion - 6 Monate";
 "paywall_6month_caption" = "Für 6 Monate bezahlen";
-"paywall_6month_price_full" = "Dann 34,99 $ für 6 Monate";
+"paywall_6month_price_full" = "Dann @ für 6 Monate";
 "paywall_month_title" = "Monatlich";
 "paywall_month_caption" = "Monatlich bezahlen";
 "paywall_subscribe_now" = "Jetzt abonnieren";
+"paywall_m" = "/m";
 
 "creating_tab_image" = "BILD";
 "creating_tab_text" = "TEXT";
@@ -77,6 +78,7 @@
 "ipicker_square" = "Quadrat";
 
 "graphics_title" = "Grafiken";
+"graphics_latest" = "Neueste Sammlungen";
 
 "background_title" = "Hintergrund";
 "background_image" = "Bild";
@@ -91,3 +93,35 @@
 "shadow_angle" = "Winkel";
 "shadow_blur" = "Unschärfe";
 "shadow_opacity" = "Deckkraft";
+
+"adjust_no_bg" = "Kein Hintergrund";
+"adjust_contrast" = "Kontrast";
+"adjust_saturation" = "Sättigung";
+"adjust_brightness" = "Helligkeit";
+"adjust_warmth" = "Wärme";
+
+"layers_hide" = "Ausblenden";
+"layers_lock" = "Sperren";
+"layers_delete" = "Löschen";
+"layer_ul" = "SCHICHT";
+
+"crop_title" = "Zuschneiden";
+"crop_original" = "Original";
+"crop_square" = "Quadrat";
+"crop_circle" = "Kreis";
+
+"file_info_created" = "Erstellt";
+"file_info_name" = "Dateiname";
+"file_info_ext" = "Erweiterung";
+"file_info_res" = "Auflösung";
+"file_info_size" = "Größe";
+
+"discover_title" = "Entdecken";
+"discover_search" = "Suchvorlagen";
+"discover_cat" = "Empfohlene Vorlagen";
+
+"alert_title" = "Neues Projekt";
+"alert_description" = "Warnung: Alle Ebenen werden beim Speichern zusammengeführt";
+"alert_a1" = "Verwerfen";
+"alert_a2" = "Abbrechen";
+"alert_a3" = "Speichern";

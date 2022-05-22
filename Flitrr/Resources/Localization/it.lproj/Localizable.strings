@@ -16,11 +16,12 @@
 "paywall_year_title" = "3 giorni di prova GRATUITA - Annuale";
 "paywall_year_caption" = "Paga annualmente, prova gratuita";
 "paywall_subscribe_now" = "Iscriviti ora";
-"paywall_year_price_full" = "quindi $ 64,99 all'anno";
+"paywall_year_price_full" = "quindi @ all'anno";
 "paywall_6month_title" = "6 mesi";
-"paywall_6month_caption" = "Paga per 6 mesi";
+"paywall_6month_caption" = "Paga @ per 6 mesi";
 "paywall_month_title" = "Mensile";
 "paywall_month_caption" = "Paga mensilmente";
+"paywall_m" = "/m";
 
 "creating_tab_image" = "IMMAGINE";
 "creating_tab_text" = "TESTO";
@@ -75,6 +76,7 @@
 "ipicker_square" = "Quadrato";
 
 "graphics_title" = "Grafica";
+"graphics_latest" = "Ultime raccolte";
 
 "background_title" = "Sfondo";
 "background_image" = "Immagine";
@@ -89,3 +91,35 @@
 "shadow_angle" = "Angolo";
 "shadow_blur" = "Sfocatura";
 "shadow_opacity" = "opacità";
+
+"adjust_no_bg" = "Nessuno sfondo";
+"adjust_contrast" = "Contrasto";
+"adjust_saturation" = "Saturazione";
+"adjust_brightness" = "Luminosità";
+"adjust_warmth" = "Calore";
+
+"layers_hide" = "Nascondi";
+"layers_lock" = "Blocca";
+"layers_delete" = "Elimina";
+"layer_ul" = "LAYER";
+
+"crop_title" = "Ritaglia";
+"crop_original" = "Originale";
+"crop_square" = "Quadrato";
+"crop_circle" = "Cerchio";
+
+"file_info_created" = "Creato";
+"file_info_name" = "Nome file";
+"file_info_ext" = "Estensione";
+"file_info_res" = "Risoluzione";
+"file_info_size" = "Dimensione";
+
+"discover_title" = "Scopri";
+"discover_search" = "Cerca modelli";
+"discover_cat" = "Modelli in primo piano";
+
+"alert_title" = "Nuovo progetto";
+"alert_description" = "Attenzione: tutti i livelli verranno uniti al salvataggio";
+"alert_a1" = "Elimina";
+"alert_a2" = "Annulla";
+"alert_a3" = "Salva";

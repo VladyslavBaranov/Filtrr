@@ -166,17 +166,23 @@ final class ThumbnailTableHeaderView: UIView {
 }
 
 final class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    struct SettingsItem {
+        enum IType { case appearance, language, restore, privacy, rate }
+        var title: String
+        var type: IType
+    }
 
     var toolBarView: ToolBarView!
     var tableView: UITableView!
     var thumbnailView: PaywallThumbnailView!
     
-    var settingsItems: [String] = [
-        LocalizationManager.shared.localizedString(for: .settingsAppearance),
-		LocalizationManager.shared.localizedString(for: .settingsLang),
-		LocalizationManager.shared.localizedString(for: .settingsRestore),
-		LocalizationManager.shared.localizedString(for: .settingsPrivacy),
-		LocalizationManager.shared.localizedString(for: .settingsRate)
+    var settingsItems: [SettingsItem] = [
+        .init(title: LocalizationManager.shared.localizedString(for: .settingsAppearance), type: .appearance),
+        .init(title: LocalizationManager.shared.localizedString(for: .settingsLang), type: .language),
+        .init(title: LocalizationManager.shared.localizedString(for: .settingsRestore), type: .restore),
+        .init(title: LocalizationManager.shared.localizedString(for: .settingsPrivacy), type: .privacy),
+        .init(title: LocalizationManager.shared.localizedString(for: .settingsRate), type: .rate)
     ]
     
     override func viewDidLoad() {
@@ -189,23 +195,23 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         tableView.register(SettingsTableCell.self, forCellReuseIdentifier: "id")
         tableView.delegate = self
         tableView.dataSource = self
-        
-        let thumb = ThumbnailTableHeaderView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: view.bounds.width * 0.9))
-        thumb.onPaywallTap = presentPaywall
-        tableView.tableHeaderView = thumb
-        tableView.separatorInset = .init(top: 80, left: 30, bottom: 0, right: 30)
-        
+    
+        if !StoreObserver.shared.isSubscribed() {
+            let thumb = ThumbnailTableHeaderView(frame: .init(x: 0, y: 0, width: view.bounds.width, height: view.bounds.width * 0.9))
+            thumb.onPaywallTap = presentPaywall
+            tableView.tableHeaderView = thumb
+            tableView.separatorInset = .init(top: 80, left: 30, bottom: 0, right: 30)
+            settingsItems.remove(at: 2)
+        }
         setupToolBar()
+        
+        tableView.contentInset = .init(
+            top: UIApplication.shared.getStatusBarHeight() + 40, left: 0, bottom: 0, right: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         localize()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.contentInset = .init(top: view.safeAreaInsets.top + 40, left: 0, bottom: 0, right: 0)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -217,31 +223,34 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "id", for: indexPath)
         cell.selectionStyle = .none
-        cell.textLabel?.text = settingsItems[indexPath.row]
+        cell.textLabel?.text = settingsItems[indexPath.row].title
         cell.backgroundColor = .clear
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let row = indexPath.row
+        let itemType = settingsItems[row].type
         
-        if row == 0 {
+        switch itemType {
+        case .appearance:
             let vc = AppearanceViewController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
-        } else if row == 1 {
-            let languageVC = LanguageTableViewController()
-            languageVC.modalPresentationStyle = .fullScreen
-            present(languageVC, animated: true)
-        } else if row == 3 {
-            let privacyPolicyVC = PrivacyPolicyViewController()
-            privacyPolicyVC.modalPresentationStyle = .fullScreen
-            present(privacyPolicyVC, animated: true)
-        } else if row == 4 {
+        case .rate:
             if let scene = view.window?.windowScene {
                 SKStoreReviewController.requestReview(in: scene)
             }
+        case .privacy:
+            let privacyPolicyVC = PrivacyPolicyViewController()
+            privacyPolicyVC.modalPresentationStyle = .fullScreen
+            present(privacyPolicyVC, animated: true)
+        case .language:
+            let languageVC = LanguageTableViewController()
+            languageVC.modalPresentationStyle = .fullScreen
+            present(languageVC, animated: true)
+        case .restore:
+            StoreObserver.shared.restore()
         }
     }
     
@@ -256,7 +265,7 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         toolBarView.delegate = self
         toolBarView.centerItem = .title
         toolBarView.trailingItem = .none
-        toolBarView.title = "Settings"
+        toolBarView.title = LocalizationManager.shared.localizedString(for: .settingsTitle)
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(toolBarView)
         
@@ -281,12 +290,15 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         thumbnailView?.premiumView.localize()
         navigationItem.title = LocalizationManager.shared.localizedString(for: .settingsTitle)
         settingsItems = [
-            LocalizationManager.shared.localizedString(for: .settingsAppearance),
-            LocalizationManager.shared.localizedString(for: .settingsLang),
-            LocalizationManager.shared.localizedString(for: .settingsRestore),
-            LocalizationManager.shared.localizedString(for: .settingsPrivacy),
-            LocalizationManager.shared.localizedString(for: .settingsRate)
+            .init(title: LocalizationManager.shared.localizedString(for: .settingsAppearance), type: .appearance),
+            .init(title: LocalizationManager.shared.localizedString(for: .settingsLang), type: .language),
+            .init(title: LocalizationManager.shared.localizedString(for: .settingsRestore), type: .restore),
+            .init(title: LocalizationManager.shared.localizedString(for: .settingsPrivacy), type: .privacy),
+            .init(title: LocalizationManager.shared.localizedString(for: .settingsRate), type: .rate)
         ]
+        if StoreObserver.shared.isSubscribed() {
+            settingsItems.remove(at: 2)
+        }
         tableView?.reloadData()
     }
 }

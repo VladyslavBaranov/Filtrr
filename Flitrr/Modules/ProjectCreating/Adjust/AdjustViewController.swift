@@ -17,7 +17,11 @@ final class AdjustViewController: UIViewController {
     private var selectedOptionIndex = 0
     private var addedCount = 0
     private let titles = [
-        "No Background", "Contrast", "Saturation", "Brightness", "Warmth"
+        LocalizationManager.shared.localizedString(for: .adjustNoBg),
+        LocalizationManager.shared.localizedString(for: .adjustContrast),
+        LocalizationManager.shared.localizedString(for: .adjustSaturation),
+        LocalizationManager.shared.localizedString(for: .adjustBrightness),
+        LocalizationManager.shared.localizedString(for: .adjustWarmth)
     ]
     
     weak var delegate: AdjustViewControllerDelegate!

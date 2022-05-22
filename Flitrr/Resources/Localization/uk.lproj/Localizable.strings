@@ -1,0 +1,127 @@
+/* 
+  Localizable.strings
+  Flitrr
+
+  Created by VladyslavMac on 01.05.2022.
+  
+*/
+
+"settings_title" = "Налаштування";
+"settings_lang" = "Мова";
+
+"settings_appearance" = "Вигляд";
+"settings_icon" = "Іконка";
+"settings_light" = "Світлий";
+"settings_dark" = "Темний";
+"settings_system" = "Системний";
+
+"settings_restore" = "Поновити покупки";
+"settings_privacy" = "Privacy Policy";
+"settings_rate" = "Оцінити нас в App Store";
+"settings_card_caption" = "Отримайте преміум можливості та отримайте необмежений доступ до додатку.";
+
+"paywall_year_title" = "3 ДНІ безкоштовно - Рік";
+"paywall_year_caption" = "Оплата щорічно";
+"paywall_year_price_full" = "Далі @ раз на рік";
+"paywall_6month_title" = "3 ДНІ безкоштовно - 6 місяців";
+"paywall_6month_caption" = "Оплата раз на 6 місяців";
+"paywall_6month_price_full" = "Далі @ на 6 місяців";
+"paywall_month_title" = "Місяць";
+"paywall_month_caption" = "Місячна оплата";
+"paywall_subscribe_now" = "Підписатись";
+"paywall_m" = "/м";
+
+"creating_tab_image" = "ФОТО";
+"creating_tab_text" = "ТЕКСТ";
+"creating_tab_graphic" = "ГРАФІКА";
+"creating_tab_shape" = "ФІГУРА";
+"creating_tab_bg" = "ФОН";
+"creating_tab_filters" = "ФІЛЬТР";
+"creating_tab_adjust" = "НАЛАШТУВАТИ";
+"creating_tab_crop" = "ОБРІЗАТИ";
+"creating_tab_shadow" = "ТІНЬ";
+"creating_tab_opacity" = "ПРОЗОРІСТЬ";
+
+"text_title" = "Текст";
+"text_color" = "Колір";
+"text_fonts" = "Шрифт";
+"text_style" = "Стиль";
+"text_fonts_featured" = "Топ";
+"text_fonts_basic" = "Базові";
+"text_fonts_fancy" = "Гарні";
+"text_fonts_classic" = "Класичні";
+"text_fonts_techno" = "Техно";
+"text_fonts_misc" = "Різні";
+"text_style_alignment" = "Вирівнювання";
+"text_style_left" = "Ліве";
+"text_style_center" = "Центральне";
+"text_style_right" = "Праве";
+"text_style_fontsize" = "Розмір шрифту";
+"text_style_letterspacing" = "Між літерами";
+"text_style_linespacing" = "Висота лінії";
+
+"shapes_search" = "Пошук фігур";
+"shapes_title" = "Фігури";
+"shapes_basic" = "Прості";
+"shapes_holiday" = "Holiday";
+"shapes_outline" = "Обведені";
+"shapes_brush" = "Brush";
+
+"projects_title" = "Проєкти";
+"projects_folders" = "Папки";
+"projects_select" = "Обрати";
+"projects_favorites" = "Улюблені";
+"projects_new_folder" = "Нова папка";
+"projects_selected_str" = "обраних проєктів";
+
+"ipicker_aspect" = "Аспект";
+"ipicker_square" = "Квадрат";
+
+"graphics_title" = "Графіка";
+"graphics_latest" = "Останні колекції";
+
+"background_title" = "Фон";
+"background_image" = "Фото";
+"background_trans" = "Прозорий";
+"background_gradient" = "Градіент";
+"background_pastel" = "Пастел";
+
+"filters_title" = "Фільтри";
+
+"shadow_title" = "Тінь";
+"shadow_size" = "Розмір";
+"shadow_angle" = "Кут";
+"shadow_blur" = "Розмитість";
+"shadow_opacity" = "Прозорість";
+
+"adjust_no_bg" = "Без фону";
+"adjust_contrast" = "Контраст";
+"adjust_saturation" = "Насищеність";
+"adjust_brightness" = "Яскравість";
+"adjust_warmth" = "Теплота";
+
+"layers_hide" = "Приховати";
+"layers_lock" = "Закріпити";
+"layers_delete" = "Видалити";
+"layer_ul" = "ШАР";
+
+"crop_title" = "Обрізати";
+"crop_original" = "Оригінал";
+"crop_square" = "Квадрат";
+"crop_circle" = "Круг";
+
+"file_info_created" = "Створено";
+"file_info_name" = "Імʼя";
+"file_info_ext" = "Формат";
+"file_info_res" = "Розширення";
+"file_info_size" = "Розмір";
+
+"discover_title" = "Шаблони";
+"discover_search" = "Пошук шаблонів";
+"discover_cat" = "Популярні шаблони";
+
+"alert_title" = "Новий проєкт";
+"alert_description" = "Увага: всі шари будуть поєднані";
+"alert_a1" = "Видалити";
+"alert_a2" = "Відмінити";
+"alert_a3" = "Зберегти";

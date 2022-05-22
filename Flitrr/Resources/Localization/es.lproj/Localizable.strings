@@ -22,13 +22,14 @@
 
 "paywall_year_title" = "Prueba GRATUITA de 3 días - Anualmente";
 "paywall_year_caption" = "Pago anual, prueba gratuita";
-"paywall_year_price_full" = "Entonces $64,99 por año";
+"paywall_year_price_full" = "Entonces @ por año";
 "paywall_6month_title" = "Prueba GRATUITA de 3 días - 6 meses";
 "paywall_6month_caption" = "Pague por 6 meses";
-"paywall_6month_price_full" = "Entonces $34,99 por 6 meses";
+"paywall_6month_price_full" = "Entonces @ por 6 meses";
 "paywall_month_title" = "Mensual";
 "paywall_month_caption" = "Pago mensual";
 "paywall_subscribe_now" = "Suscribirse ahora";
+"paywall_m" = "/m";
 
 "creating_tab_image" = "IMAGEN";
 "creating_tab_text" = "TEXTO";
@@ -77,6 +78,7 @@
 "ipicker_square" = "Cuadrado";
 
 "graphics_title" = "Gráficos";
+"graphics_latest" = "Últimas colecciones";
 
 "background_title" = "Fondo";
 "background_image" = "Imagen";
@@ -91,3 +93,35 @@
 "shadow_angle" = "Ángulo";
 "shadow_blur" = "Desenfoque";
 "shadow_opacity" = "Opacidad";
+
+"adjust_no_bg" = "Sin fondo";
+"adjust_contrast" = "Contraste";
+"adjust_saturation" = "Saturación";
+"adjust_brightness" = "Brillo";
+"adjust_warmth" = "Calidez";
+
+"layers_hide" = "Ocultar";
+"layers_lock" = "Bloquear";
+"layers_delete" = "Eliminar";
+"layer_ul" = "CAPA";
+
+"crop_title" = "Recortar";
+"recortar_original" = "Original";
+"crop_square" = "Cuadrado";
+"crop_circle" = "Círculo";
+
+"file_info_created" = "Creado";
+"file_info_name" = "Nombre de archivo";
+"file_info_ext" = "Extensión";
+"file_info_res" = "Resolución";
+"file_info_size" = "Tamaño";
+
+"discover_title" = "Descubrir";
+"discover_search" = "Plantillas de búsqueda";
+"discover_cat" = "Plantillas destacadas";
+
+"alert_title" = "Nuevo proyecto";
+"alert_description" = "Advertencia: todas las capas se fusionarán al guardarlas";
+"alert_a1" = "Descartar";
+"alert_a2" = "Cancelar";
+"alert_a3" = "Guardar";

@@ -22,13 +22,14 @@
 
 "paywall_year_title"="無料の3日間トライアル-毎年";
 "paywall_year_caption" = "毎年支払う、無料トライアル";
-"paywall_year_price_full"="その後は年間64.99ドル";
+"paywall_year_price_full"="その後、@毎年";
 "paywall_6month_title"="無料の3日間トライアル-6か月";
 "paywall_6month_caption"="6か月間支払う";
-"paywall_6month_price_full"="その後6か月あたり$34.99";
+"paywall_6month_price_full"="その後、6か月ごとに@";
 "paywall_month_title"="毎月";
 "paywall_month_caption"="毎月支払う";
 "paywall_subscribe_now"="今すぐ登録";
+"paywall_m" = "月";
 
 "creating_tab_image" = "IMAGE";
 "creating_tab_text" = "TEXT";
@@ -77,6 +78,7 @@
 "ipicker_square"="正方形";
 
 "graphics_title"="グラフィックス";
+"graphics_latest"="最新のコレクション";
 
 "background_title"="背景";
 "background_image"="画像";
@@ -91,3 +93,35 @@
 "shadow_angle"="角度";
 "shadow_blur" = "Blur";
 "shadow_opacity"="不透明度";
+
+"adjust_no_bg"="背景なし";
+"adjust_contrast"="コントラスト";
+"adjust_saturation"="彩度";
+"adjust_brightness"="明るさ";
+"adjust_warmth"="暖かさ";
+
+"layers_hide"="非表示";
+"layers_lock"="ロック";
+"layers_delete"="削除";
+"layer_ul" = "LAYER";
+
+"crop_title" = "Crop";
+"crop_original"="オリジナル";
+"crop_square"="正方形";
+"crop_circle"="サークル";
+
+"file_info_created"="作成済み";
+"file_info_name"="ファイル名";
+"file_info_ext"="拡張子";
+"file_info_res"="解決策";
+"file_info_size"="サイズ";
+
+"discover_title"="発見";
+"discover_search"="検索テンプレート";
+"discover_cat"="注目のテンプレート";
+
+"alert_title"="新しいプロジェクト";
+"alert_description" = "警告：すべてのレイヤーは保存時にマージされます";
+"alert_a1"="破棄";
+"alert_a2"="キャンセル";
+"alert_a3"="保存";
