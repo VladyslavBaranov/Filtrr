@@ -89,8 +89,16 @@ final class ProjectsFolderCell: UICollectionViewCell {
             return
         }
         let count = (folder as! Folder).loadProjectsCount()
-        imageView.image = nil
         folderCountLabel.text = "\(count)"
+        if let url = (folder as! Folder).getLastProjectURL(forFavorites: false) {
+            let png = ProjectsFileManager.shared.getImageDataWith(fileName: url.path)
+            switch png {
+            case .success(let data):
+                imageView.image = UIImage(data: data)
+            default:
+                imageView.image = nil
+            }
+        }
     }
 
 }

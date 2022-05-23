@@ -18,6 +18,8 @@ final class ProjectLookViewController: UIViewController {
     
     var imageView: UIImageView!
     
+    var swipeDownRecognizer: UISwipeGestureRecognizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
@@ -39,6 +41,10 @@ final class ProjectLookViewController: UIViewController {
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        swipeDownRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(dismissSelf))
+        swipeDownRecognizer.direction = .down
+        view.addGestureRecognizer(swipeDownRecognizer)
     }
     
     func setupButtons() {

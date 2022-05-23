@@ -197,6 +197,7 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let projectCreatingVC = ProjectCreatingViewController()
+        Canvas.renderSize = searchResult[indexPath.row].size
         projectCreatingVC.targetImageSize = searchResult[indexPath.row].size
         projectCreatingVC.modalPresentationStyle = .fullScreen
         present(projectCreatingVC, animated: true)

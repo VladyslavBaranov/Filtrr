@@ -102,6 +102,8 @@
 
 "layers_hide" = "숨기기";
 "layers_lock" = "잠금";
+"layers_unlock" = "잠금 해제";
+"layers_unhide" = "숨기기 해제";
 "layers_delete" = "삭제";
 "layer_ul" = "레이어";
 

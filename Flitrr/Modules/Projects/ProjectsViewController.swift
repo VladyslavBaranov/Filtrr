@@ -331,7 +331,6 @@ private extension ProjectsViewController {
     }
     func showContentsOfFavorites() {
         let favorites = projects.filter { $0.isFavorite }
-        print(favorites.map { $0.folder_id })
         let controller = FolderViewController()
         controller.isFavoritesMode = true
         controller.projects = favorites
@@ -366,7 +365,6 @@ extension ProjectsViewController {
 
 extension ProjectsViewController: ProjectsSelectionTabDelegate {
     func didTapShare() {
-        print("SHARE")
     }
     
     func didTapTrash() {

@@ -9,19 +9,26 @@ import UIKit
 
 protocol AdjustViewControllerDelegate: AnyObject {
     func didDismissAdjustController()
-    func didReport()
+    func didReportValue(_ value: Float, option: AdjustViewController.Option)
+    func shouldRemoveBackground()
 }
 
 final class AdjustViewController: UIViewController {
     
+    enum Option { case none, contrast, saturation, brightness }
+    struct AdjustmentItem {
+        var title: String
+        var option: Option
+    }
+    
     private var selectedOptionIndex = 0
     private var addedCount = 0
-    private let titles = [
-        LocalizationManager.shared.localizedString(for: .adjustNoBg),
-        LocalizationManager.shared.localizedString(for: .adjustContrast),
-        LocalizationManager.shared.localizedString(for: .adjustSaturation),
-        LocalizationManager.shared.localizedString(for: .adjustBrightness),
-        LocalizationManager.shared.localizedString(for: .adjustWarmth)
+    
+    var items: [AdjustmentItem] = [
+        .init(title: LocalizationManager.shared.localizedString(for: .adjustNoBg), option: .none),
+        .init(title: LocalizationManager.shared.localizedString(for: .adjustContrast), option: .contrast),
+        .init(title: LocalizationManager.shared.localizedString(for: .adjustSaturation), option: .saturation),
+        .init(title: LocalizationManager.shared.localizedString(for: .adjustBrightness), option: .brightness)
     ]
     
     weak var delegate: AdjustViewControllerDelegate!
@@ -38,6 +45,9 @@ final class AdjustViewController: UIViewController {
         setupToolBar()
         setupOptionsPicker()
         setupSlider()
+        
+        shadowOptionPicker.selectedIndex = 1
+        didSelectValue(at: 1)
     }
     
     override func viewDidLayoutSubviews() {
@@ -51,6 +61,7 @@ final class AdjustViewController: UIViewController {
             frame: .init(origin: .zero, size: .init(width: view.bounds.width - 60, height: 30)))
         sliderContainerView.slider.addTarget(self, action: #selector(sliderValueDidChange(_:)), for: .valueChanged)
         sliderContainerView.translatesAutoresizingMaskIntoConstraints = false
+        sliderContainerView.isContinuous = false
         view.addSubview(sliderContainerView)
         
         
@@ -85,10 +96,11 @@ final class AdjustViewController: UIViewController {
             frame: .init(x: 0, y: view.bounds.height - 80, width: view.bounds.width, height: 80))
         shadowOptionPicker.delegate = self
         view.addSubview(shadowOptionPicker)
-        shadowOptionPicker.titles = titles
+        shadowOptionPicker.titles = items.map { $0.title }
     }
     
     @objc func sliderValueDidChange(_ sender: UISlider) {
+        delegate?.didReportValue(sender.value, option: items[selectedOptionIndex].option)
     }
 }
 
@@ -108,8 +120,11 @@ extension AdjustViewController: ToolBarViewDelegate {
 
 extension AdjustViewController: ValuePickerViewDelegate {
     func didSelectValue(at index: Int) {
-        toolBarView.title = titles[index]
-        delegate?.didReport()
+        selectedOptionIndex = index
+        toolBarView.title = items[index].title
+        if index == 0 {
+            delegate?.shouldRemoveBackground()
+        }
     }
 }
 

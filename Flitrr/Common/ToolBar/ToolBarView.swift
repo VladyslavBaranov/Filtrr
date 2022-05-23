@@ -79,8 +79,8 @@ final class ToolBarView: UIView {
     private var titleLabel: UILabel!
     
     private var toolsStack: UIStackView!
-    private var undoButton: UIButton!
-    private var redoButton: UIButton!
+    var undoButton: UIButton!
+    var redoButton: UIButton!
     private var layersButton: UIButton!
 	
 	private var colorCircle: UIView!
@@ -201,6 +201,14 @@ final class ToolBarView: UIView {
 			])
 		}
 	}
+    
+    func setUndoRedoState(_ manager: UndoManager) {
+        redoButton.alpha = manager.canRedo ? 1 : 0.5
+        undoButton.alpha = manager.canUndo ? 1 : 0.5
+        
+        redoButton.isEnabled = manager.canRedo
+        undoButton.isEnabled = manager.canUndo
+    }
 	
 	func setColor(_ uiColor: UIColor, alphaPercent: Int) {
 		colorCircle.backgroundColor = uiColor

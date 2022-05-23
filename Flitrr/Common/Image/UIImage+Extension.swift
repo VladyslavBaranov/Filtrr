@@ -9,11 +9,15 @@ import UIKit
 import BackgroundRemoval
 
 extension UIImage {
+    
+    func applyingFilterCI(name: String, parameters: [String: Any]) -> CIImage? {
+        guard let ciImage = CIImage(image: self) else { return nil }
+        return ciImage.applyingFilter(name, parameters: parameters)
+    }
+    
 	func applyingFilter(name: String, parameters: [String: Any]) -> UIImage? {
 		guard let ciImage = CIImage(image: self) else { return nil }
 		let outputCIImage = ciImage.applyingFilter(name, parameters: parameters)
-		let ctx = CIContext()
-		ctx.createCGImage(outputCIImage, from: ciImage.extent)
 		return UIImage(ciImage: outputCIImage)
 	}
     

@@ -17,7 +17,7 @@ final class ShapesViewController: UIViewController {
     
     private var closeButton: UIButton!
     private var navigationView: NavigationView!
-    var searchTextField: UISearchTextField!
+    // var searchTextField: UISearchTextField!
     private var shapeCategoryPicker: ValuePickerView!
     var collectionView: UICollectionView!
     
@@ -50,7 +50,7 @@ final class ShapesViewController: UIViewController {
         super.viewDidLayoutSubviews()
         shapeCategoryPicker.frame = .init(
             x: 0,
-            y: view.safeAreaInsets.top + closeButton.frame.height + 130, width: view.bounds.width, height: 80)
+            y: view.safeAreaInsets.top + closeButton.frame.height + 80, width: view.bounds.width, height: 80)
     }
     
     @objc func dismissSelf() {
@@ -82,18 +82,18 @@ final class ShapesViewController: UIViewController {
             navigationView.topAnchor.constraint(equalTo: closeButton.bottomAnchor)
         ])
         
-        searchTextField = UISearchTextField()
-        searchTextField.backgroundColor = .appDark
-        searchTextField.placeholder = LocalizationManager.shared.localizedString(for: .shapesSearch)
-        searchTextField.clearButtonMode = .whileEditing
-        view.addSubview(searchTextField)
-        searchTextField.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            searchTextField.heightAnchor.constraint(equalToConstant: 50),
-            searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            searchTextField.topAnchor.constraint(equalTo: navigationView.bottomAnchor)
-        ])
+        // searchTextField = UISearchTextField()
+        // searchTextField.backgroundColor = .appDark
+        // searchTextField.placeholder = LocalizationManager.shared.localizedString(for: .shapesSearch)
+        // searchTextField.clearButtonMode = .whileEditing
+        // view.addSubview(searchTextField)
+        // searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        // NSLayoutConstraint.activate([
+        //     searchTextField.heightAnchor.constraint(equalToConstant: 50),
+        //     searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+        //     searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+        //     searchTextField.topAnchor.constraint(equalTo: navigationView.bottomAnchor)
+        // ])
         setupShapePicker()
     }
     
@@ -123,7 +123,7 @@ final class ShapesViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset = .init(top: 212, left: 0, bottom: 0, right: 0)
+        collectionView.contentInset = .init(top: 162, left: 0, bottom: 0, right: 0)
         collectionView.register(ProjectsImageCell.self, forCellWithReuseIdentifier: "id")
         
         NSLayoutConstraint.activate([
@@ -153,13 +153,13 @@ extension ShapesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if offset > 0 {
             let fraction = 1 - offset / 80
             navigationView.alpha = fraction
-            searchTextField?.alpha = fraction
+            // searchTextField?.alpha = fraction
             
             let pickerFraction = 1 - offset / 40
             shapeCategoryPicker.alpha = pickerFraction
         } else {
             navigationView.alpha = 1
-            searchTextField?.alpha = 1
+            // searchTextField?.alpha = 1
             shapeCategoryPicker.alpha = 1
         }
     }

@@ -102,6 +102,8 @@
 
 "layers_hide" = "Приховати";
 "layers_lock" = "Закріпити";
+"layers_unlock" = "Відкріпити";
+"layers_unhide" = "Показати";
 "layers_delete" = "Видалити";
 "layer_ul" = "ШАР";
 

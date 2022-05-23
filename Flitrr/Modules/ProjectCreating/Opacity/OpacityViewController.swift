@@ -8,7 +8,7 @@
 import UIKit
 
 protocol OpacityViewControllerDelegate: AnyObject {
-    func didSetOpacity(_ opacity: Float)
+    func didSetOpacity(_ opacity: Float, originalOpacity: Float, isFinal: Bool)
     func didDismissOpacityController()
 }
 
@@ -46,7 +46,8 @@ final class OpacityViewController: UIViewController {
     @objc private func opacityDidChange(_ sender: UISlider) {
         let opacity = sender.value
         toolBarView.title = "\(LocalizationManager.shared.localizedString(for: .shadowOpacity)) %\(Int(opacity * 100))"
-        delegate?.didSetOpacity(opacity)
+        delegate?.didSetOpacity(
+            opacity, originalOpacity: originalOpacity, isFinal: false)
     }
     
     private func setupToolBar() {
@@ -69,11 +70,14 @@ final class OpacityViewController: UIViewController {
 
 extension OpacityViewController: ToolBarViewDelegate {
     func didTapTrailingItem() {
+        delegate?.didSetOpacity(
+            opacityContainerView.slider.value, originalOpacity: originalOpacity, isFinal: true)
         delegate?.didDismissOpacityController()
         dismiss(animated: true)
     }
     func didTapLeadingItem() {
-        delegate?.didSetOpacity(originalOpacity)
+        delegate?.didSetOpacity(
+            originalOpacity, originalOpacity: originalOpacity, isFinal: true)
         delegate?.didDismissOpacityController()
         dismiss(animated: true)
     }

@@ -84,11 +84,10 @@ protocol ColorPaletteCollectionViewDelegate: AnyObject {
 final class ColorPaletteCollectionView: UICollectionView {
 	
 	var paletteItems: [ColorPaletteItem] = [
-		.fill, .textColor, .picker,
+        .picker,
 		.color(.white), .color(.black),
 		.color(UIColor(red: 1, green: 0.02, blue: 0.4, alpha: 1)),
 		.color(UIColor(red: 0.761, green: 0.09, blue: 0.49, alpha: 1)),
-        .gradient([.red, .purple], .zero, .init(x: 1, y: 1)),
 		.color(UIColor.darkGray),
 		.color(UIColor.gray),
 		.color(.lightGray),

@@ -107,6 +107,8 @@
 
 "crop_title" = "Rogner";
 "crop_original" = "Original";
+"layers_unlock" = "Déverrouiller";
+"layers_unhide" = "Afficher";
 "crop_square" = "Carré";
 "crop_circle" = "Cercle";
 

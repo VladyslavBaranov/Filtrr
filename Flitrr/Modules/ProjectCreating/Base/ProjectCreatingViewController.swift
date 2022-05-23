@@ -18,53 +18,46 @@ final class ProjectCreatingViewController: UIViewController {
     weak var delegate: ProjectCreatingViewControllerDelegate!
     private var currentlySelectedAdjustableView: AdjustableView!
     
-    var toolBarView: ToolBarView!
-    var scrollableTabBar: ScrollableRoundedBar!
-    var transparentGridView: ProjectTransparentGridView!
+    private var toolBarView: ToolBarView!
+    private var scrollableTabBar: ScrollableRoundedBar!
+    private var canvas: Canvas!
 	
-	var addedCount = 0
+	private var addedCount = 0
     
     private var initialBackgroundItem = ColorPaletteItem.transparent
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        undoManager?.levelsOfUndo = 10
+        
         view.backgroundColor = .appDark
         
-        print(targetImageSize)
-        
         if targetImageSize == .zero {
-            targetImageSize = .init(width: view.bounds.width, height: view.bounds.width)
+            targetImageSize = .init(width: 1080, height: 1080)
         }
         
         setupToolBar()
-        transparentGridView = ProjectTransparentGridView()
-        transparentGridView.targetImageSize = targetImageSize
-        transparentGridView.gridIsActive = false
-        transparentGridView.isTransformingEnabled = false
-		transparentGridView.clipsToBounds = true
+        canvas = Canvas()
+        canvas.canvas.gridIsActive = false
+        canvas.canvas.isTransformingEnabled = false
+		canvas.clipsToBounds = true
         //transparentGridView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(transparentGridView)
+        view.addSubview(canvas)
         
         if targetImageSize.width < targetImageSize.height {
             let factor = targetImageSize.width / targetImageSize.height
-            transparentGridView.frame.size.height = view.bounds.height - UIApplication.shared.getStatusBarHeight() - 190
-            transparentGridView.frame.size.width = transparentGridView.frame.size.height * factor
-            transparentGridView.frame.origin.y = UIApplication.shared.getStatusBarHeight() + 80
+            canvas.frame.size.height = view.bounds.height - UIApplication.shared.getStatusBarHeight() - 190
+            canvas.frame.size.width = canvas.frame.size.height * factor
+            canvas.frame.origin.y = UIApplication.shared.getStatusBarHeight() + 80
         } else {
             let factor = targetImageSize.width / targetImageSize.height
-            transparentGridView.frame.size.width = view.bounds.width
-            transparentGridView.frame.size.height = view.bounds.width * factor
-            transparentGridView.center.y = view.center.y
+            canvas.frame.size.width = view.bounds.width
+            canvas.frame.size.height = view.bounds.width * factor
+            canvas.center.y = view.center.y
         }
         //transparentGridView.frame.origin.y = UIApplication.shared.getStatusBarHeight() + 80
-        transparentGridView.center.x = view.center.x
-        
-        // NSLayoutConstraint.activate([
-        //     transparentGridView.topAnchor.constraint(equalTo: toolBarView.bottomAnchor),
-        //     transparentGridView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        //     transparentGridView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        //     transparentGridView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120)
-        // ])
+        canvas.center.x = view.center.x
         
         scrollableTabBar = ScrollableRoundedBar(frame: .init(
             x: 0,
@@ -84,23 +77,15 @@ final class ProjectCreatingViewController: UIViewController {
             scrollableTabBar.heightAnchor.constraint(equalToConstant: 100)
         ])
         
+        handleUndoRedoUI()
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        //transparentGridView.frame = .init(
-        //    x: 0,
-        //    y: toolBarView.frame.maxY,
-        //    width: view.bounds.width,
-        //    height: view.bounds.height - toolBarView.frame.maxY - 120)
-    }
+
     
     func setupToolBar() {
         toolBarView = ToolBarView(frame: .zero, centerItem: .editSet)
         toolBarView.delegate = self
-        toolBarView.translatesAutoresizingMaskIntoConstraints = false
         toolBarView.trailingItem = .none
-        toolBarView.trailingButton.isEnabled = false
+        toolBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(toolBarView)
         
         NSLayoutConstraint.activate([
@@ -112,69 +97,75 @@ final class ProjectCreatingViewController: UIViewController {
     }
     
     func prepareForOnThird(title: String) {
-        transparentGridView.gridIsActive = true
+        canvas.canvas.gridIsActive = true
         toolBarView.centerItem = .title
         toolBarView.leadingItem = .none
         toolBarView.trailingItem = .none
         toolBarView.title = title
         
-        let baseHeight = transparentGridView.bounds.height
+        let baseHeight = canvas.bounds.height
         let topHeight = view.safeAreaInsets.top + 80
         let vcHeight = view.bounds.height * 0.3
         let destinationHeight = view.bounds.height - vcHeight - topHeight
         let factor = destinationHeight / baseHeight
         
         UIView.animate(withDuration: 0.3) {
-            self.transparentGridView.transform = .init(scaleX: factor, y: factor)
+            self.canvas.transform = .init(scaleX: factor, y: factor)
                 .concatenating(.init(translationX: 0, y: -(baseHeight - baseHeight * factor) / 2))
         }
     }
     func prepareForFullFromOneThird() {
-        transparentGridView.gridIsActive = false
+        canvas.canvas.gridIsActive = false
         toolBarView.centerItem = .editSet
         toolBarView.leadingItem = .back
         toolBarView.trailingItem = .share
         UIView.animate(withDuration: 0.3) {
-            self.transparentGridView.transform = .identity
+            self.canvas.transform = .identity
         }
+    }
+    
+    private func handleUndoRedoUI() {
+        guard let undoManager = undoManager else { return }
+        toolBarView.setUndoRedoState(undoManager)
+    }
+}
+
+extension ProjectCreatingViewController: LayersViewControllerDelegate {
+    func didDeleteLayer(_ adjustable: AdjustableView) {
+        adjustable.removeFromSuperview()
+    }
+    
+    func showLayersController() {
+        let undeletedLayers = canvas.canvas.adjustables.filter { !$0.isDeleted }
+        guard !undeletedLayers.isEmpty else { return }
+        prepareForOnThird(title: "Layers")
+        let layersController = LayersViewController()
+        layersController.layers = canvas.canvas.adjustables.filter { !$0.isDeleted }
+        layersController.delegate = self
+        layersController.modalPresentationStyle = .custom
+        layersController.transitioningDelegate = layersController
+        present(layersController, animated: true)
+    }
+    func didDismissLayers() {
+        prepareForFullFromOneThird()
     }
 }
 
 extension ProjectCreatingViewController: ToolBarViewDelegate {
-    func didTapTrailingItem() {
-        transparentGridView.prepareForRendering()
-        guard let png = transparentGridView.createPNG() else { return }
-		// let renderer = UIGraphicsImageRenderer(size: transparentGridView.bounds.size)
-        //
-		// let image = renderer.image { ctx in
-		// 	transparentGridView.drawHierarchy(in: transparentGridView.bounds, afterScreenUpdates: true)
-		// }
-		let activityController = UIActivityViewController(activityItems: [png], applicationActivities: nil)
-        activityController.completionWithItemsHandler = nil
-		present(activityController, animated: true, completion: nil)
-    }
+    func didTapTrailingItem() {}
     
     func didTapLeadingItem() {
-        transparentGridView.prepareForRendering()
+        canvas.canvas.prepareForRendering()
+        
         let alert = UIAlertController(
             title: LocalizationManager.shared.localizedString(for: .alertTitle),
             message: LocalizationManager.shared.localizedString(for: .alertDesc),
             preferredStyle: .alert)
-        let discardAction = UIAlertAction(
-            title: LocalizationManager.shared.localizedString(for: .alertA1), style: .destructive) { [unowned self] _ in
-            dismiss(animated: true)
-        }
         
-        alert.addAction(discardAction)
-        let cancelAction = UIAlertAction(title: LocalizationManager.shared.localizedString(for: .alertA2), style: .default) { [unowned self] _ in
-            self.transparentGridView.unprepare()
-        }
-        
-        alert.addAction(cancelAction)
         let saveAction = UIAlertAction(
             title: LocalizationManager.shared.localizedString(for: .alertA3), style: .cancel) { [unowned self] _ in
             if StoreObserver.shared.isSubscribed() {
-                guard let png = transparentGridView.createPNG() else { return }
+                guard let png = canvas.renderPNG() else { return }
                 Project.createProjectAndSave(
                     pngData: png)
                 NotificationCenter.default.post(
@@ -192,6 +183,18 @@ extension ProjectCreatingViewController: ToolBarViewDelegate {
         }
         
         alert.addAction(saveAction)
+        
+        
+        let discardAction = UIAlertAction(
+            title: LocalizationManager.shared.localizedString(for: .alertA1), style: .destructive) { [unowned self] _ in
+            dismiss(animated: true)
+        }
+        
+        alert.addAction(discardAction)
+        let cancelAction = UIAlertAction(title: LocalizationManager.shared.localizedString(for: .alertA2), style: .default)
+        
+        alert.addAction(cancelAction)
+        
         present(alert, animated: true)
     }
     
@@ -199,7 +202,6 @@ extension ProjectCreatingViewController: ToolBarViewDelegate {
         guard let undoManager = undoManager else { return }
         guard undoManager.canUndo else { return }
         undoManager.undo()
-        print("UNDONE")
     }
     
     func didTapLayers() {
@@ -210,7 +212,6 @@ extension ProjectCreatingViewController: ToolBarViewDelegate {
         guard let undoManager = undoManager else { return }
         guard undoManager.canRedo else { return }
         undoManager.redo()
-        print("REDONE")
     }
 }
 
@@ -241,27 +242,13 @@ extension ProjectCreatingViewController: ScrollableRoundedBarDelegate {
 	}
 }
 
-extension ProjectCreatingViewController: GraphicViewControllerDelegate {
-    func didSelectGraphic(_ uiImage: UIImage) {
-        let v = AdjustableImageView(frame:
-                .init(x: 0, y: 0, width: transparentGridView.bounds.midX, height: transparentGridView.bounds.midY))
-        v.originalImage = uiImage // BackgroundRemoval().removeBackground(image: scaledOut)
-        v.imageDelegate = self
-        v.delegate = self
-        transparentGridView.add(v)
-        
-        undoManager?.registerUndo(withTarget: self, handler: { [unowned self] h in
-            transparentGridView.remove(v)
-            // didSelectImage(uiImage: v.originalImage)
-        })
+extension ProjectCreatingViewController: AdjustableViewDelegate {
+    
+    func didToggle(_ view: AdjustableView) {
+        currentlySelectedAdjustableView = view
     }
     
-    func showGraphicsController() {
-        let vc = GraphicViewController()
-        vc.delegate = self
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-    }
+    func frameDidChange(_ view: AdjustableView) {}
 }
 
 extension ProjectCreatingViewController: ImageLibraryPickerViewControllerDelegate {
@@ -272,26 +259,27 @@ extension ProjectCreatingViewController: ImageLibraryPickerViewControllerDelegat
         if UIDevice.current.userInterfaceIdiom == .phone {
             controller.modalPresentationStyle = .fullScreen
         }
-        
         present(controller, animated: true)
     }
     
     func didSelectImage(uiImage: UIImage) {
         addedCount += 1
-        // let scaledOut = BackgroundRemoval.init().removeBackground(image: uiImage, maskOnly: false)
         
         guard addedCount == 2 else { return }
-        let v = AdjustableImageView(frame:
-                .init(x: 0, y: 0, width: transparentGridView.bounds.midX, height: transparentGridView.bounds.midY))
-        v.originalImage = uiImage // BackgroundRemoval().removeBackground(image: scaledOut)
-        v.imageDelegate = self
-        v.delegate = self
-        transparentGridView.add(v)
+        let adjustable = AdjustableImageView(frame:
+                .init(x: 0, y: 0, width: canvas.bounds.midX, height: canvas.bounds.midY))
+        adjustable.originalImage = uiImage
+        adjustable.imageDelegate = self
+        adjustable.delegate = self
+        didAddImage(adjustable)
         addedCount = 0
-        
-        undoManager?.registerUndo(withTarget: self, handler: { [unowned self] h in
-            transparentGridView.remove(v)
-            // didSelectImage(uiImage: v.originalImage)
+    }
+    
+    private func didAddImage(_ adjustable: AdjustableView) {
+        canvas.add(adjustable)
+        undoManager?.registerUndo(withTarget: self, handler: { target in
+            target.canvas.remove(adjustable)
+            target.handleUndoRedoUI()
         })
     }
 }
@@ -307,7 +295,7 @@ extension ProjectCreatingViewController: ColorPickerViewControllerDelegate {
         toolBarView.trailingItem = .share
         // toolBarView.
         UIView.animate(withDuration: 0.3) {
-            self.transparentGridView.transform = .identity
+            self.canvas.transform = .identity
         }
     }
     
@@ -327,11 +315,36 @@ extension ProjectCreatingViewController: TextEditingViewControllerDelegate {
     func didConfirmText(_ attributedString: NSAttributedString) {
         let label = AdjustableLabel.createLabel(for: attributedString)
         label.delegate = self
-        transparentGridView.add(label)
-        
-        undoManager?.registerUndo(withTarget: self, handler: { [unowned self] _ in
-            transparentGridView.remove(label)
+        didAddLabel(label)
+    }
+    
+    private func didAddLabel(_ adjustable: AdjustableLabel) {
+        canvas.add(adjustable)
+        undoManager?.registerUndo(withTarget: self, handler: { target in
+            target.canvas.remove(adjustable)
         })
+    }
+}
+
+extension ProjectCreatingViewController: GraphicViewControllerDelegate {
+    func didSelectGraphic(_ uiImage: UIImage) {
+        let graphic = AdjustableImageView(frame:
+                .init(x: 0, y: 0, width: canvas.bounds.midX, height: canvas.bounds.midY))
+        graphic.originalImage = uiImage
+        graphic.imageDelegate = self
+        graphic.delegate = self
+        canvas.add(graphic)
+        
+        undoManager?.registerUndo(withTarget: self, handler: { [unowned self] h in
+            canvas.remove(graphic)
+        })
+    }
+    
+    func showGraphicsController() {
+        let vc = GraphicViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
@@ -351,40 +364,19 @@ extension ProjectCreatingViewController: ShapesViewControllerDelegate {
         shape.delegate = self
         shape.originalImage = UIImage(named: name)
         shape.imageView.image = UIImage(named: name)
-        transparentGridView.add(shape)
+        canvas.add(shape)
         
         undoManager?.registerUndo(withTarget: self, handler: { [unowned self] _ in
-            transparentGridView.remove(shape)
+            canvas.remove(shape)
         })
     }
 }
 
-extension ProjectCreatingViewController: CropViewControllerDelegate {
-    func showCropViewController() {
-        guard let adjustable = currentlySelectedAdjustableView as? AdjustableImageView else { return }
-        guard let image = adjustable.imageView.image else { return }
-        let controller = CropViewController()
-        controller.delegate = self
-        controller.originalImage = image
-        controller.modalPresentationStyle = .fullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        present(controller, animated: true)
-    }
-    func didCut(_ image: UIImage) {
-        guard let imageAdjustableView = currentlySelectedAdjustableView as? AdjustableImageView else { return }
-        imageAdjustableView.imageView.image = image
-    }
-}
-
 extension ProjectCreatingViewController: BackgroundSelectionViewControllerDelegate {
-    func shouldFillWithGradient(_ paletteItem: ColorPaletteItem, _ colors: [UIColor]) {
-        initialBackgroundItem = paletteItem
-        transparentGridView.bakgroundMode = .gradient(colors)
-    }
-    
     func showBackgroundController() {
         prepareForOnThird(title: LocalizationManager.shared.localizedString(for: .backgroundTitle))
         let vc = BackgroundSelectionViewController()
+        vc.initialBackgroundMode = canvas.canvas.bakgroundMode
         vc.initialPaletteItem = initialBackgroundItem
         vc.delegate = self
         vc.modalPresentationStyle = .custom
@@ -392,41 +384,60 @@ extension ProjectCreatingViewController: BackgroundSelectionViewControllerDelega
         present(vc, animated: true, completion: nil)
     }
     
+    func shouldFillWithGradient(_ paletteItem: ColorPaletteItem, _ colors: [UIColor]) {
+        initialBackgroundItem = paletteItem
+        canvas.canvas.bakgroundMode = .gradient(colors)
+    }
+    
     func shouldFillWithImage(_ paletteItem: ColorPaletteItem, _ uiImage: UIImage) {
         initialBackgroundItem = paletteItem
-        transparentGridView.bakgroundMode = .image(uiImage)
+        canvas.canvas.bakgroundMode = .image(uiImage)
     }
     
     func shouldFillBackgroundWithPlain(_ paletteItem: ColorPaletteItem, _ color: UIColor) {
         initialBackgroundItem = paletteItem
-        transparentGridView.bakgroundMode = .plainColor(color)
+        canvas.canvas.bakgroundMode = .plainColor(color)
     }
     
-    func didDismissBackgroundSelection() {
-        transparentGridView.gridIsActive = false
-        toolBarView.centerItem = .editSet
-        toolBarView.leadingItem = .back
-        toolBarView.trailingItem = .share
-        UIView.animate(withDuration: 0.3) {
-            self.transparentGridView.transform = .identity
+    func didDismissBackgroundSelection(didSelectNew: Bool, initialMode: CanvasCoreView.BackgroundMode) {
+        prepareForFullFromOneThird()
+        if didSelectNew {
+            didChangeBackground(
+                newItem: canvas.canvas.bakgroundMode,
+                oldItem: initialMode
+            )
         }
     }
-}
-
-
-
-extension ProjectCreatingViewController: AdjustableViewDelegate {
     
-    func didToggle(_ view: AdjustableView) {
-        currentlySelectedAdjustableView = view
-    }
-    
-    func frameDidChange(_ view: AdjustableView) {
-        // transparentGridView.setNeedsDisplay()
+    private func didChangeBackground(
+        newItem: CanvasCoreView.BackgroundMode,
+        oldItem: CanvasCoreView.BackgroundMode) {
+            canvas.canvas.bakgroundMode = newItem
+        undoManager?.registerUndo(withTarget: self, handler: { target in
+            target.canvas.canvas.bakgroundMode = oldItem
+            target.didChangeBackground(newItem: oldItem, oldItem: newItem)
+        })
     }
 }
 
 extension ProjectCreatingViewController: AdjustableImageViewDelegate {
+    
+    func didUpdateImage(_ view: AdjustableImageView, _ newImage: UIImage) {
+        guard let old = view.imageView.image else { return }
+        didUpdateImageAdj(view, newImage, oldImage: old)
+    }
+    
+    func didToggleFilterMode(_ view: AdjustableImageView) {}
+    
+    private func didUpdateImageAdj(_ view: AdjustableImageView, _ newImage: UIImage, oldImage: UIImage) {
+        view.imageView.image = newImage
+        undoManager?.registerUndo(withTarget: self, handler: { target in
+            target.didUpdateImageAdj(view, oldImage, oldImage: newImage)
+        })
+    }
+}
+
+extension ProjectCreatingViewController: FiltersViewControllerDelegate {
     
     func showFiltersController() {
         guard let adjustable = currentlySelectedAdjustableView as? AdjustableImageView else { return }
@@ -446,14 +457,15 @@ extension ProjectCreatingViewController: AdjustableImageViewDelegate {
         present(filtersController, animated: true, completion: nil)
     }
     
-    func didToggleFilterMode(_ view: AdjustableImageView) {
-    }
-}
-
-extension ProjectCreatingViewController: FiltersViewControllerDelegate {
     func didSelectFilter(_ filter: Filter) {
         guard let imageAdjustableView = currentlySelectedAdjustableView as? AdjustableImageView else { return }
-        imageAdjustableView.currentFilter = filter
+        if filter.filterName.isEmpty {
+            imageAdjustableView.removeAllFilters()
+        } else {
+            imageAdjustableView.add(filter)
+        }
+        
+        // imageAdjustableView.currentFilter = filter
     }
     
     func didSelectBlendMode(_ filterName: String) {
@@ -464,23 +476,89 @@ extension ProjectCreatingViewController: FiltersViewControllerDelegate {
         toolBarView.leadingItem = .back
         toolBarView.trailingItem = .share
         toolBarView.centerItem = .editSet
-        transparentGridView.gridIsActive = false
+        canvas.canvas.gridIsActive = false
         toolBarView.centerItem = .editSet
         toolBarView.leadingItem = .back
         toolBarView.trailingItem = .share
         UIView.animate(withDuration: 0.3) {
-            self.transparentGridView.transform = .identity
+            self.canvas.transform = .identity
         }
+    }
+}
+
+extension ProjectCreatingViewController: AdjustViewControllerDelegate {
+    func didReportValue(_ value: Float, option: AdjustViewController.Option) {
+        guard let adjustable = currentlySelectedAdjustableView as? AdjustableImageView else { return }
+        var filterName = ""
+        var parameters: [String: Any] = [:]
+        switch option {
+        case .none:
+            break
+        case .contrast:
+            filterName = "CIColorControls"
+            parameters["inputContrast"] = value * 5
+        case .saturation:
+            filterName = "CIColorControls"
+            parameters["inputSaturation"] = value * 5
+        case .brightness:
+            filterName = "CIColorControls"
+            parameters["inputBrightness"] = value
+        }
+        adjustable.applyToCI(name: filterName, paramaters: parameters)
+    }
+    
+    func didDismissAdjustController() {
+        
+    }
+    func shouldRemoveBackground() {
+        guard let adjustable = currentlySelectedAdjustableView as? AdjustableImageView else { return }
+        adjustable.imageView.image = adjustable.originalImage.rmBG()
+    }
+    func showAdjustController() {
+        let controller = AdjustViewController()
+        controller.modalPresentationStyle = .custom
+        controller.delegate = self
+        controller.transitioningDelegate = controller
+        present(controller, animated: true)
+    }
+}
+
+extension ProjectCreatingViewController: CropViewControllerDelegate {
+    func showCropViewController() {
+        guard let adjustable = currentlySelectedAdjustableView as? AdjustableImageView else { return }
+        guard let image = adjustable.imageView.image else { return }
+        let controller = CropViewController()
+        controller.delegate = self
+        controller.originalImage = image
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        present(controller, animated: true)
+    }
+    func didCut(_ image: UIImage) {
+        guard let imageAdjustableView = currentlySelectedAdjustableView as? AdjustableImageView else { return }
+        guard let currentImg = imageAdjustableView.imageView.image else { return }
+        didCutImage(image, oldImage: currentImg)
+    }
+    private func didCutImage(_ newImage: UIImage, oldImage: UIImage) {
+        guard let imageAdjustableView = currentlySelectedAdjustableView as? AdjustableImageView else { return }
+        imageAdjustableView.imageView.image = newImage
+        undoManager?.registerUndo(withTarget: self, handler: { target in
+            target.didCutImage(oldImage, oldImage: newImage)
+        })
     }
 }
 
 extension ProjectCreatingViewController: ShadowViewControllerDelegate {
     
-    func didReportNewShadowModel(_ model: ShadowModel) {
-        currentlySelectedAdjustableView.layer.shadowRadius = model.blur
-        currentlySelectedAdjustableView.layer.shadowOffset = model.angle
-        currentlySelectedAdjustableView.layer.shadowOpacity = model.alpha
-        currentlySelectedAdjustableView.layer.shadowColor = model.color
+    func didReportNewShadowModel(_ model: ShadowModel, orignaModel: ShadowModel, isFinal: Bool) {
+        if isFinal {
+            setShadowModel(
+                model,
+                originalModel: orignaModel,
+                adjustable: currentlySelectedAdjustableView
+            )
+        }
+        currentlySelectedAdjustableView.shadowModel = model
     }
     
     func showShadowViewController() {
@@ -499,6 +577,15 @@ extension ProjectCreatingViewController: ShadowViewControllerDelegate {
     func didDismissShadowController() {
         prepareForFullFromOneThird()
     }
+    
+    private func setShadowModel(
+        _ model: ShadowModel, originalModel: ShadowModel, adjustable: AdjustableView
+    ) {
+        adjustable.shadowModel = model
+        undoManager?.registerUndo(withTarget: self, handler: { target in
+            target.setShadowModel(originalModel, originalModel: model, adjustable: adjustable)
+        })
+    }
 }
 
 extension ProjectCreatingViewController: OpacityViewControllerDelegate {
@@ -514,49 +601,23 @@ extension ProjectCreatingViewController: OpacityViewControllerDelegate {
         present(opacityController, animated: true, completion: nil)
     }
     
-    func didSetOpacity(_ opacity: Float) {
+    func didSetOpacity(_ opacity: Float, originalOpacity: Float, isFinal: Bool) {
+        if isFinal {
+            setOpacity(CGFloat(opacity), originalOpacity: CGFloat(originalOpacity), adjustable: currentlySelectedAdjustableView)
+        }
         currentlySelectedAdjustableView?.alpha = CGFloat(opacity)
     }
     
     func didDismissOpacityController() {
         prepareForFullFromOneThird()
     }
-}
-
-extension ProjectCreatingViewController: LayersViewControllerDelegate {
-    func showLayersController() {
-        guard !transparentGridView.adjustables.isEmpty else { return }
-        prepareForOnThird(title: "Layers")
-        let layersController = LayersViewController()
-        layersController.layers = transparentGridView.adjustables
-        layersController.delegate = self
-        layersController.modalPresentationStyle = .custom
-        layersController.transitioningDelegate = layersController
-        present(layersController, animated: true)
+    
+    private func setOpacity(
+        _ opacity: CGFloat, originalOpacity: CGFloat, adjustable: AdjustableView?) {
+        adjustable?.alpha = opacity
+        undoManager?.registerUndo(withTarget: self, handler: { target in
+            target.setOpacity(originalOpacity, originalOpacity: opacity, adjustable: adjustable)
+        })
     }
-    func didDismissLayers() {
-        prepareForFullFromOneThird()
-    }
-}
-
-extension ProjectCreatingViewController: AdjustViewControllerDelegate {
-    func didDismissAdjustController() {
-        
-    }
-    func didReport() {
-        guard let adjustable = currentlySelectedAdjustableView as? AdjustableImageView else { return }
-        
-        //let rm = adjustable.originalImage.rmBG()
-        //DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4)) {
-            adjustable.imageView.image = adjustable.originalImage.rmBG()
-        //}
-        
-    }
-    func showAdjustController() {
-        let controller = AdjustViewController()
-        controller.modalPresentationStyle = .custom
-        controller.delegate = self
-        controller.transitioningDelegate = controller
-        present(controller, animated: true)
-    }
+    
 }

@@ -28,13 +28,6 @@ extension Project {
 
 extension Project : Identifiable {
     
-    func log() {
-        print("____")
-        print(url ?? "")
-        print(id ?? "")
-        print(isFavorite)
-    }
-    
     func toggleIsFavorites() {
         let context = AppDelegate.getContext()
         isFavorite.toggle()
@@ -46,7 +39,6 @@ extension Project : Identifiable {
     
     func getPNGData() -> Data? {
         guard let url = url?.lastPathComponent else { return nil }
-        print("#", url)
         let png = ProjectsFileManager.shared.getImageDataWith(fileName: url)
         switch png {
         case .success(let data):
@@ -89,7 +81,6 @@ extension Project : Identifiable {
     }
     
     static func getProjects(folder_id: UUID) -> [Project] {
-        print("#REQUESTING FOLDER ID: \(folder_id)")
         let context = AppDelegate.getContext()
         do {
             let req = fetchRequest()

@@ -9,6 +9,7 @@ import UIKit
 
 protocol LayersViewControllerDelegate: AnyObject {
     func didDismissLayers()
+    func didDeleteLayer(_ adjustable: AdjustableView)
 }
 
 final class LayersViewController: UIViewController {
@@ -37,6 +38,9 @@ final class LayersViewController: UIViewController {
         swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown))
         swipeGestureRecognizer.direction = .down
         view.addGestureRecognizer(swipeGestureRecognizer)
+        
+        currentlySelectedLayer = layers.first
+        didSelect(currentlySelectedLayer)
     }
     
     override func viewDidLayoutSubviews() {
@@ -55,6 +59,7 @@ final class LayersViewController: UIViewController {
             LocalizationManager.shared.localizedString(for: .layersDelete)
         ]
         layerOptionsPicker.delegate = self
+        layerOptionsPicker.usesColorForSelection = false
         view.addSubview(layerOptionsPicker)
     }
     
@@ -84,13 +89,18 @@ extension LayersViewController: ValuePickerViewDelegate {
         switch index {
         case 0:
             currentlySelectedLayer.isHidden.toggle()
+            didSelect(currentlySelectedLayer)
         case 1:
             currentlySelectedLayer.isTransformingEnabled.toggle()
+            didSelect(currentlySelectedLayer)
         case 2:
             currentlySelectedLayer.isDeleted = true
+            delegate?.didDeleteLayer(currentlySelectedLayer)
+            layers.removeAll { $0.isDeleted }
         default:
             break
         }
+        layersCollectionView.reloadData()
     }
 }
 
@@ -103,6 +113,22 @@ extension LayersViewController: UIViewControllerTransitioningDelegate {
 extension LayersViewController: LayersCollectionViewDelegate {
     func didSelect(_ adjustable: AdjustableView) {
         currentlySelectedLayer = adjustable
+        
+        var titles: [String] = []
+        if adjustable.isHidden {
+            titles.append(LocalizationManager.shared.localizedString(for: .layersUnhide))
+        } else {
+            titles.append(LocalizationManager.shared.localizedString(for: .layersHide))
+        }
+        if adjustable.isTransformingEnabled {
+            titles.append(LocalizationManager.shared.localizedString(for: .layersLock))
+        } else {
+            titles.append(LocalizationManager.shared.localizedString(for: .layersUnlock))
+        }
+        titles.append(LocalizationManager.shared.localizedString(for: .layersDelete))
+        
+        layerOptionsPicker.titles = titles
+        
     }
 }
 

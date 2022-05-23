@@ -25,7 +25,14 @@ final class CustomSlider: UISlider {
 }
 
 final class CustomSliderContainerView: UIView {
+    
 	var slider: CustomSlider!
+    
+    var isContinuous: Bool = true {
+        didSet {
+            slider.isContinuous = isContinuous
+        }
+    }
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)

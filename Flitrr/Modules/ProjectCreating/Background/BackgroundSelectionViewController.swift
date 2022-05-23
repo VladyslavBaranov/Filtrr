@@ -8,7 +8,7 @@
 import UIKit
 
 protocol BackgroundSelectionViewControllerDelegate: AnyObject {
-    func didDismissBackgroundSelection()
+    func didDismissBackgroundSelection(didSelectNew: Bool, initialMode: CanvasCoreView.BackgroundMode)
     func shouldFillBackgroundWithPlain(_ paletteItem: ColorPaletteItem, _ color: UIColor)
     func shouldFillWithImage(_ paletteItem: ColorPaletteItem, _ uiImage: UIImage)
     func shouldFillWithGradient(_ paletteItem: ColorPaletteItem, _ colors: [UIColor])
@@ -16,6 +16,7 @@ protocol BackgroundSelectionViewControllerDelegate: AnyObject {
 
 final class BackgroundSelectionViewController: UIViewController {
     
+    var initialBackgroundMode: CanvasCoreView.BackgroundMode!
     var initialPaletteItem: ColorPaletteItem!
     
     var addedCount = 0
@@ -84,12 +85,12 @@ final class BackgroundSelectionViewController: UIViewController {
 
 extension BackgroundSelectionViewController: ToolBarViewDelegate {
     func didTapTrailingItem() {
-        delegate?.didDismissBackgroundSelection()
+        delegate?.didDismissBackgroundSelection(didSelectNew: true, initialMode: initialBackgroundMode)
         dismiss(animated: true)
     }
     func didTapLeadingItem() {
         didSelectItem(initialPaletteItem)
-        delegate?.didDismissBackgroundSelection()
+        delegate?.didDismissBackgroundSelection(didSelectNew: false, initialMode: initialBackgroundMode)
         dismiss(animated: true)
     }
     func didTapUndo() {}
@@ -107,7 +108,7 @@ extension BackgroundSelectionViewController: ValuePickerViewDelegate {
             present(controller, animated: true)
         case 1:
             delegate?.shouldFillBackgroundWithPlain(.transparent, .clear)
-            delegate?.didDismissBackgroundSelection()
+            delegate?.didDismissBackgroundSelection(didSelectNew: false, initialMode: initialBackgroundMode)
             dismiss(animated: true)
         case 2:
             palette.backgroundSetColors()
@@ -154,7 +155,7 @@ extension BackgroundSelectionViewController: ImageLibraryPickerViewControllerDel
         addedCount += 1
         if addedCount == 2 {
             delegate?.shouldFillWithImage(initialPaletteItem, uiImage)
-            delegate?.didDismissBackgroundSelection()
+            delegate?.didDismissBackgroundSelection(didSelectNew: false, initialMode: initialBackgroundMode)
             dismiss(animated: true)
         }
     }

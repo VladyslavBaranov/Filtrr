@@ -98,6 +98,8 @@ enum LocalizationKey: String {
 
     case layersHide = "layers_hide"
     case layersLock = "layers_lock"
+    case layersUnlock = "layers_unlock"
+    case layersUnhide = "layers_unhide"
     case layersDelete = "layers_delete"
     case layersUL = "layer_ul"
 

@@ -85,7 +85,7 @@
 		1E98AD7C2812FDF1006DAE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD7B2812FDF1006DAE75 /* Fonts.swift */; };
 		1E98AD7E28140BB1006DAE75 /* ProjectCreatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD7D28140BB1006DAE75 /* ProjectCreatingViewController.swift */; };
 		1E98AD8128140C51006DAE75 /* ToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD8028140C51006DAE75 /* ToolBarView.swift */; };
-		1E98AD8328141DE1006DAE75 /* ProjectTransparentGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD8228141DE1006DAE75 /* ProjectTransparentGridView.swift */; };
+		1E98AD8328141DE1006DAE75 /* CanvasCoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD8228141DE1006DAE75 /* CanvasCoreView.swift */; };
 		1E98AD93281575DA006DAE75 /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD8F281575DA006DAE75 /* Folder+CoreDataClass.swift */; };
 		1E98AD94281575DA006DAE75 /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD90281575DA006DAE75 /* Folder+CoreDataProperties.swift */; };
 		1E98AD95281575DA006DAE75 /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD91281575DA006DAE75 /* Project+CoreDataClass.swift */; };
@@ -101,6 +101,8 @@
 		1EAE086728392B08000A185F /* BackgroundRemoval in Frameworks */ = {isa = PBXBuildFile; productRef = 1EAE086628392B08000A185F /* BackgroundRemoval */; };
 		1EAE0869283A1784000A185F /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE0868283A1783000A185F /* UIApplication.swift */; };
 		1EAE086B283A3A78000A185F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE086A283A3A78000A185F /* Validation.swift */; };
+		1EAE086E283B6E94000A185F /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE086D283B6E94000A185F /* GridView.swift */; };
+		1EAE0871283BA0B2000A185F /* TPInAppReceipt in Frameworks */ = {isa = PBXBuildFile; productRef = 1EAE0870283BA0B2000A185F /* TPInAppReceipt */; };
 		1EC9915A282E58B9006B2D38 /* GraphicsObservingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */; };
 		1EC9915C282E5FB6006B2D38 /* GraphicsStretchyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */; };
 		1EF9521F282ED6830002A6E7 /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF9521E282ED6830002A6E7 /* AppearanceViewController.swift */; };
@@ -227,7 +229,7 @@
 		1E98AD7B2812FDF1006DAE75 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		1E98AD7D28140BB1006DAE75 /* ProjectCreatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreatingViewController.swift; sourceTree = "<group>"; };
 		1E98AD8028140C51006DAE75 /* ToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarView.swift; sourceTree = "<group>"; };
-		1E98AD8228141DE1006DAE75 /* ProjectTransparentGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTransparentGridView.swift; sourceTree = "<group>"; };
+		1E98AD8228141DE1006DAE75 /* CanvasCoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCoreView.swift; sourceTree = "<group>"; };
 		1E98AD8F281575DA006DAE75 /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1E98AD90281575DA006DAE75 /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1E98AD91281575DA006DAE75 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		1EAE0868283A1783000A185F /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1EAE086A283A3A78000A185F /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		1EAE086C283A6572000A185F /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1EAE086D283B6E94000A185F /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsObservingViewController.swift; sourceTree = "<group>"; };
 		1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsStretchyHeader.swift; sourceTree = "<group>"; };
 		1EF9521E282ED6830002A6E7 /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
@@ -267,6 +270,7 @@
 			files = (
 				1EF9522F283141DE0002A6E7 /* StoreKit.framework in Frameworks */,
 				1EAE086728392B08000A185F /* BackgroundRemoval in Frameworks */,
+				1EAE0871283BA0B2000A185F /* TPInAppReceipt in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +426,7 @@
 				07F98778281C43620058139C /* PresentationControllers.swift */,
 				1E28628E28268E9200E624B1 /* CustomSearchTextField.swift */,
 				1EF95220282F92800002A6E7 /* AppState.swift */,
+				1EAE086D283B6E94000A185F /* GridView.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -602,7 +607,7 @@
 			isa = PBXGroup;
 			children = (
 				1E98AD7D28140BB1006DAE75 /* ProjectCreatingViewController.swift */,
-				1E98AD8228141DE1006DAE75 /* ProjectTransparentGridView.swift */,
+				1E98AD8228141DE1006DAE75 /* CanvasCoreView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -887,6 +892,7 @@
 			name = Flitrr;
 			packageProductDependencies = (
 				1EAE086628392B08000A185F /* BackgroundRemoval */,
+				1EAE0870283BA0B2000A185F /* TPInAppReceipt */,
 			);
 			productName = Flitrr;
 			productReference = 1E42E013280DC93D0033E6EE /* Flitrr.app */;
@@ -972,6 +978,7 @@
 			mainGroup = 1E42E00A280DC93D0033E6EE;
 			packageReferences = (
 				1EAE086528392B08000A185F /* XCRemoteSwiftPackageReference "BackgroundRemoval" */,
+				1EAE086F283BA0B1000A185F /* XCRemoteSwiftPackageReference "TPInAppReceipt" */,
 			);
 			productRefGroup = 1E42E014280DC93D0033E6EE /* Products */;
 			projectDirPath = "";
@@ -1044,6 +1051,7 @@
 				07F98782281ED1500058139C /* Localization.swift in Sources */,
 				1E42E021280DC93D0033E6EE /* Flitrr.xcdatamodeld in Sources */,
 				1E5BCFDF2829060B00F7B610 /* FiltersViewController.swift in Sources */,
+				1EAE086E283B6E94000A185F /* GridView.swift in Sources */,
 				07F98772281AF7390058139C /* AlphaView.swift in Sources */,
 				1E98AD5E280EE2FD006DAE75 /* ProjectsSelectionTab.swift in Sources */,
 				1E42E051280DD3C90033E6EE /* RoundedTabBar.swift in Sources */,
@@ -1066,7 +1074,7 @@
 				1E98AD60280EE9DC006DAE75 /* ProjectsFolderCell.swift in Sources */,
 				1E5BCFF7282B8B5700F7B610 /* CropViewController.swift in Sources */,
 				1EAE085A283807DE000A185F /* AdjustViewController.swift in Sources */,
-				1E98AD8328141DE1006DAE75 /* ProjectTransparentGridView.swift in Sources */,
+				1E98AD8328141DE1006DAE75 /* CanvasCoreView.swift in Sources */,
 				1E98AD59280EDEEA006DAE75 /* UIViewController.swift in Sources */,
 				1E98AD95281575DA006DAE75 /* Project+CoreDataClass.swift in Sources */,
 				1E5BCFE4282910B300F7B610 /* PaywallVideoView.swift in Sources */,
@@ -1488,6 +1496,14 @@
 				kind = branch;
 			};
 		};
+		1EAE086F283BA0B1000A185F /* XCRemoteSwiftPackageReference "TPInAppReceipt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tikhop/TPInAppReceipt.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1495,6 +1511,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1EAE086528392B08000A185F /* XCRemoteSwiftPackageReference "BackgroundRemoval" */;
 			productName = BackgroundRemoval;
+		};
+		1EAE0870283BA0B2000A185F /* TPInAppReceipt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE086F283BA0B1000A185F /* XCRemoteSwiftPackageReference "TPInAppReceipt" */;
+			productName = TPInAppReceipt;
 		};
 /* End XCSwiftPackageProductDependency section */
 

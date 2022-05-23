@@ -17,8 +17,7 @@ enum PickerStyle {
 
 final class ValuePickerView: UIView {
     
-    
-    var isMultiSelectionEnabled = false
+    var usesColorForSelection = true
 	
     var pickerStyle: PickerStyle = .style1 {
         didSet {
@@ -133,29 +132,27 @@ extension ValuePickerView: UICollectionViewDelegate, UICollectionViewDataSource,
 		cell.pickerStyle = pickerStyle
 		cell.usesBorder = true
 		cell.layer.cornerRadius = 10
-		if items[indexPath.row].isSelected {
-			cell.setSelected()
-		} else {
-			cell.setUnselected()
-		}
+        if usesColorForSelection {
+            if items[indexPath.row].isSelected {
+                cell.setSelected()
+            } else {
+                cell.setUnselected()
+            }
+        }
 		return cell
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if isMultiSelectionEnabled {
-            selectedIdexes.insert(indexPath.row)
-            collectionView.reloadData()
-            delegate?.didSelectValue(at: indexPath.row)
-        } else {
-            for i in 0..<items.count {
-                items[i].isSelected = i == indexPath.row
-            }
-            collectionView.reloadData()
-            // let cell = collectionView.cellForItem(at: indexPath) as! TextCollectionViewCell
-            // cell.setSelected()
-            delegate?.didSelectValue(at: indexPath.row)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        for i in 0..<items.count {
+            items[i].isSelected = i == indexPath.row
         }
-	}
+        collectionView.reloadData()
+        // let cell = collectionView.cellForItem(at: indexPath) as! TextCollectionViewCell
+        // cell.setSelected()
+        delegate?.didSelectValue(at: indexPath.row)
+        
+    }
 	
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 		//let cell = collectionView.cellForItem(at: indexPath) as! TextCollectionViewCell

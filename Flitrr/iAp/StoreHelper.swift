@@ -77,6 +77,10 @@ class StoreHelper: NSObject, ObservableObject {
     private var request: SKProductsRequest!
     @Published private(set) var products = [AppProduct]()
     
+    func getSelectedProduct() -> AppProduct {
+        products.first(where: { $0.isSelected })!
+    }
+    
     override init() {
         super.init()
         guard let products = InAppConfiguration.readConfigFile() else { return }
@@ -107,21 +111,19 @@ extension StoreHelper: SKProductsRequestDelegate {
                 pr.isSelected = i == 0
                 pr.price = prod.price.floatValue
                 prods.append(pr)
-                print("#", pr.skProduct.productIdentifier, pr.skProduct.price)
             }
             
             DispatchQueue.main.async { [unowned self] in
-                self.products = prods //.sorted { $0.price > $1.price }
-                for product in products {
-                    print(product.skProduct.price, product.skProduct.productIdentifier)
+                self.products = prods.sorted {
+                    $0.skProduct.price.doubleValue > $1.skProduct.price.doubleValue
+                }
+                for i in 0..<products.count {
+                    products[i].index = i
                 }
             }
-            
-            
         }
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
-        print("FAILED")
     }
 }

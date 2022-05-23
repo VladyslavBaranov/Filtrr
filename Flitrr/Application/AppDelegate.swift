@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import StoreKit
+import TPInAppReceipt
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,13 +26,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         StoreObserver.shared.receiptValidation { validation in
             if let validation = validation {
                 if validation.isReqDateLessThanExpiry() {
-                    // print("SUBSCRIPTION IS ACTIVE")
+                    print("SUBSCRIPTION IS ACTIVE")
                 } else {
                     print("SUBSCRIPTION IS NOT ACTIVE")
                     StoreObserver.shared.dropSubscription()
                 }
             } else {
-                StoreObserver.shared.dropSubscription()
+                do {
+                    let receipt = try InAppReceipt.localReceipt()
+                    if !receipt.hasActiveAutoRenewablePurchases {
+                        StoreObserver.shared.dropSubscription()
+                    }
+                } catch {
+                    StoreObserver.shared.dropSubscription()
+                }
             }
         }
         

@@ -101,6 +101,8 @@
 
 "layers_hide" = "Спрятать";
 "layers_lock" = "Закрепить";
+"layers_unlock" = "Открепить";
+"layers_unhide" = "Показать";
 "layers_delete" = "Удалить";
 "layer_ul" = "СЛОЙ";
 

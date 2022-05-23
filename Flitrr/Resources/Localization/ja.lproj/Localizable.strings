@@ -102,6 +102,8 @@
 
 "layers_hide"="非表示";
 "layers_lock"="ロック";
+"layers_unlock"="ロック解除";
+"layers_unhide"="再表示";
 "layers_delete"="削除";
 "layer_ul" = "LAYER";
 

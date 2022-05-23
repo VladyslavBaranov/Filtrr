@@ -139,7 +139,6 @@ final class FolderViewController: UIViewController {
         guard let uuid = folder.id else { return }
         let projects = Project.getProjects(folder_id: uuid)
         if !projects.isEmpty {
-            print(projects.map { $0.folder_id })
             self.projects = projects
             collectionView.reloadData()
         }
@@ -158,7 +157,6 @@ extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let offset = scrollView.contentOffset.y + view.safeAreaInsets.top + 80 + closeButton.bounds.height
-        print(offset)
         if offset > 0 {
             let fraction = 1 - offset / 160
             navigationView.alpha = fraction

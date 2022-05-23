@@ -20,6 +20,8 @@ final class LayersCollectionViewCell: UICollectionViewCell {
     
     var adjustable: AdjustableView!
     
+    var hiddenStateImage: UIImageView!
+    
     func setSelected() {
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.appAccent.cgColor
@@ -34,6 +36,7 @@ final class LayersCollectionViewCell: UICollectionViewCell {
     }
     
     func set(_ adjustable: AdjustableView) {
+        hiddenStateImage.isHidden = !adjustable.isHidden
         if adjustable is AdjustableImageView {
             imageView.isHidden = false
             label.isHidden = true
@@ -67,6 +70,13 @@ final class LayersCollectionViewCell: UICollectionViewCell {
         label.textColor = .label
         addSubview(label)
         label.isHidden = true
+        
+        hiddenStateImage = UIImageView()
+        hiddenStateImage.image = UIImage(systemName: "eye.slash.fill")
+        hiddenStateImage.tintColor = .white
+        hiddenStateImage.contentMode = .scaleAspectFit
+        addSubview(hiddenStateImage)
+        hiddenStateImage.isHidden = true
     }
     
     override func layoutSubviews() {
@@ -74,6 +84,8 @@ final class LayersCollectionViewCell: UICollectionViewCell {
         imageView.frame = .init(x: 0, y: 0, width: bounds.width, height: bounds.height - 30)
         titleLabel.frame = .init(x: 0, y: bounds.height - 30, width: bounds.width, height: 30)
         label.frame = .init(x: 0, y: 0, width: bounds.width, height: bounds.height - 30)
+        hiddenStateImage.frame.size = .init(width: 30, height: 30)
+        hiddenStateImage.center = .init(x: bounds.midX, y: bounds.midY - 15)
     }
     
     required init?(coder: NSCoder) {
@@ -111,7 +123,7 @@ extension LayersCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! LayersCollectionViewCell
         cell.set(layers[indexPath.row])
-        cell.titleLabel.text = "LAYER \(indexPath.row + 1)"
+        cell.titleLabel.text = "\(LocalizationManager.shared.localizedString(for: .layersUL)) \(indexPath.row + 1)"
         
         if indexPath.row == selectedRow {
             cell.setSelected()

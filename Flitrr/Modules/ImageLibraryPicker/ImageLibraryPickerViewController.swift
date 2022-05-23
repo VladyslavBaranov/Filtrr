@@ -271,7 +271,6 @@ extension ImageLibraryPickerViewController: UICollectionViewDelegate, UICollecti
 		
 		if let allPhotos = allPhotos {
 			let asset = allPhotos[indexPath.row]
-			print(asset.pixelWidth, asset.pixelHeight)
 			let options = PHImageRequestOptions()
 			PHImageManager.default().requestImage(
 				for: asset,

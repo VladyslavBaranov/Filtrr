@@ -102,6 +102,8 @@
 
 "layers_hide" = "Ocultar";
 "layers_lock" = "Bloquear";
+"layers_unlock" = "Desbloquear";
+"layers_unhide" = "Reexibir";
 "layers_delete" = "Excluir";
 "layer_ul" = "CAMADA";
 

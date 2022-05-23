@@ -5,12 +5,6 @@
 //  Created by Vladyslav Baranov on 10.05.2022.
 //
 
-
-/*
- y = -50cosx
- x = 50sinx
- */
-
 import UIKit
 
 final class ShadowModel {
@@ -46,7 +40,7 @@ final class ShadowModel {
 
 protocol ShadowViewControllerDelegate: AnyObject {
     func didDismissShadowController()
-    func didReportNewShadowModel(_ model: ShadowModel)
+    func didReportNewShadowModel(_ model: ShadowModel, orignaModel: ShadowModel, isFinal: Bool)
 }
 
 final class ShadowViewController: UIViewController {
@@ -148,27 +142,30 @@ final class ShadowViewController: UIViewController {
         switch selectedOptionIndex {
         case 0:
             let size = CGFloat(sender.value) * 100
-            print(size)
             modelCopy.size = size
             let rad = modelCopy._angle
             let newAngle = CGSize(width: size * sin(rad), height: -size * cos(rad))
             modelCopy.angle = newAngle
-            delegate?.didReportNewShadowModel(modelCopy)
+            delegate?.didReportNewShadowModel(
+                modelCopy, orignaModel: originalShadowModel, isFinal: false)
         case 1:
             let rad = CGFloat(2 * sender.value * .pi)
             modelCopy._angle = rad
             let ssize = modelCopy.size
             let size = CGSize(width: ssize * sin(rad), height: -ssize * cos(rad))
             modelCopy.angle = size
-            delegate?.didReportNewShadowModel(modelCopy)
+            delegate?.didReportNewShadowModel(
+                modelCopy, orignaModel: originalShadowModel, isFinal: false)
             toolBarView.title = "\(LocalizationManager.shared.localizedString(for: .shadowAngle)) \(Int(sender.value * 360))°"
         case 2:
             modelCopy.blur = CGFloat(sender.value) * 100
-            delegate?.didReportNewShadowModel(modelCopy)
+            delegate?.didReportNewShadowModel(
+                modelCopy, orignaModel: originalShadowModel, isFinal: false)
             toolBarView.title = "\(LocalizationManager.shared.localizedString(for: .shadowBlur)) \(Int(modelCopy.blur))"
         case 4:
             modelCopy.alpha = sender.value
-            delegate?.didReportNewShadowModel(modelCopy)
+            delegate?.didReportNewShadowModel(
+                modelCopy, orignaModel: originalShadowModel, isFinal: false)
             toolBarView.title = "\(LocalizationManager.shared.localizedString(for: .shadowOpacity)) %\(Int(sender.value * 100))"
         default:
             break
@@ -182,11 +179,14 @@ final class ShadowViewController: UIViewController {
 
 extension ShadowViewController: ToolBarViewDelegate {
     func didTapTrailingItem() {
+        delegate?.didReportNewShadowModel(
+            modelCopy, orignaModel: originalShadowModel, isFinal: true)
         delegate?.didDismissShadowController()
         dismiss(animated: true)
     }
     func didTapLeadingItem() {
-        delegate?.didReportNewShadowModel(originalShadowModel)
+        delegate?.didReportNewShadowModel(
+            originalShadowModel, orignaModel: originalShadowModel, isFinal: true)
         delegate?.didDismissShadowController()
         dismiss(animated: true)
     }
@@ -246,7 +246,8 @@ extension ShadowViewController: ColorPaletteCollectionViewDelegate {
             break
         case .color(let uIColor):
             modelCopy.color = uIColor.cgColor
-            delegate?.didReportNewShadowModel(modelCopy)
+            delegate?.didReportNewShadowModel(
+                modelCopy, orignaModel: originalShadowModel, isFinal: false)
         default:
             break
         }

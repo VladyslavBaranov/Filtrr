@@ -100,6 +100,8 @@
 
 "layers_hide" = "Nascondi";
 "layers_lock" = "Blocca";
+"layers_unlock" = "Sblocca";
+"layers_unhide" = "Scopri";
 "layers_delete" = "Elimina";
 "layer_ul" = "LAYER";
 

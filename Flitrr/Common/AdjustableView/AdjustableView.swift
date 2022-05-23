@@ -14,15 +14,20 @@ protocol AdjustableViewDelegate: AnyObject {
 
 class AdjustableView: UIView {
     
-    var id: UUID!
-    
-    var isDeleted = false {
+    var shadowModel: ShadowModel! {
         didSet {
-            if isDeleted {
-                isHidden = true
+            if shadowModel != nil {
+                layer.shadowRadius = shadowModel.blur
+                layer.shadowOffset = shadowModel.angle
+                layer.shadowOpacity = shadowModel.alpha
+                layer.shadowColor = shadowModel.color
             }
         }
     }
+    
+    var id: UUID!
+    
+    var isDeleted = false
 	
     weak var delegate: AdjustableViewDelegate!
     var isTransformingEnabled = true

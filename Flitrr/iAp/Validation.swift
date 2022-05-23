@@ -62,7 +62,8 @@ struct ValidationResponse {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd HH:mm:ss VV"
             if let expiresDate = receipt["expires_date"] as? String {
-                self.receipt = .init(request_date: formatter.date(from: expiresDate) ?? .init())
+                let date = formatter.date(from: expiresDate) ?? .init()
+                self.receipt = .init(request_date: date)
             }
         }
         if let status = dictionary["status"] as? Int {

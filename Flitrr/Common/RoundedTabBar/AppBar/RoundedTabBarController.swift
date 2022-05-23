@@ -40,6 +40,7 @@ extension RoundedTabBarController: RoundedTabBarDelegate {
         case 0:
             selectedViewController = controllers[0]
         case 1:
+            Canvas.renderSize = .init(width: 1080, height: 1080)
             let projectCreatingVC = ProjectCreatingViewController()
             projectCreatingVC.modalPresentationStyle = .fullScreen
             present(projectCreatingVC, animated: true)
