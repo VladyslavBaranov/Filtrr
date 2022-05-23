@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.tabBar.alpha = 0
         
         let discoverController = DiscoverViewController()
-        
         let projectsController = ProjectsViewController()
         
         tabBarController.viewControllers = [discoverController, projectsController]

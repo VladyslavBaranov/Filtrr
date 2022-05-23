@@ -154,9 +154,10 @@ final class GraphicViewController: UIViewController {
     }
     
     func setupCollection() {
+        let rows = UIDevice.current.userInterfaceIdiom == .pad ? 4 : 2
         collectionView = UICollectionView(
             frame: .zero,
-            collectionViewLayout: createLayout(cellsPerRow: 2, heightRatio: 1.2, inset: 9, usesHorizontalScroll: true)
+            collectionViewLayout: createLayout(cellsPerRow: rows, heightRatio: 1.2, inset: 9, usesHorizontalScroll: true)
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)

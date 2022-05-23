@@ -15,25 +15,24 @@ final class GridView: UIView {
         let count = UIDevice.current.userInterfaceIdiom == .pad ? 45 : 23
         
         let dimension: CGFloat = rect.width / CGFloat(count)
+        
+        let hCount = Int(rect.height / dimension)
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
-        var i = 0
-        while y <= rect.height {
-            for _ in 0..<count {
+        
+        for j in 0..<hCount {
+            for i in 0..<count {
                 ctx.addRect(.init(x: x, y: y, width: dimension, height: dimension))
                 if i % 2 == 0 {
-                    ctx.setFillColor(UIColor.appGray.cgColor)
+                    ctx.setFillColor(j % 2 == 0 ? UIColor.appGray.cgColor : UIColor.appDark.cgColor)
                 } else {
-                    ctx.setFillColor(UIColor.appDark.cgColor)
+                    ctx.setFillColor(j % 2 == 0 ? UIColor.appDark.cgColor : UIColor.appGray.cgColor)
                 }
                 ctx.fillPath()
                 x += dimension
-                if x >= rect.width {
-                    x = 0
-                    y += dimension
-                }
-                i += 1
             }
+            x = 0
+            y += dimension
         }
     }
     

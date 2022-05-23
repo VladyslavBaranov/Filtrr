@@ -68,9 +68,12 @@ final class StoreObserver: NSObject, SKPaymentTransactionObserver {
         
         let receiptFileURL = Bundle.main.appStoreReceiptURL
         let receiptData = try? Data(contentsOf: receiptFileURL!)
-        let recieptString = receiptData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
+        guard let recieptString = receiptData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) else {
+            completion(nil)
+            return
+        }
         let jsonDict: [String: AnyObject] = [
-            "receipt-data": recieptString! as AnyObject,
+            "receipt-data": recieptString as AnyObject,
             "password": "787ca6b864714cdea4ed6d55802d1fe4" as AnyObject,
             "exclude-old-transactions": 1 as AnyObject
         ]

@@ -37,9 +37,10 @@ final class GraphicsObservingViewController: UIViewController {
     }
     
     func setupCollection() {
+        let rows = UIDevice.current.userInterfaceIdiom == .pad ? 4 : 2
         collectionView = UICollectionView(
             frame: .zero,
-            collectionViewLayout: createLayout(cellsPerRow: 2, heightRatio: 1.3, inset: 9, usesHorizontalScroll: false)
+            collectionViewLayout: createLayout(cellsPerRow: rows, heightRatio: 1.3, inset: 9, usesHorizontalScroll: false)
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)

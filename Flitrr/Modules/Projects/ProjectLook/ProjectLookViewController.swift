@@ -87,6 +87,11 @@ final class ProjectLookViewController: UIViewController {
     @objc func shareAction() {
         guard let img = imageView.image else { return }
         let controller = UIActivityViewController(activityItems: [img], applicationActivities: nil)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            controller.popoverPresentationController?.sourceView = shareButton
+            controller.popoverPresentationController?.sourceRect = shareButton.frame
+        }
         present(controller, animated: true)
     }
     

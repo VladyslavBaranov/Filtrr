@@ -118,7 +118,7 @@ final class ProjectCreatingViewController: UIViewController {
         canvas.canvas.gridIsActive = false
         toolBarView.centerItem = .editSet
         toolBarView.leadingItem = .back
-        toolBarView.trailingItem = .share
+        toolBarView.trailingItem = .none
         UIView.animate(withDuration: 0.3) {
             self.canvas.transform = .identity
         }
@@ -292,7 +292,7 @@ extension ProjectCreatingViewController: ColorPickerViewControllerDelegate {
     func didReportColor(_ uiColor: UIColor) {
         toolBarView.centerItem = .editSet
         toolBarView.leadingItem = .back
-        toolBarView.trailingItem = .share
+        toolBarView.trailingItem = .none
         // toolBarView.
         UIView.animate(withDuration: 0.3) {
             self.canvas.transform = .identity
@@ -474,12 +474,12 @@ extension ProjectCreatingViewController: FiltersViewControllerDelegate {
     
     func didDismissFilters() {
         toolBarView.leadingItem = .back
-        toolBarView.trailingItem = .share
+        toolBarView.trailingItem = .none
         toolBarView.centerItem = .editSet
         canvas.canvas.gridIsActive = false
         toolBarView.centerItem = .editSet
         toolBarView.leadingItem = .back
-        toolBarView.trailingItem = .share
+        toolBarView.trailingItem = .none
         UIView.animate(withDuration: 0.3) {
             self.canvas.transform = .identity
         }

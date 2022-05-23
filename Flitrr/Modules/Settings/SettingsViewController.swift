@@ -209,6 +209,11 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
             top: UIApplication.shared.getStatusBarHeight() + 40, left: 0, bottom: 0, right: 0)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         localize()

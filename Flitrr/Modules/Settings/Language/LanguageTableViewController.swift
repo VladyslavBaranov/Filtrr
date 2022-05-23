@@ -60,6 +60,11 @@ final class LanguageTableViewController: UIViewController, UITableViewDelegate, 
         setupToolBar()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
+    
     func setupToolBar() {
         toolBarView = ToolBarView(frame: .zero, centerItem: .editSet)
         toolBarView.delegate = self

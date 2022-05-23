@@ -113,9 +113,10 @@ final class ShapesViewController: UIViewController {
     }
     
     func setupCollection() {
+        let rows = UIDevice.current.userInterfaceIdiom == .pad ? 6 : 3
         collectionView = UICollectionView(
             frame: .zero,
-            collectionViewLayout: createLayout(cellsPerRow: 3, heightRatio: 1, inset: 9, usesHorizontalScroll: false)
+            collectionViewLayout: createLayout(cellsPerRow: rows, heightRatio: 1, inset: 9, usesHorizontalScroll: false)
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
