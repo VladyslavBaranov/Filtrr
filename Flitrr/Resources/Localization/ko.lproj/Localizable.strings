@@ -127,3 +127,6 @@
 "alert_a1" = "폐기";
 "alert_a2" = "취소";
 "alert_a3" = "저장";
+
+"folder_view_add_proj" = "프로젝트 추가";
+"folder_view_rename" = "폴더 이름 바꾸기";

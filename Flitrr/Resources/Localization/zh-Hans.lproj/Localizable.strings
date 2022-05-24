@@ -127,3 +127,6 @@
 "alert_a1" = "丢弃";
 "alert_a2" = "取消";
 "alert_a3" = "保存";
+
+"folder_view_add_proj" = "添加项目";
+"folder_view_rename" = "重命名文件夹";

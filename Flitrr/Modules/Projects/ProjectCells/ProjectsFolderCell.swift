@@ -74,29 +74,29 @@ final class ProjectsFolderCell: UICollectionViewCell {
         folderCountLabel.isHidden = false
         
         if folder.isForFavorites {
+            iconImageView.isHidden = false
             iconImageView.image = UIImage(named: "FavoriteHeart")
             if let imageData = Project.getLastFavoriteProject()?.getPNGData() {
                 imageView.image = UIImage(data: imageData)
             }
-            
             return
         }
         if folder.isForCreation {
+            iconImageView.isHidden = false
             iconImageView.image = UIImage(systemName: "plus")
             iconImageView.tintColor = .gray
             folderCountLabel.isHidden = true
             imageView.image = nil
             return
         }
-        let count = (folder as! Folder).loadProjectsCount()
-        folderCountLabel.text = "\(count)"
-        if let url = (folder as! Folder).getLastProjectURL(forFavorites: false) {
-            let png = ProjectsFileManager.shared.getImageDataWith(fileName: url.path)
-            switch png {
-            case .success(let data):
+        iconImageView.isHidden = true
+        
+        let projects = (folder as! Folder).getProjects()
+        folderCountLabel.text = "\(projects.count)"
+        
+        if let last = projects.last {
+            if let data = last.getPNGData() {
                 imageView.image = UIImage(data: data)
-            default:
-                imageView.image = nil
             }
         }
     }

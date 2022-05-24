@@ -244,11 +244,18 @@ extension ProjectCreatingViewController: ScrollableRoundedBarDelegate {
 
 extension ProjectCreatingViewController: AdjustableViewDelegate {
     
+    func didReport(_ view: AdjustableView, _ newTransform: CGAffineTransform, oldTransform: CGAffineTransform) {
+        view.transform = newTransform
+        undoManager?.registerUndo(withTarget: self, handler: { target in
+            target.didReport(view, oldTransform, oldTransform: newTransform)
+        })
+    }
+    
     func didToggle(_ view: AdjustableView) {
         currentlySelectedAdjustableView = view
     }
     
-    func frameDidChange(_ view: AdjustableView) {}
+    // func frameDidChange(_ view: AdjustableView) {}
 }
 
 extension ProjectCreatingViewController: ImageLibraryPickerViewControllerDelegate {

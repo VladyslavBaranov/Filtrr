@@ -127,3 +127,6 @@
 "alert_a1"="破棄";
 "alert_a2"="キャンセル";
 "alert_a3"="保存";
+
+"folder_view_add_proj"="プロジェクトの追加";
+"folder_view_rename"="フォルダの名前を変更";

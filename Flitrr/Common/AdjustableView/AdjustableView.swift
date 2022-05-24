@@ -9,7 +9,8 @@ import UIKit
 
 protocol AdjustableViewDelegate: AnyObject {
     func didToggle(_ view: AdjustableView)
-    func frameDidChange(_ view: AdjustableView)
+    // func frameDidChange(_ view: AdjustableView, newRect: CGRect, oldRect: CGRect)
+    func didReport(_ view: AdjustableView, _ newTransform: CGAffineTransform, oldTransform: CGAffineTransform)
 }
 
 class AdjustableView: UIView {
@@ -68,6 +69,8 @@ class AdjustableView: UIView {
 
 	private var lRightButton: AdjustChevronView!
 	private var lRightRecognizer: UIPanGestureRecognizer!
+    
+    private var initialTransform = CGAffineTransform.identity
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -143,7 +146,17 @@ class AdjustableView: UIView {
 	
 	@objc func handleRotationRecognizer(_ sender: UIRotationGestureRecognizer) {
         guard isTransformingEnabled else { return }
-        transform = CGAffineTransform(rotationAngle: sender.rotation)
+        switch sender.state {
+        case .began:
+            initialTransform = transform
+        case .changed:
+            transform = CGAffineTransform(rotationAngle: sender.rotation)
+        case .ended:
+            delegate?.didReport(self, transform, oldTransform: initialTransform)
+        default:
+            break
+        }
+        
         // print(frame)
 	}
 	
@@ -157,10 +170,11 @@ class AdjustableView: UIView {
 		let globalPos = sender.location(in: superview)
 		center = globalPos
 		savedFrame = frame
-        delegate?.frameDidChange(self)
+        //ndelegate?.frameDidChange(self)
 	}
 	
 	@objc func handleULeftRecognizer(_ sender: UIPanGestureRecognizer) {
+        guard getAngle() == 0 else { return }
         guard isTransformingEnabled else { return }
 		let location = sender.location(in: superview)
 		
@@ -183,6 +197,7 @@ class AdjustableView: UIView {
 	}
     
     @objc func handleURightRecognizer(_ sender: UIPanGestureRecognizer) {
+        guard getAngle() == 0 else { return }
         guard isTransformingEnabled else { return }
         let location = sender.location(in: superview)
         
@@ -205,6 +220,7 @@ class AdjustableView: UIView {
     }
     
     @objc func handleLRightRecognizer(_ sender: UIPanGestureRecognizer) {
+        guard getAngle() == 0 else { return }
         guard isTransformingEnabled else { return }
         let location = sender.location(in: superview)
         
@@ -226,6 +242,7 @@ class AdjustableView: UIView {
     }
     
     @objc func handleLLeftRecognizer(_ sender: UIPanGestureRecognizer) {
+        guard getAngle() == 0 else { return }
         guard isTransformingEnabled else { return }
         let location = sender.location(in: superview)
         
@@ -246,5 +263,10 @@ class AdjustableView: UIView {
             break
         }
 
+    }
+    
+    private func getAngle() -> Float {
+        let rads = atan2f(Float(transform.b), Float(transform.a))
+        return rads * (180.0 / .pi)
     }
 }

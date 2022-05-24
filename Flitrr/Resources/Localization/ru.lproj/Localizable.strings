@@ -126,3 +126,6 @@
 "alert_a1" = "Удалить";
 "alert_a2" = "Отменить";
 "alert_a3" = "Сохранить";
+
+"folder_view_add_proj" = "Добавить проекты";
+"folder_view_rename" = "Переименовать папку";

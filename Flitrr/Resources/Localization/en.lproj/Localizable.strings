@@ -132,3 +132,6 @@
 "alert_a1" = "Discard";
 "alert_a2" = "Cancel";
 "alert_a3" = "Save";
+
+"folder_view_add_proj" = "Add Projects";
+"folder_view_rename" = "Rename Folder";

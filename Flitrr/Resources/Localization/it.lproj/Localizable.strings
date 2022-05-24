@@ -125,3 +125,6 @@
 "alert_a1" = "Elimina";
 "alert_a2" = "Annulla";
 "alert_a3" = "Salva";
+
+"folder_view_add_proj" = "Aggiungi progetti";
+"folder_view_rename" = "Rinomina cartella";

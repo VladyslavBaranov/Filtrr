@@ -20,7 +20,7 @@ final class GridView: UIView {
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
         
-        for j in 0..<hCount {
+        for j in 0...hCount {
             for i in 0..<count {
                 ctx.addRect(.init(x: x, y: y, width: dimension, height: dimension))
                 if i % 2 == 0 {

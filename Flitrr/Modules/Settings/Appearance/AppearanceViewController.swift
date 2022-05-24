@@ -210,7 +210,8 @@ final class AppearanceViewController: UIViewController {
     }
     
     func setupCollection() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout(cellsPerRow: 3, heightRatio: 1.2, inset: 9, usesHorizontalScroll: true))
+        let rows = UIDevice.current.userInterfaceIdiom == .pad ? 4 : 3
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout(cellsPerRow: rows, heightRatio: 1.2, inset: 9, usesHorizontalScroll: true))
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         collectionView.backgroundColor = .clear

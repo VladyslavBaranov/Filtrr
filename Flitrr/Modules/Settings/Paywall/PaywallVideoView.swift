@@ -30,11 +30,12 @@ class PlayerView: UIView {
         self.gravity = gravity
         super.init(frame: .zero)
         self.player = player
-        self.backgroundColor = .black
+        self.backgroundColor = .appDark
         setupLayer()
     }
     
     func setupLayer() {
+        playerLayer.backgroundColor = UIColor.appDark.cgColor
         switch gravity {
     
         case .aspectFill:
@@ -72,7 +73,6 @@ final class PlayerContainerView: UIViewRepresentable {
     init(player: AVQueuePlayer, gravity: PlayerGravity) {
         self.player = player
         self.gravity = gravity
-        
     }
     
     func makeUIView(context: Context) -> PlayerView {

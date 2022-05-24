@@ -127,3 +127,6 @@
 "alert_a1" = "Verwerfen";
 "alert_a2" = "Abbrechen";
 "alert_a3" = "Speichern";
+
+"folder_view_add_proj" = "Projekte hinzufügen";
+"folder_view_rename" = "Ordner umbenennen";

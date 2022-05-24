@@ -365,10 +365,19 @@ extension ProjectsViewController {
 
 extension ProjectsViewController: ProjectsSelectionTabDelegate {
     func didTapShare() {
+        guard let lastSelected = projects.filter({ $0.isSelected }).last else { return }
+        guard let data = lastSelected.getPNGData() else { return }
+        let activity = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            activity.popoverPresentationController?.sourceView = selectionTab.shareButton
+            activity.popoverPresentationController?.sourceRect = selectionTab.shareButton.frame
+        }
+        present(activity, animated: true)
     }
     
     func didTapTrash() {
         let selectedObjectsCount = projects.filter { $0.isSelected }.count
+        guard selectedObjectsCount > 0 else { return }
         let alert = UIAlertController(
             title: "Delete \(selectedObjectsCount) Projects",
             message: "This action is irreversible", preferredStyle: .alert

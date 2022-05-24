@@ -107,7 +107,6 @@ extension StoreHelper: SKProductsRequestDelegate {
             for (i, prod) in response.products.enumerated() {
                 let pr = AppProduct()
                 pr.skProduct = prod
-                pr.index = i
                 pr.isSelected = i == 0
                 pr.price = prod.price.floatValue
                 prods.append(pr)

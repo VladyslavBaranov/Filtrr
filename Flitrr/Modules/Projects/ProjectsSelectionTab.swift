@@ -16,7 +16,7 @@ final class ProjectsSelectionTab: UIView {
     
     weak var delegate: ProjectsSelectionTabDelegate!
     
-    private var shareButton: UIButton!
+    private(set) var shareButton: UIButton!
     private var numberLabel: UILabel!
     private var deleteButton: UIButton!
     

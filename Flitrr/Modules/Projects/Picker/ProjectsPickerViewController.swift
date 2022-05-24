@@ -63,9 +63,10 @@ final class ProjectsPickerViewController: UIViewController {
     }
     
     func setupMainCollectionView() {
+        let rows = UIDevice.current.userInterfaceIdiom == .pad ? 4 : 2
         collectionView = UICollectionView(
             frame: view.bounds,
-            collectionViewLayout: createLayout(cellsPerRow: 2, heightRatio: 1.5, inset: 1, usesHorizontalScroll: false)
+            collectionViewLayout: createLayout(cellsPerRow: rows, heightRatio: 1.5, inset: 1, usesHorizontalScroll: false)
         )
         
         collectionView.backgroundColor = .appDark

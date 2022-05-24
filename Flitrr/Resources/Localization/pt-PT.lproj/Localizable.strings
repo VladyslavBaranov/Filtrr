@@ -127,3 +127,6 @@
 "alert_a1" = "Descartar";
 "alert_a2" = "Cancelar";
 "alert_a3" = "Salvar";
+
+"folder_view_add_proj" = "Adicionar projetos";
+"folder_view_rename" = "Renomear pasta";

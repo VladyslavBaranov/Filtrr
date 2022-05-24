@@ -22,9 +22,10 @@ final class RoundedTabBarController: UITabBarController {
         roundedTabBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(roundedTabBar)
         
+        let tabBarInset: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 120 : 0
         NSLayoutConstraint.activate([
-            roundedTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            roundedTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            roundedTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: tabBarInset),
+            roundedTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -tabBarInset),
             roundedTabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             roundedTabBar.heightAnchor.constraint(equalToConstant: 100)
         ])

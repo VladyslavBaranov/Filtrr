@@ -127,3 +127,6 @@
 "alert_a1" = "Supprimer";
 "alert_a2" = "Annuler";
 "alert_a3" = "Enregistrer";
+
+"folder_view_add_proj" = "Ajouter des projets";
+"folder_view_rename" = "Renommer le dossier";

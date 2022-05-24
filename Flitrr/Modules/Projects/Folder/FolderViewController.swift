@@ -43,7 +43,7 @@ final class FolderViewController: UIViewController {
         
         navigationView = NavigationView(frame: .zero)
         if isFavoritesMode {
-            navigationView.title = "Favorites"
+            navigationView.title = LocalizationManager.shared.localizedString(for: .projectsFolders)
         } else {
             navigationView.trailingButtonMode = .folderEdit
             navigationView.setMenuForTrailingButton(createMenu())
@@ -90,13 +90,15 @@ final class FolderViewController: UIViewController {
     func createMenu() -> UIMenu {
         
         let action1 = UIAction(
-            title: "Add Projects", image: .init(systemName: "plus")
+            title: LocalizationManager.shared.localizedString(for: .folderViewAddProj),
+            image: .init(systemName: "plus")
         ) { [unowned self] _ in
             showProjectsPicker()
         }
         
         let action2 = UIAction(
-            title: "Rename Folder", image: .init(systemName: "pencil")
+            title: LocalizationManager.shared.localizedString(for: .folderViewRename),
+            image: .init(systemName: "pencil")
         ) { [unowned self] _ in
             showRanamingUI()
         }
@@ -115,16 +117,19 @@ final class FolderViewController: UIViewController {
     }
     
     func showRanamingUI() {
-        let alertController = UIAlertController(title: "Rename Folder", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(
+            title: LocalizationManager.shared.localizedString(for: .folderViewRename), message: nil, preferredStyle: .alert)
         alertController.addTextField { [unowned self] textField in
             textField.text = folder.name
             textField.clearButtonMode = .always
             textField.autocorrectionType = .no
             textField.autocapitalizationType = .none
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(
+            title: LocalizationManager.shared.localizedString(for: .alertA2), style: .cancel)
         alertController.addAction(cancelAction)
-        let saveAction = UIAlertAction(title: "Save", style: .default) { [unowned self] _ in
+        let saveAction = UIAlertAction(
+            title: LocalizationManager.shared.localizedString(for: .alertA3), style: .default) { [unowned self] _ in
             if let text = alertController.textFields?.first?.text {
                 if folder.rename(text) {
                     navigationView.title = text

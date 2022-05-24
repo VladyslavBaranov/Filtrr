@@ -20,6 +20,13 @@ extension Folder: FolderProtocol {
     @NSManaged public var created: Date?
     @NSManaged public var name: String?
     
+    func getProjects() -> [Project] {
+        guard let id = id else {
+            return []
+        }
+        return Project.getProjects(folder_id: id)
+    }
+    
     func getLastProjectURL(forFavorites: Bool) -> URL? {
         let projects = Project.getAllAvailableProjects()
         if forFavorites {

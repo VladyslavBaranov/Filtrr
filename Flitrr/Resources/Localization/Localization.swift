@@ -122,6 +122,9 @@ enum LocalizationKey: String {
     case alertA1 = "alert_a1"
     case alertA2 = "alert_a2"
     case alertA3 = "alert_a3"
+    
+    case folderViewAddProj = "folder_view_add_proj"
+    case folderViewRename = "folder_view_rename"
 }
 
 final class LocalizationManager {

@@ -185,6 +185,7 @@ extension GraphicViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind, withReuseIdentifier: "hId", for: indexPath) as! MainCollectionReusableView
+        view.showsTrailingButton = false
         view.associatedHeaderIndex = indexPath.section
         return view
     }
