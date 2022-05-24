@@ -54,6 +54,7 @@ final class ColorSliderView: UIView {
 		didSet {
 			if usesAlpha {
 				alphaView = AlphaView(frame: bounds)
+                alphaView.backgroundColor = .clear
 				insertSubview(alphaView, at: 0)
 			}
 		}

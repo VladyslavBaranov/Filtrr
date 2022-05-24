@@ -24,26 +24,23 @@ final class ProjectFileInfoViewController: UITableViewController {
         super.viewDidLoad()
         
         if let creationDate = project.created {
-            models.append(.init(title: "Created", value: creationDate.description))
+            models.append(.init(title: LocalizationManager.shared.localizedString(for: .fileInfoCreated), value: creationDate.description))
         }
         if let component = project.url?.lastPathComponent {
-            models.append(.init(title: "File Name", value: component))
+            models.append(.init(title: LocalizationManager.shared.localizedString(for: .fileInfoName), value: component))
         }
         if let `extension` = project.url?.pathExtension {
-            models.append(.init(title: "Extension", value: `extension`.uppercased()))
+            models.append(.init(title: LocalizationManager.shared.localizedString(for: .fileInfoExt), value: `extension`.uppercased()))
         }
-        models.append(.init(title: "Resolution", value: "\(Int(imageSize.height)) x \(Int(imageSize.width))"))
+        models.append(.init(title: LocalizationManager.shared.localizedString(for: .fileInfoRes), value: "\(Int(imageSize.height)) x \(Int(imageSize.width))"))
         
         if let count = project.getPNGData()?.count {
             let formatter = ByteCountFormatter.string(
                 fromByteCount: Int64(count),
                 countStyle: .file
             )
-            models.append(.init(title: "Size", value: "\(formatter)"))
+            models.append(.init(title: LocalizationManager.shared.localizedString(for: .fileInfoSize), value: "\(formatter)"))
         }
-        
-
-        
         
         tableView.reloadData()
     }

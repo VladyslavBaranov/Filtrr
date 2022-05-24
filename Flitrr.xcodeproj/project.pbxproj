@@ -51,7 +51,6 @@
 		1E5BCFDA2828260700F7B610 /* BackgroundSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFD92828260700F7B610 /* BackgroundSelectionViewController.swift */; };
 		1E5BCFDC2828472B00F7B610 /* AdjustableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFDB2828472A00F7B610 /* AdjustableLabel.swift */; };
 		1E5BCFDF2829060B00F7B610 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFDE2829060B00F7B610 /* FiltersViewController.swift */; };
-		1E5BCFE228290F7700F7B610 /* PaywallVid.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE128290F7700F7B610 /* PaywallVid.mp4 */; };
 		1E5BCFE4282910B300F7B610 /* PaywallVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE3282910B300F7B610 /* PaywallVideoView.swift */; };
 		1E5BCFE62829221800F7B610 /* FiltersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE52829221800F7B610 /* FiltersCollectionView.swift */; };
 		1E5BCFE82829495400F7B610 /* Filters.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E5BCFE72829495400F7B610 /* Filters.json */; };
@@ -103,6 +102,7 @@
 		1EAE086B283A3A78000A185F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE086A283A3A78000A185F /* Validation.swift */; };
 		1EAE086E283B6E94000A185F /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE086D283B6E94000A185F /* GridView.swift */; };
 		1EAE0871283BA0B2000A185F /* TPInAppReceipt in Frameworks */ = {isa = PBXBuildFile; productRef = 1EAE0870283BA0B2000A185F /* TPInAppReceipt */; };
+		1EAE087A283CE671000A185F /* PaywallVid.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1EAE0879283CE671000A185F /* PaywallVid.mp4 */; };
 		1EC9915A282E58B9006B2D38 /* GraphicsObservingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */; };
 		1EC9915C282E5FB6006B2D38 /* GraphicsStretchyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */; };
 		1EF9521F282ED6830002A6E7 /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF9521E282ED6830002A6E7 /* AppearanceViewController.swift */; };
@@ -195,7 +195,6 @@
 		1E5BCFD92828260700F7B610 /* BackgroundSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSelectionViewController.swift; sourceTree = "<group>"; };
 		1E5BCFDB2828472A00F7B610 /* AdjustableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustableLabel.swift; sourceTree = "<group>"; };
 		1E5BCFDE2829060B00F7B610 /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
-		1E5BCFE128290F7700F7B610 /* PaywallVid.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaywallVid.mp4; sourceTree = "<group>"; };
 		1E5BCFE3282910B300F7B610 /* PaywallVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallVideoView.swift; sourceTree = "<group>"; };
 		1E5BCFE52829221800F7B610 /* FiltersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersCollectionView.swift; sourceTree = "<group>"; };
 		1E5BCFE72829495400F7B610 /* Filters.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Filters.json; sourceTree = "<group>"; };
@@ -246,6 +245,7 @@
 		1EAE086A283A3A78000A185F /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		1EAE086C283A6572000A185F /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1EAE086D283B6E94000A185F /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		1EAE0879283CE671000A185F /* PaywallVid.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaywallVid.mp4; sourceTree = "<group>"; };
 		1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsObservingViewController.swift; sourceTree = "<group>"; };
 		1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsStretchyHeader.swift; sourceTree = "<group>"; };
 		1EF9521E282ED6830002A6E7 /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
@@ -507,7 +507,7 @@
 		1E42E04A280DC97B0033E6EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1E5BCFE028290F6700F7B610 /* Video */,
+				1EAE0878283CE384000A185F /* Video */,
 				07F9877A281ECC2A0058139C /* Localization */,
 				07F9874C281A99E10058139C /* Files */,
 				1E98AD4B280EAEF3006DAE75 /* Fonts */,
@@ -579,14 +579,6 @@
 			path = Filters;
 			sourceTree = "<group>";
 		};
-		1E5BCFE028290F6700F7B610 /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				1E5BCFE128290F7700F7B610 /* PaywallVid.mp4 */,
-			);
-			path = Video;
-			sourceTree = "<group>";
-		};
 		1E5BCFEB282A348900F7B610 /* Opacity */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,14 +634,11 @@
 		1E98AD43280EA679006DAE75 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				1EAE087C283CF2E6000A185F /* General */,
 				1EAE085F28390609000A185F /* ProjectLook */,
 				1EF9523B28324C4E0002A6E7 /* Picker */,
 				1EF95238283186070002A6E7 /* Folder */,
 				1EF9523528316BA60002A6E7 /* Cells */,
-				1E98AD5D280EE2FD006DAE75 /* ProjectsSelectionTab.swift */,
-				1E98AD56280EC618006DAE75 /* ProjectsOptionsView.swift */,
-				1E98AD54280EB72D006DAE75 /* WaterFallLayout.swift */,
-				1E98AD45280EA6F6006DAE75 /* ProjectsViewController.swift */,
 				1E98AD5A280EE044006DAE75 /* ProjectCells */,
 			);
 			path = Projects;
@@ -708,12 +697,11 @@
 		1E98AD6728108459006DAE75 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				1EAE087B283CF2D3000A185F /* General */,
 				1EF9521D282ED6610002A6E7 /* Appearance */,
 				1E98AD7628129541006DAE75 /* PrivacyPolicy */,
 				1E98AD73281289E1006DAE75 /* Language */,
 				1E98AD72281289D7006DAE75 /* Paywall */,
-				1E98AD6828108474006DAE75 /* SettingsViewController.swift */,
-				1E98AD6E2811D0A7006DAE75 /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -804,6 +792,34 @@
 				1EAE086228390E89000A185F /* ProjectFileInfoViewController.swift */,
 			);
 			path = ProjectLook;
+			sourceTree = "<group>";
+		};
+		1EAE0878283CE384000A185F /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				1EAE0879283CE671000A185F /* PaywallVid.mp4 */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		1EAE087B283CF2D3000A185F /* General */ = {
+			isa = PBXGroup;
+			children = (
+				1E98AD6828108474006DAE75 /* SettingsViewController.swift */,
+				1E98AD6E2811D0A7006DAE75 /* SettingsView.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		1EAE087C283CF2E6000A185F /* General */ = {
+			isa = PBXGroup;
+			children = (
+				1E98AD5D280EE2FD006DAE75 /* ProjectsSelectionTab.swift */,
+				1E98AD56280EC618006DAE75 /* ProjectsOptionsView.swift */,
+				1E98AD54280EB72D006DAE75 /* WaterFallLayout.swift */,
+				1E98AD45280EA6F6006DAE75 /* ProjectsViewController.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		1EBB40332836288E002A54B9 /* Adjust */ = {
@@ -998,7 +1014,6 @@
 			files = (
 				1E98AD6D2811AC31006DAE75 /* Montserrat-Light.ttf in Resources */,
 				1E98AD4D280EAF0A006DAE75 /* Montserrat-Bold.ttf in Resources */,
-				1E5BCFE228290F7700F7B610 /* PaywallVid.mp4 in Resources */,
 				1EF95223282FCA6D0002A6E7 /* iAps.plist in Resources */,
 				07F98752281AA6620058139C /* Oxanium-Medium.ttf in Resources */,
 				1E934C802834DADD004D9B8D /* GraphicsSystem.json in Resources */,
@@ -1017,6 +1032,7 @@
 				07F98762281ABC730058139C /* HARRYP.TTF in Resources */,
 				1E98AD7A2812FDCE006DAE75 /* Montserrat-SemiBold.ttf in Resources */,
 				1E5BCFE82829495400F7B610 /* Filters.json in Resources */,
+				1EAE087A283CE671000A185F /* PaywallVid.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

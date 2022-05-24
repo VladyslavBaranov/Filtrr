@@ -58,6 +58,9 @@ final class StoreObserver: NSObject, SKPaymentTransactionObserver {
         }
     }
     
+    
+    
+    
     func receiptValidation(_ completion: @escaping (ValidationResponse?) -> ()) {
         
         #if DEBUG

@@ -125,6 +125,12 @@ enum LocalizationKey: String {
     
     case folderViewAddProj = "folder_view_add_proj"
     case folderViewRename = "folder_view_rename"
+    
+    case fileInfoCreated = "file_info_created"
+    case fileInfoName = "file_info_name"
+    case fileInfoExt = "file_info_ext"
+    case fileInfoRes = "file_info_res"
+    case fileInfoSize = "file_info_size"
 }
 
 final class LocalizationManager {

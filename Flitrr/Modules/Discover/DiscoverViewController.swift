@@ -57,6 +57,11 @@ class DiscoverViewController: UIViewController {
         setupTopViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchTextField.placeholder = LocalizationManager.shared.localizedString(for: .discoverSearch)
+    }
+    
     func setupGradient() {
         gradientLayer = CAGradientLayer()
         let whiteComponent: CGFloat = traitCollection.userInterfaceStyle == .dark ? 0 : 1
@@ -74,7 +79,9 @@ class DiscoverViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        navigationView.title = LocalizationManager.shared.localizedString(for: .discoverTitle)
         gradientLayer.frame = .init(x: 0, y: 0, width: view.bounds.width, height: view.safeAreaInsets.top + 80)
+        collectionView.reloadData()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
