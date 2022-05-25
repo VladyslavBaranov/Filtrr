@@ -6,7 +6,7 @@
 	<array>
 		<string>com.year.renewable</string>
 		<string>com.6months.renewable</string>
-		<string>com.week.renewable</string>
+		<string>com.month.renewable</string>
 	</array>
 </dict>
 </plist>
