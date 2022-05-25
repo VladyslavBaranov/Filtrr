@@ -77,7 +77,7 @@ final class StoreObserver: NSObject, SKPaymentTransactionObserver {
         }
         let jsonDict: [String: AnyObject] = [
             "receipt-data": recieptString as AnyObject,
-            "password": "787ca6b864714cdea4ed6d55802d1fe4" as AnyObject,
+            "password": "010fb4a4a6f24f088fe9820ba9acdc12" as AnyObject,
             "exclude-old-transactions": 1 as AnyObject
         ]
         
