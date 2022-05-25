@@ -76,7 +76,6 @@
 		1E98AD60280EE9DC006DAE75 /* ProjectsFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD5F280EE9DC006DAE75 /* ProjectsFolderCell.swift */; };
 		1E98AD6928108474006DAE75 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD6828108474006DAE75 /* SettingsViewController.swift */; };
 		1E98AD6D2811AC31006DAE75 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E98AD6C2811AC31006DAE75 /* Montserrat-Light.ttf */; };
-		1E98AD6F2811D0A7006DAE75 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD6E2811D0A7006DAE75 /* SettingsView.swift */; };
 		1E98AD712811D773006DAE75 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD702811D773006DAE75 /* PaywallView.swift */; };
 		1E98AD7528128E9E006DAE75 /* LanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD7428128E9E006DAE75 /* LanguageTableViewController.swift */; };
 		1E98AD782812955E006DAE75 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98AD772812955E006DAE75 /* PrivacyPolicyViewController.swift */; };
@@ -220,7 +219,6 @@
 		1E98AD5F280EE9DC006DAE75 /* ProjectsFolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsFolderCell.swift; sourceTree = "<group>"; };
 		1E98AD6828108474006DAE75 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1E98AD6C2811AC31006DAE75 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
-		1E98AD6E2811D0A7006DAE75 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1E98AD702811D773006DAE75 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		1E98AD7428128E9E006DAE75 /* LanguageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTableViewController.swift; sourceTree = "<group>"; };
 		1E98AD772812955E006DAE75 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
@@ -806,7 +804,6 @@
 			isa = PBXGroup;
 			children = (
 				1E98AD6828108474006DAE75 /* SettingsViewController.swift */,
-				1E98AD6E2811D0A7006DAE75 /* SettingsView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -1061,7 +1058,6 @@
 				1E42E01B280DC93D0033E6EE /* DiscoverViewController.swift in Sources */,
 				1E98AD57280EC618006DAE75 /* ProjectsOptionsView.swift in Sources */,
 				1E42E017280DC93D0033E6EE /* AppDelegate.swift in Sources */,
-				1E98AD6F2811D0A7006DAE75 /* SettingsView.swift in Sources */,
 				07F9874B281A844B0058139C /* TextCollectionViewCell.swift in Sources */,
 				1E5BCFDA2828260700F7B610 /* BackgroundSelectionViewController.swift in Sources */,
 				07F98782281ED1500058139C /* Localization.swift in Sources */,

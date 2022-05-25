@@ -78,6 +78,8 @@ struct PaywallView: View {
     @ObservedObject
     var storeHelper = StoreHelper()
     
+    @State var isPrivacyPolicyPresented = false
+    
     let model: PlayerViewModel
     var onCloseButtonTapped: (() -> ())?
     
@@ -129,6 +131,14 @@ struct PaywallView: View {
                                     .opacity(dismissButtonOpacity)
                             }
                             Spacer()
+                            Button {
+                                storeHelper.restore()
+                            } label: {
+                                Text(LocalizationManager.shared.localizedString(for: .settingsRestore))
+                                    .foregroundColor(.white)
+                                    .font(Font(Montserrat.semibold(size: 14)))
+                                    .padding(EdgeInsets(top: 45, leading: 0, bottom: 0, trailing: 20))
+                            }
                         }
                         Spacer()
                     }
@@ -175,6 +185,20 @@ struct PaywallView: View {
                         
                     }
                     .padding(Edge.Set.bottom, 40)
+                    
+                    VStack {
+                        Spacer()
+                        Button {
+                            isPrivacyPolicyPresented = true
+                        } label: {
+                            Text(LocalizationManager.shared.localizedString(for: .settingsPrivacy))
+                                .foregroundColor(Color(UIColor.label))
+                                .font(Font(Montserrat.medium(size: 13)))
+                                .underline()
+                        }.sheet(isPresented: $isPrivacyPolicyPresented) {
+                            PrivacyPolicyView()
+                        }
+                    }
                 }
             } else {
                 VStack(alignment: .center) {

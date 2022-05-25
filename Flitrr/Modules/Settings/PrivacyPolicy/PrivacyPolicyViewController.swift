@@ -5,17 +5,28 @@
 //  Created by Vladyslav Baranov on 22.04.2022.
 //
 
-import UIKit
+import SwiftUI
+
+struct PrivacyPolicyView: UIViewControllerRepresentable {
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+    }
+    func makeUIViewController(context: Context) -> some UIViewController {
+        let controller = PrivacyPolicyViewController()
+        controller.showsCloseButton = false
+        return controller
+    }
+}
 
 final class PrivacyPolicyViewController: UIViewController {
     
+    var showsCloseButton: Bool = true
     private var gradientLayer: CAGradientLayer!
     private var closeButton: UIButton!
     var textView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Privacy Policy"
+        navigationItem.title = LocalizationManager.shared.localizedString(for: .settingsPrivacy)
         
         view.backgroundColor = .appDark
         textView = UITextView()
@@ -73,6 +84,7 @@ final class PrivacyPolicyViewController: UIViewController {
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(closeButton)
         closeButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
+        closeButton.isHidden = !showsCloseButton
         
         NSLayoutConstraint.activate([
             closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
