@@ -47,7 +47,7 @@ struct PaywallOptionView: View {
             Spacer()
             HStack(spacing: 3) {
                 Text("\(pricingItem.getMonthlyPrice())")
-                    .font(Font(Montserrat.semibold(size: 20)))
+                    .font(Font(Montserrat.semibold(size: 18)))
                 Text(LocalizationManager.shared.localizedString(for: .paywallM))
                     .font(Font(Montserrat.regular(size: 10)))
                     .offset(x: 0, y: 5)
@@ -181,7 +181,7 @@ struct PaywallView: View {
                                 .padding([.leading, .trailing], 50)
                         }
                         Text(storeHelper.products[selectedItem].getDescription())
-                            .font(Font(Montserrat.regular(size: 13)))
+                            .font(Font(Montserrat.semibold(size: 18)))
                         
                     }
                     .padding(Edge.Set.bottom, 40)

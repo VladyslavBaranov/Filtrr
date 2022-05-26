@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Flitrr
+
+  Created by Vladyslav Baranov on 26.05.2022.
+  
+*/
+
+
+NSPhotoLibraryUsageDescription = "允许添加照片以将内容添加到您的项目中";
