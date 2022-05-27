@@ -41,18 +41,18 @@ struct PaywallOptionView: View {
                 Text(pricingItem.getTitle())
                     .font(Font(UIFont(name: "Montserrat-Bold", size: 15) ?? .systemFont(ofSize: 15)))
                 Text(pricingItem.getSubtitle())
-                    .font(Font(UIFont(name: "Montserrat-Regular", size: 10) ?? .systemFont(ofSize: 10)))
+                    .font(Font(UIFont(name: "Montserrat-Medium", size: 12) ?? .systemFont(ofSize: 12)))
                     .foregroundColor(pricingItem.index == selectedItem ? Color(uiColor: .appAccent) : Color(uiColor: .lightGray))
             }
             Spacer()
             HStack(spacing: 3) {
                 Text("\(pricingItem.getMonthlyPrice())")
-                    .font(Font(Montserrat.semibold(size: 18)))
+                    .font(Font(Montserrat.semibold(size: 25)))
                 Text(LocalizationManager.shared.localizedString(for: .paywallM))
-                    .font(Font(Montserrat.regular(size: 10)))
+                    .font(Font(Montserrat.medium(size: 13)))
                     .offset(x: 0, y: 5)
             }
-            .offset(x: 0, y: -10)
+            //.offset(x: 0, y: -10)
             .padding(.trailing, 16)
             
         }
@@ -163,7 +163,7 @@ struct PaywallView: View {
                         PaywallOptionView(
                             selectedItem: $selectedItem,
                             pricingItem: storeHelper.products[2])
-                        Spacer(minLength: 120)
+                        Spacer(minLength: 150)
                     }
                     
                     VStack(alignment: .center) {
@@ -181,7 +181,7 @@ struct PaywallView: View {
                                 .padding([.leading, .trailing], 50)
                         }
                         Text(storeHelper.products[selectedItem].getDescription())
-                            .font(Font(Montserrat.semibold(size: 18)))
+                            .font(Font(Montserrat.semibold(size: 24)))
                         
                     }
                     .padding(Edge.Set.bottom, 40)
