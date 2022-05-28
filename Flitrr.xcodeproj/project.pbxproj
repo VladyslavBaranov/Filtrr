@@ -102,6 +102,7 @@
 		1EAE086E283B6E94000A185F /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE086D283B6E94000A185F /* GridView.swift */; };
 		1EAE0871283BA0B2000A185F /* TPInAppReceipt in Frameworks */ = {isa = PBXBuildFile; productRef = 1EAE0870283BA0B2000A185F /* TPInAppReceipt */; };
 		1EAE087A283CE671000A185F /* PaywallVid.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1EAE0879283CE671000A185F /* PaywallVid.mp4 */; };
+		1EBED8AA28424925003CC71B /* TermsOfUse.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1EBED8A928424925003CC71B /* TermsOfUse.rtf */; };
 		1EC9915A282E58B9006B2D38 /* GraphicsObservingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */; };
 		1EC9915C282E5FB6006B2D38 /* GraphicsStretchyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */; };
 		1ED2B3EC283FCEFE00848985 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1ED2B3EE283FCEFE00848985 /* InfoPlist.strings */; };
@@ -245,6 +246,7 @@
 		1EAE086C283A6572000A185F /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1EAE086D283B6E94000A185F /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		1EAE0879283CE671000A185F /* PaywallVid.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaywallVid.mp4; sourceTree = "<group>"; };
+		1EBED8A928424925003CC71B /* TermsOfUse.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = TermsOfUse.rtf; sourceTree = "<group>"; };
 		1EC99159282E58B9006B2D38 /* GraphicsObservingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsObservingViewController.swift; sourceTree = "<group>"; };
 		1EC9915B282E5FB6006B2D38 /* GraphicsStretchyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsStretchyHeader.swift; sourceTree = "<group>"; };
 		1ED2B3ED283FCEFE00848985 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 		07F9874C281A99E10058139C /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				1EBED8A928424925003CC71B /* TermsOfUse.rtf */,
 				1EAE085D2838D8A4000A185F /* PrivacyPolicy.rtf */,
 				07F9874D281A9A060058139C /* FontSystem.json */,
 				1E5BCFE72829495400F7B610 /* Filters.json */,
@@ -1025,6 +1028,7 @@
 				1E98AD6D2811AC31006DAE75 /* Montserrat-Light.ttf in Resources */,
 				1E98AD4D280EAF0A006DAE75 /* Montserrat-Bold.ttf in Resources */,
 				1EF95223282FCA6D0002A6E7 /* iAps.plist in Resources */,
+				1EBED8AA28424925003CC71B /* TermsOfUse.rtf in Resources */,
 				07F98752281AA6620058139C /* Oxanium-Medium.ttf in Resources */,
 				1E934C802834DADD004D9B8D /* GraphicsSystem.json in Resources */,
 				1E42E026280DC9430033E6EE /* LaunchScreen.storyboard in Resources */,

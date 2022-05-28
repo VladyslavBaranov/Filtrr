@@ -3,7 +3,7 @@
 //  Flitrr
 //
 //  Created by Vladyslav Baranov on 21.04.2022.
-//
+//  95,88
 
 import SwiftUI
 import AVKit
@@ -28,45 +28,66 @@ final class PaywallHostingController: UIHostingController<PaywallView> {
 
 struct PaywallOptionView: View {
     
+    var showsDiscount: Bool
     @Binding var selectedItem: Int
     @State var pricingItem: AppProduct
     
     var body: some View {
-        HStack(spacing: 16) {
-            Image(pricingItem.index == selectedItem ? "Radio-2" : "Radio")
-                .resizable()
-                .frame(width: 24, height: 24)
-                .padding(.leading, 16)
-            VStack(alignment: .leading, spacing: 10) {
-                Text(pricingItem.getTitle())
-                    .font(Font(UIFont(name: "Montserrat-Bold", size: 15) ?? .systemFont(ofSize: 15)))
-                Text(pricingItem.getSubtitle())
-                    .font(Font(UIFont(name: "Montserrat-Medium", size: 12) ?? .systemFont(ofSize: 12)))
-                    .foregroundColor(pricingItem.index == selectedItem ? Color(uiColor: .appAccent) : Color(uiColor: .lightGray))
+        ZStack {
+            HStack(spacing: 16) {
+                Image(pricingItem.index == selectedItem ? "Radio-2" : "Radio")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .padding(.leading, 16)
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(pricingItem.getTitle())
+                        .font(Font(UIFont(name: "Montserrat-Bold", size: 15) ?? .systemFont(ofSize: 15)))
+                    Text(pricingItem.getSubtitle())
+                        .font(Font(UIFont(name: "Montserrat-Medium", size: 12) ?? .systemFont(ofSize: 12)))
+                        .foregroundColor(pricingItem.index == selectedItem ? Color(uiColor: .appAccent) : Color(uiColor: .lightGray))
+                }
+                Spacer()
+                VStack(alignment: .trailing, spacing: 1.5) {
+                    Text(pricingItem.getPrice())
+                        .font(Font(Montserrat.semibold(size: 22)))
+                    HStack(spacing: 3) {
+                        Text("\(pricingItem.getMonthlyPrice())")
+                            .font(Font(Montserrat.medium(size: 16)))
+                        Text(LocalizationManager.shared.localizedString(for: .paywallM))
+                            .font(Font(Montserrat.medium(size: 12)))
+                            .offset(x: 0, y: 2)
+                    }.foregroundColor(Color(UIColor.lightGray))
+                }
+                
+                //.offset(x: 0, y: -10)
+                .padding(.trailing, 16)
+                
             }
-            Spacer()
-            HStack(spacing: 3) {
-                Text("\(pricingItem.getMonthlyPrice())")
-                    .font(Font(Montserrat.semibold(size: 25)))
-                Text(LocalizationManager.shared.localizedString(for: .paywallM))
-                    .font(Font(Montserrat.medium(size: 13)))
-                    .offset(x: 0, y: 5)
+            .frame(height: 75)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color(UIColor.appAccent), lineWidth: pricingItem.index == selectedItem ? 1 : 0)
+            )
+            .background(
+                pricingItem.index == selectedItem ? Color(uiColor: .appDark).cornerRadius(16) : Color(uiColor: .appGray).cornerRadius(16))
+            .padding([.leading, .trailing], 30)
+            .onTapGesture {
+                selectedItem = pricingItem.index
+                pricingItem.isSelected.toggle()
             }
-            //.offset(x: 0, y: -10)
-            .padding(.trailing, 16)
-            
-        }
-        .frame(height: 75)
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color(UIColor.appAccent), lineWidth: pricingItem.index == selectedItem ? 1 : 0)
-        )
-        .background(
-            pricingItem.index == selectedItem ? Color(uiColor: .appDark).cornerRadius(16) : Color(uiColor: .appGray).cornerRadius(16))
-        .padding([.leading, .trailing], 30)
-        .onTapGesture {
-            selectedItem = pricingItem.index
-            pricingItem.isSelected.toggle()
+            if showsDiscount {
+                HStack {
+                    Spacer()
+                    Text(LocalizationManager.shared.localizedString(for: .saveUpTo22))
+                        .font(Font(Montserrat.medium(size: 12)))
+                        .foregroundColor(.white)
+                        .padding(4)
+                        .background(Color(UIColor.appAccent))
+                        .cornerRadius(3)
+                }
+                .padding([.leading, .trailing], 50)
+                .offset(x: 0, y: -37)
+            }
         }
     }
 }
@@ -79,6 +100,7 @@ struct PaywallView: View {
     var storeHelper = StoreHelper()
     
     @State var isPrivacyPolicyPresented = false
+    @State var isTermsOfUsePresented = false
     
     let model: PlayerViewModel
     var onCloseButtonTapped: (() -> ())?
@@ -154,16 +176,16 @@ struct PaywallView: View {
                 ZStack {
                     VStack(alignment: .center, spacing: 16) {
                         PaywallOptionView(
-                            selectedItem: $selectedItem,
+                            showsDiscount: true, selectedItem: $selectedItem,
                             pricingItem: storeHelper.products[0])
                             .padding(.top, 40)
                         PaywallOptionView(
-                            selectedItem: $selectedItem,
+                            showsDiscount: false, selectedItem: $selectedItem,
                             pricingItem: storeHelper.products[1])
                         PaywallOptionView(
-                            selectedItem: $selectedItem,
+                            showsDiscount: false, selectedItem: $selectedItem,
                             pricingItem: storeHelper.products[2])
-                        Spacer(minLength: 150)
+                        Spacer(minLength: 110)
                     }
                     
                     VStack(alignment: .center) {
@@ -180,24 +202,37 @@ struct PaywallView: View {
                                 .cornerRadius(30)
                                 .padding([.leading, .trailing], 50)
                         }
-                        Text(storeHelper.products[selectedItem].getDescription())
-                            .font(Font(Montserrat.semibold(size: 24)))
+                        //Text(storeHelper.products[selectedItem].getDescription())
+                        //    .font(Font(Montserrat.semibold(size: 24)))
                         
                     }
                     .padding(Edge.Set.bottom, 40)
                     
                     VStack {
                         Spacer()
-                        Button {
-                            isPrivacyPolicyPresented = true
-                        } label: {
-                            Text(LocalizationManager.shared.localizedString(for: .settingsPrivacy))
-                                .foregroundColor(Color(UIColor.label))
-                                .font(Font(Montserrat.medium(size: 13)))
-                                .underline()
-                        }.sheet(isPresented: $isPrivacyPolicyPresented) {
-                            PrivacyPolicyView()
+                        HStack(spacing: 30) {
+                            Button {
+                                isTermsOfUsePresented = true
+                            } label: {
+                                Text(LocalizationManager.shared.localizedString(for: .termsOfUse))
+                                    .foregroundColor(Color(UIColor.label))
+                                    .font(Font(Montserrat.medium(size: 13)))
+                                    .underline()
+                            }.sheet(isPresented: $isTermsOfUsePresented) {
+                                PrivacyPolicyView(mode: .termsOfUse)
+                            }
+                            Button {
+                                isPrivacyPolicyPresented = true
+                            } label: {
+                                Text(LocalizationManager.shared.localizedString(for: .settingsPrivacy))
+                                    .foregroundColor(Color(UIColor.label))
+                                    .font(Font(Montserrat.medium(size: 13)))
+                                    .underline()
+                            }.sheet(isPresented: $isPrivacyPolicyPresented) {
+                                PrivacyPolicyView(mode: .privacyPolicy)
+                            }
                         }
+                        
                     }
                 }
             } else {

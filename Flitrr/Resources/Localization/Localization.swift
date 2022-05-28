@@ -131,6 +131,9 @@ enum LocalizationKey: String {
     case fileInfoExt = "file_info_ext"
     case fileInfoRes = "file_info_res"
     case fileInfoSize = "file_info_size"
+    
+    case saveUpTo22 = "paywall_save_up_to"
+    case termsOfUse = "terms_of_use"
 }
 
 final class LocalizationManager {

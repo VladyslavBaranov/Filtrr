@@ -8,16 +8,23 @@
 import SwiftUI
 
 struct PrivacyPolicyView: UIViewControllerRepresentable {
+    let mode: PrivacyPolicyViewController.Mode
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
     }
     func makeUIViewController(context: Context) -> some UIViewController {
         let controller = PrivacyPolicyViewController()
+        print("#CREATE", mode.rawValue)
+        controller.mode = mode
         controller.showsCloseButton = false
         return controller
     }
 }
 
 final class PrivacyPolicyViewController: UIViewController {
+    
+    enum Mode: String { case termsOfUse = "TermsOfUse", privacyPolicy = "PrivacyPolicy" }
+    
+    var mode: Mode = .privacyPolicy
     
     var showsCloseButton: Bool = true
     private var gradientLayer: CAGradientLayer!
@@ -40,8 +47,8 @@ final class PrivacyPolicyViewController: UIViewController {
         view.addSubview(textView)
         
         setupCloseButton()
-        
-        guard let file = Bundle.main.url(forResource: "PrivacyPolicy", withExtension: "rtf") else { return }
+        print(mode.rawValue)
+        guard let file = Bundle.main.url(forResource: mode.rawValue, withExtension: "rtf") else { return }
         guard let string = try? NSMutableAttributedString(
             url: file,
             options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil) else { return }
