@@ -59,6 +59,7 @@ final class PrivacyPolicyViewController: UIViewController {
         
         setupGradient()
     }
+
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

@@ -43,15 +43,20 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     
     func set(phAsset: PHAsset) {
         let options = PHImageRequestOptions()
-        PHImageManager.default().requestImage(
-            for: phAsset,
-            targetSize: .init(width: 500, height: 500),
-            contentMode: .aspectFill,
-            options: options) { [weak self] image, _ in
-                if let image = image {
-                    self?.imageView.image = image
+        DispatchQueue.global().async {
+            PHImageManager.default().requestImage(
+                for: phAsset,
+                targetSize: .init(width: 500, height: 500),
+                contentMode: .aspectFill,
+                options: options) { [weak self] image, _ in
+                    DispatchQueue.main.async {
+                        if let image = image {
+                            self?.imageView.image = image
+                        }
+                    }
                 }
-            }
+        }
+        
     }
     
     func set(contentMode: ContentMode) {

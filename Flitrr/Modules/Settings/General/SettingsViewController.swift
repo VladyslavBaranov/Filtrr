@@ -13,6 +13,7 @@ final class SettingsTableCell: UITableViewCell {
     enum CustomAccessoryType {
         case disclosure
         case checkmark
+        case echeckmark
         case none
     }
     
@@ -23,8 +24,12 @@ final class SettingsTableCell: UITableViewCell {
                 trailingImageView.image = UIImage()
             case .disclosure:
                 trailingImageView.image = UIImage(systemName: "chevron.right")
+            case .echeckmark:
+                trailingImageView.image = UIImage(systemName: "circle")
+                trailingImageView.tintColor = .lightGray
             case .checkmark:
-                trailingImageView.image = UIImage(named: "Checkbox")
+                trailingImageView.image = UIImage(systemName: "checkmark.circle.fill")
+                trailingImageView.tintColor = .appAccent
             }
         }
     }

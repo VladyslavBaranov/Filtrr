@@ -24,8 +24,14 @@ struct AppearanceSection {
     }
 }
 
+protocol AppearanceViewCellDelegate: AnyObject {
+    func didTapOption(_ indexPath: IndexPath)
+}
+
 final class AppearanceViewCell: UICollectionViewCell {
     
+    weak var delegate: AppearanceViewCellDelegate!
+    var indexPath: IndexPath = .init()
     var iconImageView: UIImageView!
     var label: UILabel!
     var checkMarkButton: UIButton!
@@ -70,6 +76,8 @@ final class AppearanceViewCell: UICollectionViewCell {
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.widthAnchor.constraint(equalToConstant: 80)
         ])
+        
+        checkMarkButton.addTarget(self, action: #selector(handleAppearanceButtonTap(_:)), for: .touchUpInside)
     }
     
     func setItem(_ item: AppearanceItem) {
@@ -94,6 +102,10 @@ final class AppearanceViewCell: UICollectionViewCell {
             checkMarkButton.setImage(UIImage(systemName: "circle"), for: .normal)
             checkMarkButton.tintColor = .lightGray
         }
+    }
+    
+    @objc func handleAppearanceButtonTap(_ sender: UIButton) {
+        delegate?.didTapOption(indexPath)
     }
 }
 
@@ -249,9 +261,29 @@ extension AppearanceViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.layer.cornerRadius = 8
         cell.layer.cornerCurve = .continuous
         cell.setItem(sections[indexPath.section].items[indexPath.row])
+        cell.indexPath = indexPath
+        cell.delegate = self
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didTapOption(indexPath)
+    }
+}
+
+extension AppearanceViewController: ToolBarViewDelegate {
+    func didTapTrailingItem() {
+        dismiss(animated: true)
+    }
+    func didTapLeadingItem() {
+        dismiss(animated: true)
+    }
+    func didTapUndo() {}
+    func didTapLayers() {}
+    func didTapRedo() {}
+}
+
+extension AppearanceViewController: AppearanceViewCellDelegate {
+    func didTapOption(_ indexPath: IndexPath) {
         if indexPath.section == 0 {
             guard UIApplication.shared.supportsAlternateIcons else { return }
             if indexPath.row == 0 {
@@ -276,19 +308,4 @@ extension AppearanceViewController: UICollectionViewDelegate, UICollectionViewDa
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
     }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // print(scrollView.contentOffset.y)
-    }
-}
-
-extension AppearanceViewController: ToolBarViewDelegate {
-    func didTapTrailingItem() {
-        dismiss(animated: true)
-    }
-    func didTapLeadingItem() {
-        dismiss(animated: true)
-    }
-    func didTapUndo() {}
-    func didTapLayers() {}
-    func didTapRedo() {}
 }

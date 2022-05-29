@@ -107,7 +107,7 @@ class DiscoverViewController: UIViewController {
         navigationView = NavigationView(frame: .zero)
         navigationView.title = LocalizationManager.shared.localizedString(for: .discoverTitle)
         navigationView.translatesAutoresizingMaskIntoConstraints = false
-		navigationView.onSettingsButtonTapped = openSettings
+		// navigationView.onSettingsButtonTapped = openSettings
         view.addSubview(navigationView)
         
         NSLayoutConstraint.activate([

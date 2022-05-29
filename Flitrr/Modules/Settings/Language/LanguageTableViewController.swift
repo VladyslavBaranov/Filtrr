@@ -89,6 +89,7 @@ final class LanguageTableViewController: UIViewController, UITableViewDelegate, 
         }
         LocalizationManager.shared.locale = lang.id
         tableView.reloadData()
+        toolBarView.title = LocalizationManager.shared.localizedString(for: .settingsLang)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,12 +97,12 @@ final class LanguageTableViewController: UIViewController, UITableViewDelegate, 
         let lang = languages[indexPath.row]
         cell.selectionStyle = .none
         cell.textLabel?.text = lang.lang
-        cell.customAccessoryType = lang.isSelected ? .checkmark : .none
+        cell.customAccessoryType = lang.isSelected ? .checkmark : .echeckmark
         cell.backgroundColor = .clear
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        70
+        80
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         languages.count
