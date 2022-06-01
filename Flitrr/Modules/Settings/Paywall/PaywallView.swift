@@ -42,10 +42,15 @@ struct PaywallOptionView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(pricingItem.getTitle())
                         .font(Font(UIFont(name: "Montserrat-Bold", size: 15) ?? .systemFont(ofSize: 15)))
+                    //if showsDiscount {
+                    //    Text("Participate in contest and get iPhone 13 PRO MAX")
+                    //        .font(Font(UIFont(name: "Montserrat-Bold", size: 15) ?? .systemFont(ofSize: 15)))
+                    //}
                     Text(pricingItem.getSubtitle())
                         .font(Font(UIFont(name: "Montserrat-Medium", size: 12) ?? .systemFont(ofSize: 12)))
                         .foregroundColor(pricingItem.index == selectedItem ? Color(uiColor: .appAccent) : Color(uiColor: .lightGray))
                 }
+                .padding([.bottom, .top], 16)
                 Spacer()
                 VStack(alignment: .trailing, spacing: 1.5) {
                     Text(pricingItem.getPrice())
@@ -60,10 +65,11 @@ struct PaywallOptionView: View {
                 }
                 
                 //.offset(x: 0, y: -10)
-                .padding(.trailing, 16)
+                .padding(.all, 16)
                 
             }
-            .frame(height: 75)
+            
+            // .frame(height: 75)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(Color(UIColor.appAccent), lineWidth: pricingItem.index == selectedItem ? 1 : 0)
@@ -76,17 +82,20 @@ struct PaywallOptionView: View {
                 pricingItem.isSelected.toggle()
             }
             if showsDiscount {
-                HStack {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text(LocalizationManager.shared.localizedString(for: .saveUpTo22))
+                            .font(Font(Montserrat.medium(size: 12)))
+                            .foregroundColor(.white)
+                            .padding(4)
+                            .background(Color(UIColor.appAccent))
+                            .cornerRadius(3)
+                    }
+                    .padding([.leading, .trailing], 50)
                     Spacer()
-                    Text(LocalizationManager.shared.localizedString(for: .saveUpTo22))
-                        .font(Font(Montserrat.medium(size: 12)))
-                        .foregroundColor(.white)
-                        .padding(4)
-                        .background(Color(UIColor.appAccent))
-                        .cornerRadius(3)
                 }
-                .padding([.leading, .trailing], 50)
-                .offset(x: 0, y: -37)
+                .offset(x: 0, y: -11)
             }
         }
     }
@@ -173,7 +182,7 @@ struct PaywallView: View {
             }.frame(height: UIScreen.main.bounds.height / 2)
             
             if !storeHelper.products.isEmpty {
-                ZStack {
+                VStack {
                     VStack(alignment: .center, spacing: 16) {
                         PaywallOptionView(
                             showsDiscount: true, selectedItem: $selectedItem,
@@ -185,55 +194,46 @@ struct PaywallView: View {
                         PaywallOptionView(
                             showsDiscount: false, selectedItem: $selectedItem,
                             pricingItem: storeHelper.products[2])
-                        Spacer(minLength: 110)
+                        Spacer(minLength: 10)
                     }
                     
-                    VStack(alignment: .center) {
-                        Spacer()
+                    Button {
+                        storeHelper.buy(product: storeHelper.products[selectedItem].skProduct)
+                    } label: {
+                        Text(LocalizationManager.shared.localizedString(for: .settingsSubscribNow))
+                            .foregroundColor(.white)
+                            .font(Font(Montserrat.semibold(size: 17)))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 60)
+                            .background(Color(uiColor: .appAccent))
+                            .cornerRadius(30)
+                            .padding([.leading, .trailing], 50)
+                    }
+                    
+                    HStack(spacing: 30) {
                         Button {
-                            storeHelper.buy(product: storeHelper.products[selectedItem].skProduct)
+                            isTermsOfUsePresented = true
                         } label: {
-                            Text(LocalizationManager.shared.localizedString(for: .settingsSubscribNow))
-                                .foregroundColor(.white)
-                                .font(Font(Montserrat.semibold(size: 17)))
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 60)
-                                .background(Color(uiColor: .appAccent))
-                                .cornerRadius(30)
-                                .padding([.leading, .trailing], 50)
+                            Text(LocalizationManager.shared.localizedString(for: .termsOfUse))
+                                .foregroundColor(Color(UIColor.label))
+                                .font(Font(Montserrat.medium(size: 13)))
+                                .underline()
+                        }.sheet(isPresented: $isTermsOfUsePresented) {
+                            PrivacyPolicyView(mode: .termsOfUse)
                         }
-                        //Text(storeHelper.products[selectedItem].getDescription())
-                        //    .font(Font(Montserrat.semibold(size: 24)))
-                        
+                        Button {
+                            isPrivacyPolicyPresented = true
+                        } label: {
+                            Text(LocalizationManager.shared.localizedString(for: .settingsPrivacy))
+                                .foregroundColor(Color(UIColor.label))
+                                .font(Font(Montserrat.medium(size: 13)))
+                                .underline()
+                        }.sheet(isPresented: $isPrivacyPolicyPresented) {
+                            PrivacyPolicyView(mode: .privacyPolicy)
+                        }
                     }
-                    .padding(Edge.Set.bottom, 40)
+                    .padding(.bottom, 40)
                     
-                    VStack {
-                        Spacer()
-                        HStack(spacing: 30) {
-                            Button {
-                                isTermsOfUsePresented = true
-                            } label: {
-                                Text(LocalizationManager.shared.localizedString(for: .termsOfUse))
-                                    .foregroundColor(Color(UIColor.label))
-                                    .font(Font(Montserrat.medium(size: 13)))
-                                    .underline()
-                            }.sheet(isPresented: $isTermsOfUsePresented) {
-                                PrivacyPolicyView(mode: .termsOfUse)
-                            }
-                            Button {
-                                isPrivacyPolicyPresented = true
-                            } label: {
-                                Text(LocalizationManager.shared.localizedString(for: .settingsPrivacy))
-                                    .foregroundColor(Color(UIColor.label))
-                                    .font(Font(Montserrat.medium(size: 13)))
-                                    .underline()
-                            }.sheet(isPresented: $isPrivacyPolicyPresented) {
-                                PrivacyPolicyView(mode: .privacyPolicy)
-                            }
-                        }
-                        
-                    }
                 }
             } else {
                 VStack(alignment: .center) {

@@ -239,6 +239,16 @@ final class SettingsViewController: UIViewController, UITableViewDelegate, UITab
         localize()
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yOffset = scrollView.contentOffset.y + UIApplication.shared.getStatusBarHeight() + 40 + view.safeAreaInsets.top
+        if yOffset > 0 {
+            let alpha = 1 - yOffset / 80
+            toolBarView.alpha = alpha
+        } else {
+            toolBarView.alpha = 1
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         settingsItems.count
     }

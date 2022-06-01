@@ -82,6 +82,16 @@ final class LanguageTableViewController: UIViewController, UITableViewDelegate, 
         ])
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yOffset = scrollView.contentOffset.y + UIApplication.shared.getStatusBarHeight() + 40 + view.safeAreaInsets.top
+        if yOffset > 0 {
+            let alpha = 1 - yOffset / 80
+            toolBarView.alpha = alpha
+        } else {
+            toolBarView.alpha = 1
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let lang = languages[indexPath.row]
         for i in 0..<languages.count {
