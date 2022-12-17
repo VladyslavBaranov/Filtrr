@@ -19,6 +19,7 @@ final class RoundedTabBarController: UITabBarController {
             width: view.bounds.width,
             height: 80)
         )
+        roundedTabBar.delegate = self
         roundedTabBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(roundedTabBar)
         
@@ -50,5 +51,24 @@ extension RoundedTabBarController: RoundedTabBarDelegate {
         default:
             break
         }
+    }
+}
+
+extension RoundedTabBarController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
+        guard let fromView = selectedViewController?.view else { return false }
+        guard let toView = viewController.view else { return false }
+        
+        if fromView != toView {
+            UIView.transition(
+                from: fromView,
+                to: toView,
+                duration: 0.25,
+                options: [.transitionCrossDissolve]
+            )
+        }
+        
+        return true
     }
 }
